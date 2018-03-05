@@ -1,0 +1,22 @@
+ r←Test_StdForm_001(stopFlag batchFlag);⎕TRAP;parms;n;globalParms;MyGuiParms
+⍝ Bring up a form with two fields in the Statusbar.
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+ r←∆Failed
+
+ CreateGlobalParms
+ globalParms←⎕NS MyGuiParms
+ globalParms.centerIn←⎕NEW'Form'(('Coord' 'Pixel')('Posn'(200 300))('Size'(400 600)))
+ parms←#._APLGUI.GUI.StdForm.CreateParms
+ parms.hasStatusbar←1
+ :If ⍬ ⍬≡parms.size
+     parms.size←200 400
+ :EndIf
+ parms.minSize←100 200
+ n←#._APLGUI.GUI.StdForm.Create globalParms parms
+ n.VersionNo.Text←1⊃#._APLGUI.GUI.APLGuiAdmin.Version
+ ⎕DL 1
+ →FailsIf 200 400≢n.∆Form.Size
+ ⎕NQ n.∆Form'Close'
+ ⎕NQ globalParms.centerIn'Close'
+
+ r←∆OK

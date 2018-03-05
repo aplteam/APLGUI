@@ -1,0 +1,6 @@
+ MyFonts←∆CreateFonts size;MyFonts;s
+ 'MyFonts'⎕NS''
+ MyFonts.standard←(⎕NEW'Font'(('PName' 'Georgia')('Size'size)))
+ MyFonts.input←(⎕NEW'Font'(('PName' 'Courier New')('Size'size)))
+ MyFonts.label←(⎕NEW'Font'(('PName' 'Georgia')('Size'(size-10))))
+ MyFonts.apl←(⎕NEW'Font'(('PName' 'APL385 Unicode')('Size'size)))

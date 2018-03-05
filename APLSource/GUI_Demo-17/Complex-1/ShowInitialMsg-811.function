@@ -1,0 +1,16 @@
+ ShowInitialMsg←{
+     n←⍵
+     msg←''
+     msg,←⊂'This example of the "Input" class makes use of all data types'
+     msg,←⊂'and all user-defined callbacks available.'
+     msg,←⊂'Therefore it is quite a complex example.'
+     msg,←⊂''
+     msg,←⊂'Note that some specialities are hidden behind the scenes, but'
+     msg,←⊂'by starting the help you can get some clues.'
+
+     parms←##.##.GUI.Dialogs.CreateParmsForShowMsg
+     parms.addToCaption←'Introduction'
+     parms.centerIn←n.∆Form
+     _←n.∆globalParms parms ##.##.GUI.Dialogs.ShowMsg msg
+     ⍬
+ }

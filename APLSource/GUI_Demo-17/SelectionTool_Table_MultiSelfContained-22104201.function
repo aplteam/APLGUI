@@ -1,0 +1,32 @@
+ SelectionTool_Table_MultiSelfContained;globalParms;list;parms;n1;boolean;flag
+⍝ Presents a table with any number of rows and allows selecting multiple rows
+ globalParms←##.GUI.APLGuiGlobalParms.CreateDefaults
+ globalParms.regKey←'MyApp'
+ globalParms.caption←'My App'
+ globalParms.icon←#.⎕NEW'Icon'(⊂'File'(GetFile'Sample.ico'))
+
+ list←(⊂'#.'),¨↓#.⎕NL 3
+ list,←{(⊂⍵,'.'),¨↓(⍎⍵).⎕NL 3}'#.APLTreeUtils'
+ list,←{(⊂⍵,'.'),¨↓(⍎⍵).⎕NL 3}'##.GUI.APLGuiUtils'
+ list,←{(⊂⍵,'.'),¨↓(⍎⍵).⎕NL 3}'##.GUI_Demo'
+ list,←{(⊂⍵,'.'),¨↓(⍎⍵).⎕NL 3}'##.TestCases'
+ list,←{(↓##.APLTreeUtils.FormatDateTime⊃{⍵[;1]}⍵),[0.5]({⍵[;3]}⍵)}⎕AT list
+ list,←↓⎕FMT⍪↑∘⍴∘⎕NR¨list[;0]
+
+ parms←##.GUI.SelectionTool.CreateParms
+ parms.caption←'Select from list'
+ parms.style←##.GUI.Enums.SelectionStyles.multi
+ parms.info←'Select as many rows from the table as you like:'
+ parms.colTitles←'Function' 'Timestamp' 'Author' 'No of lines'
+ parms.minSize←200 400
+ parms.sefault←3?0⊃⍴list
+
+ n1←globalParms parms ##.GUI.SelectionTool.Create list
+
+ (flag boolean)←##.GUI.SelectionTool.ModalWait n1
+ :If flag
+     ⎕←' User pressed the OK button'
+     ⎕←boolean⌿list
+ :Else
+     ⎕←'User did NOT press the OK button'
+ :EndIf

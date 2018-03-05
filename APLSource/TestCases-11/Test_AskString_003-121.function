@@ -1,0 +1,22 @@
+ r←Test_AskString_003(stopFlag batchFlag);myGuiParms;parms;string;⎕TRAP;okFlag
+⍝ Exercise the "Create" method with some props. "Cancel" is pressed automatically via "autoPress".
+ r←∆Failed
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+
+ myGuiParms←#._APLGUI.GUI.APLGuiGlobalParms.CreateDefaults
+ myGuiParms.regKey←'MyApp\Kai1'
+ myGuiParms.testMode←1
+ myGuiParms.caption←0⊃⎕XSI
+ myGuiParms.icon←⎕NEW'Icon'(⊂'File'(GetFile'Sample.ico'))
+
+ parms←#._APLGUI.GUI.Request.CreateParmsForString
+ parms.addToCaption←'My request'
+ parms.question←'Please enter your name:' '(Surname, first name)'
+ parms.default←'Kai Thomas Max Jaeger'
+ parms.timeout←0.1
+ parms.autoPress←#._APLGUI.GUI.Enums.Buttons.Cancel
+
+ (okFlag string)←myGuiParms parms #._APLGUI.GUI.Request.AskForString''
+ →FailsIf okFlag
+
+ r←∆OK

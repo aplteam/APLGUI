@@ -1,0 +1,3 @@
+ r←∆FileBox
+⍝ Returns those main classes "FileBox" really needs.
+ r←''#.GUI.FileBox

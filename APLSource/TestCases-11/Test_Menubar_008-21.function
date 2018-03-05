@@ -1,0 +1,12 @@
+ r←Test_Menubar_008(stopFlag batchFlag);n;TheForm;md;⎕TRAP
+⍝ Exercise the "Create" method with a valid definition which is basically empty
+ r←∆Failed
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+
+ 'TheForm'⎕WC'Form'('Coord' 'Pixel')('Posn'(35 45))('Size'(300 400))
+ n←#._APLGUI.GUI.Menubar.Create TheForm MenuSample2 ⍬(⎕NEW #._APLGUI.GUI.KeyCodes)
+ →PassesIf 7=↑⍴n.∆List ⍬
+ md←∆InterpretMenuDef MenuSample2
+ →PassesIf 6=⍴md
+
+ r←∆OK

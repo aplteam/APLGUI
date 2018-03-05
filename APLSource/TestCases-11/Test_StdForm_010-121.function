@@ -1,0 +1,17 @@
+ r←Test_StdForm_010(stopFlag batchFlag);⎕TRAP;parms;n;globalParms;MyGuiParms
+⍝ Bring up a form and add 3 tabs to it
+ r←∆Failed
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+
+ CreateGlobalParms
+ globalParms←⎕NS MyGuiParms
+ parms←#._APLGUI.GUI.StdForm.CreateParms
+ :If ⍬ ⍬≡parms.size
+     parms.size←400 500
+ :EndIf
+ n←#._APLGUI.GUI.StdForm.Create globalParms parms
+ n←(45 0)#._APLGUI.GUI.StdForm.AddTabs n('First' 'Second' 'Third')
+ ⎕DL 1
+ ⎕NQ n.∆Form'Close'
+
+ r←∆OK

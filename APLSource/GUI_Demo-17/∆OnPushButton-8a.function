@@ -1,0 +1,5 @@
+ ∆OnPushButton←{
+     (rf n)←⍵
+     n.ToBeRotated.Text←⌽n.ToBeRotated.Text
+     ⍬
+ }

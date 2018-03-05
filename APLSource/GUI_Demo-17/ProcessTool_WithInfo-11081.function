@@ -1,0 +1,14 @@
+ ProcessTool_WithInfo;globalParms;list;n1;parms
+⍝ Presents a list of any length and allows processing selected rows; defaults only
+ globalParms←##.GUI.APLGuiGlobalParms.CreateDefaults
+ globalParms.regKey←'MyApp'
+ globalParms.caption←'My App'
+ globalParms.icon←#.⎕NEW'Icon'(⊂'File'(GetFile'Sample.ico'))
+ parms←##.GUI.ProcessTool.CreateParms
+ parms.info←'Select items and then press "Process"'
+ parms.cancelBtnCaption←0
+ list←∪300⍴#.⎕NL-3
+ list←list[⍋⊃list]
+ n1←globalParms parms ##.GUI.ProcessTool.Create list'##.GUI_Demo.∆OnTestHandler_ProcessTool'
+
+ {}##.GUI.ProcessTool.ModalWait n1

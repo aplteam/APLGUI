@@ -1,0 +1,21 @@
+ r←Test_ShowMsg_002(stopFlag batchFlag);n;⎕TRAP;globalParms;parms
+⍝ Exercise "ShowMsg" with a callback on "OK"
+ r←∆Failed
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+
+ 'TEMP____'#.⎕NS''
+ #.TEMP____.Flag←0
+ #.TEMP____.⎕FX⊃'r←x OnOkay msg' '#.TEMP____.Flag←1' 'r←0'
+
+ globalParms←#._APLGUI.GUI.APLGuiGlobalParms.CreateDefaults
+ globalParms.testMode←1
+
+ parms←#._APLGUI.GUI.Dialogs.CreateParmsForShowMsg
+ parms.autoPress←0
+ parms.timeout←0.1
+ parms.onButtonPressed←'#.TEMP____.OnOkay'
+ ⎕←globalParms parms #._APLGUI.GUI.Dialogs.ShowMsg'This is a short message.'
+
+ →FailsIf 0=#.TEMP____.Flag
+
+ r←∆OK

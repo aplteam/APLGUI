@@ -1,0 +1,22 @@
+ r←Test_IE_003(stopFlag batchFlag);⎕TRAP;ref;n;html
+⍝ Test IE: show APLGui's readme.html file
+ r←∆Failed
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+
+ #.⎕SHADOW'TEMP'
+ 'TEMP'#.⎕NS''
+ ref←∆Create_IEcontainer #.TEMP
+ n←#._APLGUI.GUI.IE.CreateIE ref
+ #._APLGUI.GUI.IE.ShowHtmlFile n.IEobject(#.FilesAndDirs.EnforceSlash #.FilesAndDirs.PWD,'\readmefirst.html')
+ ⎕DL 0.5
+ :Trap 0
+     html←#._APLGUI.GUI.IE.GetHTML n.IEobject
+ :Else
+     html←¯1
+ :EndTrap
+ →FailsIf' '≠1↑0⍴html
+ →FailsIf 0∊⍴html
+ r←∆OK
+
+∆TidyUp:
+ :Trap 0 ⋄ n.∆container.Close ⋄ :EndTrap

@@ -1,0 +1,19 @@
+ r←Test_Input_DataType_019(stopFlag batchFlag);n;⎕TRAP;defMat;res;DT;txt
+⍝ Exercise "Input" with a very large "Notepad".
+ r←∆Failed
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+
+ DT←#._APLGUI.GUI.Enums.InputDataTypes
+
+ defMat←0 7⍴''
+ txt←100⍴⊂'APL is one of the most exiciting programming languages around.'
+ defMat⍪←'NP' 'Table'txt DT.Notepad(20 60)1 1
+
+ n←#._APLGUI.GUI.Input.Create defMat ⍬ ⍬
+
+ →GoToTidyUp 1≠⍴n.∆GetRefs'Edit'
+
+ r←∆OK
+
+∆TidyUp:
+ n.∆CloseForm

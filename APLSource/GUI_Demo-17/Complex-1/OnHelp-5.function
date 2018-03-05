@@ -1,0 +1,4 @@
+ OnHelp←{
+     n←⍵
+     ⍬⊣{_←ShowHelp ⍵}&n
+ }

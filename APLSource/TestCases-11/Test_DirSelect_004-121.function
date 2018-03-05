@@ -1,0 +1,28 @@
+ r←Test_DirSelect_004(stopFlag batchFlag);myGuiParms;parms;n;⎕TRAP;startDir;result
+⍝ Exercise the "DirSelect" method. Allows creation and removal of directories.
+ r←∆Failed
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+
+ myGuiParms←#._APLGUI.GUI.APLGuiGlobalParms.CreateDefaults
+ myGuiParms.regKey←'MyApp\Kai1'
+
+ parms←#._APLGUI.GUI.DirSelect.CreateParms
+ parms.addToCaption←'My request'
+ parms.posn←45 35
+ parms.fixDefaultDrive←1
+ parms.info←'We need a directory for the installation of the software:'
+ parms.allowCreate←1
+ parms.allowRemove←1
+
+ startDir←#.FilesAndDirs.GetTempFilename''
+ 1 ⎕NDELETE startDir
+ 'Create!'#.FilesAndDirs.CheckPath startDir  ⍝ Create a directory that does not contain a sub dir.
+ n←myGuiParms parms #._APLGUI.GUI.DirSelect.Create startDir
+ ⎕DL 0.1
+ 1 ⎕NQ n.Btn_01'Select'
+ →GoToTidyUp~0∊⍴n.∆result
+ r←∆OK
+
+∆TidyUp:
+ #.FilesAndDirs.RmDir startDir
+ :Trap 6 ⋄ n.∆CloseForm ⋄ :EndTrap

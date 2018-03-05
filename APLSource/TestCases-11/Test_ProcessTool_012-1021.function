@@ -1,0 +1,24 @@
+ r←Test_ProcessTool_012(stopFlag batchFlag);rc;parms;n;⎕TRAP;buffer;data
+⍝ Exercise "ProcessTool". Suppress "Sort by column" and checks whether it is honoured.
+ r←∆Failed
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+
+ parms←#._APLGUI.GUI.ProcessTool.CreateParms
+ parms.posn←30 40
+ parms.style←#._APLGUI.GUI.Enums.SelectionStyles.multi
+ parms.checkboxes←1
+ parms.sortByCol←0
+ data←parms.data←⍕¨1000+⍳20
+ parms.colTitles←'No' 'Filename'
+ buffer←(⍕¨1000+⍳20),[0.5]⌽10⍴¨,¨20⍴⎕A
+
+ n←parms #._APLGUI.GUI.ProcessTool.Create buffer'∆DealWithData'
+ ⎕DL 0.3
+ ⎕NQ n.List'ColumnClick' 1 1 0
+ →PassesIf buffer≡¯1↓[1]n.List.(Items,ReportInfo)
+ →PassesIf n.∆parms.data≡data
+
+ r←∆OK
+
+∆TidyUp:
+ n.∆CloseForm

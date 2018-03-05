@@ -1,0 +1,14 @@
+ ProcessToolWithTable;globalParms;list;n1;parms
+⍝ Presents a list of any length and allows processing selected rows; defaults only
+ globalParms←##.GUI.APLGuiGlobalParms.CreateDefaults
+ globalParms.regKey←'MyApp'
+ globalParms.caption←'My App'
+ globalParms.icon←#.⎕NEW'Icon'(⊂'File'(GetFile'Sample.ico'))
+ list←∪300⍴⎕NL-3
+ list←list[⍋⊃list]
+ list←list,,[0.5]↓#.APLTreeUtils.FormatDateTime⊃{⍵[;1]}⎕AT list
+ parms←##.GUI.ProcessTool.CreateParms
+ parms.colTitles←'Name' 'Timestamp'
+ parms.data←list
+ n1←globalParms parms ##.GUI.ProcessTool.Create list'##.GUI_Demo.∆OnTestHandler_ProcessTool'
+ ##.GUI.ProcessTool.ModalWait n1

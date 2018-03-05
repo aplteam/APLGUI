@@ -1,0 +1,7 @@
+ OnButtonPressed←{
+     n←⍺
+     btn←⍵
+     n.Btn0≡btn:0
+     #.TEMP.∆MSG←btn.Caption
+     1
+ }

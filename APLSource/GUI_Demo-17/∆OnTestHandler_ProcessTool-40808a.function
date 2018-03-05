@@ -1,0 +1,10 @@
+ {r}←{caption}∆OnTestHandler_ProcessTool(type bool n)
+ r←0
+ :If 0∊⍴n.List.ReportInfo
+     ⎕←' ',⍪bool/n.List.Items
+ :Else
+     ⎕←' ',bool⌿n.List.(Items,ReportInfo)
+ :EndIf
+ :If 0<⎕NC'caption'
+     ⎕←'Menu item selected: ',caption
+ :EndIf

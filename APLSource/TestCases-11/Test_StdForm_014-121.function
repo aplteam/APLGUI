@@ -1,0 +1,15 @@
+ r←Test_StdForm_014(stopFlag batchFlag);⎕TRAP;globalParms;parms;n
+⍝ Test a StdForm that has a user-defined function on the "OnClose" event'
+ r←∆Failed
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+
+ parms←#._APLGUI.GUI.StdForm.CreateParms
+ parms.size←200 400
+ parms.posn←60 60
+ parms.minSize←100 200
+ parms.onClose←'OnCloseStdForm'
+ n←#._APLGUI.GUI.StdForm.Create parms
+ 0.2 ∆Process n.∆Form
+ n.∆CloseForm
+
+ r←∆OK

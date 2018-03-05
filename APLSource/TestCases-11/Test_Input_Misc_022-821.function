@@ -1,0 +1,24 @@
+ r←Test_Input_Misc_022(stopFlag batchFlag);n;⎕TRAP;defMat;res;DT;parms
+⍝ Exercise "Input" with no buttons at all
+ r←∆Failed
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+
+ DT←#._APLGUI.GUI.Enums.InputDataTypes
+
+ defMat←0 4⍴0
+ defMat⍪←'Name' 'Enter your name:' ''DT.Character
+
+ parms←#._APLGUI.GUI.Input.CreateParms
+ parms.cancelBtnCaption←''
+ parms.okBtnCaption←''
+ parms.testMode←1
+ n←#._APLGUI.GUI.Input.Create defMat parms ⍬
+
+ n.Name ∆KeyPress'Kai Jaeger'
+ ∆Process n.∆Form
+ →GoToTidyUp~0∊⍴'Button'⎕WN n.∆Form
+
+ r←∆OK
+
+∆TidyUp:
+ n.∆CloseForm

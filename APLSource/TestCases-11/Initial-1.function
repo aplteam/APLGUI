@@ -1,0 +1,13 @@
+ {r}←Initial;∆;msg
+ r←1
+ ⎕IO←0 ⋄ ⎕ML←3
+ #.Tester.EstablishHelpersIn''
+ #.FilesAndDirs.PolishCurrentDir
+ ∆←⊂'Form'
+ ∆,←⊂'Coord' 'Pixel'
+ ∆,←⊂'Caption' 'Parent Form - don''t close!'
+ ∆,←⊂'Posn'(30 40)
+ ∆,←⊂'Size'(200 300)
+ ∆,←⊂'Event' 9955 1
+ 'ParentForm'#.⎕WC ∆
+ ⍝Done

@@ -1,0 +1,41 @@
+ r←Test_Input_DataType_011(stopFlag batchFlag);n;⎕TRAP;defMat;res;DT;globalParms;parms;props;month;values;colors;Okay;msg;list
+⍝ Exercise "Input" with data type "Image".
+ r←∆Failed
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+
+ DT←#._APLGUI.GUI.Enums.InputDataTypes
+
+ defMat←0 7⍴''
+ defMat⍪←'Text2' '' ''DT.Character 5 1 1
+ defMat⍪←'Text3' '' ''DT.Character 5 1 1
+ defMat⍪←'Text4' '' ''DT.Character 5 1 1
+ defMat⍪←'Text5' '' ''DT.Character 5 1 1
+ defMat⍪←'Text6' '' ''DT.Character 5 1 1
+ defMat⍪←'Text7' '' ''DT.Character 5 1 1
+ defMat⍪←'Text8' '' ''DT.Character 5 1 1
+ defMat⍪←'Text9' '' ''DT.Character 5 1 1
+ defMat⍪←'Text10' '' ''DT.Character 5 1 1
+ defMat⍪←'Text11' '' ''DT.Character 5 1 1
+ defMat⍪←'Img1a' 'Error icon'#._APLGUI.GUI.Enums.DialogStyles.Error DT.Image 0 1 2
+ defMat⍪←'Img2a' 'Kai Jaeger'('file://',GetFile'KaiJaeger.jpg')DT.Image 0 1 2
+ defMat⍪←'Text1a' 'Any input field' ''DT.Character 0 1 2
+ defMat⍪←'Img3a' 'Warning icon'#._APLGUI.GUI.Enums.DialogStyles.Warn DT.Image 0 1 2
+ defMat⍪←'Img4a' 'The FlipDB Team'('file://',GetFile'FlipDB-Team.png')DT.Image 0 1 2
+ defMat⍪←'Img1b' ''#._APLGUI.GUI.Enums.DialogStyles.Error DT.Image 0 1 3
+ defMat⍪←'Img2b' ''('file://',GetFile'KaiJaeger.jpg')DT.Image 0 1 3
+ defMat⍪←'Text1b' 'Any input field' ''DT.Character 0 1 3
+ defMat⍪←'Img3b' ''#._APLGUI.GUI.Enums.DialogStyles.Warn DT.Image 0 1 3
+ defMat⍪←'Img4b' ''('file://',GetFile'FlipDB-Team.png')DT.Image(200 250)1 3
+
+ globalParms←∆GetGlobalParms
+ parms←#._APLGUI.GUI.Input.CreateParms
+ parms.posn←50 50
+ parms.addToCaption←'No. ',⍕∆GetTestCaseNo
+
+ n←#._APLGUI.GUI.Input.Create defMat globalParms parms
+ ∆Process n.∆Form
+
+ r←∆OK
+
+∆TidyUp:
+ n.∆CloseForm

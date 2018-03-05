@@ -1,0 +1,68 @@
+ r←Test_Input_Callbacks_006(stopFlag batchFlag);n;⎕TRAP;defMat;res;DT;globalParms;parms;txt;props
+⍝ Exercise "Input" with on "onChange" callback.
+ r←∆Failed
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+
+ DT←#._APLGUI.GUI.Enums.InputDataTypes
+
+ :If 0  ⍝TODO⍝  Does not work = discuss with Dialog
+
+     #.⎕SHADOW'TEMP'
+     'TEMP'#.⎕NS''
+     #.TEMP.counter←0
+     #.TEMP.OnChange←{
+         ⎕←⍵
+         ⎕←#.TEMP.counter←1+#.TEMP.counter
+         n←#._APLGUI.GUI.APLGuiUtils.GetRefTo_n↑⍵
+         (#.TEMP.counter=4)'Invalid data'
+     }
+
+     defMat←0 7⍴''
+     defMat⍪←'Tab_1' '' ''DT.Tab 0 1 1
+     defMat⍪←'Time' '' ''DT.Time 0 1 1
+     defMat⍪←'Date' '' ''DT.Date 0 1 1
+     defMat⍪←'Character' '' ''DT.Character 0 1 1
+     defMat⍪←'Numeric' '' ''DT.Numeric 0 1 1
+     defMat⍪←'Currency' '' ''DT.Currency 0 1 1
+     defMat⍪←'YesNo' '' ''DT.YesNo 0 1 1
+     defMat⍪←'Tab_2' '' ''DT.Tab 0 1 1
+     defMat⍪←'YesNo2' '' ''DT.YesNo 0 1 1
+
+     globalParms←∆GetGlobalParms
+     parms←#._APLGUI.GUI.Input.CreateParms
+     parms.posn←50 50
+     parms.onChange←#.TEMP'OnChange'
+     parms.addToCaption←'No. ',⍕∆GetTestCaseNo
+
+     n←#._APLGUI.GUI.Input.Create defMat globalParms parms
+     ∆Process n.∆Form
+
+     n.Character ∆KeyPress'John Doe'
+     #.TEMP.counter←0
+     ⎕NQ n.YesNo'GotFocus' ⍝ Force "Change" event on "Caracter"
+     ∆Process n.∆Form
+     →GoToTidyUp #.TEMP.counter≠1  ⍝ Reported to Dyalog as <01019>, <01020>
+
+     ⎕NQ n.YesNo'GotFocus' ⍝ Force "Change" event on "Caracter"
+     ∆Process n.∆Form
+     →GoToTidyUp #.TEMP.counter≠2
+
+     ⎕NQ n.YesNo'GotFocus' ⍝ Force "Change" event on "Caracter"
+     ∆Process n.∆Form
+     →GoToTidyUp #.TEMP.counter≠3
+
+     ⎕NQ n.YesNo'GotFocus' ⍝ Force "Change" event on "Caracter"
+     ∆Process n.∆Form
+     →GoToTidyUp #.TEMP.counter≠4
+
+     ⎕NQ n.Character'GotFocus' ⍝ Force "Change" event on "Caracter"
+     ⎕NQ n.YesNo'GotFocus' ⍝ Force "Change" event on "Caracter"
+     ∆Process n.∆Form
+     →GoToTidyUp #.TEMP.counter≠4
+
+ :EndIf
+
+ r←∆OK
+
+∆TidyUp:
+ :Trap 0 ⋄ n.∆CloseForm ⋄ :EndTrap

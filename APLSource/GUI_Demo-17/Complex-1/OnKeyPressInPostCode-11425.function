@@ -1,0 +1,6 @@
+ OnKeyPressInPostCode←{
+     msg←⍵
+     1≠⍴,2⊃msg:1
+     msg[2]←⊂#.APLTreeUtils.Uppercase 2⊃msg ⍝ Transform the key
+     msg
+ }

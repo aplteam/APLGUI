@@ -1,0 +1,31 @@
+ r←Test_Input_Misc_004(stopFlag batchFlag);n;⎕TRAP;DT;defMat;globalParms;parms;focusHas
+⍝ Exercise "Input" with the "ForceFocusTo" method.
+ r←∆Failed
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+
+ DT←#._APLGUI.GUI.Enums.InputDataTypes
+
+ defMat←0 5⍴''
+ defMat⍪←'Char1' '' 'APL is great'DT.Character 0
+ defMat⍪←'Char2' '' 'Python is okay'DT.Character 0
+ defMat⍪←'Char3' '' 'COBOL is ... arrrgh!'DT.Character 0
+
+ globalParms←∆GetGlobalParms
+ parms←#._APLGUI.GUI.Input.CreateParms
+ parms.posn←50 50
+ parms.size←370 380
+ parms.addToCaption←'No. ',⍕∆GetTestCaseNo
+
+ n←#._APLGUI.GUI.Input.Create defMat globalParms parms
+ ∆Process n.∆Form
+
+ n #._APLGUI.GUI.Input.ForceFocusTo'Char3'
+ ∆Process n.∆Form
+ focusHas←2 ⎕NQ'#' 'GetFocusObj'
+ →GoToTidyUp~∧/n.∆Form.Size∊¨(parms.size-5)+¨⊂⍳10
+ n.∆CloseForm
+
+ r←∆OK
+
+∆TidyUp:
+ :Trap 0 ⋄ n.∆CloseForm ⋄ :EndTrap

@@ -1,0 +1,3 @@
+ AskForNumber
+ ⎕←##.GUI.Request.AskForNumber'Number of copies:'
+⍝Done

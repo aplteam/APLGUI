@@ -1,0 +1,18 @@
+ ProcessTool_WithTable;globalParms;n1;parms;table
+⍝ Presents a table
+ globalParms←##.GUI.APLGuiGlobalParms.CreateDefaults
+ globalParms.caption←'My App'
+ globalParms.icon←#.⎕NEW'Icon'(⊂'File'(GetFile'Sample.ico'))
+ parms←##.GUI.ProcessTool.CreateParms
+ parms.info←'Select items and then press "Process"'
+ parms.cancelBtnCaption←0
+ parms.posn←⍬ 60
+ parms.colTitles←'Name' 'Author' 'Timestamp'
+ table←~∘' '¨40⍴↓⎕NL 3
+ table←⍪table[⍋⊃table]
+ table,←3∘⊃∘⎕AT¨table
+ table,←⍪/{0::' ' ⋄ #.APLTreeUtils.FormatDateTime ⍵}¨1⊃∘⎕AT¨table
+
+ n1←globalParms parms ##.GUI.ProcessTool.Create table'##.GUI_Demo.∆OnTestHandler_ProcessTool'
+ {}##.GUI.ProcessTool.ModalWait n1
+⍝Done

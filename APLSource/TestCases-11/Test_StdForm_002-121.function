@@ -1,0 +1,20 @@
+ r←Test_StdForm_002(stopFlag batchFlag);⎕TRAP;parms;n;globalParms;MyGuiParms
+⍝ Bring up a form up with just one field in the Statusbar.
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+ r←∆Failed
+
+ CreateGlobalParms
+ globalParms←⎕NS MyGuiParms
+ parms←#._APLGUI.GUI.StdForm.CreateParms
+ parms.hasStatusbar←1
+ :If ⍬ ⍬≡parms.size
+     parms.size←200 400
+ :EndIf
+ parms.posn←45 35
+ n←#._APLGUI.GUI.StdForm.Create globalParms parms
+ n.VersionNo.Text←1⊃#._APLGUI.GUI.APLGuiAdmin.Version
+ ⎕DL 1
+ →FailsIf 200 400≢n.∆Form.Size
+ ⎕NQ n.∆Form'Close'
+
+ r←∆OK

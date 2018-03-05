@@ -1,0 +1,7 @@
+ YesNoCancel;globalParms
+⍝ Presents a "Yes", a "No" & a "Cancel button together with a message
+ globalParms←##.GUI.APLGuiGlobalParms.CreateDefaults
+ globalParms.regKey←'MyApp\Kai1'
+ globalParms.caption←'My App'
+ globalParms.icon←'File://',(GetFile'Sample.ico')
+ ⎕←globalParms ##.GUI.Dialogs.YesNoCancel'Do you want to fix them before carrying on?'

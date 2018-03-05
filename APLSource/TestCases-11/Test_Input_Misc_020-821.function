@@ -1,0 +1,23 @@
+ r←Test_Input_Misc_020(stopFlag batchFlag);n;⎕TRAP;DT;defMat;parms
+⍝ Exercise "Input" with testMode←1 and autoPress←1 and timeout←2
+ r←∆Failed
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+
+ DT←#._APLGUI.GUI.Enums.InputDataTypes
+
+ defMat←0 7⍴''
+ defMat⍪←'Character1' '' 'Kai Jaeger'DT.Character 0 1 1
+ defMat⍪←'Numeric1' '' 123 DT.Numeric 0 1 1
+
+ parms←#._APLGUI.GUI.Input.CreateParms
+ parms.posn←55 55
+ parms.testMode←1
+ parms.autoPress←1
+ n←#._APLGUI.GUI.Input.Create defMat ⍬ parms
+ 1 ∆Process n.∆Form
+ →GoToTidyUp~0∊⍴n.∆result
+
+ r←∆OK
+
+∆TidyUp:
+ n.∆CloseForm

@@ -1,0 +1,30 @@
+ r←Test_AskDate_003(stopFlag batchFlag);myGuiParms;parms;n;⎕TRAP
+⍝ Exercise the "AskForDate" module and select a date
+ r←∆Inactive
+ :Return
+
+ r←∆Failed
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+
+ :If 0 ⍝TODO⍝  See bug <01137>
+     myGuiParms←#._APLGUI.GUI.APLGuiGlobalParms.CreateDefaults
+     myGuiParms.regKey←'MyApp\Kai1'
+     parms←#._APLGUI.GUI.Request.CreateParmsForDate
+     parms.addToCaption←'Date needed'
+     parms.date←2015 5 30
+
+     n←myGuiParms parms #._APLGUI.GUI.Request.CreateDateRequest''
+     ∆Process n.∆Form
+⍝ ⎕NQ n.DateTime'DateTimeChange' 42519 0 0 0
+     1 ⎕NQ n.DateTime'DateTimeChange' 42500 0 0 0
+     ∆Process n.∆Form
+     ⎕NQ n.Btn0'Select'
+     ∆Process n.∆Form
+
+     →GoToTidyUp 2015 5 30≢n.∆result
+     r←∆OK
+
+∆TidyUp:
+     :Trap 0 ⋄ n.∆CloseForm ⋄ :EndTrap
+
+ :EndIf

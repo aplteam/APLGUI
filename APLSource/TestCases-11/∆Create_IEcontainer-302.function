@@ -1,0 +1,3 @@
+ r←{size}∆Create_IEcontainer parent
+ size←{0=⎕NC ⍵:600 600 ⋄ ⍎⍵}'size'
+ r←⍎'IEcontainer'parent.⎕WC'Form'('Coord' 'Pixel')('Posn' 45 25)('Size'size)

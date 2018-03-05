@@ -1,0 +1,7 @@
+ r←∆L pattern
+ r←⎕NL 3
+ r←(r[;⎕IO]≠'∆')⌿r
+ :If ~0∊⍴pattern
+     r⌿⍨←((⍴,pattern)↑[1]r)∧.=pattern
+ :EndIf
+⍝Done

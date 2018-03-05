@@ -1,0 +1,39 @@
+ r←Test_AskString_005(stopFlag batchFlag);parms;msg;was;⎕TRAP
+⍝ Exercise the "OnOkay" callback with all possible ways to define it.
+ r←∆Failed
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+
+ #.⎕SHADOW'TEMP'
+ #.TEMP←⎕NS''
+ #.TEMP.MyCallback←{
+     n←⍵
+     ⎕THIS.Result←1
+     1≤' '+.=n.∆result:1
+     ⎕THIS.Result←0
+     0
+ }
+ #.TEMP.parms←#._APLGUI.GUI.Request.CreateParmsForString
+ #.TEMP.parms.default←'Kai Jaeger'
+ #.TEMP.parms.timeout←0.1
+ #.TEMP.parms.onOkay←'#.TEMP.MyCallback'
+
+ {}#.TEMP.parms #._APLGUI.GUI.Request.AskForString'Your name:'
+ →FailsIf~#.TEMP.Result
+ #.TEMP.(⎕EX ⎕NL 2)
+
+ #.TEMP.parms.onOkay←#.TEMP'MyCallback'
+ {}#.TEMP.parms #._APLGUI.GUI.Request.AskForString'Your name:'
+ →FailsIf~#.TEMP.Result
+ #.TEMP.(⎕EX ⎕NL 2)
+
+ #.TEMP.parms.onOkay←'MyCallback'
+ was←⎕CS #.TEMP
+ parms←#._APLGUI.GUI.Request.CreateParmsForString
+ parms.default←'Kai Jaeger'
+ parms.timeout←0.1
+ parms.onOkay←'#.TEMP.MyCallback'
+ {}parms #._APLGUI.GUI.Request.AskForString'Your name:'
+ ⎕CS was
+ →FailsIf~#.TEMP.Result
+
+ r←∆OK

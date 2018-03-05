@@ -1,0 +1,27 @@
+ r←Test_AskString_001(stopFlag batchFlag);myGuiParms;parms;n;⎕TRAP
+⍝ Exercise the "AskForString" method with defaults parameters only. Input via "KeyPress".
+⍝ See also number 8
+ r←∆Failed
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+
+ myGuiParms←#._APLGUI.GUI.APLGuiGlobalParms.CreateDefaults
+ myGuiParms.regKey←'MyApp\Kai1'
+ myGuiParms.testMode←1
+ parms←#._APLGUI.GUI.Request.CreateParmsForString
+ parms.addToCaption←'My request'
+ parms.question←'Please enter your name:' '(Surname, first name)'
+
+ n←myGuiParms parms(#._APLGUI.GUI.Request.CreateParmsForString ∆Ask)''
+ 0.2 ∆Process n.∆Form
+ n.Input ∆KeyPress'Kai'
+ ∆Process n.∆Form
+ ⎕NQ n.Input 9995
+ ∆Process n.∆Form
+ ⎕NQ n.Btn0'Select'
+ ∆Process n.∆Form
+ →FailsIf'Kai'≢n.∆result  ⍝ Just execute →⎕lc and it will work  ⍝TODO⍝ discuss with Dyalog why that failes!
+
+ r←∆OK
+
+∆TidyUp:
+ n.∆CloseForm

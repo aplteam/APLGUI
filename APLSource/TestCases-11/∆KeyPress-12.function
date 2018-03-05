@@ -1,0 +1,11 @@
+ ∆KeyPress←{
+     rf←⍺                   ⍝ Reference; Likely to the grid but might be a modal form as well
+     (1≠⍴,⍵)∧0 0≢1↑¨0⍴¨¯2↑⍵:rf ∇¨⍵
+     rf.Type≢'Grid':_←(⎕DL 0.001)⊣1 ⎕NQ rf'KeyPress',⍵
+     inputControl←(1⊃rf.CurCell)⊃rf.Input
+     _←1 ⎕NQ inputControl'KeyPress',⍵
+     _←⎕DL 0.001
+⍝ ⍺: ref to a Form, MsgBox or a Grid.
+⍝ Either a single char (like "a" or "1") or a nested two-element-vector (⊂'ER') or a vector of length 3 ('' 34 2)
+⍝ ∆KeyPress 'abcdef' is valid, too, but is transformed internally to ∆KeyPress¨'abcdef'
+ }

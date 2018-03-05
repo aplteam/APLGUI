@@ -1,0 +1,34 @@
+ TableBrowse_MultipleInSubForms;parms;globalParms;n;parms1;parms0;table0;tabl1;table1;n1;ng1;ng2
+⍝ Shows three tables within three SubForms.
+ →0 ⍝ "Table" is not ready yet <Table>
+ . ⍝ The "Table" class is under construction and not ready yet
+ globalParms←##.GUI.APLGuiGlobalParms.CreateDefaults
+ globalParms.caption←'Multiple Grids'
+ globalParms.icon←⎕NEW'Icon'(⊂'File'(GetFile'Sample.ico'))
+ parms←##.GUI.StdForm.CreateParms
+ parms.caption←'Three'
+ parms.osn←35 55
+ n←##.GUI.StdForm.Create globalParms parms
+ n←##.GUI.StdForm.AddTabs n('Table 1' 'Table 2')
+ n←##.GUI.StdForm.AddButtons n(⊂'Close')
+ n.∆buttons.onSelect←1
+
+ parms0←##.GUI.Table.CreateParms
+ parms0.dataTypes←##.GUI.Enums.TableDataTypes.(Character Numeric Character Character Date Time Currency YesNo)
+ parms0.colTitles←'Name' 'Type' 'Parent' 'Author' 'Date' 'Time' 'Amount' 'Active'
+ parms0.rowTitles←0
+ parms0.parent←n.Tab_00_SF
+ table0←_CreateTable
+ ng1←##.GUI.Table.CreateGrid table0 n
+
+ parms1←##.GUI.TableViewer.CreateParms
+ parms1.dataTypes←##.GUI.Enums.TableDataTypes.(Character Character Numeric)
+ parms1.colTitles←'First name' 'Last name' 'YoB'
+ parms1.parent←n.Tab_01_SF
+ table1←⍉⊃('Ronald' 'Bill' 'George' 'Barak')('Reagan' 'Clinton' 'Bush' 'Obama')(1930 1942 1957 1962)
+ ng2←##.GUI.Table.CreateGrid table1 n
+
+ n.∆Form.Wait
+ n.∆CloseForm
+
+⍝Done

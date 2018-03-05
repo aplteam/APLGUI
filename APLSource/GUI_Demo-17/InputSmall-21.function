@@ -1,0 +1,12 @@
+ InputSmall;defMat;DT;r;parms;∆
+⍝ Very small `Input`. `minSize` should have an effect here.
+ DT←##.GUI.Enums.InputDataTypes
+
+ defMat←0 5⍴''
+ defMat⍪←'Sure' 'Are you sure about this?' ''DT.Label 0
+
+ parms←##.GUI.Input.CreateParms
+ parms.posn←55 35
+ r←parms ##.GUI.Input.Run defMat
+ ⎕SE.aplteam.Display r
+⍝Done

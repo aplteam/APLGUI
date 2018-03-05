@@ -1,0 +1,5 @@
+ AskForNumberWithDefaults;parms
+ parms←##.GUI.Request.CreateParmsForNumber
+ parms.value←10
+ ⎕←parms ##.GUI.Request.AskForNumber'Number of copies:'
+⍝Done

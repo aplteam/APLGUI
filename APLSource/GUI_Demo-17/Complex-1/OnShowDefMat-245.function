@@ -1,0 +1,4 @@
+ OnShowDefMat←{
+     n←↑⍵
+     ⍬⊣{##.GUI.Input.ViewDefinitionMatrix ⍵}&n.∆g.defMat
+ }

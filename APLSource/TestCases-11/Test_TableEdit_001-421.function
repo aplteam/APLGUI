@@ -1,0 +1,19 @@
+ r←Test_TableEdit_001(stopFlag batchFlag);n;⎕TRAP;table;globalParms;parms
+⍝ Test "Edit" in the simplest possible way.
+ r←∆Inactive
+ :Return
+
+ r←∆Failed
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+
+⍝⍝⍝ Preconditions
+ globalParms←#._APLGUI.GUI.APLGuiGlobalParms.CreateDefaults
+ parms←#._APLGUI.GUI.Table.CreateParms
+ parms.testMode←1
+ table←⍉⊃('Obama' 'Bush' 'Clinton')(1 0 1)
+ n←#._APLGUI.GUI.Table.Create table globalParms parms
+ ⎕NQ n.∆Form'Close'
+ ∆Process n.∆Form
+ →FailsIf n.∆result≢table
+
+ r←∆OK

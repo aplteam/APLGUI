@@ -1,0 +1,31 @@
+ r←Test_AskString_008(stopFlag batchFlag);msg;was;n;parms;cl;myGuiParms;⎕TRAP
+⍝ Exercise the "OnHelp" callback with all possible ways to define it. Input: insert clipboard. See also number 1
+ r←∆Failed
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+
+ myGuiParms←#._APLGUI.GUI.APLGuiGlobalParms.CreateDefaults
+ myGuiParms.regKey←'MyApp\Kai1'
+ myGuiParms.testMode←1
+ parms←#._APLGUI.GUI.Request.CreateParmsForString
+ parms.addToCaption←'My request'
+ parms.question←'Please enter your name:' '(Surname, first name)'
+
+ n←myGuiParms parms(#._APLGUI.GUI.Request.CreateParmsForString ∆Ask)''
+ ⎕DL 0.2
+ ∆Process n.∆Form
+ cl←⎕NEW⊂'Clipboard'
+ cl.Text←'Kai'
+ ⎕NQ n.Input'GotFocus'
+ ⎕NQ n.Input'KeyPress' 'PT'
+ ⎕NQ n.Input 9995
+ ∆Process n.∆Form
+ →GoToTidyUp'Kai'≢n.Input.Text
+ →GoToTidyUp'Length: 3'≢n.StatusField1.Text
+
+ ⎕NQ n.Btn0'Select'
+ ∆Process n.∆Form
+ →FailsIf'Kai'≢n.∆result
+ r←∆OK
+
+∆TidyUp:
+ n.∆CloseForm

@@ -1,0 +1,13 @@
+ {r}←n OnBeforeNavigate msg;i;URL;url;self;allowed
+ (self url)←msg[0 2]
+ n←self.n
+ url←#.APLTreeUtils.Lowercase URL←2⊃msg
+ :If r←'about:blank'≢url
+     allowed←'http://google' 'https://google' 'http://www.google' 'https://www.google'
+     r←∨/allowed{⍺≡(⍴⍺)↑⍵}¨⊂url
+ :EndIf
+ :If 0=r
+     self.Stop
+     ⎕←'Go to ',url
+     ⎕←'Suppressed by user-defined callback.'
+ :EndIf

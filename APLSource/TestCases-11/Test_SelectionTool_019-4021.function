@@ -1,0 +1,49 @@
+ r←Test_SelectionTool_019(stopFlag batchFlag);⎕TRAP;parms;data;rf
+⍝ Exercise "SelectionTool" and check "regKey2"
+ r←∆OK
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+
+ :If batchFlag
+     r←¯1
+ :Else
+     ⎕←(⎕PW-1)⍴'-'
+     ⎕←'The following eight GUIs should be sized properly'
+     ⎕←'Please check; you will be prompted at the end'
+     ⎕←''
+     ⎕←'Press <enter> when your are ready'
+     {}⍞
+     data←{⍵,[0.5]⍵}⍕¨10001+⍳1
+
+     parms←#._APLGUI.GUI.SelectionTool.CreateParms
+     {}parms #._APLGUI.GUI.SelectionTool.Run data
+
+     parms.colTitles←'First' 'Second'
+     {}parms #._APLGUI.GUI.SelectionTool.Run data
+
+     #.⎕SHADOW'MyNS'
+     'MyNS'#.⎕NS''
+     rf←#.MyNS.⎕NEW'Font'(('PName' 'APL385 Unicode')('Size' 24))
+     parms.(fontInput fontStandard)←rf
+     parms.colTitles←''
+     {}parms #._APLGUI.GUI.SelectionTool.Run data
+
+     parms.colTitles←'First' 'Second'
+     {}parms #._APLGUI.GUI.SelectionTool.Run data
+
+     data←{⍵,[0.5]⍵}⍕¨10001+⍳20
+
+     parms←#._APLGUI.GUI.SelectionTool.CreateParms
+     {}parms #._APLGUI.GUI.SelectionTool.Run data
+
+     parms.colTitles←'First' 'Second'
+     {}parms #._APLGUI.GUI.SelectionTool.Run data
+
+     parms.(fontInput fontStandard)←rf
+     parms.colTitles←''
+     {}parms #._APLGUI.GUI.SelectionTool.Run data
+
+     parms.colTitles←'First' 'Second'
+     {}parms #._APLGUI.GUI.SelectionTool.Run data
+
+     r←~∆PromptForSuccess'Did the GUIs look fine in terms of size?'
+ :EndIf

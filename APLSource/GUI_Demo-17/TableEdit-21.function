@@ -1,0 +1,26 @@
+ TableEdit;table;form;n;parms;result;settings
+⍝  ⍝TODO⍝
+ table←4 5⍴'Barak' 'Obama' 63 1 '2010-01-01' 'Bill' 'Clinton' 74 0 '1834-12-31' 'George' 'Bush' 63 1 '1994-09-03' 'Ronald' 'Reagan' 78 0 '1980-01-02'
+ table⍪←'George' 'Washington' 70 0 '1689-01-02'
+ table⍪←'Gerald' 'Ford' 65 1 '1970-04-07'
+ table⍪←'John' 'Kennedey' 54 1 '1960-03-28'
+⍝⍝table,←20001231 19871201 19880101
+⍝⍝ table,←20001231.1 19871201.1 19880101.1
+⍝⍝ table,←(1990 1 2)(1877 12 31)(2015 12 8)
+⍝⍝ table,←45000+⍳3
+ parms←##.GUI.TableEdit.CreateParms
+ parms.caption←'Test the Table Editor'
+ parms.posn←80 40
+ parms.debug←1
+ parms.dataType←'CH' 'CH' 'NU' 'YN' 'DA' ⍝ 'DA' 'DA' 'DA' 'DA'
+ parms.rowPrototype←'{First name}' '{Last name}' 0 1 '1900-07-01'
+ parms.colTitles←'First name' 'Last name' 'Age' 'Active' 'Took office in' ⍝ 'DT2' 'DT3' 'DT4' 'DT5'
+ parms.rowTitles←⍕¨⍳1+↑⍴table
+ parms.moveLines←1
+ parms.moveSelection←1
+ parms.comments←(0 0 'First comment')(2 3('Second' 'comment'))
+⍝ parms.settings←settings
+ parms.new←1
+ (result settings)←2↑parms ##.GUI.TableEdit.Edit table
+ ⎕←result
+⍝Done

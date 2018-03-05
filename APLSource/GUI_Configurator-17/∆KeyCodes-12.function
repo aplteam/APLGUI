@@ -1,0 +1,3 @@
+ r←∆KeyCodes
+⍝ Returns those main classes "KeyCodes" really needs.
+ r←''

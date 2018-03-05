@@ -1,0 +1,24 @@
+ r←Test_CreateButtonForm_011(stopFlag batchFlag);myGuiParms;parms;n;msg;⎕TRAP;oldPixelSettings
+⍝ Exercise "Dialog.Create": height test; the (nested) question defines the height
+ r←∆Failed
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+
+ oldPixelSettings←2035⌶'RealPixel'
+ myGuiParms←#._APLGUI.GUI.APLGuiGlobalParms.CreateDefaults
+ myGuiParms.regKey←'MyApp\Kai1'
+ myGuiParms.icon←⎕NEW'Icon'(⊂'File'(GetFile'Sample.ico'))
+ parms←#._APLGUI.GUI.Dialogs.CreateParmsForYesOrNo
+ msg←'Are you really really sure about this?' '' 'We have to be certain here!' 'A mistake can be fatal!' 'We don''t want this, or do we?' '' 'Therefore, think thrice!'
+ parms.question←msg
+ parms.buttons←'Yes' 'No'
+ n←#._APLGUI.GUI.Dialogs.CreateButtonForm myGuiParms parms
+ ⎕DL 0.2
+ n←#._APLGUI.GUI.Dialogs.AdjustSize n
+ :If ⍬ ⍬≡parms.posn
+     {}n.∆Form #._APLGUI.GUI.APLGuiHelpers.CenterIn myGuiParms.centerIn{(0∊⍴⍵):⍺ ⋄ ⍵}parms.centerIn
+ :EndIf
+ r←∆OK
+
+∆TidyUp:
+ n.∆CloseForm
+ {}2035⌶oldPixelSettings

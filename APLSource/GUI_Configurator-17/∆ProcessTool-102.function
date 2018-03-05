@@ -1,0 +1,3 @@
+ r←∆ProcessTool
+⍝ Returns those main classes "ProcessTool" really needs.
+ r←'StdForm' 'Menubar' 'KeyCodes' 'SelAndProcess'

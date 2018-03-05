@@ -1,0 +1,10 @@
+ DirSelect;myGuiParms;info;parms
+⍝ Allows the user to select a directory.
+ myGuiParms←##.GUI.APLGuiGlobalParms.CreateDefaults
+ myGuiParms.regKey←'MyApp\Kai1'
+ myGuiParms.icon←⎕NEW'Icon'(⊂'File'(GetFile'Sample.ico'))
+ info←'Where would you like to install the software?'
+ parms←##.GUI.DirSelect.CreateParms
+ parms.addToCaption←'Directory'
+ ⎕←parms myGuiParms ##.GUI.DirSelect.Run'C:\Windows\System32'
+⍝Done

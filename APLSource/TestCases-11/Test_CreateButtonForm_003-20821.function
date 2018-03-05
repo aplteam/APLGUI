@@ -1,0 +1,28 @@
+ r←Test_CreateButtonForm_003(stopFlag batchFlag);myGuiParms;parms;n;⎕TRAP;oldPixelSettings
+⍝ Exercise "Dialog.Create": width test; the caption defines the width.
+ r←∆Failed
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+
+ oldPixelSettings←2035⌶'RealPixel'
+ myGuiParms←#._APLGUI.GUI.APLGuiGlobalParms.CreateDefaults
+ myGuiParms.regKey←'MyApp\Kai1'
+ myGuiParms.icon←⎕NEW'Icon'(⊂'File'(GetFile'Sample.ico'))
+ parms←#._APLGUI.GUI.Dialogs.CreateParmsForYesOrNo
+ parms.addToCaption←'This caption defines the actual width of the form as such'
+ parms.question←'Are you really sure about this?'
+ parms.buttons←'Yes' 'No'
+ parms.minSize←⍬ ⍬
+ n←#._APLGUI.GUI.Dialogs.CreateButtonForm myGuiParms parms
+ ⎕DL 0.2
+ n←#._APLGUI.GUI.Dialogs.AdjustSize n
+
+ :If ⍬ ⍬≡parms.posn
+     {}n.∆Form #._APLGUI.GUI.APLGuiHelpers.CenterIn myGuiParms.centerIn{(0∊⍴⍵):⍺ ⋄ ⍵}parms.centerIn
+ :EndIf
+ →GoToTidyUp∧/n.∆Form.Size∊(160+20)(450+⍳40)
+
+∆TidyUp:
+ n.∆CloseForm
+ {}2035⌶oldPixelSettings
+
+ r←∆OK

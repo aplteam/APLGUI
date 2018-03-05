@@ -1,0 +1,37 @@
+ r←Test_NeedsUser_001(stopFlag batchFlag);rc;parms;n;list;msg;⎕TRAP
+⍝ Exercise "ProcessTool". There is no "Process" button. Processing is triggered via the context menu.
+⍝ This cannot be fully automated since context menus are strictly modal like other menus.
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+
+ :If 1=batchFlag
+     r←¯1
+ :Else
+     r←∆Failed
+     ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+     msg←⊂(⎕PW-1)⍴'-'
+     msg,←⊂'Test of the context menu'
+     msg,←⊂'When the context menu appears press `n` - that is the hot key for "Do it now!"'
+     msg,←⊂'Note that the context menu will appear at the current position of the mouse'
+     msg,←⊂'Don''t change the selection!'
+     ⎕←⍪msg
+     0/⍞,0/⎕←'  Press <enter> when ready'
+     parms←#._APLGUI.GUI.ProcessTool.CreateParms
+     parms.posn←30 40
+     list←('one' 'two' 'three' 'four' 'five' 'six' 'seven' 'eight' 'nine'),[0.5]1+⍳9
+     parms.default←(1+⍳9)∊3 5
+     parms.style←#._APLGUI.GUI.Enums.SelectionStyles.multi
+     parms.processBtnCaption←'Do it - now!'
+     parms.info←'Checks whether the context menu works as intended'
+     parms.processBtnCaption←''
+     parms.contextMenuCaptions←'Do it &now!'
+     n←parms #._APLGUI.GUI.ProcessTool.Create list'∆HarvestSelections'
+     ⎕DL 0.3
+     1 ⎕NQ n.List'ContextMenu'
+     ∆Process n.∆Form
+     →GoToTidyUp n.∆result≢,⊂list[3 5-1;]
+     →GoToTidyUp 1≠⍴n.∆buttons
+     r←∆OK
+
+∆TidyUp:
+     n.∆CloseForm
+ :EndIf

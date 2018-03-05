@@ -1,0 +1,6 @@
+ r←List these
+⍝ Prints a list with all test cases and the first comment line to the session
+ r←'Test_'{⍵⌿⍨((⍴⍺)↑[1+⎕IO]⍵)∧.=⍺}'T'⎕NL 3
+ r{⍺⌿⍨((⍴,⍵)↑[1]⍺)∧.=⍵}←these
+ r←↓r
+ r←r,⍪{⎕ML←3 ⋄ {⍵↓⍨+/∧\' '=⍵}{⎕IO←1 ⋄ ⍵↓⍨⍵⍳'⍝'}∊1↑1↓⎕NR ⍵}¨r

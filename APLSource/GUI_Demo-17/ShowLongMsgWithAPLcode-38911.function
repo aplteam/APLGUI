@@ -1,0 +1,5 @@
+ ShowLongMsgWithAPLcode;parms
+⍝ Example with a long emssage which is actually APL code
+ parms←##.GUI.Dialogs.CreateParmsForShowLongMsg
+ parms.APL←1
+ ⎕←parms ##.GUI.Dialogs.ShowLongMsg ⎕SRC ##.GUI.Dialogs

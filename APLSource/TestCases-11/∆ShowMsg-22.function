@@ -1,0 +1,7 @@
+ {r}←∆ShowMsg msg
+ r←⍬
+ ⎕←(⎕PW-1)⍴'-'
+ ⎕←⍪{(2=≡⍵):,⍵ ⋄ ,⊂⍵}msg
+ ⎕←''
+ ⎕←'To continue press <enter<'
+ {}⍞

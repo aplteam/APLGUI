@@ -1,0 +1,41 @@
+ r←Test_TableEdit_003(stopFlag batchFlag);parms;n;⎕TRAP;table;rowTitles
+⍝ Inserting rows, including syncing with "data" property.
+ r←∆Inactive
+ :Return
+
+ r←∆Failed
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+
+⍝⍝⍝ Preconditions
+ table←⍉⊃('Obama' 'Bush' 'Clinton' 'Reagan' 'Kennedy' 'Carter')(1 0 1 0 1 1)(20150102 20150630 20151231)(1 2 235659)
+ parms←#._APLGUI.GUI.Table.CreateParms
+ parms.posn←35 25
+ parms.size←400 600
+ parms.colTitles←'Name' 'Democrat' 'Date' 'Time'
+ parms.dataTypes←#._APLGUI.GUI.Enums.TableDataTypes.(Character Numeric Date Time)
+ parms.addToCaption←'Testing Table.Run'
+ parms.confirmQuit←0
+ parms.data←1 100×⍤1⊣1 1\6 1⍴1+⍳6
+ parms.testMode←1
+
+ n←#._APLGUI.GUI.Table.Create table #._APLGUI.GUI.APLGuiGlobalParms.CreateDefaults parms
+ #._APLGUI.GUI.Table.ExecPrivateFns'RowInsert'n             ⍝ Insert one row before the first one
+ →GoToTidyUp(⍴n.Grid.Values)≢1 0+⍴table
+ →GoToTidyUp 0 0≢n.∆data[0;]                        ⍝ Is ∆data kept in sync?
+ →GoToTidyUp n.Grid.Values[0;2]≢2 ⎕NQ #'DateToIDN'(3↑⎕TS)  ⍝ Inserted line should carry today's date
+ →GoToTidyUp(⌊n.Grid.Values[0;3]÷10)≢⌊(24 60 60⊥3↑3↓⎕TS)÷10 ⍝ Inserted line should carry "now" as time - roughly
+
+ #._APLGUI.GUI.Table.ExecPrivateFns'RowInsert'(n(↑⍴n.Grid.Values)1) ⍝ Insert one row after the last one
+ →GoToTidyUp(⍴n.Grid.Values)≢2 0+⍴table
+ →GoToTidyUp 0 0≢n.∆data[¯1+↑⍴n.∆data;]             ⍝ Is ∆data kept in sync?
+
+ #._APLGUI.GUI.Table.ExecPrivateFns'RowInsert'(n 2 2)       ⍝ Insert two rows after the third one
+ →GoToTidyUp(⍴n.Grid.Values)≢4 0+⍴table
+ →GoToTidyUp n.Grid.Values[;1]≢0 1 0 0 0 1 0 1 1 0
+ →GoToTidyUp(2 2⍴0 0)≢n.∆data[2+⍳2;]
+ →GoToTidyUp≢/↑¨⍴¨n.Grid.Values n.∆data             ⍝ Is ∆data kept in sync?
+
+ r←∆OK
+
+∆TidyUp:
+ n.∆CloseForm

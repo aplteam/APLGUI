@@ -1,0 +1,8 @@
+ ∆NotepadCmdHandler←{
+     (n caption)←⍵
+     parms←##.GUI.Dialogs.CreateParmsForShowMsg
+     parms.caption←'Notepad demo'
+     parms.centerIn←n.∆Form
+     _←parms ##.GUI.Dialogs.ShowMsg'User has selected:' ''caption
+     ⍬
+ }

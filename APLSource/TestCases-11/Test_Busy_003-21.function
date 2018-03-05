@@ -1,0 +1,32 @@
+ r←Test_Busy_003(stopFlag batchFlag);n;i;⎕TRAP;parms;globalParms;msg;noOfThreads
+⍝ Exercise `Busy` with "centerIn" set.
+ r←∆Failed
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+
+ #.⎕SHADOW'TEMP'
+ #.TEMP←#.⎕NS''
+ #.TEMP.f←⎕NEW'Form'(('Coord' 'Pixel')('Posn'(35 55))('Size'(600 900))('Caption' 'Busy: Test Busy 3'))
+
+ noOfThreads←⍴⎕TNUMS
+
+ parms←#._APLGUI.GUI.Busy.CreateParms
+ parms.align←#._APLGUI.GUI.Enums.Align.Center
+ parms.addToCaption←'This is a Busy test with parms'
+ parms.onTop←1
+
+ globalParms←#._APLGUI.GUI.APLGuiGlobalParms.CreateDefaults
+ globalParms.centerIn←#.TEMP.f
+
+ msg←'This may take a moment.' '' 'Therefore, you are well adviced to be a little bit patient, Sir, wether you like it or not!'
+ n←parms globalParms #._APLGUI.GUI.Busy.Create msg
+
+ :For i :In 2+⍳9
+     ⎕DL 0.15
+     n #._APLGUI.GUI.Busy.SetPercent 10×i
+ :EndFor
+ n.∆CloseForm
+ →GoToTidyUp noOfThreads≠⍴⎕TNUMS
+ r←∆OK
+
+∆TidyUp:
+ :Trap 0 ⋄ {}#.TEMP.f.Close ⍬ ⋄ :EndTrap

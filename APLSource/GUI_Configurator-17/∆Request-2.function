@@ -1,0 +1,3 @@
+ r←∆Request
+⍝ Returns those main classes "Request" really needs.
+ r←'StdForm' 'KeyCodes'

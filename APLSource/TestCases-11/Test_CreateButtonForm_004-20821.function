@@ -1,0 +1,26 @@
+ r←Test_CreateButtonForm_004(stopFlag batchFlag);myGuiParms;parms;n;⎕TRAP
+⍝ Exercise "Dialog.Create": width test; the status bar message defines the width.
+ r←∆Failed
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+
+ myGuiParms←#._APLGUI.GUI.APLGuiGlobalParms.CreateDefaults
+ myGuiParms.regKey←'MyApp\Kai1'
+ myGuiParms.icon←⎕NEW'Icon'(⊂'File'(GetFile'Sample.ico'))
+ parms←#._APLGUI.GUI.Dialogs.CreateParmsForYesOrNo
+ parms.addToCaption←'My Caption'
+ parms.question←'Are you really sure about this?'
+ parms.buttons←'Yes' 'No'
+ parms.minSize←⍬ ⍬
+ parms.statusbarMessage←'This is shown in the status bar; it actually defines the width of the form'
+ n←#._APLGUI.GUI.Dialogs.CreateButtonForm myGuiParms parms
+ ⎕DL 0.2
+ n←#._APLGUI.GUI.Dialogs.AdjustSize n
+ :If ⍬ ⍬≡parms.posn
+     {}n.∆Form #._APLGUI.GUI.APLGuiHelpers.CenterIn myGuiParms.centerIn{(0∊⍴⍵):⍺ ⋄ ⍵}parms.centerIn
+ :EndIf
+ →(0≡PassesIf{(200<⍵)∧(300>⍵)}n.∆Form.Size[1])/∆TidyUp
+
+∆TidyUp:
+ n.∆CloseForm
+
+ r←∆OK

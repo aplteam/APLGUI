@@ -1,0 +1,15 @@
+ r←Test_Busy_008(stopFlag batchFlag);n;i;⎕TRAP;noOfThreads;parms;F
+⍝ Exercise `Busy` with a parent
+ r←∆Failed
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+
+ noOfThreads←⍴⎕TNUMS
+
+ parms←#._APLGUI.GUI.Busy.CreateParms
+ parms.parent←⍎'F'⎕WC'Form'
+ n←parms #._APLGUI.GUI.Busy.Create'This may take a moment...'
+
+ n.∆CloseForm
+ ⎕NQ'F' 'Close'
+
+ r←∆OK

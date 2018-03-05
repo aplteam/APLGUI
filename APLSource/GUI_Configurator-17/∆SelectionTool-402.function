@@ -1,0 +1,3 @@
+ r←∆SelectionTool
+⍝ Returns those main classes "SelectionTool" really needs.
+ r←'StdForm' 'Menubar' 'KeyCodes' 'SelAndProcess'

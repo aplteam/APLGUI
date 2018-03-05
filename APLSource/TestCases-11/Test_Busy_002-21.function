@@ -1,0 +1,14 @@
+ r←Test_Busy_002(stopFlag batchFlag);n;i;RunSetPercent;⎕TRAP;noOfThreads
+⍝ Exercise `Busy`: The GUI runs in one thread, the `SetPercent` & `∆CloseForm` functions run in another.
+ r←∆Failed
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+
+ noOfThreads←⍴⎕TNUMS
+ n←#._APLGUI.GUI.Busy.Create'This may take a moment...'
+ ⎕FX'{r}←RunSetPercent n;i' 'r←⍬' ':For i :In 2+⍳9' '⎕DL 0.1' 'n #._APLGUI.GUI.Busy.SetPercent 10×i' ':EndFor' '⎕dl .2' 'n.∆CloseForm'
+ {}{RunSetPercent ⍵}&n
+ ⎕DL 2
+ n.∆CloseForm
+ →FailsIf noOfThreads≠⍴⎕TNUMS
+
+ r←∆OK

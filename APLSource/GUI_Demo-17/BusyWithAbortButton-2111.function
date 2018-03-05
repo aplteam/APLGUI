@@ -1,0 +1,31 @@
+ BusyWithAbortButton;parms;n;i;msg
+ #.⎕SHADOW'TEMP'
+ #.TEMP←#.⎕NS''
+
+ parms←##.GUI.Busy.CreateParms
+ parms.addToCaption←'This is "',(↑⎕XSI),'"'
+ parms.hasAbortButton←1
+ parms.align←##.GUI.Enums.Align.Center
+
+ parms.vGap←60
+ parms.hGap←10
+
+ #.TEMP.tnos←{_←+/,0.2×100 100⍴1000 ⋄ ∇ ⍵}&¨⍳10 ⍝ 200
+
+ msg←'This may take a moment' 'Please stay patient' 'It won''t last forever'
+ msg,←'' 'A very very very very very very very very very very very very very very very long line'
+ n←parms ##.GUI.Busy.Create msg
+
+ :For i :In 2+⍳98
+     ⎕DL 0.2
+     ⎕←i
+     :If 0=n.∆ABORTED
+         n ##.GUI.Busy.SetPercent i
+     :Else
+         :Leave
+     :EndIf
+ :EndFor
+
+ :Trap 0 ⋄ ⎕TKILL #.TEMP.tnos ⋄ :EndTrap
+ :Trap 0 ⋄ {}#.TEMP.f.Close ⍬ ⋄ :EndTrap
+ n.∆CloseForm

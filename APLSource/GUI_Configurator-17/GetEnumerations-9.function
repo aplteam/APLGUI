@@ -1,0 +1,2 @@
+ r←GetEnumerations
+ r←{1⊃⎕NPARTS ⍵}¨⊃(⎕NINFO⍠1)_HomePath,'/Scripts/Enums/*'

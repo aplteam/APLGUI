@@ -1,0 +1,20 @@
+ r←Test_DirSelect_002(stopFlag batchFlag);myGuiParms;parms;n;⎕TRAP;startDir
+⍝ Exercise the "DirSelect" method with some parameters.
+ r←∆Failed
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+
+ myGuiParms←#._APLGUI.GUI.APLGuiGlobalParms.CreateDefaults
+ myGuiParms.regKey←'MyApp\Kai1'
+
+ parms←#._APLGUI.GUI.DirSelect.CreateParms
+ parms.addToCaption←'My request'
+ parms.posn←72 2073
+
+ startDir←'C:\Windows\system32'
+ n←myGuiParms parms #._APLGUI.GUI.DirSelect.Create startDir
+ ⎕DL 0.1
+ →GoToTidyUp≢/#.APLTreeUtils.Lowercase startDir({⍵↓⍨-'\'=¯1↑⍵}↑#.APLTreeUtils.SplitPath(n #._APLGUI.GUI.DirSelect.GetPathFromTreeItems n.Tree.SelItems))
+ r←∆OK
+
+∆TidyUp:
+ :Trap 6 ⋄ n.∆CloseForm ⋄ :EndTrap

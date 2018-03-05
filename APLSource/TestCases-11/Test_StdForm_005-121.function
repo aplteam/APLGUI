@@ -1,0 +1,19 @@
+ r←Test_StdForm_005(stopFlag batchFlag);⎕TRAP;parms;n;globalParms;MyGuiParms
+⍝ Bring up a form without a progress bar
+ r←∆Failed
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+
+ CreateGlobalParms
+ globalParms←⎕NS MyGuiParms
+ globalParms.centerIn←⎕NEW'Form'(('Coord' 'Pixel')('Posn'(200 300))('Size'(400 600)))
+ parms←#._APLGUI.GUI.StdForm.CreateParms
+ :If ⍬ ⍬≡parms.size
+     parms.size←200 400
+ :EndIf
+ parms.hasProgressbar←0
+ n←#._APLGUI.GUI.StdForm.Create MyGuiParms parms
+ ⎕DL 1
+ ⎕NQ n.∆Form'Close'
+ ⎕NQ globalParms.centerIn'Close'
+
+ r←∆OK

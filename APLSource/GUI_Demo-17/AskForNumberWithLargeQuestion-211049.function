@@ -1,0 +1,11 @@
+ AskForNumberWithLargeQuestion;parms;question
+ parms←##.GUI.Request.CreateParmsForNumber
+ parms.value←10
+ question←''
+ question,←⊂'Make sure you understand the request!'
+ question,←⊂'This is a very very very very long line that defines the widths of the form'
+ question,←⊂'Number of copies:'
+ question,←⊂''
+ question,←⍕¨⍳10
+ ⎕←parms ##.GUI.Request.AskForNumber question
+⍝Done

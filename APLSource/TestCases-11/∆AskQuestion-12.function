@@ -1,0 +1,6 @@
+ ∆AskQuestion←{
+     ⎕←⍵
+     answer←¯1↑⍞
+     ~answer∊'YyNn':∇ ⍵
+     answer∊'Yy'
+ }

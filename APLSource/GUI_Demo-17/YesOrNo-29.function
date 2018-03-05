@@ -1,0 +1,7 @@
+ YesOrNo;globalGuiParms
+⍝ Presents a "Yes" and a "No" button together with a message
+ globalGuiParms←##.GUI.APLGuiGlobalParms.CreateDefaults
+ globalGuiParms.regKey←'MyApp\Kai1'
+ globalGuiParms.icon←⎕NEW'Icon'(⊂'File'(GetFile'Sample.ico'))
+ ⎕←globalGuiParms ##.GUI.Dialogs.YesOrNo'Are you really sure about this?'
+⍝Done

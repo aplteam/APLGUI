@@ -1,0 +1,5 @@
+ OnInitialMsg←{
+     n←⍵
+     _←ShowInitialMsg n
+     ⍬
+ }

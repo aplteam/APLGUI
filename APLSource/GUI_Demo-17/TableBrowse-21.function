@@ -1,0 +1,7 @@
+ TableBrowse;table
+⍝ Shows a table with the Table.Browse method
+ →0 ⍝ The "Table" class is under construction and not ready yet <Table>
+ table←_CreateTable
+ table←(5000,1↓⍴table)⍴table
+ ##.GUI.Table.Browse table
+⍝Done

@@ -1,0 +1,7 @@
+ AskForNumberWithTimer;parms
+ parms←##.GUI.Request.CreateParmsForNumber
+ parms.value←10
+ parms.autoPress←1
+ parms.timeout←0.001
+ ⎕←parms ##.GUI.Request.AskForNumber'Number of copies:'
+⍝Done

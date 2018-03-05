@@ -1,0 +1,41 @@
+ r←Test_IE_010(stopFlag batchFlag);⎕TRAP;FF;n1;n2;ref1;ref2;html
+⍝ Test IE: view some dynamically (= in the WS) created HTML/
+ r←∆Failed
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+
+ 'FF'⎕WC'Form'('Caption'('Test case ',¯3↑↑⎕XSI))('Coord' 'Pixel')('Posn' 50 60)('Size' 800 800)
+ ref1←⍎'FF.SF1'⎕WC'SubForm'
+ ref2←⍎'FF.SF2'⎕WC'SubForm'
+ 'FF.Splitter'⎕WC'Splitter'('SplitObj1' 'FF.SF1')('SplitObj2' 'FF.SF2')
+
+ n1←#._APLGUI.GUI.IE.CreateIE ref1
+ n2←#._APLGUI.GUI.IE.CreateIE ref2
+
+ html←('<h1>Test case ',(¯3↑↑⎕XSI),'</h1>')'<p>Some dynamically created HTML for left pane</p>'
+ #._APLGUI.GUI.IE.ShowHtml n1.IEobject html
+ html←('<h1>Test case ',(¯3↑↑⎕XSI),'</h1>')'<p>Some dynamically created HTML for right pane</p>'
+ #._APLGUI.GUI.IE.ShowHtml n2.IEobject html
+ ⎕DL 0.05
+
+ :Trap 0
+     html←#._APLGUI.GUI.IE.GetHTML n1.IEobject
+ :Else
+     html←¯1
+ :EndTrap
+ →FailsIf' '≠1↑0⍴html
+ →FailsIf 0∊⍴html
+ →FailsIf 0=+/'left pane'⍷html
+
+ :Trap 0
+     html←#._APLGUI.GUI.IE.GetHTML n2.IEobject
+ :Else
+     html←¯1
+ :EndTrap
+ →FailsIf' '≠1↑0⍴html
+ →FailsIf 0∊⍴html
+ →FailsIf 0=+/'right pane'⍷html
+
+ r←∆OK
+
+∆TidyUp:
+ :Trap 0 ⋄ FF.Close ⋄ :EndTrap

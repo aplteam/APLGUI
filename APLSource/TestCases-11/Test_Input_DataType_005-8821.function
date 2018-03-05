@@ -1,0 +1,36 @@
+ r←Test_Input_DataType_005(stopFlag batchFlag);n;⎕TRAP;defMat;res;DT;globalParms;parms;callback
+⍝ Exercise "Input" with data type "Button" together with a callback.
+ r←∆Failed
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+
+ DT←#._APLGUI.GUI.Enums.InputDataTypes
+
+ #.⎕SHADOW'TEMP'
+ 'TEMP'#.⎕NS''
+ #.TEMP.⎕FX'OnPush1 (pushButton n)' 'n.ToBeRotated.Text←⌽n.ToBeRotated.Text'
+ #.TEMP.⎕FX'OnPush2←{' '(pushButton n)←⍵' 'n.ToBeRotated.Text←⌽n.ToBeRotated.Text' '⍬' '}'
+
+ :For callback :In 'OnPush1' 'OnPush2'
+     defMat←0 7⍴''
+     defMat⍪←'ToBeRotated' 'Your &Input' 'regen'DT.Character 30 1 1
+     defMat⍪←'&Rotate' '' ''DT.Button 0 1 2
+
+     globalParms←∆GetGlobalParms
+     parms←#._APLGUI.GUI.Input.CreateParms
+     parms.posn←50 50
+     parms.onPushButton←#.TEMP callback
+     parms.addToCaption←'No. ',⍕∆GetTestCaseNo
+
+     n←#._APLGUI.GUI.Input.Create defMat globalParms parms
+
+     0 ∆Process n.∆Form
+     1 ⎕NQ n.Rotate'Select'
+     0 ∆Process n.∆Form
+     →GoToTidyUp'neger'≢n.ToBeRotated.Text
+     n.∆CloseForm
+ :EndFor
+
+ r←∆OK
+
+∆TidyUp:
+ n.∆CloseForm

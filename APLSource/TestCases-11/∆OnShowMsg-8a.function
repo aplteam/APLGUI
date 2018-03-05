@@ -1,0 +1,3 @@
+ ∆OnShowMsg←{
+     ⎕←'Help button was pressed'
+ }

@@ -1,0 +1,95 @@
+ InputComplex;defMat;DT;r;parms;label;Select;list;dates;globalParms;n;tips;callbackHome;props
+⍝ Very complex "Input" examples, using all data types and all user-defined callbacks
+ DT←##.GUI.Enums.InputDataTypes
+ tips←0 2⍴''
+ props←0 2⍴''
+ defMat←0 7⍴''
+
+ defMat⍪←'Address' '' ''DT.Tab 0 1 1
+ defMat⍪←'Key' '' 1 DT.Numeric 6 0 1
+ defMat⍪←'Active' '' 1 DT.YesNo 0 1 1
+ defMat⍪←'PH1' '' ''DT.PlaceHolder 2 1 1
+ defMat⍪←'I&mage' ''('file://',GetFile'KaiJaeger.jpg')DT.Image 0 1 1
+
+⍝ defMat⍪←'FirstnameB' 'First name:' 'John'DT.Character 30 1 1
+⍝ defMat⍪←'LastnameB' 'Last name:' 'Does'DT.Character 30 1 1
+⍝ defMat⍪←'Address1B' 'Address line 1:' '41 Ginger street'DT.Character(30 60)1 1
+⍝ defMat⍪←'Address2B' 'Address line 2:' ''DT.Character(30 60)1 1
+⍝ defMat⍪←'PostCodeB' '' 'SG1 234'DT.Character 8 1 1
+⍝ defMat⍪←'FirstnameC' 'First name:' 'John'DT.Character 30 1 1
+⍝ defMat⍪←'LastnameC' 'Last name:' 'Does'DT.Character 30 1 1
+⍝ defMat⍪←'Address1C' 'Address line 1:' '41 Ginger street'DT.Character(30 60)1 1
+⍝ defMat⍪←'Address2C' 'Address line 2:' ''DT.Character(30 60)1 1
+⍝ defMat⍪←'PostCodeC' '' 'SG1 234'DT.Character 8 1 1
+
+ defMat⍪←'Firstname' 'First name:' 'John'DT.Character 30 1 2
+ defMat⍪←'Lastname' 'Last name:' 'Does'DT.Character 30 1 2
+ defMat⍪←'Address1' 'Address line 1:' '41 Ginger street'DT.Character(30 60)1 2
+ defMat⍪←'Address2' 'Address line 2:' ''DT.Character(30 60)1 2
+ defMat⍪←'PostCode' '' 'SG1 234'DT.Character 8 1 2
+ tips⍪←'PostCode'('All input into this field is converted into UPPERCASE by' 'the user-defined callback ##.GUI_Demo.OnKeyPressInPostCode.')
+ defMat⍪←'Country' ''(Complex.∆ListOfCountries ⍬)DT.DropDown 50 1 2
+ props⍪←'Country'(⊂'SelItems'('United Kingdom'Complex.∆ListOfCountries ⍬))
+
+ defMat⍪←'Credit_card' '' ''DT.Tab 0 1 1
+ defMat⍪←'Card_number' '' ''DT.Numeric 16 1 1
+ list←'Visa' 'Mastercard' 'American Express' 'Diners Club'
+ defMat⍪←'Credit_card_type' ''list DT.DropDown 0 1 1
+ defMat⍪←'CVC' '' ''DT.Numeric 3 1 1
+ tips⍪←'CVC'('This is a three-digit number on the' 'back of your credit card.')
+ defMat⍪←'Valid_until' '' ''DT.Date 0 1 1
+ defMat⍪←'CardName' 'Your name on the card:' ''DT.Character 30 1 1
+ defMat⍪←'Credit_limit' ''(1000×⍳11)DT.Numeric 0 1 1
+ defMat⍪←'SaveCard' 'Save credit card details for future shoppings' ''DT.YesNo 0 1 1
+ defMat⍪←'PH2' '' ''DT.PlaceHolder 2 1 2
+ defMat⍪←'HelpCVC' 'What is CVC?' ''DT.Button 0 1 2
+
+ defMat⍪←'Misc' '' ''DT.Tab 0 1 1
+ defMat⍪←'Category' 'Customer category⋄Regular⋄VIP⋄Special'(0 1 0)DT.Radio 0 1 1
+ defMat⍪←'Discount' 'Discount percentage'(0 1 2 4)DT.Spinner 10 1 1
+ defMat⍪←'Newsletters'('Newsletter subscriptions⋄General⋄IT⋄Sales⋄Special offers')(4⍴1)DT.YesNo 0 1 1
+
+ defMat⍪←'SalesTab' 'Sales' ''DT.Tab 0 1 1
+ list←⊂'2000-01-03' 'PC' '2300.23'
+ list,←⊂'2012-11-12' 'Tablet' ' 800.00'
+ list,←⊂'2014-05-30' 'Iphone' ' 654.00'
+ defMat⍪←'Sales' ''(⊃list)DT.ListView(¯1 ¯1)0 1
+
+ defMat⍪←'NotesTab' 'Notes' ''DT.Tab 0 1 1
+ defMat⍪←'Notes' '' ''DT.Notepad(¯1 ¯1)1 1
+
+ defMat⍪←'Created' '' ''DT.Tab 0 1 1
+ defMat⍪←'Created_by' ''('Kai' 'Peter' 'George' 'Mala')DT.DropEdit 0 1 1
+ tips⍪←'Created_by'('Select a name or enter a new one.')
+ defMat⍪←'Info' 'Created at:' ''DT.Label 0 1 1
+ defMat⍪←'CreateDate' 'Date' ''DT.Date 0 0 1
+ defMat⍪←'CreateTime' 'Time' ''DT.Time 0 0 1
+
+⍝ defMat←##.GUI.Input.EditDefinitionMatrix defMat
+⍝ ##.GUI.Input.ViewDefinitionMatrix defMat
+
+ parms←##.GUI.Input.CreateParms
+ parms.caption←'InputComplex'
+ parms.posn←55 35
+ parms.focus←'Firstname'
+ parms.helpBtnCaption←'Give me clues!'
+ parms.debug←1
+
+ callbackHome←##.GUI_Demo.Complex
+ parms.onInitial←callbackHome'OnInitial'
+ parms.onInitialMsg←callbackHome'OnInitialMsg'
+ parms.onHelp←callbackHome'OnHelp'
+ parms.onPushButton←callbackHome'OnPushButton'
+ parms.onKeyPress←callbackHome'OnKeyPress'
+ parms.onChange←callbackHome'OnChange'
+ parms.onOkay←callbackHome'OnOK'
+ parms.props←props
+ parms.tips←tips
+ parms.menubar←'[Special] {special}' ' Show the definition matrix : ##.GUI_Demo.Complex.OnShowDefMat {showDef}'{(4↑⍵),⍺,4↓⍵}##.GUI.Input.GetDefaultMenubar 1
+
+ (globalParms parms)←##.GUI.Input.CreateParms ##.GUI.Input.GetParms parms
+ globalParms.icon←'file://',(GetFile'Sample.ico')
+ globalParms.regKey←'HKCU\Software\APLTeam\Tests\Input'
+ r←globalParms parms ##.GUI.Input.Run defMat
+ ⎕SE.aplteam.Display r
+⍝Done

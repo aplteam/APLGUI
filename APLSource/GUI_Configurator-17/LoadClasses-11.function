@@ -1,0 +1,26 @@
+ {r}←{into}LoadClasses path;i;bool;buff
+ r←⍬
+ into←{0<⎕NC ⍵:⍕⍎⍵ ⋄ '#.GUI'}'into'
+ :If 0=⎕NC into
+     into #.⎕NS''
+ :EndIf
+ bool←(⍎into).{(9≠⎕NC⊃⍵)∧9≠#.⎕NC⊃⍵}'APLTreeUtils' 'FilesAndDirs' 'WinRegSimple' 'WinSys'
+ :If 1∊bool
+     6 ⎕SIGNAL⍨'Missing: ',↑{⍺,', ',⍵}/bool/'APLTreeUtils' 'FilesAndDirs' 'WinRegSimple' 'WinSys'
+ :EndIf
+ →(0∊⍴r←SelectMainClasses)/0
+ 'Enums'(⍎into).⎕NS''
+ {}{#.APLTreeUtils.Last⍕⎕SE.UCMD'Load ',⍵,' -target=',into,'.Enums'}¨(⊂_HomePath,'/Scripts/Enums/'),¨GetEnumerations
+ '#.GUI.APLGuiIcons'(⍎into).⎕CY path,'/APLGui'
+ i←0
+ :Repeat
+     :While i<⍴r
+         :Trap 911
+             buff←#.APLTreeUtils.Last⍕⎕SE.UCMD'Load -target=',into,' ',path,'/Scripts/',i⊃r
+             r~←⊂buff
+         :EndTrap
+         i+←1
+     :EndWhile
+     i←0
+ :Until 0∊⍴r
+ ⎕←'*** Done'

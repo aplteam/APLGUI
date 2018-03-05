@@ -1,0 +1,42 @@
+ r←Test_StdForm_007(stopFlag batchFlag);⎕TRAP;parms;n;appName;formName;rk;posn;size;rk2;globalParms;MyGuiParms
+⍝ Check whether regKey2 is processed properly.
+ r←∆Failed
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+
+ CreateGlobalParms
+ globalParms←⎕NS MyGuiParms
+ appName←globalParms.regKey
+ formName←'PosnAndSizeTest'
+ rk←#._APLGUI.GUI.APLGuiUtils.GetRegPath appName
+ rk2←rk,'\',formName
+ #.WinReg.DeleteSubKeyTree rk                   ⍝ Get rid of any leftovers
+
+ parms←#._APLGUI.GUI.StdForm.CreateParms
+ parms.addToCaption←formName
+ parms.size←200 400
+ parms.posn←35 45
+ n←#._APLGUI.GUI.StdForm.Create globalParms parms
+ posn←100 200
+ size←500 220
+ ⎕NQ n.∆Form'Configure',posn,size
+ 0 ∆Process n.∆Form
+ 1 ⎕NQ n.∆Form'Close'                             ⍝ That should write "Posn" and "Size"
+ →GoToTidyUp posn size≢⍎¨#.WinReg.GetValue¨(rk2,'\posn')(rk2,'\size')
+
+ #.WinReg.DeleteSubKeyTree rk
+ parms.regKey2←''
+ n←#._APLGUI.GUI.StdForm.Create globalParms parms
+ ⎕NQ n.∆Form'Close'                             ⍝ That should not write now that regKey2 is empty
+ 1 ∆Process n.∆Form
+ →GoToTidyUp #.WinReg.DoesKeyExist rk2
+
+ parms.regKey2←'Mioma'
+ n←#._APLGUI.GUI.StdForm.Create globalParms parms
+ ⎕NQ n.∆Form'Close'                             ⍝ That should not write now that regKey2 is empty
+ 1 ∆Process n.∆Form
+ →GoToTidyUp 0=#.WinReg.DoesKeyExist rk,'\Mioma'
+
+ r←∆OK
+
+∆TidyUp:
+ #.WinReg.DeleteSubKeyTree rk

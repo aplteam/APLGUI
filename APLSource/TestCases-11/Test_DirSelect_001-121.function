@@ -1,0 +1,13 @@
+ r←Test_DirSelect_001(stopFlag batchFlag);n;⎕TRAP;result
+⍝ Exercise the "DirSelect" method with defaults parameters only.
+ r←∆Failed
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+
+ n←#._APLGUI.GUI.DirSelect.Create''
+ ⎕DL 0.1
+ →GoToTidyUp 0≠n.Tree.SelItems⍳1
+
+ r←∆OK
+
+∆TidyUp:
+ :Trap 6 ⋄ n.∆CloseForm ⋄ :EndTrap

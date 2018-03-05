@@ -1,0 +1,25 @@
+ r←Test_Input_Misc_019(stopFlag batchFlag);n;⎕TRAP;res;DT;double;parms;props;defMat;defMat2;this;that;counter;flag
+⍝ Exercise "Input" with testMode←1 and autoPress←0
+ r←∆Failed
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+
+ DT←#._APLGUI.GUI.Enums.InputDataTypes
+
+ defMat←0 7⍴''
+ defMat⍪←'Character1' '' 'Kai Jaeger'DT.Character 0 1 1
+ defMat⍪←'Numeric1' '' 123 DT.Numeric 0 1 1
+
+ parms←#._APLGUI.GUI.Input.CreateParms
+ parms.posn←55 55
+ parms.testMode←1
+ parms.autoPress←0
+ n←#._APLGUI.GUI.Input.Create defMat ⍬ parms
+ ∆Process n.∆Form
+ ⎕NQ n.∆OK'Select'
+ ∆Process n.∆Form
+ →GoToTidyUp n.∆result[;1]≢'Kai Jaeger' 123  ⍝ Value Error?! Simply try →⎕LC
+
+ r←∆OK
+
+∆TidyUp:
+ n.∆CloseForm

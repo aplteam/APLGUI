@@ -1,0 +1,6 @@
+ OnChange←{
+     (rf n)←⍵
+     name←'OnChange_',⍕rf
+     0=⎕NC name:1
+     ⍎name,' n'
+ }

@@ -1,0 +1,47 @@
+ r←Test_Input_DataType_012(stopFlag batchFlag);n;⎕TRAP;defMat;res;DT;globalParms;parms;props;month;values;colors;Okay;msg;list
+⍝ Exercise "Input" with data type "DropEdit".
+ r←∆Failed
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+
+ DT←#._APLGUI.GUI.Enums.InputDataTypes
+
+ defMat←0 7⍴''
+ defMat⍪←'DE' ''(⍕¨1+⍳12)DT.DropEdit 15 1 1
+
+ globalParms←∆GetGlobalParms
+ parms←#._APLGUI.GUI.Input.CreateParms
+ parms.posn←50 50
+ parms.addToCaption←'No. ',⍕∆GetTestCaseNo
+
+ n←#._APLGUI.GUI.Input.Create defMat globalParms parms
+ ∆Process n.∆Form
+
+ n.DE ∆KeyPress⊂'DS'
+ n.DE ∆KeyPress⊂'DS'
+ 1 ∆Process n.∆Form
+ →GoToTidyUp n.DE.Text≢'12'
+ n.DE ∆KeyPress⊂'US'
+ n.DE ∆KeyPress⊂'US'
+ 0 ∆Process n.∆Form
+ →GoToTidyUp n.DE.Text≢,'1'
+ n.DE ∆KeyPress⊂'DC'
+ 0 ∆Process n.∆Form
+ →GoToTidyUp n.DE.Text≢,'2'
+ n.DE ∆KeyPress⊂'DC'
+ 0 ∆Process n.∆Form
+ →GoToTidyUp n.DE.Text≢,'3'
+ n.DE ∆KeyPress⊂'UC'
+ 0 ∆Process n.∆Form
+ →GoToTidyUp n.DE.Text≢,'2'
+ n.DE ∆KeyPress⊂'US'
+ 0 ∆Process n.∆Form
+ →GoToTidyUp n.DE.Text≢,'1'
+ n.DE.SelText←0 10
+ n.DE ∆KeyPress'123'
+ 0 ∆Process n.∆Form
+ →GoToTidyUp n.DE.Text≢,'123'
+
+ r←∆OK
+
+∆TidyUp:
+ n.∆CloseForm

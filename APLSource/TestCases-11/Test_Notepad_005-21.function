@@ -1,0 +1,58 @@
+ r←Test_Notepad_005(stopFlag batchFlag);parms;n;was;⎕TRAP;filename
+⍝ Establish (and exercise) the "onFileOpen" callback function in all possible ways.
+ r←∆Failed
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+
+⍝⍝⍝ Preconditions
+ filename←''
+
+ #.⎕SHADOW'TEMP'
+ #.TEMP←⎕NS''
+ #.TEMP.wasCalled←0
+ #.TEMP.MyCallback←{
+     ⎕THIS.wasCalled←1
+     ⍬
+ }
+
+ parms←#._APLGUI.GUI.Notepad.CreateParmsForFile
+ parms.posn←35 25
+ parms.hasMenuItem_Open←1
+ parms.askForSave←0
+ parms.onFileOpen←'#.TEMP.MyCallback'
+
+ n←parms #._APLGUI.GUI.Notepad.CreateForEditFile filename
+ ∆Process n.∆Form
+ ⎕NQ n.menubar.open'Select'
+ ⎕NQ n.menubar.quit'Select'
+ ∆Process n.∆Form
+ →GoToTidyUp 1≠#.TEMP.wasCalled
+
+ #.TEMP.wasCalled←0
+ parms.onFileOpen←#.TEMP'MyCallback'
+ n←parms #._APLGUI.GUI.Notepad.CreateForEditFile filename
+ ∆Process n.∆Form
+ ⎕NQ n.menubar.open'Select'
+ ⎕NQ n.menubar.quit'Select'
+ ∆Process n.∆Form
+ →GoToTidyUp 1≠#.TEMP.wasCalled
+
+ was←⎕CS'#.TEMP'
+ #.TEMP.wasCalled←0
+
+ parms←#._APLGUI.GUI.Notepad.CreateParmsForFile
+ parms.posn←35 25
+ parms.hasMenuItem_Open←1
+ parms.onFileOpen←'MyCallback'
+
+ #.TEMP.n←n←parms #._APLGUI.GUI.Notepad.CreateForEditFile filename
+ #._APLGUI.TestCases.∆Process n.∆Form
+ ⎕NQ n.menubar.open'Select'
+ ⎕NQ n.menubar.quit'Select'
+ 1 #._APLGUI.TestCases.∆Process n.∆Form
+ ⎕CS was
+ →GoToTidyUp 1≠#.TEMP.wasCalled
+ r←∆OK
+
+∆TidyUp:
+ :Trap 0 ⋄ n.∆CloseForm ⋄ :EndTrap
+ :Trap 0 ⋄ #.TEMP.n.∆CloseForm ⋄ :EndTrap

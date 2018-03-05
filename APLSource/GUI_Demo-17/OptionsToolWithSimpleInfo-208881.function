@@ -1,0 +1,15 @@
+ OptionsToolWithSimpleInfo;globalParms;list;parms;n1;flag;boolean
+⍝ Presents a two-item list and a simple "info".
+ list←'White' 'Red'
+ parms←##.GUI.OptionsTool.CreateParms
+ parms.caption←'Two-item list and a simple "info"'
+ parms.info←'This is a simple info item that is long enough to rule the size of the form'
+ n1←parms ##.GUI.OptionsTool.Create list
+ (flag boolean)←##.GUI.OptionsTool.ModalWait n1
+
+ :If flag
+     ⎕←' User pressed the OK button'
+     ⎕←⍪boolean/list
+ :Else
+     ⎕←'User did NOT press the OK button'
+ :EndIf

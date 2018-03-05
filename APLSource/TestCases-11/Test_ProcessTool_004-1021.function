@@ -1,0 +1,18 @@
+ r←Test_ProcessTool_004(stopFlag batchFlag);rc;parms;n;⎕TRAP
+⍝ Exercise "ProcessTool" and check whether Ctrl+Enter works as intended.
+ r←∆Failed
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+
+ parms←#._APLGUI.GUI.ProcessTool.CreateParms
+ parms.posn←30 40
+ parms.processBtnCaption←''
+ parms.cancelBtnCaption←'''nuff'
+ parms.info←'This one does not have a "Process" button, just a "Close" button with <''nuff''> as caption'
+ n←parms #._APLGUI.GUI.ProcessTool.Create(⍕¨1+⍳10)'∆HarvestSelections'
+ ⎕DL 0.3
+ →GoToTidyUp 1≠⍴n.∆buttons
+ →GoToTidyUp n.Btn_00.Caption≢'''nuff'
+ r←∆OK
+
+∆TidyUp:
+ n.∆CloseForm

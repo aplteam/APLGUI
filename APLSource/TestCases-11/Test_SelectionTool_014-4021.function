@@ -1,0 +1,17 @@
+ r←Test_SelectionTool_014(stopFlag batchFlag);parms;n;v;colTitles;⎕TRAP
+⍝ Exercise "SelectionTool. Very long "info"
+⍝ "style" defaults to "single" but is ignored when "checkboxes"=1.
+ r←∆Failed
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+
+ parms←#._APLGUI.GUI.SelectionTool.CreateParms
+ parms.addToCaption←'Multiple columns'
+ parms.posn←60 70
+ parms.info←'This is an extraordinary long info control that even outweighs the matrix displayed below by quite a significant margin, making this visible on cinema screens only'
+ parms.checkboxes←1
+ parms.autoPress←0
+ parms.timeout←0.1
+ n←parms #._APLGUI.GUI.SelectionTool.Create⍕¨1+⍳10
+ n.∆CloseForm
+
+ r←∆OK

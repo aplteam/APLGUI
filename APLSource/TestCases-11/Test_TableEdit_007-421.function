@@ -1,0 +1,31 @@
+ r←Test_TableEdit_007(stopFlag batchFlag);parms;n;⎕TRAP;table;rowTitles
+⍝ Press <enter> in the last row. That should add a row without further ado.
+⍝ See also Test_TableEdit_012 and Test_TableEdit_013.
+ r←∆Inactive
+ :Return
+
+ r←∆Failed
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+
+⍝⍝⍝ Preconditions
+ table←⍉⊃('Obama' 'Bush' 'Clinton' 'Reagan' 'Kennedy' 'Carter')(1 0 1 0 1 1)
+ parms←#._APLGUI.GUI.Table.CreateParms
+ parms.posn←35 25
+ parms.size←400 600
+ parms.colTitles←'Name' 'Democrat'
+ parms.addToCaption←'Testing Table.Run'
+ parms.confirmQuit←0
+ parms.testMode←1
+
+ n←#._APLGUI.GUI.Table.Create table #._APLGUI.GUI.APLGuiGlobalParms.CreateDefaults parms
+
+ n.Grid.CurCell←⍴n.Grid.Values
+ n.Grid ∆KeyPress⊂'ER'
+ 0.5 ∆Process n.∆Form
+ →GoToTidyUp(⍴n.Grid.Values)≢1 0+⍴table
+ →GoToTidyUp n.Grid.Values[¯1+↑⍴n.Grid.Values;]≢'' 0
+
+ r←∆OK
+
+∆TidyUp:
+ n.∆CloseForm

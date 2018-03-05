@@ -1,0 +1,5 @@
+ r←∆OnQuit n;parms
+ parms←##.GUI.Dialogs.CreateParmsForYesOrNo
+ parms.addToCaption←'ProcessTool with "OnQuit"'
+ parms.centerIn←n.∆Form
+ r←parms ##.GUI.Dialogs.YesOrNo'Shall the user be allowed to quit?'

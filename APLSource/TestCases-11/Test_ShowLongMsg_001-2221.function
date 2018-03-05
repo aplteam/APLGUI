@@ -1,0 +1,10 @@
+ r←Test_ShowLongMsg_001(stopFlag batchFlag);n;⎕TRAP
+⍝ Exercise "ShowLongMsg" with defaults.
+ r←∆Failed
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+
+ n←∆ShowLongMsg ∆GetLoremIpsum
+ ⎕DL 1
+ n.∆CloseForm
+
+ r←∆OK

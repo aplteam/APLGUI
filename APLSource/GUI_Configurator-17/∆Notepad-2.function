@@ -1,0 +1,3 @@
+ r←∆Notepad
+⍝ Returns those main classes "Notepad" really needs.
+ r←'StdForm' 'Menubar' 'KeyCodes'

@@ -1,0 +1,30 @@
+ r←Test_CreateButtonForm_020(stopFlag batchFlag);myGuiParms;parms;n;⎕TRAP
+⍝ Exercise "Dialog.Create": 6 buttons
+ r←∆Failed
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+
+ myGuiParms←#._APLGUI.GUI.APLGuiGlobalParms.CreateDefaults
+ myGuiParms.regKey←'MyApp\Kai1'
+ myGuiParms.icon←⎕NEW'Icon'(⊂'File'(GetFile'Sample.ico'))
+ parms←#._APLGUI.GUI.Dialogs.CreateParms
+ parms.addToCaption←'Hi there'
+ parms.question←'Sure?'
+ parms.buttons←2 3⍴'Yes' 'No' 'Maybe' 'Never' 'Perhaps' 'Who knows...'
+ parms.autoPress←1
+ parms.timeout←0.1
+ parms.focusButton←3
+ parms←#._APLGUI.GUI.APLGuiUtils.CheckParmsForProgressbarAndStatusbar parms
+ n←#._APLGUI.GUI.Dialogs.CreateButtonForm myGuiParms parms
+ n(#._APLGUI.GUI.Dialogs.CreateAutoPressTimer)←parms.timeout
+ n←#._APLGUI.GUI.Dialogs.AdjustSize n
+ :If ⍬ ⍬≡parms.posn
+     {}n.∆Form #._APLGUI.GUI.APLGuiHelpers.CenterIn myGuiParms.centerIn{(0∊⍴⍵):⍺ ⋄ ⍵}parms.centerIn
+ :EndIf
+ n←#._APLGUI.GUI.Dialogs.HandleFocus n
+ n.∆Form.Wait
+ →GoToTidyUp(parms.focusButton⊃,parms.buttons)≢↑(,parms.buttons)[(,n.∆buttons)⍳1↑n.∆buttonPressed]
+ →GoToTidyUp~{(120<⍵)∧(300>⍵)}n.∆Form.Size[0]
+ r←∆OK
+
+∆TidyUp:
+ n.∆CloseForm

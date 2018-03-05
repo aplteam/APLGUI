@@ -1,0 +1,10 @@
+ r←∆PromptForSuccess question;flag;answer
+⍝ Asks the user a question and returns a Boolean with 0 for "Nn" and 1 for "Yy".
+⍝ Adds "(Yn/Nn)" to the end of question.
+ flag←0
+ :Repeat
+     ⎕←question,'  (Yes= "Y" or `n`, No= `n` or `n`)'
+     answer←¯1↑⍞
+     flag←answer∊'YyNn'
+ :Until flag
+ r←answer∊'Yy'

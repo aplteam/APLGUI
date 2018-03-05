@@ -1,0 +1,28 @@
+ r←Test_Input_DataType_002(stopFlag batchFlag);n;⎕TRAP;defMat;res;DT
+⍝ Exercise "Input" with data type "Date".
+ r←∆Failed
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+
+ DT←#._APLGUI.GUI.Enums.InputDataTypes
+
+ defMat←0 7⍴''
+
+ defMat⍪←'DateTS' 'Date as []TS'⎕TS DT.Date 0 1 1                     ⍝ Timestamp
+ defMat⍪←'DateInt' 'Date as integer' 20151029 DT.Date 0 1 1           ⍝ Integer
+ defMat⍪←'DateChar' 'Date as Character' '2015-10-29'DT.Date 0 1 1     ⍝ Character
+ defMat⍪←'Date' 'Date but no default' ''DT.Date 0 1 1                 ⍝ Undefined
+
+ n←#._APLGUI.GUI.Input.Create defMat ⍬ ⍬
+ ∆Process n.∆Form
+ ⎕NQ n.∆OK'Select'
+ ∆Process n.∆Form
+
+ →FailsIf 3≠⍴,↑n.∆result[0;1]
+ →FailsIf 1≠⍴,↑n.∆result[1;1]
+ →FailsIf 0≠1↑0⍴↑n.∆result[1;1]
+ →FailsIf 10≠⍴,↑n.∆result[2;1]
+ →FailsIf' '≠1↑0⍴↑n.∆result[2;1]
+ →FailsIf 10≠⍴,↑n.∆result[3;1]
+ →FailsIf' '≠1↑0⍴↑n.∆result[3;1]
+
+ r←∆OK

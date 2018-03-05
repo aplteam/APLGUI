@@ -1,0 +1,3 @@
+ r←GetHelpHtml;fn
+ fn←##.GetFile'HelpForInputComplex.html'
+ r←#.APLTreeUtils.ReadUtf8File fn

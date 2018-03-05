@@ -1,0 +1,10 @@
+ OkOrCancelAutoPress;globalGuiParms;parms
+⍝ Presents a "Yes" and a "No" button together with a message
+ globalGuiParms←##.GUI.APLGuiGlobalParms.CreateDefaults
+ globalGuiParms.regKey←'MyApp\Kai1'
+ globalGuiParms.icon←⎕NEW'Icon'(⊂'File'(GetFile'Sample.ico'))
+ parms←##.GUI.Dialogs.CreateParmsForOkOrCancel
+ parms.timeout←4
+ parms.autoPress←0
+ parms.statusbarMessage←'This message is shown in the status bar, and it will define the width of the dialog box'
+ ⎕←parms globalGuiParms ##.GUI.Dialogs.OkOrCancel'Proceed actions (this may take a long time)'

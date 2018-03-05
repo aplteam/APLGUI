@@ -1,0 +1,43 @@
+ r←Test_TableEdit_106(stopFlag batchFlag);parms;n;⎕TRAP;table;rowTitles
+⍝ Test the "onSort" callback
+ r←∆Inactive
+ :Return
+
+ r←∆Failed
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+
+ #.⎕SHADOW'TEMP'
+ 'TEMP'#.⎕NS''
+ #.TEMP.counter←0
+
+ #.TEMP.flag←0
+ #.TEMP.OnSort←{
+     .
+     ⎕THIS.counter+←1
+     2>⎕THIS.counter:0
+     ⎕THIS.flag←1
+     1
+ }
+
+ table←⍪'Obama' 'Bush' 'Clinton' 'Reagan' 'Kennedy'
+ table,←'Barak' 'George' 'Bill' 'Ronald' 'John'
+ table,←?5 20⍴1000000
+ parms←#._APLGUI.GUI.Table.CreateParms
+ parms.posn←35 25
+ parms.size←400 600
+ parms.caption←'Test_TableEdit_106: onSort callback'
+ parms.confirmQuit←0
+ parms.testMode←1
+ parms.onSort←'#.TEMP.OnSort'
+
+ n←#._APLGUI.GUI.Table.Create table #._APLGUI.GUI.APLGuiGlobalParms.CreateDefaults parms
+
+
+ →GoToTidyUp 1≠#.TEMP.flag
+ →GoToTidyUp 2≠#.TEMP.counter
+ →GoToTidyUp'Ford'≢↑0 0⌷n.∆result
+
+ r←∆OK
+
+∆TidyUp:
+ n.∆CloseForm

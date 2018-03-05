@@ -1,0 +1,6 @@
+ OnInitial←{
+     n←⍵
+     n.Show.Posn[0]←n.Password.Posn[0]
+     n.Show.Posn[1]←15+1⊃+⌿⊃n.Password.(Posn Size)
+     ⍬
+ }

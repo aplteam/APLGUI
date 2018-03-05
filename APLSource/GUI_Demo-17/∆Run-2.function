@@ -1,0 +1,57 @@
+ ∆Run showCodeFlag;list;this;answer;i;noOf;groups;thisGroup;n;firstFlag
+⍝ Run all demos
+ noOf←⍴list←(⎕NL-3)~'∆'⎕NL-3
+ groups←∪{(0∊⍴⍵):'' ⋄ b←(⎕IO⊃⍵)∘≡¨(⍴⎕IO⊃⍵)↑¨⍵ ⋄ (⊂⎕IO⊃b/⍵),∇(~b)/⍵}list
+ i←¯1
+ :If showCodeFlag←{0<⎕NC ⍵:⍎⍵ ⋄ 0}'showCodeFlag'
+     n←∆CreateBrowser ⍬
+ :EndIf
+ firstFlag←1
+ :Repeat
+     i+←1
+     :If i≥noOf
+         ⎕←'*** Done'
+         →∆Done
+     :EndIf
+     :If firstFlag
+         ⎕←'*** Ready to go? Press <Enter>!'
+         0/⍞
+         firstFlag←0
+     :EndIf
+     this←(i+⎕IO)⊃list
+     thisGroup←(⎕IO+↑(⍴groups){⍵/⍨⍺>⍵}∪groups⍳(↑∘⍴¨groups)↑¨⊂this)⊃groups
+     ⎕←'*** ',this,' / ',(thisGroup),' (',(⍕i+1+⎕IO),'/',(⍕noOf),')'
+     ⎕←'    ',1⊃⎕NR this
+     :If showCodeFlag
+         n ∆ShowCode this
+     :EndIf
+     ⍎this
+_Ask:
+     ⎕←'Press one of:'
+     ⎕←'<enter> for the next demo'
+     ⎕←'<e> for editing this demo fns'
+     ⎕←'<n> for "next group"'
+     ⎕←'<l> for "list groups"'
+     ⎕←'<q> for quitting'
+     answer←¯1↑⍞
+     →(~answer∊' qQeEnNLl')/_Ask
+     :If answer∊'Nn'
+         i←1+thisGroup{(⍴⍵)-1⍳⍨⌽⍺∘≡¨(⍴⍺)↑¨⍵}list
+     :ElseIf answer∊'Ll'
+         ⎕←⍪¨(↓'Group name',[0.5-~⎕IO]'=')(↓'No. of tests',[0.5-~⎕IO]'='),¨groups(list∘{+/⍵∘≡¨(⍴⍵)↑¨⍺}¨groups)
+         i-←1
+     :Else
+         :If answer∊'eE'
+             ⎕ED this
+         :ElseIf answer∊'Qq'
+             →∆Done
+         :Else
+             i+←1
+         :EndIf
+     :EndIf
+ :Until 0
+
+∆Done:
+ :If showCodeFlag
+     n.∆CloseForm
+ :EndIf

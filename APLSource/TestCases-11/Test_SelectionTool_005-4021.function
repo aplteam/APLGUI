@@ -1,0 +1,24 @@
+ r←Test_SelectionTool_005(stopFlag batchFlag);parms;n;v;⎕TRAP
+⍝ Exercise "SelectionTool. Create" with "minsize" and "size" (greater!) specified.
+ r←∆Failed
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+
+ parms←#._APLGUI.GUI.SelectionTool.CreateParms
+ parms.autoPress←0
+ parms.addToCaption←'Test with "size" and "minSize" specified'
+ parms.colTitles←⊂'Running numbers'
+ parms.default←¯10↑6↑1
+ parms.hasVersionField←0
+ parms.info←'"size" is greater than "minSize"'
+ parms.minSize←500 700
+ parms.posn←60 70
+ parms.size←520 720
+ parms.timeout←0.1
+ n←parms #._APLGUI.GUI.SelectionTool.Create⍕¨1+⍳10
+ ⎕DL 0.3
+ 3 ∆Process n.∆Form
+ →GoToTidyUp n.∆Form.Size≢parms.size
+ r←∆OK
+
+∆TidyUp:
+ n.∆CloseForm

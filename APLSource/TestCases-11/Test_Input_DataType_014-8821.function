@@ -1,0 +1,20 @@
+ r←Test_Input_DataType_014(stopFlag batchFlag);n;⎕TRAP;defMat;res;DT
+⍝ Exercise "Input" with data type "Label".
+ r←∆Failed
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+
+ DT←#._APLGUI.GUI.Enums.InputDataTypes
+
+ defMat←0 5⍴''
+ defMat⍪←'Simpel' 'This is a simple label' ''DT.Label 0
+ defMat⍪←'Nested'('This⋄is⋄a⋄nested⋄label')''DT.Label 0
+
+ n←#._APLGUI.GUI.Input.Create defMat ⍬ ⍬
+ ∆Process n.∆Form
+
+ ⎕NQ n.∆OK'Select'
+ ∆Process n.∆Form
+
+ →FailsIf~0∊⍴n.∆result
+
+ r←∆OK

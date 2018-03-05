@@ -1,0 +1,21 @@
+ r←Test_ProcessTool_009(stopFlag batchFlag);rc;parms;n;list;⎕TRAP
+⍝ Exercise "ProcessTool". There is no "Process" button. Processing is triggered by a double-click.
+ r←∆Failed
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+
+ parms←#._APLGUI.GUI.ProcessTool.CreateParms
+ parms.posn←30 40
+ list←('one' 'two' 'three' 'four' 'five' 'six' 'seven' 'eight' 'nine'),[0.5]1+⍳9
+ parms.default←(1+⍳9)∊3 5
+ parms.style←#._APLGUI.GUI.Enums.SelectionStyles.single
+ parms.info←'Checks whether a double-click works as intended.'
+ parms.processBtnCaption←''
+ parms.dblClick←1
+ n←parms #._APLGUI.GUI.ProcessTool.Create list'∆HarvestSelections'
+ ⎕DL 0.3
+ 1 ⎕NQ n.List'ItemDblClick' 2 0 0 8
+ →GoToTidyUp n.∆result≢,⊂list[,2;]
+ →GoToTidyUp 1≠⍴n.∆buttons
+ r←∆OK
+∆TidyUp:
+ n.∆CloseForm

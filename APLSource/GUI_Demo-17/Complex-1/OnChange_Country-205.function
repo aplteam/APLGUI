@@ -1,0 +1,6 @@
+ OnChange_Country←{
+     n←⍵
+     'United Kingdom'≡↑n.Country.(SelItems/Items):1⊣n.PostCode.MaxLength←8
+     n.PostCode.MaxLength←25
+     1
+ }

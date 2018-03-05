@@ -1,0 +1,27 @@
+ r←Test_DirSelect_006(stopFlag batchFlag);myGuiParms;parms;n;⎕TRAP;rc
+⍝ Exercise the "DirSelect" method on a UNC path as StartDrive.
+ r←∆Failed
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+
+ myGuiParms←#._APLGUI.GUI.APLGuiGlobalParms.CreateDefaults
+ myGuiParms.regKey←'MyApp\Kai1'
+ myGuiParms.testMode←1
+
+ parms←#._APLGUI.GUI.DirSelect.CreateParms
+ parms.addToCaption←'My request'
+ parms.posn←45 35
+ parms.fixDefaultDrive←0
+ parms.info←'We need a directory for the installation of the software:'
+ parms.allowCreate←1
+ parms.allowRemove←1
+ parms.defaultDir←''
+ parms.defaultDrive←#.FilesAndDirs.GetTempPath
+
+ n←myGuiParms parms #._APLGUI.GUI.DirSelect.Create''
+ ⎕DL 0.1
+ 1 ⎕NQ n.Btn_00'Select'
+ →GoToTidyUp parms.defaultDrive≢n.∆result
+ r←∆OK
+
+∆TidyUp:
+ :Trap 6 ⋄ n.∆CloseForm ⋄ :EndTrap

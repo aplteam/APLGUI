@@ -1,0 +1,4 @@
+[&File] {Menubar}
+ Open=Ctrl+O : OnTestHandler {open}        ;Specify an alias name between "{" and "}"
+ New=Ctrl+N  : OnTestHandler {new} ;Opens a new document
+ ~Close      : OnTestHandler   {close} ;Close a document  ⍝ Note the typo!!

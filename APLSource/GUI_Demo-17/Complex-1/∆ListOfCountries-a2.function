@@ -1,0 +1,18 @@
+ r←{name}∆ListOfCountries dummy;i
+⍝ If the left argument is not specified this returns a list with country names
+⍝ If the left argument is specified than an integer is returned. This is the
+⍝ index of that country in the list. If it is not found and error is thrown.
+ r←''
+ r,←⊂'France'
+ r,←⊂'Germany'
+ r,←⊂'Ireland'
+ r,←⊂'Italy'
+ r,←⊂'United Kingdom'
+ :If 2=⎕NC'name'
+     i←r⍳⊂name
+     :If (⍴r)=i
+         'Unknown country'⎕SIGNAL 6
+     :Else
+         r←i=⍳⍴r
+     :EndIf
+ :EndIf

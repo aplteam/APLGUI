@@ -1,0 +1,378 @@
+:Class TableViewer
+⍝ = Overview
+⍝ This class is designed to display tables. For editing tables see `TableEdit`.
+⍝ You can modify the Form and its children to some extend by setting the `modalWait` parameter to 0.
+⍝ That will create the Form and the Grid but does not dequeue it. At that point you can, say, add _
+⍝ a menubar to it.
+⍝ = Limitations
+⍝ `TableViewer` is not a general cover for the Dyalog Grid control: `TableTableViewer` assumes the _
+⍝ all columns have a single data type. That's what you get when you read data from a SQL database.
+⍝ Also, the number of rows and particularly columns should be reasonable: though a table may have _
+⍝ thousands of rows and hundred or so columns, it's not designed for tables with millions of rows _
+⍝ and / or thousands of columns.
+
+⍝ Author: Kai Jaeger ⋄ Copyright: APL Team Ltd
+
+    :Include #.APLTreeUtils
+    :Include APLGuiUtils
+
+    ⎕IO←0 ⋄ ⎕ML←3
+
+    :Field Public Shared ReadOnly InactiaveColor←128 128 128
+
+    ∇ r←ListHelpers
+      :Access Public Shared
+      r←'CreateGrid' 'Edit' 'Browse'
+    ∇
+
+    ∇ {n}←{x}Run table;⎕TRAP;globalParms;parms;parms2
+      :Access Public Shared
+      ⎕TRAP←(APLGuiError'E'('⎕DMX.EM ⎕SIGNAL ',⍕APLGuiError))(0 'N')
+      'Invalid table - columns must have a single data type'⎕SIGNAL 11/⍨∨/1≠↑¨⍴¨∪¨↓⍉' '=↑¨1↑¨0⍴¨table
+      x←{(0<⎕NC ⍵):⍎⍵ ⋄ ⍬}'x'
+      (globalParms parms)←CreateParms GetParms x
+      parms.readonly←1
+      parms2←##.StdForm.CreateParms
+      parms2.(posn size)←parms.(posn size)
+      parms2.addToCaption←parms.addToCaption
+      n←##.StdForm.Create globalParms parms2
+      n.menubar←##.Menubar.Create n.∆Form parms.menu ⍬(⎕NEW ##.KeyCodes)
+      n.menubar.⎕DF'[Menubar namespace]:Menubar'
+      parms.parent←n.∆Form
+      n.Grid←globalParms CreateGrid parms table
+      n.StatusField1.Text←(⍕0⊃⍴table),' x ',⍕1⊃⍴table
+      :If parms.modalWait
+          ⎕DQ n.∆Form
+          n←⍬
+      :EndIf
+    ∇
+
+    ∇ {n}←{globalParms}CreateGrid(parms table);⎕TRAP
+      :Access Public Shared
+      ⎕TRAP←(APLGuiError'E'('⎕DMX.EM ⎕SIGNAL ',⍕APLGuiError))(0 'N')
+      'Invalid table - columns must have a single data type'⎕SIGNAL 11/⍨∨/1≠↑¨⍴¨∪¨↓⍉' '=↑¨1↑¨0⍴¨table
+      'Missing parameter: "parent"'⎕SIGNAL 11/⍨¯1≡parms.parent
+      n←⎕NS''
+      globalParms←{(0<⎕NC ⍵):⍎⍵ ⋄ ⍬}'globalParms'
+      (globalParms parms)←CreateParms GetParms globalParms parms
+      parms.readonly←1
+      parms←CheckGridParms parms
+      n←CreateGridAndStuffForBrowse n parms globalParms table
+      n.Grid.Values←table
+      {}SetColSize n
+    ∇
+
+    ∇ r←CreateParms
+      :Access Public Shared
+    ⍝ Returns a namespace with default values for creating a form via a call to `Table.CreateGrid`.
+    ⍝ Note that all other (more specialized) `CreateParmsFor*` funtions call this one first, then add _
+    ⍝ add new or modify existing ones.
+    ⍝ || ''Parameter name'' ||''Comment''||
+    ⍝ || `addToCaption` || Together with the "caption" this is used to compile the caption.||
+    ⍝ || `cellWidths`   || Defaults to ⍬. Can be scalar or a vector instead. Vector length must match number of columns in table.||
+    ⍝ || `colTitles`    || Defaults to `''`. Can be scalar or a vector instead. Vector length must match number of columns in table.||
+    ⍝ || `datatypes`    || Defaults to ⍬. Can be scalar or a vector instead. Vector length must match number of columns in table. See `Enums.TableDataTypes`. ||
+    ⍝ || `decimals`     || Defaults to 0. Can be scalar or a vector instead. Vector length must match number of columns in table.||
+    ⍝ || `fontInput`    || Font to be used inside the table.||
+    ⍝ || `modalWait`    || Boolean that defaults to 1. A 1 will make `Browse` dequeue the Form. Useful for adding a menubar etc.||
+    ⍝ || `size`         || Defaults to `(⍬ ⍬)`. Set this to a two-item vector in case you want the Form to have a certain size.||
+    ⍝ || `parent`       || Form or SubForm hosting the grid. Defaults to n.∆Form if not specified.||
+    ⍝ || `parmsType`    || Must be "BrowseTable".||
+    ⍝ || `posn`         || Defaults to `(⍬ ⍬)`. Use this to specify a certain position for the Form.||
+    ⍝ || `rowTitles`    || Defaults to rows numbered from 1. Use 0 to suppress row titles. Otherwise it must be a vector of text vectors matching the table cols.||
+      r←##.APLGuiParameterSpace.Create
+      r.addToCaption←''
+      r.cellWidths←⍬
+      r.colTitles←''
+      r.dataTypes←⍬
+      r.decimals←⍬
+      r.fontInput←¯1
+      r.modalWait←1
+      r.menu←GetBrowseMenu ⍬
+      r.size←⍬ ⍬
+      r.parent←¯1
+      r.parmType←'BrowseTable'
+      r.posn←⍬ ⍬
+      r.rowTitles←¯1
+     ⍝Done
+    ∇
+
+⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝ Private
+
+    ∇ {parms}←CheckGridParms parms
+      parms.rowTitles{⍵:'' ⋄ ⍺}←¯1≡parms.rowTitles
+    ∇
+
+    ∇ n←CreateGridAndStuffForBrowse(n parms globalParms table);bool;dt
+      n←CreateBrowseGrid n parms globalParms table
+      :If 0∊⍴parms.dataTypes
+          parms.dataTypes←(##.Enums.TableDataTypes.(Numeric Char))[↑¨' '=1↑¨0⍴¨table[0;]]
+      :EndIf
+      n←CreateInputControls n parms 1
+      :If 0∊parms.dataTypes∊##.Enums.TableDataTypes.∆List[;1]
+          11 ⎕SIGNAL⍨'Invalid data types'
+      :EndIf
+      n.Grid.Input.Bcol←⊂3⍴230
+      n.Grid.CellTypes←(⍴table)⍴1+⍳1⊃⍴table
+      n.Grid.onContextMenu←'OnContextMenu'
+      n.Grid.onGridKeyPress←'OnGridKeyPress'parms.readonly
+    ∇
+
+    ∇ n←CreateBrowseGrid(n parms globalParms table);∆;bool;dt
+      ∆←''
+      ∆,←⊂'Coord' 'Prop'
+      ∆,←⊂'Posn'(0 0)
+      ∆,←⊂'Size'(100 100)
+      ∆,←⊂'BCol'(⊂230 230 230)
+      :If ¯1≢parms.fontInput
+          ∆,←⊂'Font'parms.fontInput
+      :Else
+          ∆,←⊂'Font'globalParms.fontInput
+      :EndIf
+      ∆,←{0∊⍴⍵:'' ⋄ ⊂'CellWidths'⍵}parms.cellWidths
+      ∆,←{0∊⍴⍵:'' ⋄ ⊂'ColTitlesWidths'⍵}parms.cellWidths
+      :If ~0∊⍴parms.rowTitles
+          :If (,0)≡,parms.rowTitles
+              ∆,←⊂'TitleWidth' 0
+          :Else
+              ∆,←⊂'RowTitles'parms.rowTitles
+          :EndIf
+      :EndIf
+      n.Grid←parms.parent.⎕NEW'Grid'∆
+      n.Grid.⎕DF'[Grid]:Grid'
+      n.Grid.Coord←'Pixel'  ⍝ For GetTextSize
+      n.Grid.ShowInput←1
+      n.Grid.ColTitles←parms.colTitles
+      n.Grid.ResizeCols←1
+      n.Grid.EnterReadOnlyCells←1
+     ⍝Done
+    ∇
+
+    ∇ {n}←CreateInputControls(n parms browseFlag);∆;dataType;e;i;inputControls
+    ⍝ Note that the sequence in which the controls are created IS important:
+    ⍝ It has to be in sync with what ##.Enums.TableDataTypes.∆List returns,
+    ⍝ and that will be alphabetically sorted.
+      e←##.Enums.TableDataTypes
+      inputControls←⍬   ⍝ Collect and assigned later to Grid.Input to circumvent Dyalog bug <00964>
+      :For i :In ⍳⍴parms.dataTypes
+          dataType←i⊃parms.dataTypes
+          :Select dataType
+          :Case e.Bool
+              inputControls,←i CreateInputControl_Bool n browseFlag
+          :Case e.Char
+              inputControls,←i CreateInputControl_Char n browseFlag
+          :Case e.Currency
+              inputControls,←i CreateInputControl_Currency n browseFlag parms
+          :Case e.Date
+              inputControls,←i CreateInputControl_Date n browseFlag
+          :Case e.Numeric
+              inputControls,←i CreateInputControl_Numeric n browseFlag parms
+          :Case e.Time
+              inputControls,←i CreateInputControl_Time n browseFlag
+          :Else
+              . ⍝ Huuh?!
+          :EndSelect
+      :EndFor
+      n.Grid.Input←inputControls
+    ∇
+
+    ∇ {ref}←i CreateInputControl_Char(n readOnly);∆;ref
+    ⍝ Creates two controls, one for editing & one just for browsing.
+      :If readOnly
+          ref←n.Grid.⎕NEW'Label'(,⊂'FieldType' 'Char')
+      :Else
+          ref←n.Grid.⎕NEW'Edit'(,⊂'FieldType' 'Char')
+      :EndIf
+      {}n AssignRefToColumn i ref
+    ∇
+
+    ∇ {ref}←i CreateInputControl_Numeric(n readOnly parms);∆;ref
+    ⍝ Creates two controls, one for editing & one just for browsing.
+      ∆←''
+      ∆,←⊂'FieldType' 'Numeric'
+      ∆,←⊂'ValidIfEmpty' 1
+      ∆,←⊂'Decimals'(i{⍺∊⍵:i⊃⍵ ⋄ 0}parms.decimals)
+      ∆,←readOnly/⊂'ReadOnly' 1
+      ref←n.Grid.⎕NEW'Edit'∆
+      ref.⎕DF'[Numeric_Edit]'
+      {}n AssignRefToColumn i ref
+    ∇
+
+    ∇ {ref}←i CreateInputControl_Currency(n readOnly parms);∆;ref
+    ⍝ Creates two controls, one for editing & one just for browsing.
+      ∆←''
+      ∆,←⊂'FieldType' 'Currency'
+      ∆,←⊂'ValidIfEmpty' 1
+      ∆,←⊂'Decimals'({0∊⍴⍵:2 ⋄ ⍵}i{i<⍴⍵:i⊃⍵ ⋄ 2}parms.decimals)
+      ∆,←readOnly/⊂'ReadOnly' 1
+      ref←n.Grid.⎕NEW'Edit'∆
+      ref.⎕DF'[Currency_Edit]'
+      {}n AssignRefToColumn i ref
+    ∇
+
+    ∇ {ref}←i CreateInputControl_Date(n readOnly);∆;ref
+    ⍝ Creates two controls, one for editing & one just for browsing.
+      ∆←''
+      ∆,←⊂'FieldType' 'Char'
+      ∆,←⊂'FormatString' 'ZI4,<->,ZI2,<->,ZI2'
+      ∆,←⊂'ValidIfEmpty' 1
+      ∆,←readOnly/⊂'ReadOnly' 1
+      ref←n.Grid.⎕NEW'Edit'∆
+      ref.⎕DF'[Char_Edit]'
+      {}n AssignRefToColumn i ref
+    ∇
+
+    ∇ {ref}←i CreateInputControl_Time(n readOnly);∆;ref
+    ⍝ Creates two controls, one for editing & one just for browsing.
+      ∆←''
+      ∆,←⊂'FieldType' 'Time'
+      ∆,←readOnly/⊂'ReadOnly' 1
+      ref←n.Grid.⎕NEW'Edit'∆
+      ref.⎕DF'[Time_Edit]'
+      {}n AssignRefToColumn i ref
+    ∇
+
+    ∇ {ref}←i CreateInputControl_Bool(n readOnly);∆;ref
+    ⍝ Creates two controls, one for editing & one just for browsing.
+      ∆←''
+      ∆,←⊂'Caption' 'Yes/No'
+      ∆,←⊂'Style' 'Check'
+      ∆,←⊂'BCol'(140 140 140)
+      :If readOnly
+          ∆,←⊂'Active' 0
+          ∆,←⊂'BCol' 0
+      :EndIf
+      ref←n.Grid.⎕NEW'Button'∆
+      ref.⎕DF'[YesNo_Edit]'
+      {}n AssignRefToColumn i ref
+    ∇
+
+    :Section InActive
+
+    ∇ {ref}←i CreateInputControl_DropEdit(n readOnly);∆;ref
+    ⍝ Creates two controls, one for editing & one just for browsing.
+      . ⍝ not ready yet  ⍝TODO⍝
+      ∆←''
+      ∆,←⊂'Style' 'Drop'
+      ∆,←⊂'Style' 'DropEdit'
+      ∆,←readOnly/⊂'Active' 0
+      ref←n.Grid.⎕NEW'Combo'∆
+      ref.⎕DF'[DropEdit_Edit]'
+      n AssignRefToColumn i ref
+    ∇
+
+    ∇ {ref}←i CreateInputControl_Drop(n readOnly);∆;ref
+    ⍝ Creates two controls, one for editing & one just for browsing.
+      . ⍝ not ready yet  ⍝TODO⍝
+      ∆←''
+      ∆,←⊂'Style' 'Drop'
+      ∆,←readOnly/⊂'Active' 0
+      ref←n.Grid.⎕NEW'Combo'∆
+      ref.⎕DF'[DropDownt]'
+      n AssignRefToColumn i ref
+    ∇
+
+    :EndSection
+
+      DetermineColumnDataTypes←{
+     ⍝ Returns the proper definition for a single row depending on parms.dataTypes and _
+     ⍝ ##.Enums.TableDataTypes
+          (n parms)←⍵
+          ind←{(⍴⍵)⍴⍳⍴,⍵}##.Enums.TableDataTypes.∆List
+          rows←##.Enums.TableDataTypes.∆List[;1]⍳parms.dataTypes
+          r←(rows,¨parms.readonly)⌷¨⊂ind
+          r
+      }
+
+    ∇ {r}←SetInputModeTo type
+      r←⍬
+      :Select type
+      :Case 'Scroll'
+          'Grid'⎕WS('InputMode' 'Scroll')('Cursor' 0)
+      :Case 'AlwaysInCell'
+          'Grid'⎕WS('InputMode' 'AlwaysInCell')('Cursor' 3)
+      :EndSelect
+    ∇
+
+      GetRefTo_n←{
+     ⍝ ⍵ is a ref pointing to any control.
+     ⍝ If that is a Form that it will contain an "n" namepsace, and that is returned.
+     ⍝ If that is not the case then we climb up one step and try again
+          'Form'≡⍵.Type:⍵.n
+          ∇ ⍵.##
+      }
+
+      AssignRefToColumn←{
+          (i ref)←⍵
+          n←⍺
+          _←⍎'⍴n.col_',(¯3↑'000',(⍕i)),'←ref'
+          n
+      }
+
+      CreateContextMenuForBrowse←{
+          n←⍵
+          n2←⎕NS''
+          n2.Menu←n.Grid.⎕NEW⊂'Menu'
+          n2.Cancel←n2.Menu.⎕NEW'MenuItem'(⊂('Caption' 'Cancel'))
+          c2.Cancel.⎕DF'[MenuItem]:Cancel'
+          n2.Cancel.onSelect←1
+          n2.sep1←n2.Menu.⎕NEW⊂'Separator'
+          n2.Copy←n2.Menu.⎕NEW'MenuItem'(('Caption'('Copy',(⎕UCS 9),'Ctrl+C'))('Accelerator'(67 2)))
+          c2.Copy.⎕DF'[MenuItem]:Copy'
+          n2.Copy.onSelect←1
+          n2
+      }
+
+      GetBrowseMenu←{
+          r←''
+          r,←⊂'[File]                                 {File}'
+          r,←⊂' Quit=Alt+F4        : OnQuit           {Quit}'
+          r,←⊂'[Edit]                                 {Edit}'
+          r,←⊂' Copy=Ctrl+C        : OnCopyTable      {Copy}            ;Copies the current selection to the clipboard'
+          r,←⊂' -'
+          r,←⊂' Select all=Ctrl+A  : OnSelectAll      {SelectAll}       ;Selects all rows and all columns of the table'
+          r
+      }
+
+      SetColSize←{
+    ⍝ For large tables the `SetColSize` method might be (too) slow.
+    ⍝ In that case you need to specify the column size via parms.
+          n←⍵
+          _←{n.Grid.SetColSize ⍵ ¯3}¨⍳1+1⊃⍴n.Grid.Values
+          ⍬
+      }
+
+
+⍝⍝⍝⍝⍝⍝⍝⍝ Handler
+
+      OnContextMenu←{
+          n←GetRefTo_n↑⍵
+          n2←CreateContextMenuForBrowse n
+          ans←⎕DQ n2.Menu
+          n2.Cancel≡↑ans:⍬
+          _←2 ⎕NQ n.Grid.Grid'KeyPress' 'CP' 3 67 2
+          ⍬
+      }
+
+      OnGridKeyPress←{
+          key←2⊃⍵
+          ∧/⍺:~(⊂key)∊'DI' 'PT'  ⍝ Ignore the DEL key as well as the "Insert clipboard" key in case the full table is read-only
+          0∊⍺:.  ⍝TODO⍝    not completely read-only - we need to check whether it tries in insert/delete protected columns
+          1
+      }
+
+    ∇ {r}←OnSelectAll msg;n
+      :Access Public Shared
+      r←0
+      n←GetRefTo_n↑msg
+      n.Grid.Grid.SelItems←(0 0)(⍴n.Grid.Grid.Values)
+    ∇
+
+    ∇ {r}←OnCopyTable msg;n
+      :Access Public Shared
+      r←0
+      n←GetRefTo_n↑msg
+      2 ⎕NQ n.Grid.Grid'KeyPress' 'CP' ⍝
+    ∇
+
+:EndClass

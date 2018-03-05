@@ -1,0 +1,8 @@
+ OnKeyPress←{
+     (rf event key)←3↑msg←⍵
+     n←⍺
+     name←'OnKeyPressIn',⍕rf
+     '['∊name:1
+     0=⎕NC name:1
+     ⍎'n ',name,' msg'
+ }

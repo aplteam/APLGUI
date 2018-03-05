@@ -1,0 +1,28 @@
+ r←Test_Input_DataType_001(stopFlag batchFlag);n;⎕TRAP;defMat;res;DT
+⍝ Exercise "Input" with data type "Time".
+ r←∆Failed
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+
+ DT←#._APLGUI.GUI.Enums.InputDataTypes
+
+ defMat←0 7⍴''
+
+ defMat⍪←'TimeInt' 'Int' 81234 DT.Time 0 1 1            ⍝ Integer
+ defMat⍪←'TimeFloat' 'Float' 0.081234 DT.Time 0 1 1     ⍝ Float
+ defMat⍪←'TimeChar' 'Char' '08:12:34'DT.Time 0 1 1      ⍝ Char
+ defMat⍪←'TS' 'TS'(1999 1 1 2 3 4 5)DT.Time 0 1 1       ⍝ Timestamp
+
+ n←#._APLGUI.GUI.Input.Create defMat ⍬ ⍬
+ ∆Process n.∆Form
+ ⎕NQ n.∆OK'Select'
+ 0.5 ∆Process n.∆Form
+
+ →FailsIf 1≠⍴,↑n.∆result[0;1]
+ →FailsIf 0≠1↑0⍴↑n.∆result[0;1]
+ →FailsIf 1≠⍴,↑n.∆result[1;1]
+ →FailsIf 0≠1↑0⍴↑n.∆result[1;1]
+ →FailsIf 8≠⍴,↑n.∆result[2;1]
+ →FailsIf' '≠1↑0⍴↑n.∆result[2;1]
+ →FailsIf 7≠⍴↑n.∆result[3;1]
+
+ r←∆OK

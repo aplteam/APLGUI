@@ -1,0 +1,46 @@
+ r←Test_TableEdit_104(stopFlag batchFlag);parms;n;⎕TRAP;table;rowTitles
+⍝ Test the "onKeyPress" callback
+ r←∆Inactive
+ :Return
+
+ r←∆Failed
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+
+ #.⎕SHADOW'TEMP'
+ 'TEMP'#.⎕NS''
+ #.TEMP.counter←0
+
+ #.TEMP.flag←0
+ #.TEMP.OnKeyPress←{
+     n←⍺
+     msg←⍵
+     key←2⊃msg
+     1≠⍴,key:1
+     ~key∊⎕A,#.APLTreeUtils.Lowercase ⎕A:0      ⍝ Suppress everything that is not a letter
+     (2⊃msg)←#.APLTreeUtils.Uppercase key       ⍝ Translate to Uppercase
+     ⎕THIS.flag←1
+     msg
+ }
+ table←⍪'Obama' 'Bush' 'Clinton' 'Reagan' 'Kennedy'
+ table,←'Barak' 'George' 'Bill' 'Ronald' 'John'
+ table,←?5 20⍴1000000
+ parms←#._APLGUI.GUI.Table.CreateParms
+ parms.posn←35 25
+ parms.size←400 600
+ parms.caption←'Test_TableEdit_104: onKeyPress callback'
+ parms.confirmQuit←0
+ parms.testMode←1
+ parms.onKeyPress←'#.TEMP.OnKeyPress'
+
+ n←#._APLGUI.GUI.Table.Create table #._APLGUI.GUI.APLGuiGlobalParms.CreateDefaults parms
+ n.Grid ∆KeyPress'Fo234rd'      ⍝ we need a change
+ n.Grid ∆KeyPress⊂'ER'          ⍝ Make it permanent
+ ∆Process n.∆Form
+
+ →GoToTidyUp'FORD'≢↑0 0⌷n.Grid.Values
+ →GoToTidyUp 1≠#.TEMP.flag
+
+ r←∆OK
+
+∆TidyUp:
+ n.∆CloseForm

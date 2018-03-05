@@ -1,0 +1,30 @@
+ r←Test_ProcessTool_005(stopFlag batchFlag);rc;parms;n;⎕TRAP
+⍝ Exercise "ProcessTool" with a tailored "Process" caption and check on <enter>. All "Items" are single chars.
+ r←∆Failed
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+
+ parms←#._APLGUI.GUI.ProcessTool.CreateParms
+ parms.posn←30 40
+ parms.default←(1+⍳9)∊3 5
+ parms.style←#._APLGUI.GUI.Enums.SelectionStyles.multi
+ parms.processBtnCaption←'Do it - now!'
+ parms.info←'Checks whether <enter> works with "processBtnCaption" set'
+ n←parms #._APLGUI.GUI.ProcessTool.Create(⍕¨1+⍳9)'∆HarvestSelections'
+ ⎕NQ n.∆Form'KeyPress' 'ER'
+ 0.5 ∆Process n.∆Form
+ →GoToTidyUp'35'≢∊n.∆result
+ n.List.SelItems←(1+⍳9)∊4 5 6
+ n.∆result←⍬
+ ⎕NQ n.∆Form'KeyPress' 'ER'
+ 0.5 ∆Process n.∆Form
+ →GoToTidyUp'456'≢∊n.∆result
+ n.List.SelItems[]←0
+ n.List.SelItems[3]←1
+ n.∆result←⍬
+ ⎕NQ n.∆Form'KeyPress' 'ER'
+ 0.5 ∆Process n.∆Form
+ →GoToTidyUp(,'4')≢∊n.∆result
+ r←∆OK
+
+∆TidyUp:
+ n.∆CloseForm

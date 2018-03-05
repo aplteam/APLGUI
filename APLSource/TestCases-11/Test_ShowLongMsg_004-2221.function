@@ -1,0 +1,14 @@
+ r←Test_ShowLongMsg_004(stopFlag batchFlag);parms;n;⎕TRAP
+⍝ Exercise "ShowLongMsg" without a status bar
+ r←∆Failed
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+
+ parms←#._APLGUI.GUI.Dialogs.CreateParmsForShowLongMsg
+ parms.buttons←''
+ parms.hasProgressbar←0
+ parms.hasStatusbar←0
+ n←parms ∆ShowLongMsg ∆GetLoremIpsum
+ ⎕DL 0.5
+ n.∆CloseForm
+
+ r←∆OK

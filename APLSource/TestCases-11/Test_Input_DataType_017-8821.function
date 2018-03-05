@@ -1,0 +1,19 @@
+ r←Test_Input_DataType_017(stopFlag batchFlag);n;⎕TRAP;defMat;res;DT;mat
+⍝ Exercise "Input" with a very large "ListView".
+ r←∆Failed
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+
+ DT←#._APLGUI.GUI.Enums.InputDataTypes
+
+ defMat←0 7⍴''
+ mat←{(' '~⍨¨↓⍵),[0.5]↓#.APLTreeUtils.FormatDateTime⊃(⎕AT ⍵)[;1]}⎕NL 3
+ defMat⍪←'LV' 'Table'mat DT.ListView(10 40)1 1
+
+ n←#._APLGUI.GUI.Input.Create defMat ⍬ ⍬
+
+ →GoToTidyUp 1≠⍴n.∆GetRefs'ListView'
+
+ r←∆OK
+
+∆TidyUp:
+ n.∆CloseForm

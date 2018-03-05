@@ -1,0 +1,7 @@
+ CorrectPushButtonPosn←{
+     n←⍵
+     n.HelpCVC.Posn[0]←⊃n.CVC.Posn[0]
+     n.HelpCVC.Posn[1]←10+1⊃+⌿⊃n.CVC.(Posn Size)
+     n.HelpCVC.Size[1]←10+1⊃n.HelpCVC.GetTextSize n.HelpCVC.Caption
+     ⍬
+ }

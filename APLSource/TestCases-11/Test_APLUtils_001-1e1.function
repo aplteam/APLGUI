@@ -1,0 +1,35 @@
+ r←Test_APLUtils_001(stopFlag batchFlag);⎕TRAP;globalParms;parms
+⍝ Exercise the "CompileCaption" function.
+ r←∆Failed
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+
+ globalParms←#._APLGUI.GUI.APLGuiGlobalParms.CreateDefaults
+ parms←#._APLGUI.GUI.Input.CreateParms
+ parms.caption←'Here we are!'
+ →FailsIf'Here we are!'≢#._APLGUI.GUI.APLGuiUtils.CompileCaption globalParms parms
+
+ globalParms←#._APLGUI.GUI.APLGuiGlobalParms.CreateDefaults
+ globalParms.caption←'Is overwritten'
+ parms←#._APLGUI.GUI.Input.CreateParms
+ parms.caption←'Here we are2!'
+ →FailsIf'Here we are2!'≢#._APLGUI.GUI.APLGuiUtils.CompileCaption globalParms parms
+
+ globalParms←#._APLGUI.GUI.APLGuiGlobalParms.CreateDefaults
+ globalParms.caption←'Here we are3!'
+ parms←#._APLGUI.GUI.Input.CreateParms
+ →FailsIf'Here we are3!'≢#._APLGUI.GUI.APLGuiUtils.CompileCaption globalParms parms
+
+ globalParms←#._APLGUI.GUI.APLGuiGlobalParms.CreateDefaults
+ globalParms.caption←'This1'
+ parms←#._APLGUI.GUI.Input.CreateParms
+ parms.addToCaption←'That'
+ →FailsIf'This1: That'≢#._APLGUI.GUI.APLGuiUtils.CompileCaption globalParms parms
+
+ globalParms←#._APLGUI.GUI.APLGuiGlobalParms.CreateDefaults
+ globalParms.caption←'This1'
+ parms←#._APLGUI.GUI.Input.CreateParms
+ parms.addToCaption←'That'
+ parms.caption←'More'
+ →FailsIf'More: That'≢#._APLGUI.GUI.APLGuiUtils.CompileCaption globalParms parms
+
+ r←∆OK

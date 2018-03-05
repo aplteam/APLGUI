@@ -1,0 +1,3 @@
+ r←∆StdForm
+⍝ Returns those main classes "StdForm" really needs.
+ r←''

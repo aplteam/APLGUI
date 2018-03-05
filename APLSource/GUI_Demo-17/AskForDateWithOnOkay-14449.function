@@ -1,0 +1,8 @@
+ AskForDateWithOnOkay;parms
+ parms←##.GUI.Request.CreateParmsForDate
+ parms.hasToday←0
+ #.⎕SHADOW'OnMyOkay'
+ #.⎕FX' OnMyOkay←{' 'n←⍵' '1≠↑⌽n.∆result:1' 'n.StatusField1.Text←''Please do not select the first day of a month''' '0}'
+ parms.onOkay←'#.OnMyOkay'
+ ⎕←parms ##.GUI.Request.AskForDate 2015 3 1
+⍝Done

@@ -1,0 +1,9 @@
+ {r}←n ∆ShowCode name;vtv
+ r←⍬
+ :If 0=n.∆Form.∆closed
+     n.∆Form.Caption←'Code of ',name
+     vtv←⎕VR name
+     ((vtv∊⎕UCS 13)/vtv)←⊂⎕UCS 13 10
+     vtv←∊vtv
+     n.Edit.Text←vtv
+ :EndIf

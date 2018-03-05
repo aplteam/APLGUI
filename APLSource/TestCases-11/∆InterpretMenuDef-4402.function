@@ -1,0 +1,8 @@
+ ∆InterpretMenuDef←{
+     md←{⍵/⍨'⍝'≠↑¨⍵}⍵                   ⍝ Drop all comment lines
+     md←{';'∊⍵:⍵↑⍨⍵⍳';' ⋄ ⍵}¨md         ⍝ Drop all hints (may contain "{}")
+     md←{⍵/⍨2=+/¨'{}'∘∊¨⍵}md            ⍝ Drop all that do not contain "{}"
+     md←{⍵/⍨{⍵∨≠\⍵}⍵∊'{}'}¨md           ⍝ All between "{}"
+     md←'{'~¨⍨'}'~⍨¨md                  ⍝ Drop the curlies
+     (⊂'menubar'),md                    ⍝ All names found plus "menubar"
+ }

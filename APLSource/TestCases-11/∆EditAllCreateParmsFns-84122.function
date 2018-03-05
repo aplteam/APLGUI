@@ -1,0 +1,9 @@
+ ∆EditAllCreateParmsFns;thisClass;list;buf
+⍝ Puts
+ buf←''
+ :For thisClass :In ∆GetMainClassName
+     list←thisClass.⎕NL-3
+     list/⍨←'Create'{⍺(∧.=)⍨(⍴⍺)↑[1]⍵}⊃list
+     buf,←((⍕thisClass),'.')∘,¨('Parms'{⍺∘≡¨(-⍴⍺)↑¨⍵}list)/list
+ :EndFor
+ ⎕ED⊃buf

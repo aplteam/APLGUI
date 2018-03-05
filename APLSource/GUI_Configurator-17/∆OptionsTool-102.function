@@ -1,0 +1,3 @@
+ r←∆OptionsTool
+⍝ Returns those main classes "OptionsTool" really needs.
+ r←'StdForm' 'Menubar' 'KeyCodes'

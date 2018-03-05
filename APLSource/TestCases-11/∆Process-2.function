@@ -1,0 +1,12 @@
+ ∆Process←{
+⍝ If ⍺ is specified it can be an integer. This defines a delay.
+     ⍺←0                                      ⍝ The default delay
+     rf←⍵                                     ⍝ Ref
+⍝ ↓↓ Trapping the VALUE ERROR is needed: it sometimes fails for unkown reasons...
+     _←⍺{6:: ⋄ _←⎕DL ⍺ ⋄ _←⎕NQ ⍵ 9955}&rf     ⍝ Make sure that the "Wait" call is ended after ⍺ delay
+     0::
+     _←rf.Wait                                ⍝ Enqueue
+⍝ Events sent to a control won't always get processed without a "Wait" call.
+⍝ ⍵ is ref to a control.
+⍝ "Wait" is performed on ⍵.
+ }

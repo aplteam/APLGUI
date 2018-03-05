@@ -1,0 +1,2 @@
+ AskForDate
+ ⎕←##.GUI.Request.AskForDate 2000 1 2

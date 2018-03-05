@@ -1,0 +1,44 @@
+ {showCodeFlag}∆RunThese pattern;list;this;flag;answer;n;firstFlag
+⍝ Run all demos starting with "pattern"
+ list←(⎕NL-3)~'∆'⎕NL-3
+ pattern←⊂⍣(2>≡pattern)⊣pattern
+ list/⍨←↑∨/∨/¨pattern⍷¨⊂⊃list
+ :If showCodeFlag←{0<⎕NC ⍵:⍎⍵ ⋄ 0}'showCodeFlag'
+     n←∆CreateBrowser ⍬
+ :EndIf
+ firstFlag←1
+ :For this :In list
+     flag←0
+     :Repeat
+         :If firstFlag
+             ⎕←'*** Ready to go? Press <Enter>!'
+             0/⍞
+             firstFlag←0
+         :EndIf
+         ⎕←'*** ',this
+         ⎕←'    ',1⊃⎕NR this
+         :If showCodeFlag
+             n ∆ShowCode this
+         :EndIf
+         ⍎this
+         →(this≡↑⌽list)/∆Done
+_Ask:
+         ⎕←'Press one of:'
+         ⎕←'<enter> for the next demo'
+         ⎕←'<e> for editing this demo fns'
+         ⎕←'<q> for quitting'
+         answer←¯1↑⍞
+         →(~answer∊' qQeE')/_Ask
+         :If answer∊'eE'
+             ⎕ED this
+         :ElseIf answer∊'Qq'
+             →∆Done
+         :Else
+             flag←1
+         :EndIf
+     :Until flag
+ :EndFor
+∆Done:
+ :If showCodeFlag
+     n.∆CloseForm
+ :EndIf

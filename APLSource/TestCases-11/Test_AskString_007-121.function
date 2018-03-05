@@ -1,0 +1,55 @@
+ r←Test_AskString_007(stopFlag batchFlag);parms;msg;was;n;⎕TRAP
+⍝ Exercise the "OnHelp" callback with all possible ways to define it.
+ r←∆Failed
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+
+ #.⎕SHADOW'TEMP'
+ #.TEMP←⎕NS''
+ ⎕THIS.wasCalled←0
+ #.TEMP.MyCallback←{
+     n←⍵
+     ⎕THIS.wasCalled←1
+     ⍬
+ }
+ #.TEMP.parms←#._APLGUI.GUI.Request.CreateParmsForString
+ #.TEMP.parms.default←'Kai Jaeger'
+ #.TEMP.parms.hasHelpBtn←1
+ #.TEMP.parms.onHelp←'#.TEMP.MyCallback'
+
+ n←#.TEMP.parms(#._APLGUI.GUI.Request.CreateParmsForString ∆Ask)'Your name:'
+ ⎕DL 0.1
+ ⎕NQ n.HelpBtn'Select'
+ ∆Process n.∆Form
+ →GoToTidyUp #.TEMP.wasCalled=0
+
+ #.TEMP.parms.onHelp←#.TEMP'MyCallback'
+
+ n←#.TEMP.parms(#._APLGUI.GUI.Request.CreateParmsForString ∆Ask)'Your name:'
+ ⎕DL 0.1
+ ⎕NQ n.HelpBtn'Select'
+ ∆Process n.∆Form
+ →GoToTidyUp #.TEMP.wasCalled=0
+
+ #.TEMP.parms.onHelp←'MyCallback'
+ was←⎕CS'#.TEMP'
+ parms←#._APLGUI.GUI.Request.CreateParmsForString
+ parms.default←'Kai Jaeger'
+ parms.hasHelpBtn←1
+ parms.onHelp←'#.TEMP.MyCallback'
+ MyCallback←{
+     n←⍵
+     ⎕THIS.wasCalled←1
+     ⍬
+ }
+ n←parms(#._APLGUI.GUI.Request.CreateParmsForString #._APLGUI.TestCases.∆Ask)'Your name:'
+ ⎕DL 0.1
+ 1 ⎕NQ n.HelpBtn'Select'
+ #._APLGUI.TestCases.∆Process n.∆Form
+ ⎕CS was
+ →GoToTidyUp #.TEMP.wasCalled=0
+ r←∆OK
+
+∆TidyUp:
+ n.∆CloseForm
+ ⎕DL 0.02
+ {}⎕WA
