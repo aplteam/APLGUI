@@ -3,6 +3,8 @@
 ⍝ Included in many GUI classes, and in **all** main classes.\\
 ⍝ Carries often-used utilities.
 
+    ⎕IO←0 ⋄ ⎕ML←3
+
     ∇ r←APLGuiError
       r←605  ⍝ Thrown by APLGui in case it is unhappy with something
     ∇
@@ -52,17 +54,17 @@
       :EndIf
     ∇
 
- CheckPosition←{
-     rf←⍵
-     corr←RefToWinSys.(GetSystemMetrics SM_CYCAPTION)
-     corr+←RefToWinSys.(GetSystemMetrics SM_CYMENU)
-     rf.Posn[0]⌈←corr+20
-     (2=+/b←(corr++⌿⊃n.∆Form.(Size Posn))<(↑↑¯1↑⎕CLASS ⎕THIS).##.APLGuiHelpers.ScreenEstate):⍬
-     posn←b[0]⊃(corr+⌈0.5×(↑↑¯1↑⎕CLASS ⎕THIS).##.APLGuiHelpers.ScreenEstate[0]-rf.Size[0]+corr)(rf.Posn[0])
-     posn,←b[1]⊃(⌈0.5×(↑↑¯1↑⎕CLASS ⎕THIS).##.APLGuiHelpers.ScreenEstate[1]-rf.Size[1])(rf.Posn[1])
-     rf.Posn←posn
-     ⍬
- }
+      CheckPosition←{
+          rf←⍵
+          corr←RefToWinSys.(GetSystemMetrics SM_CYCAPTION)
+          corr+←RefToWinSys.(GetSystemMetrics SM_CYMENU)
+          rf.Posn[0]⌈←corr+20
+          (2=+/b←(corr++⌿⊃n.∆Form.(Size Posn))<(↑↑¯1↑⎕CLASS ⎕THIS).##.APLGuiHelpers.ScreenEstate):⍬
+          posn←b[0]⊃(corr+⌈0.5×(↑↑¯1↑⎕CLASS ⎕THIS).##.APLGuiHelpers.ScreenEstate[0]-rf.Size[0]+corr)(rf.Posn[0])
+          posn,←b[1]⊃(⌈0.5×(↑↑¯1↑⎕CLASS ⎕THIS).##.APLGuiHelpers.ScreenEstate[1]-rf.Size[1])(rf.Posn[1])
+          rf.Posn←posn
+          ⍬
+      }
 
       CheckTimeout←{
           (globalParms parms)←⍵
@@ -114,17 +116,17 @@
     ∇
 
     ∇ n←n CreateAutoPressTimer_ timeout;focusHas
-     :If n.∆parms.hasProgressbar
-         n.Progressbar.Limits←0,1⌈timeout
-         n.Progressbar.Visible←1
-         :If timeout<1  ⍝ That means it is a test cases
-             n.Timer←n.∆Form.⎕NEW'Timer'(,⊂'Interval'(100⌈timeout))
-         :Else
-             n.Timer←n.∆Form.⎕NEW'Timer'(,⊂'Interval' 1000)
-         :EndIf
-         n.Timer.onTimer←'OnAutoPressTimer&'n
-         n.Timer.Counter←0
-     :EndIf
+      :If n.∆parms.hasProgressbar
+          n.Progressbar.Limits←0,1⌈timeout
+          n.Progressbar.Visible←1
+          :If timeout<1  ⍝ That means it is a test cases
+              n.Timer←n.∆Form.⎕NEW'Timer'(,⊂'Interval'(100⌈timeout))
+          :Else
+              n.Timer←n.∆Form.⎕NEW'Timer'(,⊂'Interval' 1000)
+          :EndIf
+          n.Timer.onTimer←'OnAutoPressTimer&'n
+          n.Timer.Counter←0
+      :EndIf
     ∇
 
     ∇ n←CreateProgressbarTimerAndMessage n;parms;globalParms;hotKey;∆
@@ -154,17 +156,17 @@
       r←↑∆GetFocusHandle⊂⍬
     ∇
 
- GetFormCaptionTextSize←{
+      GetFormCaptionTextSize←{
 ⍝ Returns the size needed for displaying the caption in a form.
 ⍝ At the moment we lack the skills for doing this, so we make something up.
 ⍝ Right argument is "n".
-     rf←⎕NEW'Form'(('Coord' 'Pixel')('Visible' 0)('Size'(5 5)))
-     n←⍵
-     size←rf.GetTextSize n.∆Form.Caption
-     size[1]+←40×n.∆Form.SysMenu∨~0∊⍴n.∆Form.IconObj  ⍝ Does the form has an icon and/or a system menu? Add 40 pixels!
-     size[1]+←40++/(40 40×n.∆Form.(MinButton MaxButton))+60×n.∆Form.HelpButton ⍝ Add close btn, Min btn, Max btn & help btn
-     size
- }
+          rf←⎕NEW'Form'(('Coord' 'Pixel')('Visible' 0)('Size'(5 5)))
+          n←⍵
+          size←rf.GetTextSize n.∆Form.Caption
+          size[1]+←40×n.∆Form.SysMenu∨~0∊⍴n.∆Form.IconObj  ⍝ Does the form has an icon and/or a system menu? Add 40 pixels!
+          size[1]+←40++/(40 40×n.∆Form.(MinButton MaxButton))+60×n.∆Form.HelpButton ⍝ Add close btn, Min btn, Max btn & help btn
+          size
+      }
 
       GetListViewItemHeight←{
 ⍝ ⍵ is ref pointing to a ListView
@@ -448,43 +450,43 @@
       }
 
     ∇ n←AdjustSize_ n;oldPosn;oldSize;allControls;height;width
-     (oldPosn oldSize)←n.∆Form.(Posn Size)
-     :If 0<n.⎕NC'StatusField1'
-         n.StatusField1.Coord←'Pixel'
-         {}n.StatusField1.(Posn Size) ⍝ Don't remove this: without this the StatusField might not be visible! (2013-08-27)
-     :EndIf
-     allControls←⎕WN n.∆Form                               ⍝ All controls
-     allControls/⍨←~({⍵.Type}¨allControls)∊'StatusBar' 'Timer' 'Font'  ⍝ For size calculation we ignore certain controls
-     :If 0<n.⎕NC'∆buttons'                                 ⍝ If there are buttons ...
-         allControls~←n.∆buttons                           ⍝ ... we exclude them for the time being.
-     :EndIf
-     (height width)←(n.∆initialVgap+n.∆Vgap)n.∆Hgap+⌈⌿⊃{+⌿⊃⍵.(Posn Size)}¨allControls  ⍝ Calculate height and width needed plus distance
-     :If 0<n.⎕NC'DateTime'
-         height+←220                                       ⍝ DateTime unfoldes when clicked at; we want to cover that area. minSize makes no sense here.
-     :EndIf
-     :If ~0∊⍴n.∆buttons                                    ⍝ Are there any push buttons at all?
-         :If 2=⍴⍴n.∆buttons                                ⍝ Are they arranged as a matrix?
-             height+←+/n.∆Vgap+↑¨n.∆buttons[;0].Size
-         :Else
-             height+←n.∆Vgap+↑{⍵.Size}↑n.∆buttons
-         :EndIf
-         width⌈←n.∆Hgap+1⊃+⌿⊃{⍵.(Posn Size)}↑⌽n.∆buttons
-     :EndIf
-     :If n.∆parms.hasStatusbar
-         height+←↑{⍵.Size}↑{list/⍨(⊂'StatusBar')≡¨{⍵.Type}¨list←⎕WN ⍵}n.∆Form
-     :EndIf
-     :If ⍬≢0⊃n.∆parms.size
-         height←n.∆parms.size[0]
-     :EndIf
-     :If ⍬≢1⊃n.∆parms.size
-         width←1⊃n.∆parms.size
-     :EndIf
-     width⌈←CalcSizeOfFormCaption n
-     2 ⎕NQ n.∆Form'Configure',(n.∆Form.Posn),(↑¨n.∆parms.minSize)⌈height,width
-     n.∆Form.Posn+←⌊(oldSize-n.∆Form.Size)÷2
-     :If 0<n.⎕NC'StatusField1'
-         n.StatusField1.Size[1]-←7   ⍝ Ensure left and right are the same
-     :EndIf
+      (oldPosn oldSize)←n.∆Form.(Posn Size)
+      :If 0<n.⎕NC'StatusField1'
+          n.StatusField1.Coord←'Pixel'
+          {}n.StatusField1.(Posn Size) ⍝ Don't remove this: without this the StatusField might not be visible! (2013-08-27)
+      :EndIf
+      allControls←⎕WN n.∆Form                               ⍝ All controls
+      allControls/⍨←~({⍵.Type}¨allControls)∊'StatusBar' 'Timer' 'Font'  ⍝ For size calculation we ignore certain controls
+      :If 0<n.⎕NC'∆buttons'                                 ⍝ If there are buttons ...
+          allControls~←n.∆buttons                           ⍝ ... we exclude them for the time being.
+      :EndIf
+      (height width)←(n.∆initialVgap+n.∆Vgap)n.∆Hgap+⌈⌿⊃{+⌿⊃⍵.(Posn Size)}¨allControls  ⍝ Calculate height and width needed plus distance
+      :If 0<n.⎕NC'DateTime'
+          height+←220                                       ⍝ DateTime unfoldes when clicked at; we want to cover that area. minSize makes no sense here.
+      :EndIf
+      :If ~0∊⍴n.∆buttons                                    ⍝ Are there any push buttons at all?
+          :If 2=⍴⍴n.∆buttons                                ⍝ Are they arranged as a matrix?
+              height+←+/n.∆Vgap+↑¨n.∆buttons[;0].Size
+          :Else
+              height+←n.∆Vgap+↑{⍵.Size}↑n.∆buttons
+          :EndIf
+          width⌈←n.∆Hgap+1⊃+⌿⊃{⍵.(Posn Size)}↑⌽n.∆buttons
+      :EndIf
+      :If n.∆parms.hasStatusbar
+          height+←↑{⍵.Size}↑{list/⍨(⊂'StatusBar')≡¨{⍵.Type}¨list←⎕WN ⍵}n.∆Form
+      :EndIf
+      :If ⍬≢0⊃n.∆parms.size
+          height←n.∆parms.size[0]
+      :EndIf
+      :If ⍬≢1⊃n.∆parms.size
+          width←1⊃n.∆parms.size
+      :EndIf
+      width⌈←CalcSizeOfFormCaption n
+      2 ⎕NQ n.∆Form'Configure',(n.∆Form.Posn),(↑¨n.∆parms.minSize)⌈height,width
+      n.∆Form.Posn+←⌊(oldSize-n.∆Form.Size)÷2
+      :If 0<n.⎕NC'StatusField1'
+          n.StatusField1.Size[1]-←7   ⍝ Ensure left and right are the same
+      :EndIf
     ∇
 
     ∇ parms←HandleParmsDefaults(globalParms parms)
@@ -502,16 +504,16 @@
         ⍝ Make sure that pressing <tab> jumps in the right order.
         ⍝ This is important only when custom controls are added
         ⍝ to a form after the buttons have already been created.
-     list←⎕WN n.∆Form
-     list←(~list.Type∊'TabControl' 'MenuBar' 'TipField')/list
-     {}ReorderTabIndex_ list
-     :If ~0∊⍴n.∆GetRefs'TabControl'
-         :For thisTab :In ↑,/'SubForm'∘⎕WN¨'TabControl'⎕WN n.∆Form
-             list←⎕WN thisTab
-             list←(~list.Type∊'TabControl' 'MenuBar' 'TipField' 'Image')/list
-             {}ReorderTabIndex_ list
-         :EndFor
-     :EndIf
+      list←⎕WN n.∆Form
+      list←(~list.Type∊'TabControl' 'MenuBar' 'TipField')/list
+      {}ReorderTabIndex_ list
+      :If ~0∊⍴n.∆GetRefs'TabControl'
+          :For thisTab :In ↑,/'SubForm'∘⎕WN¨'TabControl'⎕WN n.∆Form
+              list←⎕WN thisTab
+              list←(~list.Type∊'TabControl' 'MenuBar' 'TipField' 'Image')/list
+              {}ReorderTabIndex_ list
+          :EndFor
+      :EndIf
           ⍝Done
     ∇
 
@@ -535,26 +537,26 @@
             ⍝ In case buttons are supposed to be centered or aligned to the right we need to
             ⍝ take action. This function must be called after the form got the right size.
             ⍝ The optional left argument can be one of #.GUI.Enums.Align.*
-     al←##.Enums.Align
-     :If 0=⎕NC'align'
-         align←n.∆globalParms.alignButtons{0∊⍴⍵:⍺ ⋄ ⍵}n.∆parms.alignButtons
-     :EndIf
-     :Select align
-     :Case al.Right
-         btnSizes←n.∆Hgap+1⊃¨n.∆buttons.Size
-         n.∆buttons.Posn←(↑¨n.∆buttons.Posn),¨n.∆Form.Size[1]-⌽+\btnSizes
-         n.∆buttons.Attach←⊂4⍴'Bottom' 'Right'
-     :Case al.Center
-         btnSizes←,1⊃¨n.∆buttons.Size
-         need←n.∆Vgap{+/⍵,(¯1+⍴⍵)⍴⍺}btnSizes
-         newPosn1←(⌊0.5×n.∆Form.Size[1]-need)
-         n.∆buttons.Posn←(⍴n.∆buttons.Posn)⍴(↑¨,n.∆buttons.Posn),¨,(⍴n.∆buttons)⍴newPosn1+0,¯1↓+\btnSizes+n.∆Vgap
-         n.∆buttons.Attach←⊂4⍴'Bottom' 'Right'
-     :Case al.Left
+      al←##.Enums.Align
+      :If 0=⎕NC'align'
+          align←n.∆globalParms.alignButtons{0∊⍴⍵:⍺ ⋄ ⍵}n.∆parms.alignButtons
+      :EndIf
+      :Select align
+      :Case al.Right
+          btnSizes←n.∆Hgap+1⊃¨n.∆buttons.Size
+          n.∆buttons.Posn←(↑¨n.∆buttons.Posn),¨n.∆Form.Size[1]-⌽+\btnSizes
+          n.∆buttons.Attach←⊂4⍴'Bottom' 'Right'
+      :Case al.Center
+          btnSizes←,1⊃¨n.∆buttons.Size
+          need←n.∆Vgap{+/⍵,(¯1+⍴⍵)⍴⍺}btnSizes
+          newPosn1←(⌊0.5×n.∆Form.Size[1]-need)
+          n.∆buttons.Posn←(⍴n.∆buttons.Posn)⍴(↑¨,n.∆buttons.Posn),¨,(⍴n.∆buttons)⍴newPosn1+0,¯1↓+\btnSizes+n.∆Vgap
+          n.∆buttons.Attach←⊂4⍴'Bottom' 'Right'
+      :Case al.Left
                  ⍝ This case is already handled because it is the default
-     :Else
-         . ⍝ Huuh?!
-     :EndSelect
+      :Else
+          . ⍝ Huuh?!
+      :EndSelect
     ∇
 
       GetFontStandard←{
@@ -605,13 +607,13 @@
       :EndIf
     ∇
 
- GetMenubarHeight←{
+      GetMenubarHeight←{
       ⍝ Returns the height of the menubar or, if there is no menubar, zero.
       ⍝ Typically used to correct size/posn of Forms that do have a menubar.
-     n←⍵
-     0∊⍴'Menubar'⎕WN n.∆Form:0
-     RefToWinSys.(GetSystemMetrics SM_CYMENU)
- }
+          n←⍵
+          0∊⍴'Menubar'⎕WN n.∆Form:0
+          RefToWinSys.(GetSystemMetrics SM_CYMENU)
+      }
 
       CheckUserCallback_←{
       ⍝ ⍺: name of the event (help, okay,...)
@@ -664,14 +666,14 @@
       :EndIf
     ∇
 
- CalcSizeOfFormCaption←{
+      CalcSizeOfFormCaption←{
       ⍝ The name says it all but see also the comment in ##.Enums.Globals.AddToCaptionWidth
-     n←⍵
-     buff←##.##.WinSys.GetFormCaptionFontInfo
-     ns←⎕NS''
-     font←ns.⎕NEW'Font'(('Size'(|buff[0]))('Weight'(buff[4])))
-     ##.Enums.Globals.AddToCaptionWidth+1⊃n.∆Form.GetTextSize n.∆Form.Caption font
- }
+          n←⍵
+          buff←##.##.WinSys.GetFormCaptionFontInfo
+          ns←⎕NS''
+          font←ns.⎕NEW'Font'(('Size'(|buff[0]))('Weight'(buff[4])))
+          ##.Enums.Globals.AddToCaptionWidth+1⊃n.∆Form.GetTextSize n.∆Form.Caption font
+      }
 
     ∇ parms←CheckParmsForProgressbarAndStatusbar parms
       :If 0<parms.⎕NC'timeout'

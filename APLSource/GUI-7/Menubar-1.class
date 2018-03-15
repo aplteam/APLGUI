@@ -7,7 +7,7 @@
 ⍝ Note that this class does not need to be instanciated.\\
 ⍝ Copyright: Kai Jaeger ⋄ APL Team Ltd ⋄ http://aplteam.com\\
 
-    :Include ##.APLTreeUtils
+    :Include ##.##.APLTreeUtils
     :Include APLGuiUtils
 
     (⎕IO ⎕ML)←0 3
@@ -344,3 +344,4 @@
     ∇
 
 :Endclass
+

@@ -14,7 +14,7 @@
 ⍝
 ⍝ Author: Kai Jaeger ⋄ Copyright: APL Team Ltd
 
-    :Include ##.APLTreeUtils
+    :Include ##.##.APLTreeUtils
     :Include APLGuiUtils
 
     ⎕IO←0 ⋄ ⎕ML←3
@@ -845,30 +845,30 @@
       UndoRedo←{⎕ML←1                     ⍝ Derive undo/redo function. Taken from John Schole's dfns workspace and modified (pick added)
           ⍺←⊢                             ⍝ default: commit values.
           1≡⍺ 1:⍺⍺.(redo undo←⍬(⍵ undo))  ⍝ monadic commit: push new history record.
-
+     
           '!'≡⍺:⍺⍺.(redo undo←⊂⍬)         ⍝ initialize history stacks.
-
+     
           '?'≡⍺:0{                        ⍝ size of redo and undo stacks.
               ⍵≡⍬:⍺                       ⍝ empty: 0
               (⍺+1)∇⊃⌽⍵                   ⍝ otherwise: 1+length of tail.
           }¨⍺⍺.(redo undo)                ⍝ accumulates stack size in ⍺.
-
+     
           '<'≡⍺:⍺⍺{                       ⍝ undo:
               ⍬≡⍺.undo:⍵                  ⍝ no more undo: state unchanged.
               ⍺.(redo←⍵ redo)             ⍝ push current state on redo stack.
               ⊃last ⍺.undo←⍺.undo         ⍝ pop undo stack.
           }⍵
-
+     
           '⊃'≡⍺:⍺⍺{                       ⍝ pick: return latest redo/undo (or ⍬)
               (⍺{⍬≡⍺.redo:⍵ ⋄ ⊃⍺.redo}⍵)(⍺{⍬≡⍺.undo:⍵ ⋄ ⊃⍺.undo}⍵)
           }⍵
-
+     
           '>'≡⍺:⍺⍺{                       ⍝ redo:
               ⍬≡⍺.redo:⍵                  ⍝ no more redo: state unchanged.
               ⍺.(undo←⍵ undo)             ⍝ push current state on undo stack.
               ⊃next ⍺.redo←⍺.redo         ⍝ pop redo stack.
           }⍵
-
+     
           '↑'≡⍺:⍺⍺.undo←⍵{                ⍝ truncate undo stack to ⍵ items.
               ⍺=0:⍬                       ⍝ 0 items: empty stack.
               head tail←⍵                 ⍝ first and remaining items.
@@ -901,3 +901,4 @@
     :endSection
 
 :EndClass
+

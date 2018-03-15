@@ -24,7 +24,7 @@
 ⍝ be replaced by a `SelectFile` class one day.\\
 ⍝ Author: Kai Jaeger ⋄ APL Team Ltd.
 
-    :Include ##.APLTreeUtils
+    :Include ##.##.APLTreeUtils
     :Include APLGuiUtils
 
     ∇ n←{x}Create path;globalParms;parms;n;caption;∆
@@ -44,7 +44,7 @@
       ∆,←⊂'FileMode'parms.fileMode
       path←↑⎕NPARTS path
       ((path='/')/path)←'\'
-      ∆,←⊂'Directory' path
+      ∆,←⊂'Directory'path
       :If 0∊⍴parms.file
           ∆,←⊂'File'(↑,/1↓⎕NPARTS path)
       :Else
@@ -128,3 +128,4 @@
       }
 
 :EndClass
+

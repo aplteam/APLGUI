@@ -17,7 +17,7 @@
 ⍝ own independent keycodes while slash, minus and <Enter> don't.\\
 ⍝ Kai Jaeger ⋄ APL Team Ltd\\
 
-    :Include ##.APLTreeUtils
+    :Include ##.##.APLTreeUtils
     :Include APLGuiUtils
 
     ⎕IO←0 ⋄ ⎕ML←3
@@ -87,31 +87,31 @@
 
     ∇ r←CreateNames
       r←''
-
+     
       r,←⊂'enter' 13
       r,←⊂'escape' 27
       r,←⊂'backspace' 8
       r,←⊂'tab' 9
       r,←⊂'space' 32
       r,←⊂'contextmenuhotkey' 93
-
+     
       r,←⊂'ins' 45
       r,←⊂'home' 36
       r,←⊂'pgup' 33
       r,←⊂'del' 46
       r,←⊂'end' 35
       r,←⊂'pgdn' 34
-
+     
       r,←⊂'left' 37
       r,←⊂'right' 39
       r,←⊂'up' 38
       r,←⊂'down' 40
-
+     
       r,←⊂'cursorright' 39
       r,←⊂'cursorleft' 37
       r,←⊂'cursordown' 40
       r,←⊂'cursorup' 38
-
+     
       r,←⊂'f01' 112
       r,←⊂'f02' 113
       r,←⊂'f03' 114
@@ -124,7 +124,7 @@
       r,←⊂'f10' 121
       r,←⊂'f11' 122
       r,←⊂'f12' 123
-
+     
       r,←⊂'a' 65
       r,←⊂'b' 66
       r,←⊂'c' 67
@@ -151,7 +151,7 @@
       r,←⊂'x' 88
       r,←⊂'y' 89
       r,←⊂'z' 90
-
+     
       r,←⊂'0' 48
       r,←⊂'1' 49
       r,←⊂'2' 50
@@ -162,7 +162,7 @@
       r,←⊂'7' 55
       r,←⊂'8' 56
       r,←⊂'9' 57
-
+     
       r,←⊂'-' 189
       r,←⊂'+' 107
       r,←⊂'*' 106
@@ -176,7 +176,7 @@
       r,←⊂'[' 219
       r,←⊂']' 221
       r,←⊂'`' 223
-
+     
       r←↓⍉⊃r
       (0⊃r)←,¨(0⊃r)
     ∇
@@ -190,3 +190,4 @@
     ∇
 
 :EndClass
+
