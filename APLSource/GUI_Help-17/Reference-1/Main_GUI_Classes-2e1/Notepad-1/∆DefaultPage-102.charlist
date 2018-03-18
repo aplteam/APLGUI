@@ -31,7 +31,7 @@ cover function for `Notepad`.
 For implementation details execute:
 
 ~~~
-]ADOC.Browse #.GUI.Notepad
+]ADOC #.GUI.Notepad
 ~~~
 
 What is →[*.ADOC]?

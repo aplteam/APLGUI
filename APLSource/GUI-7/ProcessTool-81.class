@@ -122,7 +122,7 @@
       r.ctrlEnter←0
       r.data←⍬
       r.debug←1
-      r.default←¯1
+      r.default←¯1   ⍝ Must be Boolean in the end
       r.dblClick←0
       r.(fontAPL fontInput fontLabel fontStandard)←⊂''
       r.hasStatusbar←1

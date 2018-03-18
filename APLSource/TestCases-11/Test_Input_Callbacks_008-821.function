@@ -10,6 +10,7 @@
  #.TEMP.flag←0
  #.TEMP.OnInitial←{
      n←⍵
+     ⎕IO←0 ⋄ ⎕ML←3
      n.RegEx.Posn[0]←n.∆Vgap+↑+⌿⊃n.Search_for.(Posn Size)
      n.Case_sensitive.Posn[0]←n.∆Vgap+↑+⌿⊃n.RegEx.(Posn Size)
      ⍬

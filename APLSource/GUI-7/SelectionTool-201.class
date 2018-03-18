@@ -257,7 +257,7 @@
       :EndIf
       :If n.List.CheckBoxes
           :If {(0∊⍴⍵):0 ⋄ 0<+/⍵}ind←parms.default
-              :If ~0∊⍴ind←Where ind
+              :If ~0∊⍴ind←1+Where ind
                   {n.List.SetItemState ⍵ 4096}¨ind
                   n.List.SelItems[0]←1
                   {}SetFocusTo n.List(¯1↑Where parms.default)

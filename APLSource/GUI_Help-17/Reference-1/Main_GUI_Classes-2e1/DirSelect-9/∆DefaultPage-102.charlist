@@ -11,7 +11,7 @@ There are several parameters available that you may set in order to make `DirSel
 For implementation details execute:
 
 ~~~
-      ]ADOC.Browse #.GUI.Dialogs
+      ]ADOC #.GUI.Dialogs
 ~~~
 
 What is →[*.ADOC]?

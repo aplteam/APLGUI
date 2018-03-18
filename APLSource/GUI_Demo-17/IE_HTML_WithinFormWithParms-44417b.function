@@ -26,6 +26,7 @@
 
  code←''
  code,←⊂'{r}←n OnNavigate page;i'
+ code,←⊂'⎕IO←0 ⋄ ⎕ML←3'
  code,←⊂' r←1'
  code,←⊂' i←''home'' ''first'' ''second''⍳⊂page'
  code,←⊂' :If 3>i'

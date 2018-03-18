@@ -63,7 +63,7 @@ Notes:
 For implementation details execute:
 
 ~~~
-     ]ADOC.Browse #.GUI.Menubar
+     ]ADOC #.GUI.Menubar
 ~~~
 
 What is →[*.ADOC]?

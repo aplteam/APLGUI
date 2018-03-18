@@ -240,7 +240,7 @@
       r.(fontAPL fontInput fontLabel fontStandard)←⊂''
       r.hasHelpBtn←0
       r.hasProgressbar←0
-      r.hasStatusbar←0
+      r.hasStatusbar←1
       r.helpBtnCaption←'Help'
       r.helpKey←'F1'
       r.hGap←¯1

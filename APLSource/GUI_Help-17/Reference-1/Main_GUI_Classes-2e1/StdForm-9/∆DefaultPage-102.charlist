@@ -15,7 +15,7 @@ Default appearance and behaviour can be changed of course.
 For implementation details execute:
 
 ~~~
-]ADOC.Browse #.GUI.StdForm
+]ADOC #.GUI.StdForm
 ~~~
 
 What is →[*.ADOC]?

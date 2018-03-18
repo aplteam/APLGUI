@@ -8,7 +8,7 @@ The list should not be long: it's not scrollable. For selections from long lists
 For implementation details execute:
 
 ~~~
-]ADOC.Browse #.GUI.OptionsTool
+]ADOC #.GUI.OptionsTool
 ~~~
 
 What is →[*.ADOC]

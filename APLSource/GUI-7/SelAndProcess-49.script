@@ -17,6 +17,7 @@
       CheckParms←{
           parms←⍵
           1<≡parms.info:'Invalid: "info"; must not be nested'⎕SIGNAL 11
+          (¯1≢parms.default)∧~∧/parms.default∊0 1:'Invalid: "default"; must be Boolean'⎕SIGNAL 11
           parms
       }
 
@@ -38,17 +39,17 @@
       :EndIf
     ∇
 
- CreateInfo←{
-     n←⍺
-     info←⍵
-     ∆←''
-     ∆,←⊂'Caption'info
-     ∆,←⊂'Posn'n.(∆initialVgap ∆Hgap)
-     ∆,←⊂'Size'((0∊⍴info)⊃(⍬(1⊃n.∆Form.GetTextSize'W',info,'W'))(0 0))
-     ∆,←⊂'Attach'(4⍴'Top' 'Left')
-     n.Info←n.∆Form.⎕NEW'Label'∆
-     n
- }
+      CreateInfo←{
+          n←⍺
+          info←⍵
+          ∆←''
+          ∆,←⊂'Caption'info
+          ∆,←⊂'Posn'n.(∆initialVgap ∆Hgap)
+          ∆,←⊂'Size'((0∊⍴info)⊃(⍬(1⊃n.∆Form.GetTextSize'W',info,'W'))(0 0))
+          ∆,←⊂'Attach'(4⍴'Top' 'Left')
+          n.Info←n.∆Form.⎕NEW'Label'∆
+          n
+      }
 
       GetPosnOfList←{
           parms←⍵
@@ -58,35 +59,35 @@
 
     ∇ {r}←AdjustSizeAndPosn n;needed;corr;posn
         ⍝ Adjusts the size and -if needed- the Posn of the form.
-     r←⍬
-     needed←95 CalcNeededSize n
-     corr←##.APLGuiUtils.RefToWinSys.(+/GetSystemMetrics¨SM_CYMENU SM_CYCAPTION) ⍝ Menu height + caption height
-     needed[0]+←corr
-     posn←n.∆Form.Posn
-     :If ~0∊⍴↑n.∆parms.posn[0]
-         posn[0]←n.∆parms.posn[0]
-     :EndIf
-     :If ~0∊⍴↑n.∆parms.posn[1]
-         posn[1]←n.∆parms.posn[1]
-     :EndIf
-     needed[0]←(~0∊⍴↑n.∆parms.size[0])⊃0⊃¨needed n.∆parms.size
-     needed[1]←(~0∊⍴↑n.∆parms.size[1])⊃1⊃¨needed n.∆parms.size
-     :If ~0∊⍴↑n.∆parms.minSize[0]
-         needed[0]⌈←n.∆parms.minSize[0]
-     :EndIf
-     :If ~0∊⍴↑n.∆parms.minSize[1]
-         needed[1]⌈←n.∆parms.minSize[1]
-     :EndIf
-     :If ~0∊⍴↑n.∆parms.posn[1]
-         posn[1]←n.∆parms.posn[1]
-     :EndIf
-     :If 0∊⍴↑n.∆parms.posn[0]
-         posn[0]+←0⊃⌊0.5×n.∆Form.Size-needed
-     :EndIf
-     :If 0∊⍴↑n.∆parms.posn[1]
-         posn[1]+←1⊃⌊0.5×n.∆Form.Size-needed
-     :EndIf
-     {}2 ⎕NQ n.∆Form'Configure',posn,needed
+      r←⍬
+      needed←95 CalcNeededSize n
+      corr←##.APLGuiUtils.RefToWinSys.(+/GetSystemMetrics¨SM_CYMENU SM_CYCAPTION) ⍝ Menu height + caption height
+      needed[0]+←corr
+      posn←n.∆Form.Posn
+      :If ~0∊⍴↑n.∆parms.posn[0]
+          posn[0]←n.∆parms.posn[0]
+      :EndIf
+      :If ~0∊⍴↑n.∆parms.posn[1]
+          posn[1]←n.∆parms.posn[1]
+      :EndIf
+      needed[0]←(~0∊⍴↑n.∆parms.size[0])⊃0⊃¨needed n.∆parms.size
+      needed[1]←(~0∊⍴↑n.∆parms.size[1])⊃1⊃¨needed n.∆parms.size
+      :If ~0∊⍴↑n.∆parms.minSize[0]
+          needed[0]⌈←n.∆parms.minSize[0]
+      :EndIf
+      :If ~0∊⍴↑n.∆parms.minSize[1]
+          needed[1]⌈←n.∆parms.minSize[1]
+      :EndIf
+      :If ~0∊⍴↑n.∆parms.posn[1]
+          posn[1]←n.∆parms.posn[1]
+      :EndIf
+      :If 0∊⍴↑n.∆parms.posn[0]
+          posn[0]+←0⊃⌊0.5×n.∆Form.Size-needed
+      :EndIf
+      :If 0∊⍴↑n.∆parms.posn[1]
+          posn[1]+←1⊃⌊0.5×n.∆Form.Size-needed
+      :EndIf
+      {}2 ⎕NQ n.∆Form'Configure',posn,needed
     ∇
 
       SetFocusTo←{
@@ -155,42 +156,42 @@
         ⍝ a form got created. Purpose is to avoid monster forms to be
         ⍝ created on very large monitors. Later the user might actually ask
         ⍝ for a monster form, so we allow this then.
-     fac←1+⍴n.List.Items
-     lineHeight←GetListViewItemHeight n.List
-     height←5+n.List.Posn[0]+fac×lineHeight
-     height+←(4+lineHeight)×~0∊⍴n.∆parms.colTitles
-     :If 0∊⍴n.List.ReportInfo
-         width←⌈/1⊃¨n.List.GetTextSize¨n.List.Items
-     :Else
-         buf←1⊃n.List.GetTextSize(4+⌈/↑∘⍴¨n.List.Items)⍴'W'
-         buf+←1⊃n.List.GetTextSize({+/(2+⍴⍵)+⍵}↑¨⌈⌿⍴¨n.List.ReportInfo)⍴'W'
-         width←buf
-     :EndIf
-     width⌈←n.∆Hgap+1⊃↑+/↑¯1↑n.∆buttons.(Posn Size)      ⍝ Take right-most button into account
-     width⌈←n.Info.Size[1]+2×n.∆Hgap                     ⍝ Take the "Info" field into account
-     corr←##.APLGuiUtils.RefToWinSys.(GetSystemMetrics SM_CYCAPTION)
-     corr+←##.APLGuiUtils.RefToWinSys.(GetSystemMetrics SM_CYMENU)
-     height+←corr
-     height+←n.Btn_00.Size[0]
-     width+←30×n.List.CheckBoxes
-     fntObj←⎕NEW'Font'((⊂¨'PName' 'Weight' 'Size'),¨⊂∘{(' '=1↑0⍴⍵):⍵~⎕UCS 0 ⋄ |⍵}¨##.APLGuiUtils.RefToWinSys.GetFormCaptionFontInfo[13 4 0])
-     btns←##.APLGuiUtils.RefToWinSys.(GetSystemMetrics SM_CXICON)×1+n.∆Form.(SysMenu+MaxButton+MinButton)
-     width⌈←btns+1⊃n.∆Form.GetTextSize n.∆Form.Caption fntObj
-     width⌈←##.APLGuiUtils.CalcSizeOfFormCaption n
-     available←##.APLGuiHelpers.MonitorEstate
-     :If height>available[0]
-         height←available[0]           ⍝ But not more than the size of the screen
-     :EndIf
-     :If width>available[1]
-         width←available[1]            ⍝ But not more than the size of the screen
-         height+←2+##.APLGuiUtils.RefToWinSys.(GetSystemMetrics SM_CXVSCROLL)
-     :EndIf
-     size←height,width
-     :If 0<⎕NC'maxPercentage'
-         size⌊←⌊(0.01×maxPercentage)×##.APLGuiHelpers.ScreenEstate-corr
-     :EndIf
-     size←n.∆parms.size{(0∊⍴⍺):⍵ ⋄ ⍺}¨size
-     size←n.∆parms.minSize{(0∊⍴⍺):⍵ ⋄ ⍺⌈⍵}¨size
+      fac←1+⍴n.List.Items
+      lineHeight←GetListViewItemHeight n.List
+      height←5+n.List.Posn[0]+fac×lineHeight
+      height+←(4+lineHeight)×~0∊⍴n.∆parms.colTitles
+      :If 0∊⍴n.List.ReportInfo
+          width←⌈/1⊃¨n.List.GetTextSize¨n.List.Items
+      :Else
+          buf←1⊃n.List.GetTextSize(4+⌈/↑∘⍴¨n.List.Items)⍴'W'
+          buf+←1⊃n.List.GetTextSize({+/(2+⍴⍵)+⍵}↑¨⌈⌿⍴¨n.List.ReportInfo)⍴'W'
+          width←buf
+      :EndIf
+      width⌈←n.∆Hgap+1⊃↑+/↑¯1↑n.∆buttons.(Posn Size)      ⍝ Take right-most button into account
+      width⌈←n.Info.Size[1]+2×n.∆Hgap                     ⍝ Take the "Info" field into account
+      corr←##.APLGuiUtils.RefToWinSys.(GetSystemMetrics SM_CYCAPTION)
+      corr+←##.APLGuiUtils.RefToWinSys.(GetSystemMetrics SM_CYMENU)
+      height+←corr
+      height+←n.Btn_00.Size[0]
+      width+←30×n.List.CheckBoxes
+      fntObj←⎕NEW'Font'((⊂¨'PName' 'Weight' 'Size'),¨⊂∘{(' '=1↑0⍴⍵):⍵~⎕UCS 0 ⋄ |⍵}¨##.APLGuiUtils.RefToWinSys.GetFormCaptionFontInfo[13 4 0])
+      btns←##.APLGuiUtils.RefToWinSys.(GetSystemMetrics SM_CXICON)×1+n.∆Form.(SysMenu+MaxButton+MinButton)
+      width⌈←btns+1⊃n.∆Form.GetTextSize n.∆Form.Caption fntObj
+      width⌈←##.APLGuiUtils.CalcSizeOfFormCaption n
+      available←##.APLGuiHelpers.MonitorEstate
+      :If height>available[0]
+          height←available[0]           ⍝ But not more than the size of the screen
+      :EndIf
+      :If width>available[1]
+          width←available[1]            ⍝ But not more than the size of the screen
+          height+←2+##.APLGuiUtils.RefToWinSys.(GetSystemMetrics SM_CXVSCROLL)
+      :EndIf
+      size←height,width
+      :If 0<⎕NC'maxPercentage'
+          size⌊←⌊(0.01×maxPercentage)×##.APLGuiHelpers.ScreenEstate-corr
+      :EndIf
+      size←n.∆parms.size{(0∊⍴⍺):⍵ ⋄ ⍺}¨size
+      size←n.∆parms.minSize{(0∊⍴⍺):⍵ ⋄ ⍺⌈⍵}¨size
     ∇
 
     ∇ {r}←OnColumnClick msg;rf;colNo;mb;ss;bool;vals;isNum;ind;data;n;sel;ci;nci
@@ -248,11 +249,11 @@
       rf.∆orderedBy[0]←colNo
     ∇
 
- OnClose←{
-     n←##.APLGuiUtils.GetRefTo_n 0⊃⍵
-     _←##.APLGuiHelpers.SavePosnAndSizeInRegistry n
-     ⊢n.∆Form.∆closed←1
- }
+      OnClose←{
+          n←##.APLGuiUtils.GetRefTo_n 0⊃⍵
+          _←##.APLGuiHelpers.SavePosnAndSizeInRegistry n
+          ⊢n.∆Form.∆closed←1
+      }
 
     ∇ {r}←n SelectItems bool;b;ci
       r←⍬
@@ -354,15 +355,15 @@
     ∇
 
     ∇ r←CalcSizeOfListView(n posn);height
-     r←n.∆Form.Size
+      r←n.∆Form.Size
           ⍝ Start of list control + size of statusbar + size of button + two vGaps:
-     :If 0=n.⎕NC'Statusbar'
-         height←0
-     :Else
-         height←n.Statusbar.Size[0]
-     :EndIf
-     r[0]-←posn[0]+height+n.(∆Vgap+∆initialVgap)+0⊃↑n.∆buttons.Size
-     r[1]-←n.∆Hgap×2     ⍝ Left and right gaps
+      :If 0=n.⎕NC'Statusbar'
+          height←0
+      :Else
+          height←n.Statusbar.Size[0]
+      :EndIf
+      r[0]-←posn[0]+height+n.(∆Vgap+∆initialVgap)+0⊃↑n.∆buttons.Size
+      r[1]-←n.∆Hgap×2     ⍝ Left and right gaps
     ∇
 
 :EndNamespace

@@ -1,5 +1,5 @@
  r←Test_SelectionTool_020(stopFlag batchFlag);⎕TRAP;parms;data;rf;n
-⍝ Exercise "SelectionTool" with `parent.
+⍝ Exercise "SelectionTool" with `parent`.
  r←∆Failed
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
 

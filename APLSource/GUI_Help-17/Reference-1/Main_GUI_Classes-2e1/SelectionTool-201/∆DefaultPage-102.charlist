@@ -13,7 +13,7 @@ moment the users presses the "OK" button: this might differ in case the user has
 For implementation details execute:
 
 ~~~
-]ADOC.Browse #.GUI.SelectionTool
+]ADOC #.GUI.SelectionTool
 ~~~
 
 What is →[*.ADOC]

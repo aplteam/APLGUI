@@ -33,6 +33,7 @@
       (globalParms parms)←CreateParms GetParms x
       parms←CheckParmsForProgressbarAndStatusbar parms
       'Invalid: style'⎕SIGNAL APLGuiError/⍨~(⊂Lowercase parms.style)∊##.Enums.OptionsStyles.(radio check)
+      'Invalid: "default"; must be Boolean'⎕signal 11/⍨(¯1≢parms.default)∧~∧/(parms.default)∊0 1
       parms2←CopyNamespace parms
       parms2.(fontAPL fontInput fontLabel fontStandard)←parms.(fontAPL fontInput fontLabel fontStandard)
       parms2.(sysMenu maxButton minButton sizeable)←1
@@ -68,7 +69,7 @@
     ⍝ | `autoPress`        | Defines the button that is clicked in test mode (`0`=OK, `1`=Cancel, `3`=Help, `¯1`=no button at all).|
     ⍝ | `caption`          | This overwrites any setting of "caption" in the global parameter set.|
     ⍝ | `centerIn`         | A form the new form shall be centered in.|
-    ⍝ | `default`          | Which items shall be preselected from the start. Boolean or Integer(s).|
+    ⍝ | `default`          | Which items shall be preselected from the start. Must be Boolean.|
     ⍝ | `destroyAutoPressTimerHotKey` | Which key allows the user to stop the timer. Defaults to F12|
     ⍝ | `fontAPL`          | Font to be used for displaying APL code.|
     ⍝ | `fontInput`        | Font to be used for any input field.|

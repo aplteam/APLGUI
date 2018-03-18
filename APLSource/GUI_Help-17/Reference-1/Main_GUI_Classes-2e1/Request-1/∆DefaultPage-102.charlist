@@ -13,7 +13,7 @@ Those functions are called →[Modal_helpers|"Helpers"].
 For implementation details execute:
 
 ~~~
-]ADOC.Browse #.GUI.Request'
+]ADOC #.GUI.Request'
 ~~~
 
 What is →[*.ADOC]?

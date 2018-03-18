@@ -9,6 +9,7 @@
  'TEMP'#.⎕NS''
  #.TEMP.OnMyKeyPress←{
      n←⍺
+     ⎕IO←0 ⋄ ⎕ML←3
      msg←⍵
      key←2⊃msg
      1≠⍴,key:1

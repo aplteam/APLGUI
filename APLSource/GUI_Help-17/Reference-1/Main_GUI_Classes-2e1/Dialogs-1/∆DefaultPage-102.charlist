@@ -40,7 +40,7 @@ There are also `CreateParms`\* functions for all sorts of purposes of parameters
 For implementation details execute:
 
 ~~~
-      ]ADOC.Browse #.GUI.Dialogs
+      ]ADOC #.GUI.Dialogs
 ~~~
 
 What is →[*.ADOC]?

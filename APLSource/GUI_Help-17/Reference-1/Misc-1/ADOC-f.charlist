@@ -10,3 +10,11 @@ Wrong documentation however is worse than no documentation at all.
 
 `]ADOC` offers methods that extract information from classes, namespace scripts and
 interfaces. The implementor of a class can also add additional information by using markdown.
+
+Help on ADOC is  available via standard user command syntax:
+
+~~~
+]?ADOC     ⍝ Short overview
+]??ADOC    ⍝ Enough information to get you going
+]???ADOC   ⍝ ADOC on itself
+~~~

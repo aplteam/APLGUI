@@ -9,7 +9,7 @@ as all the `CreateParms`\* methods of the main classes will call `APLGuiParamete
 For details regarding `∆List` use:
 
 ~~~
-]ADOC.Browse APLGuiParameterSpace
+]ADOC APLGuiParameterSpace
 ~~~
 
 What is →[*.ADOC]?

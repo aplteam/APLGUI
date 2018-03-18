@@ -68,7 +68,7 @@ which would (without that additional empty column) lead to an unnecessary scroll
 For implementation details execute:
 
 ~~~
-]ADOC.Browse #.GUI.ProcessTool
+]ADOC #.GUI.ProcessTool
 ~~~
 
 What is →[*.ADOC]?
