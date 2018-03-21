@@ -1,10 +1,13 @@
 :Namespace APLGuiAdmin
 
     ∇ r←Version
-      r←(⍕⎕THIS.##)'0.12.0' '2018-03-16'
+      r←(⍕⎕THIS.##)'0.13.0' '2018-03-21'
     ∇
 
     ∇ r←History
+      ⍝ * 0.13.0
+      ⍝   * In `SelectOptions` using the space key for toggling check boxes did not work (anymore). This is due to
+      ⍝     a `⎕IO` dependency which in turn is a Dyalog bug. Se <01464>. Workaround (using 2 ⎕NQ) implemented.
       ⍝ * 0.12.0
       ⍝   * Again `⎕IO` and `⎕ML.
       ⍝ * 0.11.0
@@ -47,91 +50,6 @@
       ⍝ `Notepad` Now has a "Find" feature.
       ⍝ 0.9.0:
       ⍝ `Notepad` may now have a user-defined menu.
-      ⍝ 0.8.0:
-      ⍝ * `ProcessTool` now returns the current selection.
-      ⍝ * `ProcessTool` will now honour a user-defined callback "onQuit".
-      ⍝ 0.7.5:
-      ⍝ * `OptionsTool` does find a callback in the caller's space. (Other's should manage as well!)
-      ⍝ * `Table` removed from #.GUI.APLGuiAdmin.ListMainClasses.
-      ⍝ * `OptionsTool` did not supported multiple "info" lines.
-      ⍝ * `Busy`'s "auto" renamed into "wrap".
-      ⍝ * `Busy` did not show "caption".
-      ⍝ * `Busy` documentation improved.
-      ⍝ * "&" in an `Input` definition matrix might be part of the name now.
-      ⍝ * Help improved.
-      ⍝ * `Busy.OnProcess` could fail with a VALUE ERROR under rare circumstances.
-      ⍝ * `Wait` is buggy! All calls replaced by calls to ⎕DQ.
-      ⍝ * `Busy.Close` did not kill off the thread the instance was running in.
-      ⍝ 0.7.4:
-      ⍝ * "parent" removed from several classes: not really needed.
-      ⍝ * ...
-      ⍝ 0.7.3:
-      ⍝ Bug fixes:
-      ⍝ * Copying a namespace with `⎕NS parms` will fail when `parms` contains a reference, and that CAN happen.
-      ⍝ * "DropEdit" is not suitable for numeric lists but was used for that in #.GUI_Demo.InputComplex
-      ⍝ * External links in `IE` did not work.
-      ⍝ 0.7.2:
-      ⍝ Bug fix: "Time" in "Input" (Timestamp) was wronlgy handled.
-      ⍝ 0.7.1:
-      ⍝ Some minor bugs fixed.
-      ⍝ 0.7.0:
-      ⍝ Cleaning up, bug fixes
-      ⍝ 0.6.0:
-      ⍝ * Bug fixes, plenty actually.
-      ⍝ * Started to implement the Grid but it's not ready yet. Not anywhere near.
-      ⍝ **********************************************************************************************************
-      ⍝ * This is the last version with improved functionality. Form now it's all about debugging and reviewing. *
-      ⍝ **********************************************************************************************************
-      ⍝ 0.5.0:
-      ⍝ * Help improved.
-      ⍝ * Plenty of test cases added, in particular regarding `Input`.
-      ⍝ 0.4.0:
-      ⍝ `Input` implemented
-      ⍝ 0.3.1:
-      ⍝ The "Abort" button in `Busy` caused problem when threads were involved. Fixed now.
-      ⍝ 0.3.0:
-      ⍝ * New class `Busy` added.
-      ⍝ * Buttons can now be aligned the to right or centered via the "alignButtons" parameter.
-      ⍝ 0.2.0:
-      ⍝ * New class `Table` added.
-      ⍝ 0.1.1:
-      ⍝ * Bug fix in OptionsTool: requird "default" with check boxes - it shouldn't.
-      ⍝ 0.1.0:
-      ⍝ * New class IE (for Internet Explorer)
-      ⍝ 0.0.16:
-      ⍝ * Alt+F4 in Notepad stopped working wih version 0.0.14.
-      ⍝ * Font in Notepad was sometimes incorrect with aplMode←1
-      ⍝ 0.0.15:
-      ⍝ * All Enums moved to (newly introduced) namespace "Enums".
-      ⍝ 0.0.14:
-      ⍝ * Notepad tidied up
-      ⍝ * Test cases added / improved.
-      ⍝ 0.0.13:
-      ⍝ Notepad did not save n.∆result
-      ⍝ 0.0.12:
-      ⍝ * Several of bug fixes
-      ⍝ 0.0.11:
-      ⍝ * ProcessTool now allows the callback to be created on the fly. With test case.
-      ⍝ 0.0.10:
-      ⍝ * New global parameter "developmentMode" introduced.
-      ⍝ * `Menubar` now offers a "Developers" menus that allows editing callbacks when
-      ⍝   in development mode.
-      ⍝ * So does `ProcessTool`.
-      ⍝ 0.0.9:
-      ⍝ * sysMenu, maxButton, minButton and sizeable removed from the global parameters.
-      ⍝ 0.0.8:
-      ⍝ * Double-click in a SelectionTool list crashed.
-      ⍝ * `⎕DF` of StdForm now uses "caption" fomr the global parms in case "addToCaption" is empty.
-      ⍝ * StdForm did not re-establish Posn and Size from Registry
-      ⍝ * Testcases added for size calculation with #.GUI.SelAndProcess.CalcNeededSize.
-      ⍝ 0.0.7:
-      ⍝ * SelectionTool & ProcessTool still did not always calculate their size correctly.
-      ⍝ 0.0.6:
-      ⍝ * SelectionTool had a problem with processing parms & globalParms.
-      ⍝ * SelectionTool & ProcessTool did not always calculate their size correctly.
-      ⍝ * Setting fontInput for SelectionTool had no effect.
-      ⍝ 0.0.5:
-      ⍝ * TabIndex on buttons fixed.
     ∇
 
     ∇ {(report rc)}←CheckOtherRequirements compileFlag

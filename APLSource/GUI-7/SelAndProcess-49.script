@@ -290,7 +290,7 @@
               :Else
                   b[1]←~b[1]                ⍝ SelItem
               :EndIf
-              rf.SetItemState(ci)(Power2 b)
+              2 ⎕NQ rf'SetItemState'(ci)(Power2 b)  ⍝ Don't call the method: bug 10925
           :EndIf
       :Else
           rf.SelItems[ci]←~rf.SelItems[ci]
