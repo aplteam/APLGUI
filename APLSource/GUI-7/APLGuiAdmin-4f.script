@@ -1,10 +1,13 @@
 :Namespace APLGuiAdmin
 
     ∇ r←Version
-      r←(⍕⎕THIS.##)'0.13.0' '2018-03-21'
+      r←(⍕⎕THIS.##)'0.14.0' '2018-03-30'
     ∇
 
     ∇ r←History
+      ⍝ * 0.14.0
+      ⍝   * `FileBox` selected the second filter as the default.
+      ⍝   * `FileBox` had no `index` parameter.
       ⍝ * 0.13.0
       ⍝   * In `SelectOptions` using the space key for toggling check boxes did not work (anymore). This is due to
       ⍝     a `⎕IO` dependency which in turn is a Dyalog bug. Se <01464>. Workaround (using 2 ⎕NQ) implemented.

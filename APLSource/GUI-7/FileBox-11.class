@@ -42,6 +42,7 @@
       ∆,←⊂'Style'parms.style
       ∆,←⊂'Filters'parms.filters
       ∆,←⊂'FileMode'parms.fileMode
+      ∆,←⊂'Index'(parms.index-1)
       path←↑⎕NPARTS path
       ((path='/')/path)←'\'
       ∆,←⊂'Directory'path
@@ -74,6 +75,7 @@
     ⍝ | `file`         | Default is '' | Use this to pre-define the name of the file.|
     ⍝ | `fileMode`     | Is one of `Enums.FileModes`, "Read" being the default. |
     ⍝ | `filters`      | Defaults to `⊂'*.*' 'All Files (*.*)'`. |
+    ⍝ | `index`        | Selects the active filter. Defaults to 1 (first filter). |
     ⍝ | `parent`       | Specifies the owner of the form; default is `#`.|
     ⍝ | `parmType`     | Is "FileBox".|
     ⍝ | `style`        | One of Enums.SelectionStyles with "single" being the default. |
@@ -128,4 +130,3 @@
       }
 
 :EndClass
-
