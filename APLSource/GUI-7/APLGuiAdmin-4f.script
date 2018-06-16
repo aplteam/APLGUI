@@ -5,6 +5,8 @@
     ∇
 
     ∇ r←History
+      ⍝ * 0.15.1
+      ⍝   * Bug fix: For a "Notepad" (Inout) the cursor position should not be tempered with.    
       ⍝ * 0.15.0
       ⍝   * Bug fix: there was no default for "index" in `FileBox.CreateParms`.
       ⍝ * 0.14.0

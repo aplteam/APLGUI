@@ -2049,8 +2049,8 @@
                   rf.SelText←1 1
               :EndIf
           :EndIf
-      :Else               ⍝ It is a notepad. The cursor is placed at the end of the text.
-          rf.SelText←{2⍴⊂(⍴⍵),1+⍴(¯1+⍴⍵)⊃⍵}rf.Text
+      :Else               
+            ⍝ It is a notepad: we don't temper with the cursor position
       :EndIf
     ∇
 
@@ -2191,4 +2191,3 @@
     :EndSection ⍝ Private
 
 :EndClass
-
