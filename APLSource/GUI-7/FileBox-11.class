@@ -84,6 +84,7 @@
       r.file←''
       r.fileMode←##.Enums.FileModes.Read
       r.filters←⊂'*.*' 'All files (*.*)'
+      r.index←1
       r.parent←''
       r.parmType←'FileBox'
       r.style←##.Enums.SelectionStyles.single

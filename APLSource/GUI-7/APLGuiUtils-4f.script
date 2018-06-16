@@ -23,7 +23,7 @@
 
     ∇ {r}←{name}CopyNamespace ns;listV;listF;listN;listI
     ⍝ Returns a new namespace and copies all variables, functions, operators and
-    ⍝ sub namespaces in ``ns` over.\\
+    ⍝ sub namespaces in `ns` over.\\
     ⍝ Force a named namespace by specifying a name via `⍺`.\\
     ⍝ Notes:
     ⍝ 1. Any sub namespaces in `ns` must not contain references, otherwise

@@ -1,10 +1,12 @@
 :Namespace APLGuiAdmin
 
     ∇ r←Version
-      r←(⍕⎕THIS.##)'0.14.0' '2018-03-30'
+      r←(⍕⎕THIS.##)'0.15.0' '2018-06-16'
     ∇
 
     ∇ r←History
+      ⍝ * 0.15.0
+      ⍝   * Bug fix: there was no default for "index" in `FileBox.CreateParms`.
       ⍝ * 0.14.0
       ⍝   * `FileBox` selected the second filter as the default.
       ⍝   * `FileBox` had no `index` parameter.
@@ -171,10 +173,10 @@
       children←{A.dlb 2↓A.dlb ⍵↓⍨1+⍵⍳'`'}¨1↓¨code
       children←A.dtb¨¯2↓¨A.dtb¨children
       children←{0=+/b←''''=w←⍵:w ⋄ (b/w)←⊂'''''' ⋄ ∊w}¨children
-
+     
       fns(⍎helpPath).⎕NS''
       path←helpPath,'.',fns
-
+     
       :For child text :InEach headers children
           body←,¨(child,'←{')''('r←⊂''Title'' ''',child,'''')''('t←''',text,'''')'r,←⊂''Body'' t' '' 'r' '}'
           buf←(⍎path).⎕FX⊃body
