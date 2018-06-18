@@ -18,12 +18,16 @@ The general idea is to define a menu as text: a vector of text vector. This is a
  -
  &Quit=Alt+F4   : OnHandler {quit}  ; Quit the program
 [&Edit]         : OnHandler {edit}  ;
+ Cut=Ctrl+X     : <cut>     {cut}
+ Copy=Ctrl+C    : <copy>    {copy}
+ Paste=Ctrl+V   : <paste>   {paste}
+ -
  Show Clipboard : OnHandler {clip}  ; Opens a window+display the clipboard
 [Sub Menu]      : OnHandler
  Cut=Ctrl+X     : OnHandler {cut}   ; Cut an already selected piece of text
  Copy=Ctrl+C    : OnHandler {copy}  ; Copies an already selected piece of text
  Paste=Ctrl+V   : OnHandler {paste} ; Paste the contents of the clipboard
- #Toggle	       :  OnToggle  {toggle}
+ #Toggle	       : OnToggle  {toggle}
 ~~~
 
 ## Notes:
@@ -41,6 +45,13 @@ The general idea is to define a menu as text: a vector of text vector. This is a
   When `debug` is 1 and `noDevelopersMenu` is 0 then the user may select any callbacks from the menubar itself:<<BR>>
   there will be a menu "Developers" in such a case. However, depending on the circumstances the callbacks might not be 
   visible at that very moment but this is then indicated.
+* The standard operations "cut", "copy" and "paste" can be added in the simplified syntax shown above: no handler, just
+  keywords between a pair of `<>`.
+  
+  However, this works only when used with the `Input` class.
+  
+  It is not strictly necessary to assign names (between a pair of `{}`) to those special operations but recommended
+  for consistency.
 
 ## Names
 

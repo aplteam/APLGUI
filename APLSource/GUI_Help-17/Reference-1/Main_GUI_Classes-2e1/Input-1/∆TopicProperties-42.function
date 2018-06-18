@@ -25,7 +25,7 @@
      r⍪←'Parameters' '' 1 0
      r⍪←'Smoothing' '' 1 0
      r⍪←'Polishing_Posn' 'Polishing Posn' 1 0
-     r⍪←'The_menubar' 'The menu bar' 1 0
+     r⍪←'The_menubar' 'The menubar' 1 0
      r⍪←'The_n_namespace' 'The "n" namespace' 1 0
      r⍪←'The_result' 'The result' 1 0
      r

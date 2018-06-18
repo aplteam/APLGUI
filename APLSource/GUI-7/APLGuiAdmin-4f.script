@@ -1,10 +1,13 @@
 :Namespace APLGuiAdmin
 
     ∇ r←Version
-      r←(⍕⎕THIS.##)'0.15.2' '2018-06-16'
+      r←(⍕⎕THIS.##)'0.16.0' '2018-06-17'
     ∇
 
     ∇ r←History
+      ⍝ * 0.16.0
+      ⍝     * A menubar added to input now allows access to standard operations "cut", "copy" and "paste" via
+      ⍝       a simplified syntax.
       ⍝ * 0.15.2
       ⍝     * Bug fix: In "Input" `confirmCancel` had the wrong effect.
       ⍝ * 0.15.1

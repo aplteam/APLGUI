@@ -1,4 +1,4 @@
-# The menu bar
+# The menubar
 
 A menu can be added to any Form created by `Input` by passing a →[*.Menubar|menu bar definition]
 via the "menubar" parameter. By default this is an "Edit" menu with three commands: cut, copy and paste.
@@ -19,4 +19,15 @@ That allows you easily to...
 1. find out what menu command the user has selected.
 1. reference and manipulate all controls.
 
+If you want you own menubar to carry an "Edit" menu with the menu items "cut", "copy" and "paste" then 
+add this to your menybar definition:
 
+~~~
+[&Edit]         : OnHandler {edit}
+ Cut=Ctrl+X     : <cut>     {cut}
+ Copy=Ctrl+C    : <copy>    {copy}
+ Paste=Ctrl+V   : <paste>   {paste}
+~~~
+
+Specifying `<cut>` etc. rather than a callback is handled by `Input` and results in what you are looking
+for without further ado. Of course, this includes the functionality.

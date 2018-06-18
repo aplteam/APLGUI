@@ -651,12 +651,19 @@
       }
 
     ∇ {r}←OnMenuItem msg;n;row;callback;parent;fns;rf;fnsName
+      r←0
       rf←↑msg
+      
+      
+
       n←GetRefTo_n rf
       :If (↑msg)∊n.menubar.∆Callbacks[;0]
           row←n.menubar.∆Callbacks[;0]⍳↑msg
           callback←1⊃n.menubar.∆Callbacks[row;]
-          (parent fnsName)←callback CheckUserCallback_ callback
+          :If (⊂callback)∊'<cut>' '<copy>' '<paste>'
+              callback←(⍕↑⎕rsi),'.OnCutCopyPaste'
+          :EndIf
+          (parent fnsName)←CheckUserCallback_ callback
           fns←parent⍎fnsName
           :If 0=FunctionReturnsResult parent callback
               fns n rf

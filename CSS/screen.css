@@ -1,8 +1,8 @@
- /* -------------------------------------------------- */          
+ /* -------------------------------------------------- */
  /* This CSS file is part of the Markdown2Help project */          
  /* Author: Kai Jaeger * APL Team Ltd                  */          
  /* Project page: http://aplwiki.com/Markdown2Help     */          
- /* Version 1.2 * 2018-01-14                           */          
+ /* Version 1.2.1 * 2018-06-17                         */          
  /*                                                    */          
  /* If you know what you are doing you may take a      */          
  /* copy of this file, change it and use it with your  */          
@@ -55,7 +55,7 @@
  p.small {                                                         
  font-size: 60%;                                                   
  }                                                                 
- p.center {                                                        
+ p.center {
  text-align: center;                                               
  }                                                                 
  ul, ol p {                                                        
@@ -119,7 +119,7 @@
  li > table, blockquote {                                          
  margin-left:0;                                                    
  }                                                                 
- li > p > img {                                                    
+ li > p > img {
  margin-left:0;                                                    
  }                                                                 
  td, th {                                                          
@@ -135,8 +135,8 @@
  ul {                                                              
  margin-top: 0;                                                    
  }                                                                 
- li {                                                              
- margin-top: 8px;                                                  
+ li {
+ margin-top: 10px;
  }                                                                 
  img {                                                             
  display:block;                                                    

@@ -2,7 +2,7 @@
 /* This CSS file is part of the Markdown2Help project */
 /* Author: Kai Jaeger * APL Team Ltd                  */
 /* Project page: http://aplwiki.com/Markdown2Help     */
-/* Version 1.2 * 2018-01-14                           */
+/* Version 1.2.1 * 2018-06-17                         */
 /*                                                    */
 /* If you know what you are doing you may take a      */
 /* copy of this file, change it and use it with your  */
@@ -58,9 +58,6 @@ font-size: 60%;
 p.center {
 text-align: center;
 }
-ul, ol p {
-margin-left:0;
-}
 a.also {
 font-family: "APL385 Unicode";
 font-weight: 600;
@@ -87,7 +84,7 @@ padding: 0 3px;
 display: block !important;
 white-space: inherit;
 }
-ul, ol pre {
+ul, ol, pre {
 margin: 10px 0!important;
 }
 code {
@@ -132,11 +129,8 @@ background-color: inherit;
 tr:nth-child(even) {
 background-color: #ffefdb;
 }
-ul {
-margin-top: 0;
-}
 li {
-margin-top: 8px;
+margin-top: 10px;
 }
 img {
 display:block;
@@ -230,4 +224,7 @@ color: Gray !important;
 .autoheader_anchor  {
 text-decoration:none;
 color:black;
+}
+ul p, ol p {
+margin-left: 0;
 }
