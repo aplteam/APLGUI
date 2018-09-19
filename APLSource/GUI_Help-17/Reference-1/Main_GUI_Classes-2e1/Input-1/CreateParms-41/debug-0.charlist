@@ -1,5 +1,12 @@
 # debug
 
-Boolean that defaults to 0 and will remain 0 in Runtime no matter what the setting is. With 1 a
-developer gets additional features via the context menu.
+Boolean that defaults to 0 and will remain 0 in Runtime no matter what the setting is.
+
+With 1 a developer gets additional features an additional menu "Developers" in the menubar:
+
+* Toggle the "magic grid" on the form
+* Edit any user defined callbacks during run time
+* Browse the `Input` class (read-only)
+
+  This can be useful in order to read the documentation or look at implementation details.
 

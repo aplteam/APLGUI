@@ -1,0 +1,55 @@
+# CreateParms
+
+This niladic function returns a namespace with variables that represent all the possible parameters
+that can be passed onto `Input` with their default values.
+
+The namespace comes also with one method, `∆List`, which can be used to list all the names
+together with their values:
+
+~~~
+      Input.CreateParms.∆List
+ addToCaption              
+ alignButtons         1    
+ appendColon          1    
+ autoPress           ¯1    
+ cancel               1    
+ cancelBtnCaption   Cancel 
+ caption                   
+ centerIn                  
+ confirmCancel        0    
+ debug                0    
+ default              1    
+ focus                     
+ fontAPL                   
+ fontInput                 
+ fontLabel                 
+ fontStandard              
+ hGap                ¯1    
+ hasProgressbar       0    
+ hasStatusbar         1    
+ helpBtnCaption            
+ icon                      
+ initialVgap         ¯1    
+ menubar             ¯1    
+ minSize           200 300 
+ okBtnCaption           OK 
+ onChange                  
+ onHelp                    
+ onInitial                 
+ onInitialMsg              
+ onKeyPress                
+ onOkay                    
+ onPushButton              
+ parent                    
+ parmType            Input 
+ posn                      
+ props                     
+ regKey2             ¯1    
+ selTextStyle         1    
+ size                      
+ testMode             0    
+ timeout              0    
+ tips                      
+ vGap                 0.75 
+ watchLength          1    
+~~~

@@ -1,10 +1,14 @@
 :Namespace APLGuiAdmin
 
     ∇ r←Version
-      r←(⍕⎕THIS.##)'0.16.0' '2018-06-17'
+      r←(⍕⎕THIS.##)'0.16.2' '2018-09-09'
     ∇
 
-    ∇ r←History
+    ∇ r←History 
+      ⍝ * 0.16.2
+      ⍝   * "Restore" added to Enums.SelTextStyles and `Input` changed accordingly.
+      ⍝ * 0.16.1
+      ⍝   * Bug fix in `Input` (`AdjustSize`).
       ⍝ * 0.16.0
       ⍝     * A menubar added to input now allows access to standard operations "cut", "copy" and "paste" via
       ⍝       a simplified syntax.

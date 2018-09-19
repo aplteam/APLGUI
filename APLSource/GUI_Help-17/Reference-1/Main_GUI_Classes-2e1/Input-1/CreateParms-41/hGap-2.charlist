@@ -1,4 +1,6 @@
 # hGap
 
-Defines the horizontal distance (minimum) between controls.
+Defines the vertical gap between controls. 
 
+If this is a fraction of 1 then it defines the % of the hight of `fontStandard`, 
+otherwise it is interpreted as number of pixels. Defaults to 0.99.

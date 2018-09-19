@@ -1,0 +1,9 @@
+# Methods
+
+Note that `Input` offers way more public methods than listed here. The reason for that is that many functions need
+to be publicly available for technical reasons. All the callbacks are an example: without them being public they
+would not be found and therefore not executed.
+
+Here we list just those functions that can be meaningful used by the user.
+
+For this reasons there is a function `PublicMethods` available: it lists just what's important for the user.

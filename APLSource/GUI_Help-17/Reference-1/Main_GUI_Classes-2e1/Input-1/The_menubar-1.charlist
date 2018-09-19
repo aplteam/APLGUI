@@ -6,12 +6,12 @@ via the "menubar" parameter. By default this is an "Edit" menu with three comman
 If you don't want a menubar at all just assign an empty vector.
 
 The callbacks defined in your menu bar definition will be replaced by a callback function of
-`Input`, and they will be called under the supervision of `Input`.
+`Input`, and yours will be called under the supervision of `Input`.
 
 Any callback specified in the menu bar definition will be fed with a two-item vector:
 
 * The "n" namespace
-* The menuItem that was called as a reference.
+* The menu item that was called as a reference.
 
 
 That allows you easily to...
@@ -19,11 +19,26 @@ That allows you easily to...
 1. find out what menu command the user has selected.
 1. reference and manipulate all controls.
 
+## Enhancing the menubar
+
+### Overview
+
+There are two different ways to enhance the menubar:
+
+* You can assign a vector of text vectors which define the menu you want to have. This approach replaces
+  `Input`'s own menubar. However, by doing this you cannot access the built-in "Developer" menu.
+  
+* You can specify additional menus and menu items by passing the definition as left argument to the 
+  `→[Methods.GetDefaultMenubar|GetDefaultMenubar]` method. This would insert your definition after the
+  "Edit" menu and before the (optional) "Developer" menu.
+                                                         
+### Replacing the built-in menubar by your own
+
 If you want you own menubar to carry an "Edit" menu with the menu items "cut", "copy" and "paste" then 
 add this to your menybar definition:
 
 ~~~
-[&Edit]         : OnHandler {edit}
+[&Edit]         :           {edit}
  Cut=Ctrl+X     : <cut>     {cut}
  Copy=Ctrl+C    : <copy>    {copy}
  Paste=Ctrl+V   : <paste>   {paste}
@@ -31,3 +46,7 @@ add this to your menybar definition:
 
 Specifying `<cut>` etc. rather than a callback is handled by `Input` and results in what you are looking
 for without further ado. Of course, this includes the functionality.
+
+### Insert your own menus with `GetDefaultMenubar`
+
+

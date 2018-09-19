@@ -1,5 +1,7 @@
 # Input
 
+## Overview
+
 Among the APLGui methods `Input` is by far the most powerful class.
 
 `Input` allows the creation of complex (possibly very complex) forms with or without Tabs and a
@@ -10,7 +12,7 @@ The layout is assembled automatically following a (relatively) simple set of →
 
 In short `Input` can be useful in two respects:
 
-Save time by creating simple to complex forms in minutes.
+* Save time by creating simple to complex forms in minutes.
 
 * Standardize the way you deal with GUIs.
 
@@ -25,3 +27,12 @@ parameters as left argument. There are two ways to take advantage of `Input.Run`
 
 Of course yu can combine the two strategies as well, for example checking for consistent data in 
 the callback(s) and doing the real work later.
+
+## Regarding public methods
+
+Only some of the public functions in the `Input` class are actually designed to be used by the user; many have
+to be public for pure technical reasons. For example, the callbacks needs to be public because otherwise, at
+run time, they would not be found.
+
+The help →[#._APLGUI.GUI_Help.Reference.Main_GUI_Classes.Input.Methods|explains just those methods] that **are** 
+designed for usage by the user.

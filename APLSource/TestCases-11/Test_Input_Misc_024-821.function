@@ -1,5 +1,5 @@
  r←Test_Input_Misc_024(stopFlag batchFlag);n;⎕TRAP;defMat;res;DT;parms;F
-⍝ Exercise "Input" with a user-defined menubar.
+⍝ Exercise "Input" with a user-defined menubar that replaces the default menubar
  r←∆Failed
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
 

@@ -2,4 +2,4 @@
 
 This comprises the utilities used by the →[*.Main_GUI_Classes|main classes] of APLGui.
 
-You will find these useful when building your own tools upon `→[*.StdForm]` and `→[*Menubar]`
+You will find these useful when building your own tools upon `→[*.StdForm]` and `→[*.Menubar]`

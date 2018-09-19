@@ -16,6 +16,11 @@
       r←3
     ∇
 
+    ∇ r←Restore
+      :Access Public Shared
+      r←4
+    ∇
+
     ∇ r←∆List
       :Access Public Shared
       r←⍉{⍵,[-0.5]⍎¨⍵}(⎕NL-3)~⊂'∆List'

@@ -1,0 +1,28 @@
+# E
+
+This niladic function returns a reference pointing to `→[*.Enumerations|InputDataTypes]` which is an enumration 
+with all the data types available in `Input`.
+
+There is a method `∆List` available that can be used to list the contents:
+
+~~~
+      Input.E.∆List
+ Button        1
+ Character     2
+ Currency      4
+ Date          5
+ DropDown      6
+ DropEdit      7
+ Image        13
+ Label         9
+ ListView     10
+ Notepad      11
+ Numeric      12
+ Password     20
+ PlaceHolder  14
+ Radio        15
+ Spinner      16
+ Tab          17
+ Time         18
+ YesNo        19
+~~~

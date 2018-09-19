@@ -1,5 +1,5 @@
  InputComplex2;defMat;DT;r;parms;label;Select;list;dates;globalParms;n;tips;props
-⍝ Complex "Input" examples without TABs, using all data typesbut no user-defined callbacks
+⍝ Complex "Input" examples without TABs, using all data types but no user-defined callbacks
  DT←##.GUI.Enums.InputDataTypes
  tips←0 2⍴''
  props←0 2⍴''

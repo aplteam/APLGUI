@@ -1,5 +1,4 @@
 :Namespace APLGuiUtils
-
 ⍝ Included in many GUI classes, and in **all** main classes.\\
 ⍝ Carries often-used utilities.
 
@@ -628,7 +627,7 @@
           calledFrom←{↑⍵↓⍨+/∧\⍵≡¨⊂↑⍵}⎕RSI
           home←calledFrom{2=|≡⍵:0⊃⍵ ⋄ ⍺}⍵
           3=⌊|home.⎕NC⊂⍵:home ⍵
-          msg←'Cannot see ',⍺,' callback'
+          msg←'Cannot see callback ',⍵
           ~'.'∊⍵:msg ⎕SIGNAL APLGuiError
           (calledFrom name)←{(⍎¯1↓0⊃⍵)(1⊃⍵)}'.'SplitPath ⍵
           3≠⌊|calledFrom.⎕NC⊂name:msg ⎕SIGNAL APLGuiError
@@ -653,9 +652,6 @@
     ∇ {r}←OnMenuItem msg;n;row;callback;parent;fns;rf;fnsName
       r←0
       rf←↑msg
-      
-      
-
       n←GetRefTo_n rf
       :If (↑msg)∊n.menubar.∆Callbacks[;0]
           row←n.menubar.∆Callbacks[;0]⍳↑msg

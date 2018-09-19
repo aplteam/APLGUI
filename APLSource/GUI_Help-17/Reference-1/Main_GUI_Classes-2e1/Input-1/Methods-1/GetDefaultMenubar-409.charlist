@@ -1,0 +1,39 @@
+# GetDefaultMenubar
+
+This function returns the standard menubar definition:
+
+~~~
+      ⎕←⍪{addAfterEdit} GetDefaultMenubar debugFlag
+~~~
+
+With a `0` as left argument you get just the definition of the "Edit" menu:
+
+~~~
+      ⎕←⍪GUI.Input.GetDefaultMenubar 0
+ [&Edit]                         {edit}                                                                                                                                 
+  Cut=Ctrl+X        : <callback> {cut}          ;<description>
+  Copy=Ctrl+C       : <callback> {copy}         ;<description>
+  Paste=Ctrl+V      : <callback> {paste}        ;<description>
+~~~
+
+You can add your own stuff by passing it as left argument:
+
+~~~
+    q←'[Special]' ' View : #.MyCallback {view} ; View in default Browser'
+    ⎕←⍪#.q Input.GetDefaultMenubar 1
+ [&Edit]                           {edit}                                                                                                                                 
+  Cut=Ctrl+X        : <callback>   {cut}           ;<description>
+  Copy=Ctrl+C       : <callback>   {copy}          ;<description>
+  Paste=Ctrl+V      : <callback>   {paste}         ;<description>
+ [Special] {special}                                                                                                                            
+  View              : #.MyCallback {view}          ;View in default Browser
+ [Developers]                      {developers}                                                                                                                       
+  Toggle magic grid : <callback>   {toggleMagic}   ;<description>
+  Edit callbacks... : <callback>   {editCallbacks} ;<description>
+  Browse "Input"    : <callback>   {editInput}     ;<description>
+~~~
+
+Notes:
+
+* We passed a `1` as argument and therefore got the definition of the "Developers" menu as well, offering additional features for developers.
+* Your own definition comes **after** the "Edit" menu but **before** the "Developers" menu if there is one.

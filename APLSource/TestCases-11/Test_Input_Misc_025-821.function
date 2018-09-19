@@ -1,0 +1,23 @@
+ r←Test_Input_Misc_025(stopFlag batchFlag);n;⎕TRAP;defMat;res;DT;parms;F;menubar
+⍝ Exercise "Input" with a user-defined menubar that is based on the default menubar
+ r←∆Failed
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+
+ DT←#._APLGUI.GUI.Enums.InputDataTypes
+
+ defMat←0 4⍴0
+ defMat⍪←'Name' 'Enter your name:' ''DT.Character
+
+ parms←#._APLGUI.GUI.Input.CreateParms
+ parms.testMode←1
+ menubar←'[View] {view}' ' HTML=F11 : OnView {html}' ' XML=F12 : OnView {xml}'#._APLGUI.GUI.Input.GetDefaultMenubar 1
+ parms.menubar←menubar
+ n←#._APLGUI.GUI.Input.Create defMat parms ⍬
+ →GoToTidyUp 3≠≢n.menubar.∆List'Menu'
+ →GoToTidyUp 8≠≢n.menubar.∆List'MenuItem'
+
+ r←∆OK
+
+∆TidyUp:
+ :Trap 0 ⋄ {}n.∆CloseForm ⋄ :EndTrap
+⍝Done
