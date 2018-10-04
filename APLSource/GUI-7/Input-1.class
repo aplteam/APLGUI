@@ -63,6 +63,7 @@
       r.testMode←0
       r.timeout←0
       r.tips←0 2⍴⍬       ⍝ Matrix with control names & tips
+      r.visible←0        ⍝ In order to avoid flickering 
       r.vGap←0.75
       r.watchLength←1
     ∇
@@ -128,6 +129,7 @@
       :Access Public Shared
       focus←n.∆parms.focus{0=⎕NC ⍵:⍺ ⋄ ⍎⍵}'focus'
       n ForceFocusTo focus
+      n.∆Form.Visible←1
       r←⎕DQ n.∆Form
     ⍝Done
     ∇
@@ -1773,6 +1775,7 @@
       parms2.parent←parms.parent
       parms.regKey2←''
       n←##.StdForm.Create globalParms parms2
+      n.∆Form.Visible←parms.visible
       'parms2'CopyNamespace parms   ⍝ Yes, this IS needed!
       n.∆Form.⎕WS'Event'QuitEvent 1
       n.∆Form.onClose←'OnClose'
