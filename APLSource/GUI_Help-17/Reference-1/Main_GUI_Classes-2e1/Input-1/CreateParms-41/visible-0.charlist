@@ -1,6 +1,6 @@
 # visible
 
-Boolean that defaults to 0. This is a necessary measure because with very complex forms you might otherwise experience a flickering affect.
+Boolean that defaults to 0. This is a necessary measure because with very complex forms you might otherwise experience a flickering effect.
 
 The function `DQ` will set `visible` automatically to 1.
 
