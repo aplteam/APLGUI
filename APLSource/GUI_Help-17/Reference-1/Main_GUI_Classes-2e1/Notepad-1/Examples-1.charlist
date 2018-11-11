@@ -8,7 +8,7 @@ The `Edit` method allows you to edit a variable (vector of text vectors) in the 
 Notepad.Edit 'This is a text' 'with two lines'
 ~~~
 
-![](.\Images\Notepad\01.png)
+![](Images/Notepad/01.png)
 
 ## EditFile
 
@@ -20,7 +20,7 @@ APLTreeUtils.WriteUtf8File fn'This is a simple string'
 Notepad.EditFile fn
 ~~~
 
-![](.\Images\Notepad\02.png)
+![](Images/Notepad/02.png)
 
 ## Browse
 
@@ -30,7 +30,7 @@ The `Browse` method allows you to display a variable (vector of text vectors) in
 #.GUI.Notepad.Browse 'This is a text' 'with two lines'
 ~~~
 
-![](.\Images\Notepad\03.png)
+![](Images/Notepad/03.png)
 
 ## BrowseFile
 
@@ -42,4 +42,4 @@ APLTreeUtils.WriteUtf8File fn'This is a simple string'
 Notepad.BrowseFile fn
 ~~~
 
-![](.\Images\Notepad\04.png)
+![](Images/Notepad/04.png)

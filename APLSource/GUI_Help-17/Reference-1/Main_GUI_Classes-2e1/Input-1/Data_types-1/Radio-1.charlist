@@ -31,6 +31,6 @@ defMat←⍉⍪'Radio' list  2 DT.Radio 0
 
 This results in this GUI:
 
-![](.\Help\Images\DataTypes\RadioButtons_01.png)
+![](Images/DataTypes/RadioButtons_01.png)
 
 For a group of check boxes see →[*.YesNo].

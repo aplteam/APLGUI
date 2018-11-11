@@ -3,7 +3,7 @@
 Before you consider using APLGui there are two ways to get an impression how it looks like:
 
 * Load the workspace APLGuiDemo from the APLGuiDemo folder.
-* Run one of the `∆Run`\* functions from the `GUI_Demo` namespace.
+* Run one of the `∆Run`\\* functions from the `GUI_Demo` namespace.
 
 
 While the former is an application that informs about the APLGui utilities by just using them, the

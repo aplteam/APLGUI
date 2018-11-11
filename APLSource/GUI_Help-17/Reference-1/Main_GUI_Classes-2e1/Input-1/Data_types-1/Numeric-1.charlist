@@ -25,4 +25,4 @@ defMat←⍉⍪'Number1' 'Test' '100.23' DT.Numeric 30
 
 This results in this GUI:
 
-![](.\Images\DataTypes\Numeric.png)
+![](Images/DataTypes/Numeric.png)

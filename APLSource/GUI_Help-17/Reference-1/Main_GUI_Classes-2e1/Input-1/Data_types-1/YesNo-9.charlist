@@ -65,7 +65,7 @@ defMat⍪←'Options' list (1 1 0 0) DT.YesNo 0 1 1
 
 This results in this GUI:
 
-![](.\Images\DataTypes\YesNo_01.png)
+![](Images/DataTypes/YesNo_01.png)
 
 Note that in this example the list contained 4 `⋄`, therefore the list contained 5 items while the
 vector of Booleans in "Default" had only 4 items. That's why "My special options" made it into the
@@ -80,7 +80,7 @@ defMat⍪←'Options'list(1 1 0 0)DT.YesNo 0 1 1
 #.GUI.Input.Run defMat
 ~~~
 
-![](.\Images\DataTypes\YesNo_02.png)
+![](Images/DataTypes/YesNo_02.png)
 
 Note however that if "Default" is a scalar then `Input` has no way to determine whether the label
 is included or not; therefore you **must** specify the caption of the group in the first item in

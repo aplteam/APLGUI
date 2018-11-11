@@ -13,7 +13,7 @@ You will find several functions starting their names with `∆Run`.
 
 * The function `∆Run` runs all the demo functions.
 * The function `∆Run_This` takes a string or a vector of strings. All demo function containing those strings will be executed.
-* The `∆Run_`\* functions relate to the APLGui main classes.
+* The `∆Run_`\\* functions relate to the APLGui main classes.
 
 
 Note that there are no demo functions for neither `StdForm` nor the `Menubar` class. The reason is

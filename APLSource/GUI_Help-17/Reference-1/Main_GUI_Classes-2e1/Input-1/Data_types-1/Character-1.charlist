@@ -21,4 +21,4 @@ defMat←⍉⍪'Char1' 'Your name' 'John Doe' DT.Character 30 1 1
 
 This results in this GUI:
 
-![](.\Images\DataTypes\character.png)
+![](Images/DataTypes/Character.png)

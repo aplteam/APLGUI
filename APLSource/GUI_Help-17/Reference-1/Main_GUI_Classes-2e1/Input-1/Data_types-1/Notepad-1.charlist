@@ -29,4 +29,4 @@ defMat←⍉⍪'NP' 'Table' txt DT.Notepad (10 60) 1 1
 
 This results in this GUI:
 
-![](.\Images\DataTypes\Notepad.png)
+![](Images/DataTypes/Notepad.png)

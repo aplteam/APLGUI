@@ -10,5 +10,5 @@ Returns a string that can be used as caption for a Form.
 
 For this the function investigates `globalParms.caption`, `parms.caption` and `parms.addToCaption`.
 
-See the →[*.Caption_and_AddToCaption] page for details.
+See the →[*.Caption_and_AddToCaption|"Caption" and "AddToCaption"] page for details.
 

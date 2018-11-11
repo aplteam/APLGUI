@@ -25,4 +25,4 @@ defMat⍪←'Nested' 'This⋄is⋄a⋄nested⋄label '' DT.Label 0
 
 This results in this GUI:
 
-![](.\Images\DataTypes\label.png)
+![](Images/DataTypes/Label.png)

@@ -1,3 +1,4 @@
+
 # Examples
 
 ## AskForNumber
@@ -6,7 +7,7 @@
 Request.AskForNumber'Number of copies:'
 ~~~
 
-![](.\Images\Request\01.png)
+![](Images/Request/01.png)
 
 ~~~
 ┌→──┐
@@ -20,7 +21,7 @@ Request.AskForNumber'Number of copies:'
 Request.AskForString'Enter your name:'
 ~~~
 
-![](.\Images\Request\02.png)
+![](Images/Request/02.png)
 
 ~~~
 ┌→──────┐
@@ -36,7 +37,7 @@ Request.AskForString'Enter your name:'
 Request.AskForPassword 20
 ~~~
 
-![](.\Images\Request\03.png)
+![](Images/Request/03.png)
 
 Returns te password entered.
 
@@ -46,7 +47,7 @@ Returns te password entered.
 Request.AskForDate ⍬
 ~~~
 
-![](.\Images\Request\04.png)
+![](Images/Request/04.png)
 
 ~~~
 ┌→─────────────┐ 

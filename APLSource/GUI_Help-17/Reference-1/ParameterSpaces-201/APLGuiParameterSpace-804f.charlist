@@ -4,7 +4,7 @@ This class offers a shared method `Create` which will return a simple namespace 
 and no refs in it but one method, `∆List`.
 
 This is the most basic way to create a parameter space. `APLGuiGlobalsParms.CreateDefaults` as well
-as all the `CreateParms`\* methods of the main classes will call `APLGuiParameterSpace.Create`.
+as all the `CreateParms`\\* methods of the main classes will call `APLGuiParameterSpace.Create`.
 
 For details regarding `∆List` use:
 

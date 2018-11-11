@@ -6,7 +6,7 @@
 YesOrNo 'Are you really sure about this?'
 ~~~
 
-![](.\Images\Dialogs\01.png)
+![](Images/Dialogs/01.png)
 
 Note that the size of the control adapts automatically to the font and its size as well as the
 length of the question asked.
@@ -17,7 +17,7 @@ length of the question asked.
 NoOrYes 'Are you really sure about this?'
 ~~~
 
-![](.\Images\Dialogs\02.png)
+![](Images/Dialogs/02.png)
 
 Note that the focus is on the "No" button - that tells this one apart from `YesOrNo`.
 
@@ -27,7 +27,7 @@ Note that the focus is on the "No" button - that tells this one apart from `YesO
 YesNoCancel 'Do you want to fix them before carrying on?'
 ~~~
 
-![](.\Images\Dialogs\03.png)
+![](Images/Dialogs/03.png)
 
 ## ShowMsg
 
@@ -35,7 +35,7 @@ YesNoCancel 'Do you want to fix them before carrying on?'
 ShowMsg
 ~~~
 
-![](.\Images\Dialogs\04.png)
+![](Images/Dialogs/04.png)
 
 If scrolling is needed, look at the next one:
 
@@ -45,7 +45,7 @@ If scrolling is needed, look at the next one:
 ShowLongMsg
 ~~~
 
-![](.\Images\Dialogs\05.png)
+![](Images/Dialogs/05.png)
 
 ## DisplayButtons
 
@@ -56,4 +56,4 @@ question←'What action would you like to perform?'buttons
 DisplayButtons question buttons
 ~~~
 
-![](.\Images\Dialogs\06.png)
+![](Images/Dialogs/06.png)

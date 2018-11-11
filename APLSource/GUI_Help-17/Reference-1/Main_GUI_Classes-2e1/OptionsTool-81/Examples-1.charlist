@@ -7,7 +7,7 @@ list←'White' 'Red' 'Green' 'Yellow' 'Black' 'Pink' 'Magenta' 'Black' 'Blue'
 OptionsTool.Run list
 ~~~
 
-![](.\Images\OptionsTool\01.png)
+![](Images/OptionsTool/01.png)
 
 The result:
 
@@ -30,4 +30,4 @@ list←'White' 'Red' 'Green' 'Yellow' 'Black' 'Pink' 'Magenta' 'Black' 'Blue'
       ps #.GUI.OptionsTool.Run list
 ~~~
 
-![](.\Images\OptionsTool\02.png)
+![](Images/OptionsTool/02.png)

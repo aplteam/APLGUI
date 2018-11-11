@@ -63,7 +63,7 @@
       r.testMode←0
       r.timeout←0
       r.tips←0 2⍴⍬       ⍝ Matrix with control names & tips
-      r.visible←0        ⍝ In order to avoid flickering 
+      r.visible←0        ⍝ In order to avoid flickering
       r.vGap←0.75
       r.watchLength←1
     ∇
@@ -1410,7 +1410,7 @@
     ∇ n←AdjustSize n;list;sf;bottomRight;newSize;imageList;imagePosnAndSize
       :Access Public Shared
       list←n.∆GetRefs''
-      list←(~list.Type∊'Vars' 'TabControl' 'TabButton' 'SubForm' 'TipField' 'Font' )/list
+      list←(~list.Type∊'Vars' 'TabControl' 'TabButton' 'SubForm' 'TipField' 'Font')/list
       list~←n.(∆buttons,∆Form,StatusField1,Statusbar)
       :If 0<n.⎕NC'Progressbar'
           list~←n.Progressbar
@@ -1422,7 +1422,10 @@
       :EndIf
       sf←↑{⍵[;0]}n.∆List'SubForm'
       list~←sf
-      bottomRight←n._SubForm.Posn+n.(3 1×∆Vgap ∆Hgap)+↑⌈⌿⊃+/¨GetPosnAndSize list
+      bottomRight←n.(3 1×∆Vgap ∆Hgap)+↑⌈⌿⊃+/¨GetPosnAndSize list
+      :If 0<n.⎕nc'_SubForm'
+          bottomRight+←n._SubForm.Posn
+      :EndIf
       newSize←bottomRight
       :If ~0∊⍴n.∆buttons
           newSize[0]+←(2×n.∆Vgap)+n.∆Form.Size[0]-↑n.Btn_00.Posn

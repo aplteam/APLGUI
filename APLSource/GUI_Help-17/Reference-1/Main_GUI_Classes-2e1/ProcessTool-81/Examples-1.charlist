@@ -6,7 +6,7 @@ OnMyHandler←{}
 ProcessTool.Run list 'OnMyHandler'
 ~~~
 
-![](.\Images\ProcessTool\01.png)
+![](Images/ProcessTool/01.png)
 
 ~~~
 list←'Red' 'Green' 'Yellow' 'Black' 'Pink' 'Magenta' 'Black' 'Blue'
@@ -15,5 +15,5 @@ OnMyHandler←{}
 ProcessTool.Run list 'OnMyHandler'
 ~~~
 
-![](.\Images\ProcessTool\02.png)
+![](Images/ProcessTool/02.png)
 

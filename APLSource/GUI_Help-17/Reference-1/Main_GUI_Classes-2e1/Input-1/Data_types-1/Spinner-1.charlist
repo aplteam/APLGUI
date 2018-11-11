@@ -48,4 +48,4 @@ parmsprops←1 2⍴'Copies' (⊂('Thumb' 7))
 
 This results in this GUI:
 
-![](.\Images\DataTypes\Spinner.png)
+![](Images/DataTypes/Spinner.png)

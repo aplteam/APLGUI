@@ -26,4 +26,4 @@ defMat←⍉⍪'Curr1' 'Amount in GBP' 123.45 DT.Currency 0 1 1
 
 This results in this GUI:
 
-![](.\Images\DataTypes\Currency_01.png)
+![](Images/DataTypes/Currency_01.png)

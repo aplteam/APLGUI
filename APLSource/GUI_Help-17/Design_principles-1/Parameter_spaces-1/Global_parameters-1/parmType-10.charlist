@@ -1,4 +1,4 @@
 # parmType
 
-Carries the name (type) of the parameter namespace: "APLGuiGlobalParms"
+Constant "APLGuiGlobalParms"
 

@@ -38,4 +38,4 @@ defMat⍪←'&Rotate' '' ''DT.Button 0 1 2
 
 This results in this GUI:
 
-![](.\Images\DataTypes\button.png)
+![](Images/DataTypes/Button.png)

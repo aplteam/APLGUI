@@ -2,7 +2,7 @@
 
 A parameter space is an ordinary namespace populated with some variables and some functions and possibly also references.
 
-The general idea is to call any `CreateParms`* function (examples are `APLGuiGlobalParms.CreateDefaults` and
+The general idea is to call any `CreateParms`\\* function (examples are `APLGuiGlobalParms.CreateDefaults` and
 `Request.CreateParmsForNumber` and `Notepad.CreateParms`), modify any of the values and then pass the namespace on
 to functions like `StdForm.Create` or `Request.YesOrNo` or `NotePad.Create`.
 

@@ -1,9 +1,9 @@
 # Requirements
 
 The APLGui stuff needs several classes/scripted namespaces from the Open Source project APLTree
-from the APL wiki; for details see
+from the APLTree project; for details see
 
-→[http://aplwiki.com/CategoryAplTree]
+→[http://github.com/aplteam/apltree]
 
 These objects are needed:
 

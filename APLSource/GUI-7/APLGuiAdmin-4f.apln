@@ -1,10 +1,12 @@
 :Namespace APLGuiAdmin
 
     ∇ r←Version
-      r←(⍕⎕THIS.##)'0.16.2' '2018-09-09'
+      r←(⍕⎕THIS.##)'0.16.3' '2018-11-08'
     ∇
 
     ∇ r←History 
+      ⍝ * 0.16.3
+      ⍝   * Bug fix: in case `Input` had to deal with a form that does not have any sub forms it crashed.
       ⍝ * 0.16.2
       ⍝   * "Restore" added to Enums.SelTextStyles and `Input` changed accordingly.
       ⍝ * 0.16.1

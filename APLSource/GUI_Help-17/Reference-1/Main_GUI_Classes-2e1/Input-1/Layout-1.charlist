@@ -53,7 +53,7 @@ TimeChar   Char                             08:12:34  18 0 1 1
 
 This is how the GUI looks like:
 
-![](.\Images\Input\01.png)
+![](Images/Input/01.png)
 
 You can change this by specifying a different column in the definition matrix. Let's check the
 current setting:
@@ -74,7 +74,7 @@ three input fields go into the first column and the remaining into the second co
 
 With this new definition matrix we get this:
 
-![](.\Images\Input\02.png)
+![](Images/Input/02.png)
 
 ~~~
     defMat[;#.GUI.Enums.DefMatIndices.Column]←0 1 1 2 2 2
@@ -82,7 +82,7 @@ With this new definition matrix we get this:
 
 Now we get three columns:
 
-![](.\Images\Input\03.png)
+![](Images/Input/03.png)
 
 Note that this time we specified 0 rather than 1 for the first column; it does not really matter,
 `Input` figures out whether you use `⎕IO←0` or `⎕IO←1` mentally. In fact you could use 2, 4 and 5

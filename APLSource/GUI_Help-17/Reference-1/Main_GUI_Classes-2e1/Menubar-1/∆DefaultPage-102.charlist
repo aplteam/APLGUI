@@ -27,7 +27,7 @@ The general idea is to define a menu as text: a vector of text vector. This is a
  Cut=Ctrl+X     : OnHandler {cut}   ; Cut an already selected piece of text
  Copy=Ctrl+C    : OnHandler {copy}  ; Copies an already selected piece of text
  Paste=Ctrl+V   : OnHandler {paste} ; Paste the contents of the clipboard
- #Toggle	       : OnToggle  {toggle}
+ #Toggle        : OnToggle  {toggle}
 ~~~
 
 ## Notes:

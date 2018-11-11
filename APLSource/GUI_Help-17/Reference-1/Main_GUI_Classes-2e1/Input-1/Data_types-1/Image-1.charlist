@@ -28,4 +28,4 @@ defMat←⍉⍪'Img1a' 'Error icon' #.GUI.Enums.DialogStyles.Error DT.Image 0 1 
 
 This results in this GUI:
 
-![](.\Images\DataTypes\image.png)
+![](Images/DataTypes/Image.png)

@@ -10,7 +10,7 @@ n←#.GUI.IE.CreateIE ref
 #.GUI.IE.ShowHtmlFile n.IEobject 'README.html'
 ~~~
 
-![](.\Images\IE_01.png)
+![](Images/IE_01.png)
 
 ## Example II.
 
