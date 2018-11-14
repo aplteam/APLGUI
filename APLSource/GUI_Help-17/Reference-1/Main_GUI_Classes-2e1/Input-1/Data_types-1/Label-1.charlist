@@ -14,7 +14,7 @@ Note that the "Default" field is ignored for this data type. However, if "Label"
 
 This data type does **not** make it into the →[*.The_result|result].
 
-## Example
+### Example
 
 ~~~
 DT←#.GUI.Enums.InputDataTypes
@@ -25,4 +25,24 @@ defMat⍪←'Nested' 'This⋄is⋄a⋄nested⋄label '' DT.Label 0
 
 This results in this GUI:
 
-![](Images/DataTypes/Label.png)
+![](Images/DataTypes/Label.png)   
+
+## URLs
+
+You can make a single-line label a URL or include a stand-alone URL in a vector of labels as long
+as the protocol is one of: "http", "https", "mailto", "ftp" or "tfpf".
+
+Note however that the URL needs to be embraced by "<>" as in Markdown.
+
+### Examples
+
+~~~
+DT←#.GUI.Enums.InputDataTypes
+defMat←⍉⍪'Simpel' '' '<https://github.com/aplteam/apltree>'DT.Label 0
+defMat⍪←'Nested' 'Refere to⋄<https://github.com/aplteam/apltree>⋄for details' '' DT.Label 0
+#.GUI.Input.Run defMat
+~~~
+
+This results in this GUI:
+
+![](Images/DataTypes/Label_02.png)   

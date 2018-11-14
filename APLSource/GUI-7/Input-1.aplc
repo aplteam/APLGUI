@@ -17,7 +17,20 @@
 
     ∇ r←Version
       :Access Public Shared
-      r←(⍕⎕THIS)'1.1.4' '2018-09-19'
+      r←(⍕⎕THIS)'1.3.0' '2018-11-14'
+    ∇
+
+    ∇ History
+     ⍝ * 1.3.0
+     ⍝   * Data type "URL" removed.
+     ⍝   * Instead every item in a label that matches this regular expression:\\
+     ⍝     ^<(http|https|ftp:tftp:mailto)://.+?>$'\\
+     ⍝     Is transformed into a URL: blue color, underlined, acts on a click.\\
+     ⍝     Note that this implies that a URL must stand on its own.
+     ⍝ * 1.2.1
+     ⍝   * Bug fix: size calculation of the final Form in `Input` was ruined by 1.2.0
+     ⍝ * 1.2.0
+     ⍝   * Data type "URL" introduced.
     ∇
 
     ∇ r←CreateParms
@@ -63,7 +76,7 @@
       r.testMode←0
       r.timeout←0
       r.tips←0 2⍴⍬       ⍝ Matrix with control names & tips
-      r.visible←0        ⍝ In order to avoid flickering
+      r.visible←1        ⍝ Set this to 0 in order to avoid any flickering
       r.vGap←0.75
       r.watchLength←1
     ∇
@@ -108,6 +121,7 @@
       n←ReorderTabIndex n
       n←n CreateAutoPressTimer parms.timeout
       ExecOnInitialMsg n
+      n.∆Form.Visible←parms.visible
     ∇
 
     ∇ r←PublicMethods
@@ -607,6 +621,13 @@
       rf.n.∆result←⍬
     ∇
 
+    ∇ OnSelectURL msg;ref
+      ref←↑msg
+      :Trap 11
+          GoToWebPage ref.Caption
+      :EndTrap
+    ∇
+
     :EndSection ⍝ Callbacks
 
     :Section CreateControls
@@ -798,12 +819,7 @@
       GetAddFnsName←{
       ⍝ Returns the name of the "Add*" function that is associated with data type ⍵
           dataType←⍵
-          dataTypes←E.(Button Character Currency Date DropDown DropEdit Label ListView Notepad Numeric Image PlaceHolder Radio Spinner Time YesNo Password)
-          fnsList←'AddButton' 'AddCharacter' 'AddCurrency' 'AddDate' 'AddDropDown' 'AddDropEdit' 'AddLabel' 'AddListView' 'AddNotepad'
-          fnsList,←'AddNumeric' 'AddImage' 'AddPlaceHolder' 'AddRadio' 'AddSpinner' 'AddTime' 'AddYesNo' 'AddPassword'
-          where←dataTypes⍳⊂dataType
-          where=⍴dataTypes:11 ⎕SIGNAL⍨'Invalid data type'
-          where⊃fnsList
+          'Add',↑E.∆GetName dataType
       }
 
     ∇ {button}←AddButton(d n p lo);∆;label;caption
@@ -1004,20 +1020,29 @@
       combo.⎕DF d.name
     ∇
 
-    ∇ {label}←AddLabel(d n p lo);∆
-      :If '⋄'∊d.label
-          d.label←'⋄'Split d.label
+    ∇ {label}←AddLabel(d n p lo);∆;pattern;isUrl
+      :If '⋄'∊d.default
+          d.default←'⋄'Split d.default
           label←AddLabels d n p lo
       :Else
           ∆←''
-          ∆,←⊂'Font'(n GetParm ##.Enums.Fonts.Label)
           ∆,←⊂'Posn'(p.startAt+0 2)
           ∆,←d.props
-          ∆,←⊂'Caption'd.default
           ∆,←⊂'Attach'(4⍴'Top' 'Left')
+          pattern←GetUrlSearchPattern
+          :If isUrl←0<≢pattern ⎕S 1⍠('Mode' 'M')⊣d.default
+              ∆,←⊂'Caption'(pattern ⎕R'\1'⍠('Mode' 'M')⊣d.default)
+              ∆,←⊂'FCol'(0 0 255)
+          :Else
+              ∆,←⊂'Caption'd.default
+          :EndIf
           label←p.ctrl.⎕NEW'Label'∆
           ⍎'n.',d.name,'←label'
           label.⎕DF d.name
+          label.FontObj←CreateLabelFont label
+          :If isUrl
+              label.onMouseUp←'OnSelectURL'
+          :EndIf
       :EndIf
       p.startAt[0]←n.∆Hgap CalcNextPosn n(↑¯1↑label)
       label.∆DataType←##.Enums.InputDataTypes.Label
@@ -1025,18 +1050,30 @@
       label.∆MyName←⊂d.name
     ∇
 
-    ∇ labels←AddLabels(d n p lo);∆;rf;label;caption
+    ∇ labels←AddLabels(d n p lo);∆;rf;label;caption;pattern;isUrl;sub
       labels←⍬
-      :For caption :In d.label
+      :For caption :In d.default
           ∆←''
-          ∆,←⊂'Font'(n GetParm ##.Enums.Fonts.Label)
           ∆,←⊂'Posn'p.startAt
           ∆,←d.props
           ∆,←⊂'Caption'caption
           ∆,←⊂'Attach'(4⍴'Top' 'Left')
+          pattern←GetUrlSearchPattern
+          :If isUrl←0<≢pattern ⎕S 1⍠('Mode' 'M')⊣caption
+              ∆,←⊂'Caption'(pattern ⎕R'\1'⍠('Mode' 'M')⊣caption)
+              ∆,←⊂'FCol'(0 0 255)
+              sub←4
+          :Else
+              ∆,←⊂'Caption'caption
+              sub←6
+          :EndIf
           label←p.ctrl.⎕NEW'Label'∆
           labels,←label
-          p.startAt[0]+←label.Size[0]-6
+          p.startAt[0]+←label.Size[0]-sub
+          :If isUrl
+              label.onMouseUp←'OnSelectURL'
+          :EndIf
+          label.FontObj←CreateLabelFont label
       :EndFor
       ⍎'n.',d.name,'←labels'
     ∇
@@ -1415,7 +1452,7 @@
       :If 0<n.⎕NC'Progressbar'
           list~←n.Progressbar
       :EndIf
-      :If 0∊⍴imageList←GetAllImagesFrom n
+      :If 0=≢imageList←GetAllImagesFrom n
           imagePosnAndSize←⍬
       :Else
           imagePosnAndSize←GetPosnAndSize imageList
@@ -1423,11 +1460,11 @@
       sf←↑{⍵[;0]}n.∆List'SubForm'
       list~←sf
       bottomRight←n.(3 1×∆Vgap ∆Hgap)+↑⌈⌿⊃+/¨GetPosnAndSize list
-      :If 0<n.⎕nc'_SubForm'
+      :If 0<n.⎕NC'_SubForm'
           bottomRight+←n._SubForm.Posn
       :EndIf
       newSize←bottomRight
-      :If ~0∊⍴n.∆buttons
+      :If ~0=≢n.∆buttons
           newSize[0]+←(2×n.∆Vgap)+n.∆Form.Size[0]-↑n.Btn_00.Posn
           newSize[1]⌈←(↑+/1↓¨n.∆buttons.Size)+(n.∆Hgap×1+⍴n.∆buttons) ⍝ Minimum: the buttons must be visible
       :EndIf
@@ -1435,7 +1472,7 @@
           newSize[0]+←n.∆TabButtons[0].Size[0]
           newSize[1]+←2×1⊃(↑(n.∆List'SubForm')[;0]).Posn
       :EndIf
-      :If ~0∊⍴∊n.∆parms.size
+      :If ~0=≢∊n.∆parms.size
           :If ~0∊⍴↑n.∆parms.size
           :AndIf ∨/(↑n.∆parms.size)>newSize[0]
               :If ~0∊⍴↑n.∆parms.size
@@ -1448,8 +1485,13 @@
               newSize[1]←↑1↓n.∆parms.size
           :EndIf
       :EndIf
-      :If ~0∊⍴∊n.∆parms.minSize
-          newSize⌈←n.∆parms.minSize
+      :If 0≠≢∊n.∆parms.minSize
+          :If 0≠≢0⊃n.∆parms.minSize
+              newSize[0]⌈←n.∆parms.minSize[0]
+          :EndIf
+          :If 0≠≢1⊃n.∆parms.minSize
+              newSize[1]⌈←n.∆parms.minSize[1]
+          :EndIf
       :EndIf
       2 ⎕NQ n.∆Form'Configure',(n.∆Form.Posn),newSize
       :If ~0∊⍴imageList
@@ -1567,6 +1609,7 @@
     ∇ r←GetResult ctrl;DT
      ⍝ Collects the data of a single control
       DT←##.Enums.InputDataTypes
+      r←''
       :If 0<ctrl.⎕NC'∆DataType'
           :Select ctrl.∆DataType
           :CaseList DT.Character DT.Notepad DT.Password
@@ -1604,7 +1647,7 @@
               :Else
                   r←ctrl.State
               :EndIf
-          :CaseList DT.(Image Button Tab Label PlaceHolder)
+          :CaseList DT.(Image Button Tab Label PlaceHolder URL)
           ⍝ Those require no action
           :Else
               . ⍝ Huuh?!
@@ -1776,9 +1819,9 @@
       parms2.icon←parms.icon{0∊⍴⍺:⍵ ⋄ ⍺}globalParms.icon
       parms2.testMode←globalParms.testMode{⍺∨⍵}parms.testMode
       parms2.parent←parms.parent
+      parms2.visible←0
       parms.regKey2←''
       n←##.StdForm.Create globalParms parms2
-      n.∆Form.Visible←parms.visible
       'parms2'CopyNamespace parms   ⍝ Yes, this IS needed!
       n.∆Form.⎕WS'Event'QuitEvent 1
       n.∆Form.onClose←'OnClose'
@@ -2150,9 +2193,6 @@
           :If 0∊bool←parms.props[;0]∊defMat[;I.ControlName]
               11 ⎕SIGNAL⍨'"props" carries ',(⍕+/~bool),' invalid control name(s)'
           :EndIf
-⍝⍝          :If ∨/bool←0≠(⎕NS'').{↑⎕NC ⍵}¨defMat[;I.ControlName]
-⍝⍝
-⍝⍝          :EndIf
       :EndIf
     ∇
 
@@ -2206,6 +2246,24 @@
           ' '≠1↑0⍴msg:'Invalid "msg" returned by user-defined "onChange" callback'⎕SIGNAL 11
           ⍬⊣⎕NQ n.∆Form ShowMsgEvent(ctrl msg)
       }
+
+    ∇ font←CreateLabelFont label;props
+    ⍝ In case FCol←→0 0 555 (blue) then the font created is underlined, otherwise it's not.
+      :If ~0=≢n.∆parms.fontLabel
+          props←'PName' 'Size' 'Fixed' 'Italic' 'Weight'{⍺,[0.5]⍵.⍎¨⍺}n.∆parms.fontLabel
+      :ElseIf ~0=≢n.∆globalParms.fontLabel
+          props←'PName' 'Size' 'Fixed' 'Italic' 'Weight'{⍺,[0.5]⍵.⍎¨⍺}n.∆globalParms.fontLabel
+      :EndIf
+      :If label.FCol≡0 0 255
+          props⍪←'Underline' 1
+          props⍪←'Weight' 600
+      :EndIf
+      font←⎕NEW'Font'(↓props)
+    ∇
+
+    ∇ r←GetUrlSearchPattern
+      r←'^<((http|https|ftp|tftp|mailto)://.+?)>$'
+    ∇
 
     :EndSection ⍝ Private
 

@@ -55,6 +55,9 @@
       ∆,←⊂'MinButton'parms.minButton
       ∆,←⊂'Sizeable'parms.sizeable
       ∆,←⊂'Size'parms.size
+      :If 0<parms.⎕NC'vsisible'
+      ∆,←⊂'Visible'parms.visible     
+      :EndIf
       :If 0<parms.⎕NC'parent'
           :If ~(⊂parms.parent)∊''⍬
               n.∆Form←parms.parent.⎕NEW'Form'∆
@@ -117,6 +120,7 @@
       r.sysMenu←1
       r.regKey2←¯1
       r.vGap←¯1
+      r.visible←1
      ⍝Done
     ∇
 
@@ -312,4 +316,3 @@
     ∇
 
 :EndClass
-

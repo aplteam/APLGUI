@@ -71,24 +71,29 @@
       r←16
     ∇
 
-    ∇ r←Tab
+    ∇ r←Time
       :Access Public Shared
       r←17
     ∇
 
-    ∇ r←Time
+    ∇ r←YesNo
       :Access Public Shared
       r←18
     ∇
 
-    ∇ r←YesNo
+    ∇ r←Password
       :Access Public Shared
       r←19
     ∇
 
-    ∇ r←Password
+    ∇ r←URL
       :Access Public Shared
       r←20
+    ∇
+
+    ∇ r←Tab
+      :Access Public Shared
+      r←100       ⍝ This MUST be the last data type !!
     ∇
 
 ⍝⍝⍝ Functions
@@ -101,7 +106,12 @@
     ∇ r←∆ListInputFields
       :Access Public Shared
       r←∆List
-      r⌿⍨←~r[;1]∊Label Image PlaceHolder Tab
+      r⌿⍨←~r[;1]∊Label Image PlaceHolder Tab URL
+    ∇
+
+    ∇ r←∆GetName int
+      :Access Public Shared
+      r←∆List[∆List[;1]⍳int;0]
     ∇
 
 :EndClass

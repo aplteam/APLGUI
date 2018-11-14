@@ -10,7 +10,7 @@
 
  parms←#._APLGUI.GUI.Input.CreateParms
  parms.testMode←1
- menubar←'[View] {view}' ' HTML=F11 : OnView {html}' ' XML=F12 : OnView {xml}'#._APLGUI.GUI.Input.GetDefaultMenubar 1
+ menubar←'[View] {view}' ' HTML=F11 : OnView {html}' ' XML=F12 : OnView {xml}',#._APLGUI.GUI.Input.GetDefaultMenubar 1
  parms.menubar←menubar
  n←#._APLGUI.GUI.Input.Create defMat parms ⍬
  →GoToTidyUp 3≠≢n.menubar.∆List'Menu'

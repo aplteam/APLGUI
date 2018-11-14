@@ -1,10 +1,15 @@
 :Namespace APLGuiAdmin
 
     ∇ r←Version
-      r←(⍕⎕THIS.##)'0.16.3' '2018-11-08'
+      r←(⍕⎕THIS.##)'0.17.1' '2018-11-14'
     ∇
 
     ∇ r←History 
+      ⍝ * 0.17.1
+      ⍝   * Bug fixes in `Input`, see there.
+      ⍝   * Bug in `Enums.InputDataTypes.∆ListInputFields`: was not supposed to return "URL".
+      ⍝ * 0.17.0
+      ⍝   * Input got a new data type: "UR" for URL.
       ⍝ * 0.16.3
       ⍝   * Bug fix: in case `Input` had to deal with a form that does not have any sub forms it crashed.
       ⍝ * 0.16.2
