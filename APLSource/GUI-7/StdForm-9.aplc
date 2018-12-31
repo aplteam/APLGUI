@@ -208,7 +208,7 @@
 
 
     ∇ n←AddButton(n captions);i;∆;this;rf;size;name
-      size←⍬(⌈/(n∘{1⊃GetSize ⍺((2+⍴⍵)⍴'9')}¨captions))
+      size←⍬(⌈/80,(n∘{1⊃GetSize ⍺((2+⍴⍵)⍴'9')}¨captions))
       :For i :In ⍳⍴,captions
           this←i⊃,captions
           :If (,0)≢,this   ⍝ Now deprecated way to have no such button

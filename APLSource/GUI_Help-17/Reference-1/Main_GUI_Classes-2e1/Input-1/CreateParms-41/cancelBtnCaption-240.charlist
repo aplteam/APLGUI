@@ -2,6 +2,7 @@
 
 Defaults to "Cancel". Can be any string. If you don't want a "Cancel" button at all set this to an empty string.
 
-Note that a button with the caption "Cancel" gets the `Default` property set to 1. 
+Note that a button with the caption "Cancel" gets the `Cancel` property set to 1 in case the "cancel" parameter
+is undefined.
 
 

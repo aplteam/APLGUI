@@ -2,5 +2,6 @@
 
 Defaults to "OK". If you don't need an "OK" button then assign an empty vector.
 
-Note that a button with the caption "OK" gets the `Default` property set to 1. 
+Note that a button with the caption "OK" gets the `Default` property set to 1 in
+case the "default" parameter is undefined.
 

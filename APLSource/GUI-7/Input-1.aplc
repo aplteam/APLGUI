@@ -673,7 +673,7 @@
       :If 0∊⍴n.∆parms.helpBtnCaption
           n←##.StdForm.AddButtons n(n.∆parms.(okBtnCaption cancelBtnCaption))
           :If ~0∊⍴n.∆buttons
-          :AndIf 0<n.⎕NC'Btn_01'
+          :AndIf 0<n.⎕NC'Btn_00'
               n.Btn_00.Default←n.∆parms.default
               n.Btn_00.onSelect←'OnOkay'
               n.∆OK←n.Btn_00

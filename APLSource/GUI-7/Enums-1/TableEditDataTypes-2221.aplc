@@ -48,10 +48,4 @@
       r←⍉{⍵,[-0.5]⍎¨⍵}(⎕NL-3)~'∆'⎕NL-3
     ∇
 
-    ∇ r←∆ListInputFields
-      :Access Public Shared
-      r←∆List
-      r⌿⍨←~r[;1]∊Label Image PlaceHolder Tab
-    ∇
-
 :EndClass

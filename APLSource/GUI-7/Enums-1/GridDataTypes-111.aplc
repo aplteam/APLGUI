@@ -1,0 +1,62 @@
+:Class GridDataTypes
+⍝ All data types the "Grid" class does support
+
+    ∇ r←Char
+      :Access Public Shared
+      r←1
+    ∇
+
+    ∇ r←Numeric
+      :Access Public Shared
+      r←2
+    ∇
+
+    ∇ r←Currency
+      :Access Public Shared
+      r←3
+    ∇
+
+    ∇ r←Date
+      :Access Public Shared
+      r←4
+    ∇
+
+    ∇ r←DateTime
+      :Access Public Shared
+      r←5
+    ∇
+
+    ∇ r←DropEdit
+      :Access Public Shared
+      r←6
+    ∇
+
+    ∇ r←DropDown
+      :Access Public Shared
+      r←7
+    ∇
+
+    ∇ r←Time
+      :Access Public Shared
+      r←8
+    ∇
+
+    ∇ r←YesNo
+      :Access Public Shared
+      r←9
+    ∇
+
+⍝⍝⍝ Functions
+
+    ∇ r←∆List
+      :Access Public Shared
+      r←⍉{⍵,[-0.5]⍎¨⍵}(⎕NL-3)~'∆'⎕NL-3
+    ∇
+
+    ∇ r←∆GetName int;list
+      :Access Public Shared
+      list←∆List
+      list[list[;1]⍳int;0]
+    ∇
+
+:EndClass

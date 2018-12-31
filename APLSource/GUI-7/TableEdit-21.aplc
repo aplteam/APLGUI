@@ -1,11 +1,7 @@
 :Class TableEdit
 ⍝ This class offers functions for editing and browsing SQL-like tables.
-⍝ SQL-like means that any column has exactly one well-defined data type.
-⍝
-⍝ Main methods are [`Edit`](#), `Browse` and `CreateGrid`.
-⍝
-⍝ It also offers a method `CreateGrid` that can be used to inject a Grid into any
-⍝ Form or SubForm, for exmaple by `Input` for the "Grid" data type.
+⍝ SQL-like means that any column has exactly one well-defined data type.\\
+⍝ Main methods are `Edit` and `Browse`.\\
 
     :Include ##.##.APLTreeUtils
     :Include APLGuiUtils
