@@ -1,78 +1,14 @@
 :Namespace APLGuiAdmin
 
     ∇ r←Version
-      r←(⍕⎕THIS.##)'0.17.1' '2018-11-14'
+      r←(⍕⎕THIS.##)'0.17.2' '2018-12-31'
     ∇
 
     ∇ r←History 
-      ⍝ * 0.17.1
-      ⍝   * Bug fixes in `Input`, see there.
-      ⍝   * Bug in `Enums.InputDataTypes.∆ListInputFields`: was not supposed to return "URL".
-      ⍝ * 0.17.0
-      ⍝   * Input got a new data type: "UR" for URL.
-      ⍝ * 0.16.3
-      ⍝   * Bug fix: in case `Input` had to deal with a form that does not have any sub forms it crashed.
-      ⍝ * 0.16.2
-      ⍝   * "Restore" added to Enums.SelTextStyles and `Input` changed accordingly.
-      ⍝ * 0.16.1
-      ⍝   * Bug fix in `Input` (`AdjustSize`).
-      ⍝ * 0.16.0
-      ⍝     * A menubar added to input now allows access to standard operations "cut", "copy" and "paste" via
-      ⍝       a simplified syntax.
-      ⍝ * 0.15.2
-      ⍝     * Bug fix: In "Input" `confirmCancel` had the wrong effect.
-      ⍝ * 0.15.1
-      ⍝   * Bug fix: For a "Notepad" (Inout) the cursor position should not be tempered with.
-      ⍝ * 0.15.0
-      ⍝   * Bug fix: there was no default for "index" in `FileBox.CreateParms`.
-      ⍝ * 0.14.0
-      ⍝   * `FileBox` selected the second filter as the default.
-      ⍝   * `FileBox` had no `index` parameter.
-      ⍝ * 0.13.0
-      ⍝   * In `SelectOptions` using the space key for toggling check boxes did not work (anymore). This is due to
-      ⍝     a `⎕IO` dependency which in turn is a Dyalog bug. Se <01464>. Workaround (using 2 ⎕NQ) implemented.
-      ⍝ * 0.12.0
-      ⍝   * Again `⎕IO` and `⎕ML.
-      ⍝ * 0.11.0
-      ⍝   * `:Include` statements for `APLTreeUtils` corrected.
-      ⍝   * `⎕IO` and `⎕ML` dependencies fixed.
-      ⍝ * 0.10.0
-      ⍝   Converted to both acre 4 and GitHub
-      ⍝ * 0.9.13
-      ⍝   * `Enums` tidied up: no classes any more that start their names with "Enums".
-      ⍝ * 0.9.12
-      ⍝   * All main classes producing a GUI now have a paramater `parent`.
-      ⍝   * In `StdForm` and `APLGuiGlobalParms.CreateDefaults` the parameter `mainform` was renamed to `parent.
-      ⍝   * Several minor bug fixes.
-      ⍝ * 0.9.11
-      ⍝   * Problem in "Notepad" fixed.
-      ⍝ * 0.9.9
-      ⍝   * OptionTools ignored font settings.
-      ⍝ * 0.9.8
-      ⍝   * Help problems fixed.
-      ⍝   * `Input` may be used without any push buttons at all.
-      ⍝ 0.9.7
-      ⍝ * Callbacks associated with buttons where not handled correctly in `Dialogs`. Also, documentation was poor.
-      ⍝ 0.9.6
-      ⍝ * Bug fix in `CenterIn`.
-      ⍝ 0.9.5
-      ⍝ * Bug fix in Notepad.
-      ⍝ * IE revisited.
-      ⍝ 0.9.4:
-      ⍝ * APLMode in Notepad now changes color for both background and foreground.
-      ⍝ * Bug fixes in Notepad.
-      ⍝ 0.9.3:
-      ⍝ * Bug with "Undo" fixed: the cursor position was not right after an undo.
-      ⍝ * Search can now start either at the top or at the current cursor position.
-      ⍝ * Bug in Find with Lowercase fixed.
-      ⍝ * Bug in Find with "Words" fixed.
-      ⍝ 0.9.2:
-      ⍝ Notepad now offers "Undo" and "Redo".
-      ⍝ "APLMode" in Notepad redefined.
-      ⍝ 0.9.1:
-      ⍝ `Notepad` Now has a "Find" feature.
-      ⍝ 0.9.0:
-      ⍝ `Notepad` may now have a user-defined menu.
+      ⍝ * 0.17.2
+      ⍝   * Bug fix in `Input`, see there.
+      ⍝\\
+      ⍝ For information regarding older version see <https://github.com/aplteam/APLGUI/releases>
     ∇
 
     ∇ {(report rc)}←CheckOtherRequirements compileFlag
