@@ -1,12 +1,12 @@
 :Namespace APLGuiAdmin
 
     ∇ r←Version
-      r←(⍕⎕THIS.##)'0.17.2' '2018-12-31'
+      r←(⍕⎕THIS.##)'0.17.3' '2019-06-18'
     ∇
 
     ∇ r←History 
-      ⍝ * 0.17.2
-      ⍝   * Bug fix in `Input`, see there.
+      ⍝ * 0.17.3
+      ⍝   * Bug fix regarding :Include APLTreeUtils
       ⍝\\
       ⍝ For information regarding older version see <https://github.com/aplteam/APLGUI/releases>
     ∇

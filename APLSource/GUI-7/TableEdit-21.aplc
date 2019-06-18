@@ -3,7 +3,6 @@
 ⍝ SQL-like means that any column has exactly one well-defined data type.\\
 ⍝ Main methods are `Edit` and `Browse`.\\
 
-    :Include ##.##.APLTreeUtils
     :Include APLGuiUtils
 
     :Section Public
