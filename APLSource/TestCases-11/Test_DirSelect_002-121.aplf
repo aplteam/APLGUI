@@ -13,7 +13,7 @@
  startDir←'C:\Windows\system32'
  n←myGuiParms parms #._APLGUI.GUI.DirSelect.Create startDir
  ⎕DL 0.1
- →GoToTidyUp≢/#.APLTreeUtils.Lowercase startDir({⍵↓⍨-'\'=¯1↑⍵}↑#.APLTreeUtils.SplitPath(n #._APLGUI.GUI.DirSelect.GetPathFromTreeItems n.Tree.SelItems))
+ →GoToTidyUp≢/#.APLTreeUtils.Lowercase startDir({⍵↓⍨-'\'=¯1↑⍵}(n #._APLGUI.GUI.DirSelect.GetPathFromTreeItems n.Tree.SelItems))
  r←∆OK
 
 ∆TidyUp:

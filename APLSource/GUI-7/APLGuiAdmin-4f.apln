@@ -1,12 +1,16 @@
 :Namespace APLGuiAdmin
 
     ∇ r←Version
-      r←(⍕⎕THIS.##)'0.17.4.7' '2019-06-18'
+      r←(⍕⎕THIS.##)'0.18.0.11' '2019-06-19'
     ∇
 
     ∇ r←History 
-      ⍝ * 0.17.4
-      ⍝   * YesOrNo in Test cases
+      ⍝ * 0.18.0
+      ⍝   * `DirSelect` polished.
+      ⍝   * Markdown2Help replaced by Laguntza.
+      ⍝   * Couple of minor bug fixes.
+      ⍝   * Documentation polished.
+      ⍝   * YesOrNo in Test cases improved.
       ⍝\\
       ⍝ For information regarding older version see <https://github.com/aplteam/APLGUI/releases>
     ∇
@@ -56,8 +60,8 @@
     ⍝ `compileFlag` defaults to 0 except when the help file cannot be found.
     ⍝ `userMode` is a Boolean. If it is 1 then there is no "Developer" menu.
       r←⍬
-      helpFilename←'Markdown2Help.dcf'
-      parms←##.##.Markdown2Help.CreateParms ⍬
+      helpFilename←'Laguntza.dcf'
+      parms←##.##.Laguntza.CreateParms ⍬
       parms.folderName←(↑1 ⎕NPARTS''),'Help'
       compileFlag←(parms.folderName,'/',helpFilename){0<⎕NC ⍵:⍎⍵ ⋄ 0=⎕NEXISTS ⍺}'compileFlag'
       'Right argument must be a Boolean'⎕SIGNAL 11/⍨∧/(,userMode)∘≢¨,¨0 1
@@ -72,7 +76,7 @@
       :Else
           parms.userMode←1
       :EndIf
-      compileFlag ##.##.Markdown2Help.New parms
+      compileFlag #.##.Laguntza.New parms
     ∇
 
     ∇ {r}←SaveScripts flag;list;path;code;filename;scriptName

@@ -4,7 +4,7 @@
  projects_←settings_←''
  :If 9=⎕SE.⎕NC'acre'
      :If 0=⎕NC'projects'
-         projects←,⎕SE.UCMD'acre.ListOpenProjects'
+         projects←,⎕SE.UCMD'acre.Projects'
      :Else
          projects←{2=⍴⍴⍵:↓⍵ ⋄ ⍵}{2=≡⍵:⍵ ⋄ ⊂⍵}projects
      :EndIf

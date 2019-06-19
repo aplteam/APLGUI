@@ -1,24 +1,20 @@
 :Class FileBox
 ⍝ This class implements a standard Windows "FileSelection" dialog box but accepts
-⍝ a global parameter space and makes necessary adjustments as far as possible.
-⍝
+⍝ a global parameter space and makes necessary adjustments as far as possible.\\
 ⍝ The idea is to set the parameters and then call the `Run` method. `Run` will
 ⍝ return either an empty vector (in case the "Cancel" button was pressed) or
 ⍝ a text vector with a path in case the "style" property was "single" or a vector
-⍝ of vectors with path names in case "style" was "multi".
-⍝
+⍝ of vectors with path names in case "style" was "multi".\\
 ⍝ Instead of calling `Run` you can also call the `Create` method and then the
-⍝ `ModalWait` method but in this particular  instance this has no benefits over
-⍝ calling `Run`. For details on the parameters call `]ADOC_Browse` on `FileBox`.
-⍝
+⍝ `ModalWait` method but in this particular instance this has no benefits over
+⍝ calling `Run`. For details on the parameters call `]ADOC_Browse` on `FileBox`.\\
 ⍝ Note that the `FileBox` control used by the `FileBox` class comes with certain
 ⍝ limitations:
 ⍝ * Its window cannot be centered in the main application's window.
 ⍝ * No icon can be specified.
 ⍝ * Neither "Posn" nor "Size" can be specified.
 ⍝ * The font to be used cannot be specified.
-⍝ * The user cannot be restricted to a certain directory.
-⍝
+⍝ * The user cannot be restricted to a certain directory.\\
 ⍝ All in all the class lacks many of the features of the `SelectDir` class and
 ⍝ therefore also the flexibility of that class. For that reason it might well
 ⍝ be replaced by a `SelectFile` class one day.\\

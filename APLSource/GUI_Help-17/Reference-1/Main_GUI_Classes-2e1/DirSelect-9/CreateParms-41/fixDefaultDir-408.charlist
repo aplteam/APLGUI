@@ -1,4 +1,5 @@
 # fixDefaultDir
 
-Boolean that defaults to 0. That this to 1 makes it impossible for the user to change the `defaultDir`.
+Boolean that defaults to 0. That this to 1 makes it impossible for the user to change the pre-selected folder.
 
+Note that setting this to 1 sets [fixDefaultDrive](#) as well.

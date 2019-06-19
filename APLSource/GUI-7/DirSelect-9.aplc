@@ -1,8 +1,8 @@
 :Class DirSelect
-⍝ Allows the user to select a certain directory.\\
-⍝ You may give the user no, some or plenty of freedom in changing the
-⍝ parent directory or even the drive. This can all be achieved by setting
-⍝ certain values of the parameters, see there.\\
+⍝ Allows the user to select a directory.\\
+⍝ By default the user is free to switch freely between disk as well as folders. By setting `fixDrive` to 1 she
+⍝ can be prevented from switching to another disk and by setting `fixDefaultDir` she can also be prevented
+⍝ from switching folders. Naturally setting `fixDefaultDir` to 1 implies that `fixDefaultDrive` gets 1 as well.\\
 ⍝ Author: Kai Jaeger ⋄ Copyright: APL Team Ltd
 
     :Include ##.##.APLTreeUtils
@@ -34,6 +34,7 @@
       parms.sizeable←1
       parms.hasStatusbar←1
       n←##.StdForm.Create globalParms parms
+      n.∆Form.CursorObj←1
       n(PolishParms)←startDir
       n.∆Form.⎕WS'Event'QuitEvent 1
       n.∆Form.onClose←'OnClose'
@@ -44,11 +45,13 @@
       n(CreateDriveCombo)←n.∆startDrive
       n←##.StdForm.AddButtons(n('OK' 'Cancel'))
       n.Tree←CreateTree n
+      2 ⎕NQ n.∆Form'Flush'
       PopulateTree n
       n.∆buttons.onSelect←⊂'OnButtonPressed'
       n.∆Form ##.APLGuiHelpers.CenterIn n GetParm'centerIn'
       {}CheckPosition n.∆Form
       n←PositionButtons n
+      n.∆Form.CursorObj←0
      ⍝Done
     ∇
 
@@ -62,7 +65,6 @@
       r.alignButtons←##.Enums.Align.Left
       r.caption←''
       r.centerIn←''
-      r.defaultDir←''
       r.defaultDrive←¯1
       r.driveList←¯1
       r.fixDefaultDir←0
@@ -126,12 +128,13 @@
                   :Return
               :EndIf
               :If '\'∊item←ind⊃n.Tree.Items
-                  path←item,path
+                  path←item,'\',path
               :Else
                   path←item,'\',path
               :EndIf
           :Until 0=ind⊃n.Tree.Depth
       :EndIf
+      path←RefToFilesAndDirs.NormalizePath path
     ∇
 
 ⍝⍝⍝⍝ Private stuff
@@ -152,77 +155,30 @@
           ∆
       }
 
-    ∇ {r}←OnExpandTree msg;n;in;where;path;d;_;depth;bool;items;saveCursorObj
+    ∇ {r}←OnExpandTree msg;n;in;path;d;_;depth;items;saveCursorObj;hasSubDirs
       r←1
       n←GetRefTo_n↑msg
       saveCursorObj←n.∆Form.CursorObj
       n.∆Form.CursorObj←1
       in←2⊃msg
-      where←{¯1+(⍴⍵)-⍵⍳⍳1+↑⍵}⌽(1+in)↑n.Tree.Depth
-      path←↑{⍺,(('\'≠↑⌽⍺)/'\'),⍵}/n.Tree.Items[where]
-      :If ⎕NEXISTS path
-          :If 0∊⍴items←##.FilesAndDirs.ListDirs path,'\*'            ⍝ List of sub dirs
-              {}DeleteChildren n.Tree in                            ⍝ There are no sub dirs, so let's delete "dummy"
-          :Else
-              items←Sort items
-              {}DeleteChildren n.Tree in
-              bool←{~0∊⍴##.FilesAndDirs.ListDirs ⍵}¨(path,'\')∘,¨items
-              items←⊂¨items
-              (bool/items)←(bool/items),¨⊂⊂'dummy'
-              items←↑,/items
-              (bool/bool)←⊂0 1
-              depth←∊bool
-              {}2 ⎕NQ n.Tree'AddChildren'in items depth
-              {}2 ⎕NQ n.Tree'Expanding' 0
-              n.Tree.SelItems[in]←1
-          :EndIf
-      :Else
-          n.Tree.SelItems[]←0
-          n.Tree.SelItems[in]←1
-          1 ⎕NQ n.Tree'Retracting'in
-      :EndIf
-      n.∆Form.CursorObj←saveCursorObj
-    ∇
-
-    ∇ {r}←OnRetractTree msg;n;in;where;path;d;_;depth;bool;items;saveCursorObj;flag;pi;path2
-      r←1
-      n←GetRefTo_n↑msg
-      saveCursorObj←n.∆Form.CursorObj
-      n.∆Form.CursorObj←1
-      in←2⊃msg
+      n.Tree.SelItems[]←0
+      n.Tree.SelItems[in]←1
       path←n GetPathFromTreeItems n.Tree.SelItems
-      :If 0=##.FilesAndDirs.IsDir path
-          flag←0
-          :Repeat
-              pi←n.Tree.GetParentItem in
-              path2←n GetPathFromTreeItems pi=⍳⍴n.Tree.SelItems
-              :If 0=flag←##.FilesAndDirs.IsDir path2
-                  in←pi
-                  path←path2
-              :EndIf
-          :Until flag
-          2 ⎕NQ n.Tree'DeleteItems'in
-          n.Tree.SelItems[]←0
-          n.Tree.SelItems[pi]←1
+      items←RefToFilesAndDirs.ListDirs path,'\*'            ⍝ List of sub dirs
+      :If 0=≢items
+          {}DeleteChildren n.Tree in                        ⍝ There are no sub dirs, so let's delete "dummy"
+      :Else
+          items←Sort items
+          {}DeleteChildren n.Tree in
+          {}2 ⎕NQ n.Tree'AddChildren'in('\'Last¨items)0
+          {}2 ⎕NQ n.Tree'Expanding'in
+      :EndIf
+      :If 0<≢items
+      :AndIf 0<≢hasSubDirs←0<≢¨RefToFilesAndDirs.ListDirs¨items
+      :AndIf 1<+/hasSubDirs
+          2 ⎕NQ n.Tree'AddChildren'(in+1+⌽Where hasSubDirs)((+/hasSubDirs)⍴⊂'dummy')0
       :EndIf
       n.∆Form.CursorObj←saveCursorObj
-    ∇
-
-    ∇ r←n OnRefreshEvent msg;sh;no;rf
-      ⍝ Refresh selection info in the status bar
-      r←⍬
-      :If 0<n.⎕NC'Statusbar'
-          no←+/n.Options.State
-          sh←⍴n.Options
-          :If 0=no
-              n.StatusField1.Text←'None of ',(⍕sh),' option',((1<sh)/'s'),' is selected'
-          :ElseIf no=1
-              n.StatusField1.Text←'1 option of ',(⍕sh),' is selected'
-          :Else
-              n.StatusField1.Text←(⍕no),' option',((1<no)/'s'),' of ',(⍕sh)
-              n.StatusField1.Text,←((1<no)⊃,' is' ' are'),' selected'
-          :EndIf
-      :EndIf
     ∇
 
       CreateInfo←{
@@ -304,7 +260,6 @@
           ref.Posn[1]+←n.∆Hgap
           ref.Size[1]-←2×n.∆Hgap
           ref.onExpanding←'OnExpandTree'
-          ref.onRetracting←'OnRetractTree'
           ref.onContextMenu←'OnContextMenuOnTree'
           ref.onItemUp←'OnItemUpInTree'
           ref.onKeyPress←'OnKeyPressInTree'
@@ -313,44 +268,39 @@
       }
 
       DeleteChildren←{
-          (rf in)←⍵                                             ⍝ [1]: Ref pointing to the grid; [2] Item number
+          (rf in)←⍵                                             ⍝ [1]: Ref pointing to the TreeView; [2] Item number
           0=noOf←{+/∧\(↑⍵)≤1↓⍵}in↓n.Tree.Depth:⍬
           _←2 ⎕NQ n.Tree'DeleteItems'(in+1)noOf
           ⍬
       }
 
-    ∇ {r}←PopulateTree n;paths;path;i;bool;items;in;depth;itemsLC;noOf
+    ∇ {r}←PopulateTree n;paths;path;i;bool;items;in;itemsLC;noOf;firstFlag;depth;hasSubDirs
       r←⍬
       :If n.∆parms.fixDefaultDir
           paths←,⊂n.∆startDrive,n.∆startDir
       :Else
           paths←(⊂n.∆startDrive),{0∊⍴⍵:⍵ ⋄ '\'Split ⍵}n.∆startDir
       :EndIf
-      in←0
+      depth←in←0
       2 ⎕NQ n.Tree'AddChildren' 0(1↑paths)0
+      firstFlag←1
       :For i :In ⍳⍴paths
           path←↑{⍺,(('\'≠¯1↑⍺)/'\'),⍵}/(i+1)↑paths
-          :If ~0∊⍴items←RefToFilesAndDirs.ListDirs path,'\'
-              noOf←{19 22::¯1 ⋄ ↑⍴RefToFilesAndDirs.ListDirs ⍵}¨items
-          :AndIf ~0∊⍴items←(¯1≠noOf)/items
-              noOf~←¯1
-              items←Sort items
-              bool←0<noOf
-              items←⊂¨items
-              (bool/items)←(bool/items),¨⊂⊂'dummy'
-              items←↑,/items
-              (bool/bool)←⊂0 1
-              depth←∊bool
-              :If 0<i
-                  2 ⎕NQ n.Tree'DeleteChildren'in
-              :EndIf
-              2 ⎕NQ n.Tree'AddChildren'in items depth
-              2 ⎕NQ n.Tree'Expanding'in
-              :If (i+1)<⍴paths
-                  itemsLC←Lowercase items
-                  in+←1+itemsLC⍳⊂Lowercase(i+1)⊃paths
-              :EndIf
+          items←RefToFilesAndDirs.ListDirs path,'\'
+          :If ~firstFlag
+              in←Where(n.Tree.Depth=depth)∧(Lowercase n.Tree.Items)≡¨Lowercase paths[i]
+              2 ⎕NQ n.Tree'DeleteChildren'in
           :EndIf
+          :If 0<≢items
+              2 ⎕NQ n.Tree'AddChildren'in('\'Last¨items)((≢items)⍴0)
+              2 ⎕NQ n.Tree'Expanding'in
+          :EndIf
+          :If 0<≢items
+              hasSubDirs←0<≢¨RefToFilesAndDirs.ListDirs¨items
+              2 ⎕NQ n.Tree'AddChildren'(in+1+⌽Where hasSubDirs)((≢hasSubDirs)⍴⊂'dummy')0
+          :EndIf
+          firstFlag←0
+          depth+←1
       :EndFor
       n.Tree.SelItems←(⍴n.Tree.Items)⍴0
       SelectStartDir n
@@ -358,8 +308,8 @@
 
       PopulateTree_←{
           (Tree path items)←⍵
-          bool←{~0∊⍴⍵ RefToFilesAndDirs.ListDirs ⍵}¨(path,'\')∘,¨items
-          items←⊂¨items
+          bool←{0≠≢⍵ RefToFilesAndDirs.ListDirs ⍵}¨items
+          items←⊂¨'\'Last¨items
           (bool/items)←(bool/items),¨⊂⊂'dummy'
           Tree.Items←(⊂path),↑,/items
           (bool/bool)←⊂0 1
@@ -370,14 +320,19 @@
 
     ∇ {n}←n PolishParms startDir;noOf
       n.∆parms.fixDefaultDrive∨←n.∆parms.fixDefaultDir
-      :If ~0∊⍴n.∆startDir←startDir
+      :If 0≠≢n.∆startDir←startDir
           :If '//'≡2↑startDir
               noOf←+/4>+\startDir='/'
               n.∆startDrive←noOf↑startDir
               n.∆startDir←(1+noOf)↓startDir
           :Else
-              n.∆startDrive←{'\'∊⍵:⍵↑⍨1+⍵⍳'\' ⋄ ''}n.∆startDir
-              n.∆startDir←{'\'∊⍵:⍵↓⍨1+⍵⍳'\' ⋄ ⍵}n.∆startDir
+              :If {(2=≢⍵)∧':'=1⊃⍵}n.∆startDir
+                  n.∆startDrive←n.∆startDir,'\'
+                  n.∆startDir←''
+              :Else
+                  n.∆startDrive←{'\'∊⍵:⍵↑⍨1+⍵⍳'\' ⋄ ''}n.∆startDir
+                  n.∆startDir←{'\'∊⍵:⍵↓⍨1+⍵⍳'\' ⋄ ⍵}n.∆startDir
+              :EndIf
           :EndIf
       :Else
           :If ¯1≡n.∆parms.defaultDrive
@@ -420,9 +375,6 @@
           in←n.Tree.SelItems⍳1
           n2←⎕NS''
           n2.ContextMenu←n.∆Form.⎕NEW⊂'Menu'
-          n2.Cancel←n2.ContextMenu.⎕NEW'MenuItem'(⊂('Caption' 'Cancel'))
-          n2.Cancel.onSelect←1
-          n2.Sep1←n2.ContextMenu.⎕NEW⊂'Separator'
           n2.GetPath←n2.ContextMenu.⎕NEW'MenuItem'(⊂('Caption' 'Copy full path to clipboard'))
           f1←n.∆parms.allowCreate
           f2←n.∆parms.allowRemove
@@ -485,13 +437,13 @@
           path←n GetPathFromTreeItems n.Tree.SelItems
           parms←##.Dialogs.CreateParmsForYesOrNo
           parms.centerIn←n.∆Form
-          ¯1=ef←0∊⍴##.FilesAndDirs.Dir path:⍬  ⍝ Empty flag; ¯1=does not exist
+          ¯1=ef←0=≢↑RefToFilesAndDirs.Dir path,'\':⍬  ⍝ Empty flag; ¯1=does not exist
           msg←'The directory:'path
           msg,←⊂'is ',((~ef)/'NOT '),' empty.'
           msg,←⊂'Are you sure that you want to remove it?'
           0=n.∆globalParms parms ##.Dialogs.YesOrNo msg:⍬
-          (rc more)←'Recursive'##.FilesAndDirs.RmDir path
-          (rc≠0):⍬⊣##.Dialogs.ShowMsg('Removing directory <',path,'> failed; rc=',⍕rc)more
+          (rc en more)←RefToFilesAndDirs.RmDir path
+          rc≠0:⍬⊣##.Dialogs.ShowMsg('Removing directory <',path,'> failed; rc=',⍕rc)more
           ind←n.Tree.SelItems⍳1
           _←2 ⎕NQ n.Tree'DeleteItems'ind
           n.Tree.SelItems[]←0
@@ -579,4 +531,3 @@
       }
 
 :EndClass
-

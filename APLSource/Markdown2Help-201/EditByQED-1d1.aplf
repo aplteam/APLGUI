@@ -1,4 +1,4 @@
- {r}←{refToParent}EditByQED name;body;noOf;flag;msg;old;acreSettings;acreProjects
+ {r}←{refToParent}EditByQED name;body;noOf;flag;msg;old
 ⍝ Allows "edit-through" in version 14.1 and later.
 ⍝ Returns 1 if the user has entered something, otherwise 0 if name points to a vars.
 ⍝ Returns the result of ⎕FX if name points to a function (∆TopicProperties)
@@ -9,13 +9,11 @@
      old←refToParent⍎name
  :EndIf
  :Repeat
-     (acreProjects acreSettings)←AcreMessages⊂'NULL'
      :If 14.1≤↑(//)⎕VFI{⍵/⍨2>+\'.'=⍵}1⊃'#'⎕WG'APLVersion'
          {}(refToParent.⎕ED⍠('EditName' 'Allow'))name
      :Else
          {}refToParent.⎕ED name
      :EndIf
-     {}acreProjects AcreMessages acreSettings
      :If 3=refToParent.⎕NC name
          body←⎕CR name
          r←refToParent.⎕FX body
