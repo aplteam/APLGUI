@@ -5,6 +5,7 @@
 ⍝ certain values of the parameters, see there.\\
 ⍝ Author: Kai Jaeger ⋄ Copyright: APL Team Ltd
 
+    :Include ##.##.APLTreeUtils
     :Include APLGuiUtils
 
     :Field Shared ReadOnly RefreshEvent←9999

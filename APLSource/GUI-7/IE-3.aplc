@@ -30,6 +30,7 @@
 ⍝ [Documentation on MSDN](https://msdn.microsoft.com/en-us/library/aa752040(v=vs.85).aspx)\\
 ⍝ Author: Kai Jaeger ⋄ Copyright: APL Team Ltd
 
+    :Include ##.##.APLTreeUtils
     :Include APLGuiUtils
 
     ⎕IO←0 ⋄ ⎕ML←3
@@ -138,7 +139,7 @@
     ⍝ * Vector of  vectors with HTML
     ⍝
     ⍝ Returns the name of the tmep file used or ''
-
+     
     ⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝
     ⍝ We don't do the (memory based) approach anymore because ⍝
     ⍝ a) Ctrl+F (Find) on a page does not work then           ⍝
@@ -146,7 +147,7 @@
     ⍝      ref.browser.Document.close                         ⍝
     ⍝      ref.browser.Document.write⊂1↓↑,/(⎕UCS 13),¨html    ⍝
     ⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝
-
+     
       tempFilename←(¯3↓RefToFilesAndDirs.GetTempFilename''),'html'
       RefToAPLTreeUtils.WriteUtf8File tempFilename html
       ref.Navigate⊂'file://',tempFilename

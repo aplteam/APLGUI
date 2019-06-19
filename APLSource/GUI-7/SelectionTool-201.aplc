@@ -1,6 +1,7 @@
 :Class SelectionTool
 ⍝ This is the base class of `OptionsTool` and `ProcessTool`.
 
+    :Include ##.##.APLTreeUtils
     :Include APLGuiUtils
     :Include SelAndProcess
 

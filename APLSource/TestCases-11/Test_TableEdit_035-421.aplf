@@ -25,7 +25,7 @@
 
      n←#._APLGUI.GUI.Table.Create table #._APLGUI.GUI.APLGuiGlobalParms.CreateDefaults parms
 
-     r←~∆PromptForSuccess'Are the first two columns excluded from horizontal scrolling?'
+     r←~1 ∆PromptForSuccess'Are the first two columns excluded from horizontal scrolling?'
 
 ∆TidyUp:
      n.∆CloseForm

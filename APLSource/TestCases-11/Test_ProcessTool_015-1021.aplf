@@ -49,6 +49,6 @@
      parms.colTitles←'First' 'Second'
      parms #._APLGUI.GUI.ProcessTool.Run data'#.MyNS.OnHandler'
 
-     r←~∆PromptForSuccess'Did the GUIs look fine in terms of size?'
+     r←~1 ∆PromptForSuccess'Did the GUIs look fine in terms of size?'
 
  :EndIf

@@ -28,7 +28,7 @@
 
      ⎕DQ n1.∆Form
 
-     →PassesIf ∆AskQuestion'Did the Browser control act in the expected way? (y/n)'
+     →PassesIf 1 ∆PromptForSuccess'Did the Browser control act in the expected way?'
 
      r←∆OK
 

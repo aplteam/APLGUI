@@ -16,6 +16,7 @@
 ⍝
 ⍝ Author: Kai Jaeger ⋄ Copyright: APL Team Ltd
 
+    :Include ##.##.APLTreeUtils
     :Include APLGuiUtils
 
     ⎕IO←0 ⋄ ⎕ML←3
@@ -31,7 +32,7 @@
     ∇ (okFlag answer)←{x}AskForString question;n;buffer;globalParms;parms;⎕TRAP
      ⍝ Modal cover for `CreateStringRequest`
       :Access Public Shared
-      ⎕TRAP←(APLGuiError'C'('(0⊃⎕DM )⎕signal ',⍕APLGuiError))(0 'N')
+      ⎕TRAP←(##.APLGuiUtils.APLGuiError'C'('(0⊃⎕DM )⎕signal ',⍕##.APLGuiUtils.APLGuiError))(0 'N')
       okFlag←0 ⋄ answer←''
       :If 0=⎕NC'x'
           n←CreateStringRequest question
@@ -50,7 +51,7 @@
     ∇ password←{x}AskForPassword length;n;globalParms;parms;⎕TRAP
      ⍝ Modal cover for `CreatePasswordRequest`
       :Access Public Shared
-      ⎕TRAP←(APLGuiError'C'('(0⊃⎕DM )⎕signal ',⍕APLGuiError))(0 'N')
+      ⎕TRAP←(##.APLGuiUtils.APLGuiError'C'('(0⊃⎕DM )⎕signal ',⍕##.APLGuiUtils.APLGuiError))(0 'N')
       'Invalid right argument: password length'⎕SIGNAL 11/⍨83≠⎕DR length
       :If 0=⎕NC'x'
           n←CreatePasswordRequest length
@@ -66,7 +67,7 @@
     ∇ (okFlag date)←{x}AskForDate date;n;buffer;globalParms;parms;⎕TRAP
      ⍝ Modal cover for `CreateDateRequest`
       :Access Public Shared
-      ⎕TRAP←(APLGuiError'C'('(0⊃⎕DM )⎕signal ',⍕APLGuiError))(0 'N')
+      ⎕TRAP←(##.APLGuiUtils.APLGuiError'C'('(0⊃⎕DM )⎕signal ',⍕##.APLGuiUtils.APLGuiError))(0 'N')
       :If 0=⎕NC'x'
           n←CreateDateRequest date
       :Else
@@ -89,7 +90,7 @@
     ∇ (okFlag value)←{x}AskForNumber question;n;buffer;globalParms;parms;⎕TRAP
      ⍝ Modal cover for `CreateNumberRequest`
       :Access Public Shared
-      ⎕TRAP←(APLGuiError'C'('(0⊃⎕DM )⎕signal ',⍕APLGuiError))(0 'N')
+      ⎕TRAP←(##.APLGuiUtils.APLGuiError'C'('(0⊃⎕DM )⎕signal ',⍕##.APLGuiUtils.APLGuiError))(0 'N')
       :If 0=⎕NC'x'
           n←CreateNumberRequest question
       :Else
@@ -106,7 +107,7 @@
     ∇ n←{x}CreateStringRequest question;buffer;globalParms;parms;⎕TRAP
      ⍝ Creates the form for a request for a string.
       :Access Public Shared
-      ⎕TRAP←(APLGuiError'C'('(0⊃⎕DM )⎕signal ',⍕APLGuiError))(0 'N')
+      ⎕TRAP←(##.APLGuiUtils.APLGuiError'C'('(0⊃⎕DM )⎕signal ',⍕##.APLGuiUtils.APLGuiError))(0 'N')
       x←{(0<⎕NC ⍵):⍎⍵ ⋄ ⍬}'x'
       (globalParms parms)←CreateParmsForString GetParms x
       parms.(onHelp onOkay)←'"Help"' '"Okay"'CheckUserCallback¨parms.(onHelp onOkay)
@@ -121,7 +122,7 @@
     ∇ n←{x}CreatePasswordRequest length;buffer;globalParms;parms;⎕TRAP
      ⍝ Creates the form for a request for a password.
       :Access Public Shared
-      ⎕TRAP←(APLGuiError'C'('(0⊃⎕DM )⎕signal ',⍕APLGuiError))(0 'N')
+      ⎕TRAP←(##.APLGuiUtils.APLGuiError'C'('(0⊃⎕DM )⎕signal ',⍕##.APLGuiUtils.APLGuiError))(0 'N')
       'Invalid right argument: password length'⎕SIGNAL 11/⍨83≠⎕DR length
       x←{(0<⎕NC ⍵):⍎⍵ ⋄ ⍬}'x'
       (globalParms parms)←CreateParmsForPassword GetParms x
@@ -137,7 +138,7 @@
     ∇ n←{x}CreateDateRequest date;globalParms;parms;⎕TRAP
      ⍝ Creates the form for a request for a Date.
       :Access Public Shared
-      ⎕TRAP←(APLGuiError'C'('(0⊃⎕DM )⎕signal ',⍕APLGuiError))(0 'N')
+      ⎕TRAP←(##.APLGuiUtils.APLGuiError'C'('(0⊃⎕DM )⎕signal ',⍕##.APLGuiUtils.APLGuiError))(0 'N')
       x←{(0<⎕NC ⍵):⍎⍵ ⋄ ⍬}'x'
       (globalParms parms)←CreateParmsForDate GetParms x
       parms←CheckParmsForProgressbarAndStatusbar parms
@@ -153,12 +154,12 @@
     ∇ n←{x}CreateNumberRequest question;globalParms;parms;⎕TRAP
      ⍝ Creates the form for a request for a number.
       :Access Public Shared
-      ⎕TRAP←(APLGuiError'C'('(0⊃⎕DM )⎕signal ',⍕APLGuiError))(0 'N')
+      ⎕TRAP←(##.APLGuiUtils.APLGuiError'C'('(0⊃⎕DM )⎕signal ',⍕##.APLGuiUtils.APLGuiError))(0 'N')
       x←{(0<⎕NC ⍵):⍎⍵ ⋄ ⍬}'x'
       (globalParms parms)←CreateParmsForNumber GetParms x
       parms←CheckParmsForProgressbarAndStatusbar parms
       parms.sizeable←0
-      'Invalid: "fieldType"'⎕SIGNAL APLGuiError/⍨~(⊂parms.fieldType)∊##.Enums.EditFieldTypes.(numeric currency)
+      'Invalid: "fieldType"'⎕SIGNAL ##.APLGuiUtils.APLGuiError/⍨~(⊂parms.fieldType)∊##.Enums.EditFieldTypes.(numeric currency)
       parms.(onHelp onOkay)←'"Help"' '"Okay"'CheckUserCallback¨parms.(onHelp onOkay)
       :If ~0∊⍴question
           parms.question←question
@@ -431,9 +432,9 @@
           n.HelpBtn.Posn[0]←n.∆Form.Size[0]-n.∆Vgap+rf.Size[0]+{(0=⍵.⎕NC'Statusbar'):0 ⋄ ⍵.Statusbar.Size[0]}n
           n.HelpBtn.Posn[1]←n.∆Hgap+{⍵:0 ⋄ 1⊃+⌿⊃(↑⌽n.∆buttons).(Posn Size)}0=i
           :If 0∊⍴buf←parms.onHelp
-              'Help button enabled but callback is missing'⎕SIGNAL APLGuiError
+              'Help button enabled but callback is missing'⎕SIGNAL ##.APLGuiUtils.APLGuiError
           :Else
-              'onHelp does not point to a callback function'⎕SIGNAL APLGuiError/⍨{3≠(0⊃⍵).⎕NC 1⊃⍵}{2=≡⍵:⍵ ⋄ ⎕THIS ⍵}buf
+              'onHelp does not point to a callback function'⎕SIGNAL ##.APLGuiUtils.APLGuiError/⍨{3≠(0⊃⍵).⎕NC 1⊃⍵}{2=≡⍵:⍵ ⋄ ⎕THIS ⍵}buf
               n.HelpBtn.onSelect←'OnExecHandler'
           :EndIf
           n.HelpBtn.⎕DF'[Button:',n.HelpBtn.Caption,']'
@@ -676,4 +677,3 @@
       }
 
 :EndClass
-

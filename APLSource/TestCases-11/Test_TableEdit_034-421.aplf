@@ -24,7 +24,7 @@
 
      n←#._APLGUI.GUI.Table.Create table #._APLGUI.GUI.APLGuiGlobalParms.CreateDefaults parms
 
-     r←~∆PromptForSuccess'Do you see just a vertical scroll bar?'
+     r←~1 ∆PromptForSuccess'Do you see just a vertical scroll bar?'
 
 ∆TidyUp:
      n.∆CloseForm

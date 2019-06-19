@@ -13,7 +13,7 @@
          ⎕←'When the GUI appears, perform the following actions:'
          ⎕←' * Press the "Show" button'
          ⎕←' * Press the "OK" button'
-     :Until ∆AskQuestion'Are you ready?'
+     :Until 1 ∆PromptForSuccess'Are you ready?'
 
      (globalParms parms)←#._APLGUI.GUI.Dialogs.CreateParmsForShowLongMsg #._APLGUI.GUI.APLGuiUtils.GetParms ⍬
 
