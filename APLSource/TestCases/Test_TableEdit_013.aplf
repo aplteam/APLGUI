@@ -1,0 +1,41 @@
+ r←Test_TableEdit_013(stopFlag batchFlag);parms;n;⎕TRAP;table;rowTitles
+⍝ Press <enter> in the last row. Adds two rows with specific contents thanks to the "rowPrototype" function.
+⍝ See also Test_TableEdit_007 and Test_TableEdit_012.
+ r←∆Inactive
+ :Return
+
+ r←∆Failed
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+
+⍝⍝⍝ Preconditions
+ #.⎕SHADOW'TEMP'
+ 'TEMP'#.⎕NS''
+ #.TEMP.RowPrototype←{
+     n←⍵
+     'Row:'(1+↑⍴n.Grid.Values)
+ }
+
+ table←⍉⊃('Obama' 'Bush' 'Clinton' 'Reagan' 'Kennedy' 'Carter')(1 0 1 0 1 1)
+ parms←#.APLGUI.APLGUI.Table.CreateParms
+ parms.posn←35 25
+ parms.size←400 600
+ parms.colTitles←'Name' 'Democrat'
+ parms.addToCaption←'Testing Table.Run'
+ parms.confirmQuit←0
+ parms.testMode←1
+ parms.rowPrototype←'#.TEMP.RowPrototype'
+
+ n←#.APLGUI.APLGUI.Table.Create table #.APLGUI.APLGUI.APLGuiGlobalParms.CreateDefaults parms
+
+ n.Grid.CurCell←⍴n.Grid.Values
+ n.Grid ∆KeyPress⊂'ER'
+ 0.5 ∆Process n.∆Form
+ n.Grid ∆KeyPress⊂'ER'
+ 0.5 ∆Process n.∆Form
+ →GoToTidyUp(⍴n.Grid.Values)≢2 0+⍴table
+ →GoToTidyUp n.Grid.Values[¯1 0+¯1+↑⍴n.Grid.Values;]≢2 2⍴'Row:' 7 'Row:' 8
+
+ r←∆OK
+
+∆TidyUp:
+ n.∆CloseForm

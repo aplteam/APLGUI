@@ -1,0 +1,36 @@
+ r←Test_Input_DataType_003(stopFlag batchFlag);n;⎕TRAP;defMat;res;DT;globalParms;parms;props
+⍝ Exercise "Input" with data type "Currency".
+ r←∆Failed
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+
+ DT←#.APLGUI.APLGUI.Enums.InputDataTypes
+
+ defMat←0 7⍴''
+ props←0 2⍴''
+
+ defMat⍪←'Curr1' 'Amount in GBP (1)' '123.45'DT.Currency 0 1 1
+ defMat⍪←'Curr2' 'Amount in ??? (2)' '654.32'DT.Currency 0 0 1
+ defMat⍪←'Curr3' 'Amount in GBP (3)' ''DT.Currency(18 20)1 1
+ defMat⍪←'Curr4' 'Amount in GBP (4)'⍬ DT.Currency(18 20)1 1
+ props⍪←'Curr4'(⊂('Decimals' 2))
+
+ globalParms←∆GetGlobalParms
+ parms←#.APLGUI.APLGUI.Input.CreateParms
+ parms.posn←50 50
+ parms.addToCaption←'No. ',⍕∆GetTestCaseNo
+ parms.props←props
+
+ n←#.APLGUI.APLGUI.Input.Create defMat globalParms parms
+ 0 ∆Process n.∆Form
+
+ →GoToTidyUp 1 0 1≢n.(Curr1 Curr2 Curr3).Active
+ n.Curr3 ∆KeyPress'9.123'
+ 0 ∆Process n.∆Form
+ ⎕NQ n.∆OK'Select'
+ 0 ∆Process n.∆Form
+ →GoToTidyUp 786.89≢+/n.∆result[;1]
+
+ r←∆OK
+
+∆TidyUp:
+ n.∆CloseForm

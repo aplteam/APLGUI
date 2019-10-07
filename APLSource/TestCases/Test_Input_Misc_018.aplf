@@ -1,0 +1,80 @@
+ r←Test_Input_Misc_018(stopFlag batchFlag);n;⎕TRAP;res;DT;double;parms;props;defMat1;defMat2;this;that;counter;flag
+⍝ Exercise "Input" with tabs and tries to switch tabs with keystroke from within all data types.
+⍝ This is done because some native controls may consume <ctrl+tab> and <ctrl+shift+tab>.
+ r←∆Failed
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+
+ DT←#.APLGUI.APLGUI.Enums.InputDataTypes
+
+ defMat1←0 7⍴''
+ defMat1⍪←'Tab1' 'Tab1' ''DT.Tab 0 1 1
+ defMat1⍪←'Time1' '' ''DT.Time 0 1 1
+ defMat1⍪←'Date1' '' ''DT.Date 0 1 1
+ defMat1⍪←'Character1' '' ''DT.Character 0 1 1
+ defMat1⍪←'Numeric1' '' ''DT.Numeric 0 1 1
+ defMat1⍪←'Currency1' '' ''DT.Currency 0 1 1
+ defMat1⍪←'YesNo1' '' ''DT.YesNo 0 1 1
+ defMat1⍪←'Button1' '' ''DT.Button 0 1 1
+ defMat1⍪←'Image1' ''('file:///',GetFile'KaiJaeger.jpg')DT.Image 0 1 1
+ defMat1⍪←'DropDown1' ''('This' 'That' 'More')DT.DropDown 0 1 1
+ defMat1⍪←'DropEdit1' ''('One' 'Two' 'Three')DT.DropEdit 0 1 1
+ defMat1⍪←'ListView1' ''('Kai' 'Thomas' 'Max')DT.ListView(5 5)1 2
+ props←1 2⍴'ListView1'(('ColTitles'(,⊂'Names'))('Style' 'Multi'))
+ defMat1⍪←'Notepad1' '' ''DT.Notepad(5 5)1 2
+ defMat1⍪←'Radio1' 'Options⋄On⋄off' 1 DT.Radio 0 1 2
+ defMat1⍪←'Spinner1' ''(1 2 3 4)DT.Spinner 0 1 2
+
+ defMat2←0 7⍴''
+ defMat2⍪←'Tab2' 'Tab1' ''DT.Tab 0 1 1
+ defMat2⍪←'Time2' '' ''DT.Time 0 1 1
+ defMat2⍪←'Date2' '' ''DT.Date 0 1 1
+ defMat2⍪←'Character2' '' ''DT.Character 0 1 1
+ defMat2⍪←'Numeric2' '' ''DT.Numeric 0 1 1
+ defMat2⍪←'Currency2' '' ''DT.Currency 0 1 1
+ defMat2⍪←'YesNo2' '' ''DT.YesNo 0 1 1
+ defMat2⍪←'Button2' '' ''DT.Button 0 1 1
+ defMat2⍪←'Image2' ''('file:///',GetFile'KaiJaeger.jpg')DT.Image 0 1 1
+ defMat2⍪←'DropDown2' ''('This' 'That' 'More')DT.DropDown 0 1 1
+ defMat2⍪←'DropEdit2' ''('One' 'Two' 'Three')DT.DropEdit 0 1 1
+ defMat2⍪←'ListView2' ''('Kai' 'Thomas' 'Max')DT.ListView(5 5)1 2
+ defMat2⍪←'Notepad2' '' ''DT.Notepad(5 5)1 2
+ defMat2⍪←'Radio2' 'Options⋄On⋄off'(1 0)DT.Radio 0 1 2
+ defMat2⍪←'Spinner2' ''(1 2 3 4)DT.Spinner 0 1 2
+
+ parms←#.APLGUI.APLGUI.Input.CreateParms
+ parms.props←props
+ parms.posn←55 55
+ n←#.APLGUI.APLGUI.Input.Create(defMat1⍪defMat2)⍬ parms
+ n←#.APLGUI.APLGUI.Input.AdjustSize n
+ ∆Process n
+
+ :For this that :InEach (1↓defMat1[;0])(1↓defMat2[;0])
+     (n⍎this)∆KeyPress⊂'TB'
+     ∆Process n.∆Form
+     :Repeat
+         :Trap 999
+             →GoToTidyUp 0 1≢n.(Tab1 Tab2).State
+             flag←1
+         :Else
+             →GoToTidyUp 5<counter←counter+1
+             0.01 ∆Process n.∆Form
+         :EndTrap
+     :Until flag
+     (n⍎that)∆KeyPress⊂'BT'
+     ∆Process n.∆Form
+     flag←counter←0
+     :Repeat
+         :Trap 999
+             →GoToTidyUp 1 0≢n.(Tab1 Tab2).State
+             flag←1
+         :Else
+             →GoToTidyUp 5<counter←counter+1
+             0.01 ∆Process n.∆Form
+         :EndTrap
+     :Until flag
+ :EndFor
+
+ r←∆OK
+
+∆TidyUp:
+ n.∆CloseForm

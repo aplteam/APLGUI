@@ -1,0 +1,3 @@
+ AskForNumber
+ ⎕←##.APLGUI.Request.AskForNumber'Number of copies:'
+⍝Done

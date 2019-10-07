@@ -1,0 +1,17 @@
+ n←{x}∆NoOrYes question;n;_;parms;globalParms
+    ⍝ Modal dialog asking a yes-no question with "No" being the default button
+ x←{(0<⎕NC ⍵):⍎⍵ ⋄ ⍬}'x'
+ (globalParms parms)←#.APLGUI.APLGUI.Dialogs.CreateParmsForNoOrYes #.APLGUI.APLGUI.APLGuiUtils.GetParms x
+ parms←#.APLGUI.APLGUI.APLGuiUtils.CheckTimeout globalParms parms
+ :If 0∊⍴parms.autoPress
+     parms.focusButton←1
+ :Else
+     parms.focusButton←parms.autoPress
+ :EndIf
+ :If ~0∊⍴question
+     parms.question←question
+ :EndIf
+ parms.buttons←'Yes' 'No'
+ n←#.APLGUI.APLGUI.Dialogs.CreateButtonForm globalParms parms
+ n←#.APLGUI.APLGUI.Dialogs.HandleFocus n
+ n(#.APLGUI.APLGUI.Dialogs.CreateAutoPressTimer)←parms.timeout

@@ -1,9 +1,0 @@
- OnOK←{
-     n←⍵
-     parms←##.##.GUI.Dialogs.CreateParmsForYesOrNo
-     parms.addToCaption←'Edit callbacks'
-     parms.centerIn←n.∆Form
-     msg←⊂'This is the "OnOK" handler.'
-     msg←'' 'Shall the user be allowed to quit the dialog?'
-     n.∆globalParms parms ##.##.GUI.Dialogs.YesOrNo msg
- }

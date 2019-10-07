@@ -1,0 +1,13 @@
+ AskForNumberWithRange;parms
+ parms←##.APLGUI.Request.CreateParmsForNumber
+ parms.valueRange←1 10
+ #.⎕SHADOW'OnOkayInAskForNumberWithRange'
+ parms.onOkay←'#.OnOkayInAskForNumberWithRange'
+ #.OnOkayInAskForNumberWithRange←{
+     n←⍵
+     n.∆result<4:1
+     msg←'The number (',(⍕n.∆result),') is unusually high - are you aure?'
+     ##.APLGUI.Dialogs.YesOrNo msg
+ }
+ ⎕←parms ##.APLGUI.Request.AskForNumber'Number of copies:'
+⍝Done

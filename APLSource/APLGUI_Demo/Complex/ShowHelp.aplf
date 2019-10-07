@@ -1,0 +1,13 @@
+ ShowHelp←{
+     n←⍵
+     parms1←##.##.APLGUI.StdForm.CreateParms
+     parms1.addToCaption←'Help for "InputComplex"'
+     parms1.size←400 500
+     n2←##.##.APLGUI.StdForm.Create n.∆globalParms parms1
+     _←n2.∆Form ##.##.APLGUI.APLGuiHelpers.CenterIn n.∆Form
+     parms2←##.##.APLGUI.IE.CreateParms
+     n3←parms2 ##.##.APLGUI.IE.CreateIE n2.∆Form
+     _←##.##.APLGUI.IE.ShowHtml n3.IEobject GetHelpHtml
+     _←⎕DQ n2.∆Form
+     ⍬
+ }

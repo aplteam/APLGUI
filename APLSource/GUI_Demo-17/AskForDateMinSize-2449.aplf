@@ -1,4 +1,0 @@
- AskForDateMinSize;parms
- parms←##.GUI.Request.CreateParmsForDate
- parms.minSize←600 400
- ⎕←parms ##.GUI.Request.AskForDate 2000 1 2

@@ -1,0 +1,34 @@
+ r←Test_Input_Callbacks_004(stopFlag batchFlag);n;⎕TRAP;defMat;res;DT;globalParms;parms;printerList
+⍝ Exercise "Input" with on "onInitial" callback. See also Test_Input_Callbacks_007 and Test_Input_Callbacks_008.
+ r←∆Failed
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+
+ DT←#.APLGUI.APLGUI.Enums.InputDataTypes
+ #.⎕SHADOW'TEMP'
+ 'TEMP'#.⎕NS''
+ #.TEMP.flag←0
+ #.TEMP.OnInitial←{
+     ⎕THIS.flag←1
+     ⍬
+ }
+
+ defMat←0 5⍴''
+ defMat⍪←'Label' 'Select your printer:' ''DT.Label 0
+ printerList←'LaserJet' 'InkJet' 'PDF'
+ defMat⍪←'Text' ''printerList DT.DropDown 0
+ defMat⍪←'Save_copy' '' 1 DT.YesNo 0
+
+ globalParms←∆GetGlobalParms
+ parms←#.APLGUI.APLGUI.Input.CreateParms
+ parms.posn←50 50
+ parms.onInitial←#.TEMP'OnInitial'
+ parms.addToCaption←'No. ',⍕∆GetTestCaseNo
+
+ n←#.APLGUI.APLGUI.Input.Create defMat globalParms parms
+ 0 ∆Process n.∆Form
+ →GoToTidyUp #.TEMP.flag=0
+
+ r←∆OK
+
+∆TidyUp:
+ n.∆CloseForm

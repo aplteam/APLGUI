@@ -1,0 +1,8 @@
+ {r}←RunSetPercent n;i
+ r←⍬
+ :For i :In 2+⍳9
+     ⎕DL 0.1
+     n ##.APLGUI.Busy.SetPercent 10×i
+ :EndFor
+ ⎕DL 0.2
+ n.∆CloseForm

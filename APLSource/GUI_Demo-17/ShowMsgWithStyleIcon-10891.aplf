@@ -1,5 +1,0 @@
- ShowMsgWithStyleIcon;msg;parms
- msg←'This is a message' '' 'It serves as an example for what Dialogs.ShowMsg can do for you'
- parms←##.GUI.Dialogs.CreateParmsForShowMsg
- parms.style←##.GUI.Enums.DialogStyles.Error
- parms ##.GUI.Dialogs.ShowMsg msg

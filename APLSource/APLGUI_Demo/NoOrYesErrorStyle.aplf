@@ -1,0 +1,8 @@
+ NoOrYesErrorStyle;myGuiParms;parms
+⍝ Simple "No-or-Yes" dialog in error style.
+ myGuiParms←##.APLGUI.APLGuiGlobalParms.CreateDefaults
+ myGuiParms.regKey←'MyApp\Kai1'
+ myGuiParms.icon←⎕NEW'Icon'(⊂'File'(GetFile'Sample.ico'))
+ parms←##.APLGUI.Dialogs.CreateParmsForNoOrYes
+ parms.style←##.APLGUI.Enums.DialogStyles.Error
+ parms myGuiParms ##.APLGUI.Dialogs.NoOrYes'Are you really sure about this?'

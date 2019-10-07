@@ -1,0 +1,25 @@
+ SelectionTool_List_MultiSelfContained;globalParms;list;parms;n1;flag;boolean
+⍝ Presents a list of any length and allows selecting of multiple rows with right-aligend buttons.
+ globalParms←##.APLGUI.APLGuiGlobalParms.CreateDefaults
+ globalParms.regKey←'MyApp'
+ globalParms.caption←'My App'
+ globalParms.icon←#.⎕NEW'Icon'(⊂'File'(GetFile'Sample.ico'))
+ list←∪300⍴#.⎕NL-3
+ list←list[⍋⊃list]
+ parms←##.APLGUI.SelectionTool.CreateParms
+ parms.caption←'Select from list'
+ parms.colTitles←,⊂'Numbers'
+ parms.style←##.APLGUI.Enums.SelectionStyles.multi
+ parms.info←'Select as many items from the list as you like:'
+ parms.useWindowsRegistry←1
+ parms.default←(⍳0⊃⍴list)∊3?0⊃⍴list
+ parms.alignButtons←##.APLGUI.Enums.Align.Right
+ n1←globalParms parms ##.APLGUI.SelectionTool.Create list
+
+ (flag boolean)←##.APLGUI.SelectionTool.ModalWait n1
+ :If flag
+     ⎕←' User pressed the OK button'
+     ⎕←⍪boolean/list
+ :Else
+     ⎕←'User did NOT press the OK button'
+ :EndIf

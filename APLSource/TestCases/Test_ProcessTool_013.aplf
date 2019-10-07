@@ -1,0 +1,26 @@
+ r←Test_ProcessTool_013(stopFlag batchFlag);rc;parms;n;⎕TRAP;buffer
+⍝ Sort by a columns and then quit: is the result okay?
+ r←∆Failed
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+
+ parms←#.APLGUI.APLGUI.ProcessTool.CreateParms
+ parms.posn←30 40
+ parms.style←#.APLGUI.APLGUI.Enums.SelectionStyles.multi
+ parms.checkboxes←1
+ parms.colTitles←'No' 'Filename'
+ buffer←(⍕¨1000+⍳20),[0.5]⌽10⍴¨,¨20⍴⎕A
+ parms.default←20⍴0
+ parms.default[2 3 5+~⎕IO]←1
+
+ n←parms #.APLGUI.APLGUI.ProcessTool.Create buffer'∆HarvestSelections'
+ ⎕DL 0.1
+ 1 ⎕NQ n.List'ColumnClick' 1 1 0
+ ⎕DL 0.1
+ 1 ⎕NQ n.Btn_00'Select'
+
+ →PassesIf'1005' '1003' '1002'≡{⍵[;0]}0⊃n.∆result
+
+ r←∆OK
+
+∆TidyUp:
+ n.∆CloseForm

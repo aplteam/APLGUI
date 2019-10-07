@@ -1,0 +1,22 @@
+ r←Test_ProcessTool_011(stopFlag batchFlag);rc;parms;n;⎕TRAP;buffer
+⍝ Exercise "ProcessTool". Specifies additional data via the "data" property and performs a column sort.
+ r←∆Failed
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+
+ parms←#.APLGUI.APLGUI.ProcessTool.CreateParms
+ parms.posn←30 40
+ parms.style←#.APLGUI.APLGUI.Enums.SelectionStyles.multi
+ parms.checkboxes←1
+ parms.colTitles←'No' 'Filename'
+ buffer←(⍕¨1000+⍳20),[0.5]⌽10⍴¨,¨20⍴⎕A
+ parms.data←,[0.5]buffer[;0]
+
+ n←parms #.APLGUI.APLGUI.ProcessTool.Create buffer'∆DealWithData'
+ ⎕DL 0.3
+ ⎕NQ n.List'ColumnClick' 1 1 0
+ →PassesIf(,[0.5]n.List.Items)≡n.∆data
+
+ r←∆OK
+
+∆TidyUp:
+ n.∆CloseForm

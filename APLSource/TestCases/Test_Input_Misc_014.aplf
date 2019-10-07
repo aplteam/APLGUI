@@ -1,0 +1,35 @@
+ r←Test_Input_Misc_014(stopFlag batchFlag);n;⎕TRAP;defMat;res;DT;globalParms;parms;list
+⍝ Exercise "Input" with an icon.
+ r←∆Failed
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+
+ DT←#.APLGUI.APLGUI.Enums.InputDataTypes
+
+ defMat←0 5⍴''
+
+ defMat⍪←'Name' 'Your name' ''DT.Character 30
+ list←'HP Office Jet' 'Lexmark III' 'PDF'
+ defMat⍪←'Printer' 'Select printer'list DT.DropDown 30
+ defMat⍪←'NoOfCopies' 'No of copies' 1 DT.Numeric 2
+
+ globalParms←∆GetGlobalParms
+ globalParms.icon←⎕NEW'Icon'(⊂'File' 'Sample.ico')
+
+ n←#.APLGUI.APLGUI.Input.Create defMat globalParms ⍬
+
+ →GoToTidyUp 0∊⍴n.∆Form.IconObj
+
+ n.∆CloseForm
+ globalParms←∆GetGlobalParms
+ parms←#.APLGUI.APLGUI.Input.CreateParms
+ parms.posn←50 50
+ parms.addToCaption←'No. ',⍕∆GetTestCaseNo
+ parms.icon←⎕NEW'Icon'(⊂'File'(GetFile'Sample.ico'))
+
+ n←#.APLGUI.APLGUI.Input.Create defMat globalParms parms
+
+ →GoToTidyUp 0∊⍴n.∆Form.IconObj
+ r←∆OK
+
+∆TidyUp:
+ n.∆CloseForm

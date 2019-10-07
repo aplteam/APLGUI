@@ -1,0 +1,22 @@
+ r←Test_SelectionTool_051(stopFlag batchFlag);parms;n;v;⎕TRAP
+⍝ Exercise "SelectionTool. Uses checkboxes.
+ r←∆Failed
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+
+ parms←#.APLGUI.APLGUI.SelectionTool.CreateParms
+ parms.autoPress←0
+ parms.timeout←0.1
+ parms.addToCaption←'Checkbox test'
+ parms.colTitles←⊂'Running numbers'
+ parms.default←20{~⍵∊⍺?⍴⍵}1+⍳100
+ parms.info←'Checkbox test'
+ parms.posn←60 70
+ parms.checkboxes←1
+
+ n←parms #.APLGUI.APLGUI.SelectionTool.Create⍕¨1+⍳100
+ ∆Process n.∆Form
+ →GoToTidyUp(#.APLGUI.APLGUI.SelectionTool.GetSelection n)≢parms.default
+ r←∆OK
+
+∆TidyUp:
+ n.∆CloseForm

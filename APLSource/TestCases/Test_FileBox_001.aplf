@@ -1,0 +1,10 @@
+ r←Test_FileBox_001(stopFlag batchFlag);⎕TRAP;path;n
+⍝ Exercise the "Create" method without any parameters.
+ r←∆Failed
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+
+ n←#.APLGUI.APLGUI.FileBox.Create'C:\Windows\'
+
+ →PassesIf'[FileBox]'≡⍕n.∆Form
+
+ r←∆OK

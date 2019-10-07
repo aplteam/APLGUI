@@ -1,0 +1,15 @@
+ NotepadBrowse;txt;parms;n;VTV;res;globalParms;text;changeFlag
+⍝ Simple NotePad with default parameters
+ globalParms←##.APLGUI.APLGuiGlobalParms.CreateDefaults
+ globalParms.icon←#.⎕NEW'Icon'(⊂'File'(GetFile'Sample.ico'))
+ globalParms.regKey←∆GetRegPath,'Notepad_Test\'
+
+ VTV←⎕SRC ##.APLGUI.Notepad
+
+ parms←##.APLGUI.Notepad.CreateParms
+ parms.addToCaption←'The "Notepad" class'
+ parms.aplMode←1
+ parms.posn←35 25
+
+ globalParms parms ##.APLGUI.Notepad.Browse VTV
+⍝Done

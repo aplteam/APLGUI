@@ -1,0 +1,50 @@
+ r←Test_TableEdit_103(stopFlag batchFlag);parms;n;⎕TRAP;table;rowTitles
+⍝ Test the "onClose" callback
+ r←∆Inactive
+ :Return
+
+ r←∆Failed
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+
+ #.⎕SHADOW'TEMP'
+ 'TEMP'#.⎕NS''
+ #.TEMP.counter←0
+
+ #.TEMP.flag←0
+ #.TEMP.OnClose←{
+     ⎕THIS.counter+←1
+     2>⎕THIS.counter:0
+     ⎕THIS.flag←1
+     1
+ }
+
+ table←⍪'Obama' 'Bush' 'Clinton' 'Reagan' 'Kennedy'
+ table,←'Barak' 'George' 'Bill' 'Ronald' 'John'
+ table,←?5 20⍴1000000
+ parms←#.APLGUI.APLGUI.Table.CreateParms
+ parms.posn←35 25
+ parms.size←400 600
+ parms.caption←'Test_TableEdit_103: onClose callback'
+ parms.confirmQuit←0
+ parms.testMode←1
+ parms.onClose←'#.TEMP.OnClose'
+
+ n←#.APLGUI.APLGUI.Table.Create table #.APLGUI.APLGUI.APLGuiGlobalParms.CreateDefaults parms
+ n.Grid ∆KeyPress'Ford'         ⍝ we need a change
+ n.Grid ∆KeyPress⊂'ER'          ⍝ Make it permanent
+ ∆Process n.∆Form
+ 1 ⎕NQ n.∆Form'Close'
+ 0.1 ∆Process n.∆Form
+ →GoToTidyUp 0≠#.TEMP.flag
+ →GoToTidyUp 1≠#.TEMP.counter
+ 1 ⎕NQ n.∆Form'Close'
+ ∆Process n.∆Form
+
+ →GoToTidyUp 1≠#.TEMP.flag
+ →GoToTidyUp 2≠#.TEMP.counter
+ →GoToTidyUp'Ford'≢↑0 0⌷n.∆result
+
+ r←∆OK
+
+∆TidyUp:
+ n.∆CloseForm

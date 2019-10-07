@@ -1,0 +1,30 @@
+ r←Test_AskNumber_008(stopFlag batchFlag);myGuiParms;parms;n;cl;⎕TRAP
+⍝ Exercise the "AskForNumber" method with defaults parameters only. Input via insert clipboard. See also no 1.
+ r←∆Failed
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+
+ myGuiParms←#.APLGUI.APLGUI.APLGuiGlobalParms.CreateDefaults
+ myGuiParms.regKey←'MyApp\Kai1'
+ myGuiParms.testMode←1
+ parms←#.APLGUI.APLGUI.Request.CreateParmsForNumber
+ parms.addToCaption←'My request'
+ parms.question←'Number of copies'
+
+ n←myGuiParms parms(#.APLGUI.APLGUI.Request.CreateParmsForNumber ∆Ask)''
+ ⎕DL 0.2
+ cl←⎕NEW⊂'Clipboard'
+ cl.Text←'33'
+ ⎕NQ n.Input'GotFocus'
+ ⎕NQ n.Input'KeyPress' 'PT'
+ ⎕NQ n.Input 9995
+ ∆Process n.∆Form
+ →GoToTidyUp 33≢n.Input.Value
+ →GoToTidyUp'Length: 2'{⍺≢(⍴⍺)↑⍵}n.StatusField1.Text
+
+ ⎕NQ n.Btn0'Select'
+ ∆Process n.∆Form
+ →GoToTidyUp 33≢n.∆result
+ r←∆OK
+
+∆TidyUp:
+ n.∆CloseForm

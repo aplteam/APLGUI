@@ -1,0 +1,25 @@
+ r←Test_YesNoCancel_003(stopFlag batchFlag);myGuiParms;msg;parms;result;⎕TRAP
+⍝ Exercise "YesNoCancel" with a simple question and a large font.
+ r←∆Failed
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+
+ myGuiParms←#.APLGUI.APLGUI.APLGuiGlobalParms.CreateDefaults
+ myGuiParms.regKey←'MyApp\Kai1'
+ myGuiParms.icon←⎕NEW'Icon'(⊂'File'(GetFile'Sample.ico'))
+ myGuiParms.testMode←1
+
+ msg←'Are you really sure about this?'
+ parms←#.APLGUI.APLGUI.Dialogs.CreateParmsForYesNoCancel
+ parms.addToCaption←'My caption'
+ parms.style←#.APLGUI.APLGUI.Enums.DialogStyles.None
+ #.⎕SHADOW'MyFont'
+ #.MyFont←⎕NEW'Font'(('PName' 'Verdana')('Size' 48))
+ parms.(fontInput fontLabel fontStandard)←#.MyFont
+ parms.hGap←↑#.MyFont.Size
+ parms.vGap←6
+ parms.timeout←0.1
+ parms.autoPress←2
+ result←parms myGuiParms #.APLGUI.APLGUI.Dialogs.YesNoCancel msg
+ →FailsIf ¯1≠result
+
+ r←∆OK

@@ -1,0 +1,43 @@
+ r←Test_Input_Callbacks_008(stopFlag batchFlag);n;⎕TRAP;defMat;res;DT;globalParms;parms
+⍝ Exercise "Input" with on "onInitial" callback that corrects the Posn of some controls.
+⍝ See also Test_Input_Callbacks_004 and Test_Input_Callbacks_007.
+ r←∆Failed
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+
+ DT←#.APLGUI.APLGUI.Enums.InputDataTypes
+ #.⎕SHADOW'TEMP'
+ 'TEMP'#.⎕NS''
+ #.TEMP.flag←0
+ #.TEMP.OnInitial←{
+     n←⍵
+     ⎕IO←0 ⋄ ⎕ML←3
+     n.RegEx.Posn[0]←n.∆Vgap+↑+⌿⊃n.Search_for.(Posn Size)
+     n.Case_sensitive.Posn[0]←n.∆Vgap+↑+⌿⊃n.RegEx.(Posn Size)
+     ⍬
+ }
+ #.TEMP.OnOkay←{
+     #.TEMP.flag←1
+     1
+ }
+
+ defMat←0 5⍴''
+ defMat⍪←'&Search_for' '' ''DT.Character 0
+ defMat⍪←'&RegEx' '' 0 DT.YesNo 0
+ defMat⍪←'&Case_sensitive' '' 1 DT.YesNo 0
+
+ globalParms←∆GetGlobalParms
+ parms←#.APLGUI.APLGUI.Input.CreateParms
+ parms.posn←50 50
+ parms.onInitial←#.TEMP'OnInitial'
+ parms.onOkay←'#.TEMP.OnOkay'
+ parms.addToCaption←'No. ',⍕∆GetTestCaseNo
+
+ n←#.APLGUI.APLGUI.Input.Create defMat globalParms parms
+ ⎕NQ n.Btn_00'Select'
+ 0 ∆Process n.∆Form
+ →GoToTidyUp #.TEMP.flag=0
+
+ r←∆OK
+
+∆TidyUp:
+ n.∆CloseForm

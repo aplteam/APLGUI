@@ -1,0 +1,16 @@
+ DisplayButtons;globalGuiParms;buttons;bool;parms
+⍝ Presents any number of buttons together with a message.
+ globalGuiParms←##.APLGUI.APLGuiGlobalParms.CreateDefaults
+ globalGuiParms.regKey←'MyApp\Kai1'
+ globalGuiParms.icon←⎕NEW'Icon'(⊂'File'(GetFile'Sample.ico'))
+ buttons←3 2⍴'PDF' 'XML' 'JSON' 'Display' 'Print' 'Cancel'
+ parms←##.APLGUI.Dialogs.CreateParmsForDisplayButtons
+ parms.focusButton←1
+ parms.cancelButton←¯1+⍴,buttons
+ bool←globalGuiParms parms ##.APLGUI.Dialogs.DisplayButtons('Which action would you like to perform in reality?')buttons
+ :If 0=+/bool
+     ⎕←'Cancelled'
+ :Else
+     ⎕←'Button pressed: "',(↑(,bool)/,buttons),'"'
+ :EndIf
+⍝Done

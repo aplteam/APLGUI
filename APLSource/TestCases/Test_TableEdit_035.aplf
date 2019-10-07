@@ -1,0 +1,32 @@
+ r←Test_TableEdit_035(stopFlag batchFlag);parms;n;⎕TRAP;table;rowTitles
+⍝ Test "lock" of columns. The first two columns should not participate in horizontal scolling.
+ r←∆Inactive
+ :Return
+
+ r←∆Failed
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+
+ :If batchFlag
+     r←¯1
+ :Else
+     table←⍪'Obama' 'Bush' 'Clinton' 'Reagan' 'Kennedy'
+     table,←'Barak' 'George' 'Bill' 'Ronald' 'John'
+     table,←?5 200⍴1000000
+     parms←#.APLGUI.APLGUI.Table.CreateParms
+     parms.posn←35 25
+     parms.size←400 600
+     parms.caption←'Test_Table_004: locking columns'
+     parms.confirmQuit←0
+     parms.testMode←1
+     parms.lock←2
+
+     ⎕←'In this test you shall scroll horizontally. The first two columns should stay put. When you are ready to continue press <Enter>'
+     0⍴⍞
+
+     n←#.APLGUI.APLGUI.Table.Create table #.APLGUI.APLGUI.APLGuiGlobalParms.CreateDefaults parms
+
+     r←~1 ∆PromptForSuccess'Are the first two columns excluded from horizontal scrolling?'
+
+∆TidyUp:
+     n.∆CloseForm
+ :EndIf

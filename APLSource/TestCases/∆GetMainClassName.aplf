@@ -1,0 +1,2 @@
+ r←∆GetMainClassName
+ r←#.APLGUI.APLGUI.(Dialogs Request Notepad SelectionTool Menubar StdForm OptionsTool ProcessTool)

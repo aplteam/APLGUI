@@ -1,0 +1,43 @@
+ r←Test_Input_Callbacks_001(stopFlag batchFlag);n;⎕TRAP;defMat;res;DT;globalParms;parms;focusHas
+⍝ Exercise "Input" with an "onOkay" callback
+ r←∆Failed
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+
+ DT←#.APLGUI.APLGUI.Enums.InputDataTypes
+
+ #.⎕SHADOW'TEMP'
+ 'TEMP'#.⎕NS''
+ #.TEMP.flag←0
+ #.TEMP.⎕FX'r←OnMyOK n' 'r←flag n.Text4a' 'flag+←1'
+
+ defMat←0 7⍴''
+ defMat⍪←'Text1a' '' 'aa'DT.Character(20 40)1 1
+ defMat⍪←'Text2a' '' 'bb'DT.Character 20 1 1
+ defMat⍪←'Text3a' '' 'ccc'DT.Character 20 1 1
+ defMat⍪←'Text4a' '' 'd'DT.Character 20 1 1
+ defMat⍪←'Text5a' '' 'ee'DT.Character 20 1 1
+ defMat⍪←'Text6a' '' 'fff'DT.Character 20 1 1
+
+ globalParms←∆GetGlobalParms
+ parms←#.APLGUI.APLGUI.Input.CreateParms
+ parms.posn←50 50
+ parms.addToCaption←'No. ',⍕∆GetTestCaseNo
+ parms.onOkay←#.TEMP'OnMyOK'
+
+ n←#.APLGUI.APLGUI.Input.Create defMat globalParms parms
+ ∆Process n.∆Form
+
+ 1 ⎕NQ n.∆OK'Select'
+ focusHas←2 ⎕NQ'#' 'GetFocusObj'
+ 0 ∆Process n.∆Form
+ →GoToTidyUp n.∆Form.∆closed
+ →GoToTidyUp 2≠focusHas.⎕NC'∆MyName'
+ →GoToTidyUp'Text4a'≢focusHas.∆MyName
+ 1 ⎕NQ n.∆OK'Select'
+ ∆Process n.∆Form
+ →GoToTidyUp~n.∆Form.∆closed
+
+ r←∆OK
+
+∆TidyUp:
+ n.∆CloseForm

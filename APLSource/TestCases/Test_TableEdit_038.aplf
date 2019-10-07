@@ -1,0 +1,38 @@
+ r←Test_TableEdit_038(stopFlag batchFlag);n;i;⎕TRAP;fns
+⍝ Exercise private function "UnifyDate"
+ r←∆Inactive
+ :Return
+
+ r←∆Failed
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+
+ fns←#.APLGUI.APLGUI.Table.ExecPrivateFns
+
+ →PassesIf'2015-12-30'≡fns'UnifyDate' 42367                  ⍝ IDN
+ →PassesIf'2010-01-12'≡fns'UnifyDate' '2010-01-12'           ⍝ IDF
+ →PassesIf'1988-12-31'≡fns'UnifyDate' 19881231               ⍝ Integer
+ →PassesIf'1988-12-31'≡fns'UnifyDate' 19881231.123413        ⍝ Float
+ →PassesIf'1011-01-03'≡fns'UnifyDate'(1011 1 3)              ⍝ Timestamp
+
+ :Trap 11
+     fns'UnifyDate'(⍳9)
+     →FailsIf 1
+ :Else
+     →FailsIf'Invalid date'≢↑⎕DM
+ :EndTrap
+
+ :Trap 11
+     fns'UnifyDate' ¯1
+     →FailsIf 1
+ :Else
+     →FailsIf'Invalid date'≢↑⎕DM
+ :EndTrap
+
+ :Trap 11
+     fns'UnifyDate' '20151-01-12'
+     →FailsIf 1
+ :Else
+     →FailsIf'Invalid date'≢↑⎕DM
+ :EndTrap
+
+ r←∆OK

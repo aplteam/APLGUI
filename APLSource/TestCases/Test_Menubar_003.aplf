@@ -1,0 +1,16 @@
+ r←Test_Menubar_003(stopFlag batchFlag);parms;n;TheForm;⎕TRAP
+⍝ Exercise the "Create" method with an invalid definition (non-unique names)
+ r←∆Failed
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+
+ parms←#.APLGUI.APLGUI.Menubar.CreateParms
+ 'TheForm'⎕WC'Form'('Coord' 'Pixel')('Posn'(35 45))('Size'(300 400))
+
+ :Trap 0
+     n←#.APLGUI.APLGUI.Menubar.Create TheForm MenuDefNonUniqueNames parms(⎕NEW #.APLGUI.APLGUI.KeyCodes)
+     →FailsIf 1
+ :Else
+     →FailsIf'Names used more than once:'{⍺≢(⍴⍺)↑⍵}0⊃⎕DM
+ :EndTrap
+
+ r←∆OK

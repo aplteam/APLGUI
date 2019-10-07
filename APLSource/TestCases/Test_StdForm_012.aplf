@@ -1,0 +1,42 @@
+ r←Test_StdForm_012(stopFlag batchFlag);⎕TRAP;globalParms;appName;formName;rk;rk2;parms;n;newVal
+⍝ First saves "Posn" & "Size" in Registry then creates form again but with "Posn" and "Size" specified.
+⍝ That means that the Registry entries should be ignored.
+ r←∆Failed
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+
+ CreateGlobalParms
+ globalParms←⎕NS MyGuiParms
+ appName←globalParms.regKey
+ formName←'PosnAndSizeTest'
+ rk←#.APLGUI.APLGUI.APLGuiUtils.GetRegPath appName
+ rk2←rk,'\',formName
+ #.WinReg.DeleteSubKeyTree rk                   ⍝ Get rid of any leftovers
+
+ parms←#.APLGUI.APLGUI.StdForm.CreateParms
+ parms.addToCaption←formName
+ parms.size←200 400
+ parms.posn←35 45
+ n←#.APLGUI.APLGUI.StdForm.Create globalParms parms
+ ∆Process n.∆Form
+ 1 ⎕NQ n.∆Form'Close'                             ⍝ That should write "Posn" and "Size"
+ →GoToTidyUp~∧/parms.posn∊¨(⍎#.WinReg.GetValue rk2,'\posn')+⊂¯5+⍳10
+ →GoToTidyUp~∧/parms.size∊¨(⍎#.WinReg.GetValue rk2,'\size')+⊂¯5+⍳10
+
+ newVal←parms.posn←135 145
+ n←#.APLGUI.APLGUI.StdForm.Create globalParms parms
+ ∆Process n.∆Form
+ 1 ⎕NQ n.∆Form'Close'
+ →GoToTidyUp~∧/parms.posn∊¨(⍎#.WinReg.GetValue rk2,'\posn')+⊂¯5+⍳10
+ →GoToTidyUp~∧/parms.size∊¨(⍎#.WinReg.GetValue rk2,'\size')+⊂¯5+⍳10
+
+ newVal←parms.size←300 500
+ n←#.APLGUI.APLGUI.StdForm.Create globalParms parms
+ ∆Process n.∆Form
+ 1 ⎕NQ n.∆Form'Close'
+ →GoToTidyUp~∧/parms.posn∊¨(⍎#.WinReg.GetValue rk2,'\posn')+⊂¯5+⍳10
+ →GoToTidyUp~∧/parms.size∊¨(⍎#.WinReg.GetValue rk2,'\size')+⊂¯5+⍳10
+
+ r←∆OK
+
+∆TidyUp:
+ #.WinReg.DeleteSubKeyTree rk

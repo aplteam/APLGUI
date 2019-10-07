@@ -1,0 +1,32 @@
+ r←Test_TableEdit_201(stopFlag batchFlag);parms;n;⎕TRAP;table;rowTitles
+⍝ Test quitting the table editor. Changes are made and the user shall be prompted and will press "No".
+ r←∆Inactive
+ :Return
+
+ r←∆Failed
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+
+ table←⍪'Obama' 'Bush' 'Clinton' 'Reagan' 'Kennedy'
+ table,←'Barak' 'George' 'Bill' 'Ronald' 'John'
+ table,←?5 10⍴1000000
+ parms←#.APLGUI.APLGUI.Table.CreateParms
+ parms.posn←35 25
+ parms.size←400 600
+ parms.caption←'Test_TableEdit_201: check "Close" with changes not accepted by user'
+ parms.confirmQuit←1
+ parms.testMode←1
+ parms.testParms←1 2⍴'AskFor_SaveChanges'(('autoPress' 1)('timeout' 0.1))
+
+ n←#.APLGUI.APLGUI.Table.Create table #.APLGUI.APLGUI.APLGuiGlobalParms.CreateDefaults parms
+ n.Grid ∆KeyPress'Ford'         ⍝ we need a change
+ n.Grid ∆KeyPress⊂'ER'          ⍝ Make it permanent
+ ∆Process n.∆Form
+ 1 ⎕NQ n.∆Form'Close'
+ 0.1 ∆Process n.∆Form
+
+ →GoToTidyUp table≢n.∆result
+
+ r←∆OK
+
+∆TidyUp:
+ n.∆CloseForm

@@ -1,7 +1,0 @@
- YesOrNoWithBigFontWithInitialVgap;parms
-⍝ Presents a "Yes" and a "No" button with a big font
- parms←##.GUI.Dialogs.CreateParmsForYesOrNo
- parms.(fontStandard fontInput)←2⍴⎕NEW'Font'(('PName' 'Courier New')('Size' 30))
- parms.initialVgap←50
-
- ⎕←parms ##.GUI.Dialogs.YesOrNo'Are you really sure about this?'

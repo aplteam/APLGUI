@@ -1,0 +1,36 @@
+ r←Test_ShowLongMsg_006(stopFlag batchFlag);n;⎕TRAP;globalParms;parms;btn
+⍝ Exercise "ShowLongMsg" with a callback acting on a button pressed by specifying a parent and a function name.
+ r←∆Failed
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+
+ :If batchFlag
+     r←∆NoBatchTest
+ :Else
+
+     :Repeat
+         ⎕←'Note that this test needs you!'
+         ⎕←''
+         ⎕←'When the GUI appears, perform the following actions:'
+         ⎕←' * Press the "Show" button'
+         ⎕←' * Press the "OK" button'
+     :Until 1 ∆PromptForSuccess'Are you ready?'
+
+     (globalParms parms)←#.APLGUI.APLGUI.Dialogs.CreateParmsForShowLongMsg #.APLGUI.APLGUI.APLGuiUtils.GetParms ⍬
+
+     #.⎕SHADOW'TEMP'
+     'TEMP'#.⎕NS''
+     #.TEMP.∆MSG←''
+     #.TEMP.(⎕IO ⎕ML)←1
+     #.TEMP.⎕FX'OnButtonPressed←{' 'n←⍺' 'btn←⍵' 'n.Btn0≡btn:0' '#.TEMP.∆MSG←btn.Caption' '1' '}'
+
+     parms.onButtonPressed←#.TEMP'OnButtonPressed'
+     parms.cancelButton←0
+     parms.buttons←'OK' 'Show'
+
+     btn←parms #.APLGUI.APLGUI.Dialogs.ShowLongMsg'Are you sure?'
+     →PassesIf 0=btn
+     →PassesIf'Show'≡#.TEMP.∆MSG
+
+     r←∆OK
+
+ :EndIf

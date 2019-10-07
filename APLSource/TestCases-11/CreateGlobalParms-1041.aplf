@@ -1,5 +1,0 @@
- CreateGlobalParms
- MyGuiParms←#._APLGUI.GUI.APLGuiGlobalParms.CreateDefaults
- MyGuiParms.regKey←'APLGui-Tests'
- MyGuiParms.caption←'App-name'
- MyGuiParms.icon←'file://',GetFile'Sample.ico'

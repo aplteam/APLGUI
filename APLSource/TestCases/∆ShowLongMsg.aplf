@@ -1,0 +1,22 @@
+ n←{x}∆ShowLongMsg msg;globalParms;parms;n;⎕TRAP
+ :Access Public Shared
+ ⎕TRAP←(#.APLGUI.APLGUI.APLGuiUtils.APLGuiError'C' '(⎕IO⊃⎕DM) ⎕SIGNAL ⎕en')(0 'N')
+ x←{(0<⎕NC ⍵):⍎⍵ ⋄ ⍬}'x'
+ (globalParms parms)←#.APLGUI.APLGUI.Dialogs.CreateParmsForShowLongMsg #.APLGUI.APLGUI.APLGuiUtils.GetParms x
+ parms←#.APLGUI.APLGUI.APLGuiUtils.CheckTimeout globalParms parms
+ :If ¯1=parms.autoPress
+     parms.focusButton←0
+ :Else
+     parms.focusButton←parms.autoPress
+ :EndIf
+ :If ~0∊⍴msg
+     parms.question←msg
+ :EndIf
+ :If ¯1=parms.focusButton
+     parms.focusButton←0
+ :ElseIf ¯1≠parms.autoPress
+     parms.focusButton←parms.autoPress
+ :EndIf
+ n←#.APLGUI.APLGUI.Dialogs.CreateLongMsgForm globalParms parms
+ n←#.APLGUI.APLGUI.Dialogs.AdjustSize n
+⍝Done

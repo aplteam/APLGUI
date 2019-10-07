@@ -1,0 +1,40 @@
+ r←Test_IE_006(stopFlag batchFlag);⎕TRAP;ref;code;msg;orig;n1;n2;parms1;parms2
+⍝ Test IE with an web page (Google). We need the user to search for something and click a link and judge success.
+⍝ It would be really nice if we could automate this fully (SendKeys?!)
+ r←∆Failed
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+
+ :If batchFlag
+     r←¯1
+ :Else
+
+     ⎕←(⎕PW-1)⍴'-'
+     ⎕←'This test expects you to search for something via Google. The search page'
+     ⎕←'should not change except by Ajax requests.'
+     ⎕←'Please try and when you are sure it works that way then close the window.'
+     ⎕←''
+     ⎕←'Any link you click after a search should be displayed in your default browser.'
+     ⎕←''
+     ⎕←'To continue press <enter>'
+     {}⍞
+
+     parms1←#.APLGUI.APLGUI.StdForm.CreateParms
+     parms1.caption←'IE Test Case Number "',(¯3↑↑⎕XSI),'"'
+     n1←#.APLGUI.APLGUI.StdForm.Create parms1
+
+     parms2←#.APLGUI.APLGUI.IE.CreateParms
+     n2←parms2 #.APLGUI.APLGUI.IE.CreateIE n1.∆Form
+     #.APLGUI.APLGUI.IE.Navigate n2.IEobject'https://google.com/'
+
+     ⎕DQ n1.∆Form
+
+     →PassesIf 1 ∆PromptForSuccess'Did the Browser control act in the expected way?'
+
+     r←∆OK
+
+ :EndIf
+
+∆TidyUp:
+ :Trap 0 ⋄ n1.∆container.Close ⋄ :EndTrap
+ :Trap 0 ⋄ ##.FilesAndDirs.DeleteFile n2.∆container.IEobject.∆Filename ⋄ :EndTrap
+⍝Done

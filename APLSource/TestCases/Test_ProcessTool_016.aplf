@@ -1,0 +1,30 @@
+ r←Test_ProcessTool_016(stopFlag batchFlag);⎕TRAP;rf;data;parms;globalParms;n;code
+⍝ Exercise "ProcessTool" with non-existing callback. In test mode a stub will be created automatically.
+ r←∆Failed
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+
+ data←{⍵,[0.5]⍵}⍕¨10001+⍳10
+
+ #.⎕SHADOW'MyNS'
+ 'MyNS'#.⎕NS''
+
+ globalParms←#.APLGUI.APLGUI.APLGuiGlobalParms.CreateDefaults
+ globalParms.testMode←1
+ parms←#.APLGUI.APLGUI.ProcessTool.CreateParms
+ parms.timeout←0.1
+ n←globalParms parms #.APLGUI.APLGUI.ProcessTool.Create data'#.MyNS.OnHandler'
+
+ 1 ⎕NQ n.menubar.editCallback'Select'
+ {}1 ⎕NQ n.Btn_00'Select'
+
+ →FailsIf 0=#.MyNS.⎕NC'OnHandler'
+
+ code←#.MyNS.⎕NR'OnHandler'
+ code,←⊂'GLOBAL←1'
+ code←#.MyNS.⎕FX code
+
+ 1 ⎕NQ n.Btn_00'Select'
+ →FailsIf 0=#.MyNS.⎕NC'GLOBAL'
+ →FailsIf 1≢#.MyNS.GLOBAL
+
+ r←∆OK

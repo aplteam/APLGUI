@@ -1,0 +1,26 @@
+ r←Test_TableEdit_009(stopFlag batchFlag);parms;n;⎕TRAP;table
+⍝ Test all representations of "Time"
+ r←∆Inactive
+ :Return
+
+ r←∆Failed
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+
+⍝⍝⍝ Preconditions
+ table←⍉⊃('20:01:02' '20:12:01')(201401 200112)((20 2 3)(20 4 5))(0.010203 0.235959)
+ parms←#.APLGUI.APLGUI.Table.CreateParms
+ parms.posn←35 25
+ parms.size←250 800
+ parms.confirmQuit←0
+ parms.testMode←1
+ parms.dataTypes←4⍴⊂#.APLGUI.APLGUI.Enums.TableDataTypes.Time
+
+ n←#.APLGUI.APLGUI.Table.Create table #.APLGUI.APLGUI.APLGuiGlobalParms.CreateDefaults parms
+
+ 1 ⎕NQ n.∆Form'Close'
+ →GoToTidyUp n.∆result≢table
+
+ r←∆OK
+
+∆TidyUp:
+ n.∆CloseForm

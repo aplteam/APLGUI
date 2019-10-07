@@ -1,0 +1,110 @@
+ InputWithTabsAndCenteredButtons;defMat;DT;r;parms;label;Select;list;dates;props;globalParms;n;tips
+⍝ "Input" form with three tabs and a help button
+ DT←##.APLGUI.Enums.InputDataTypes
+ props←0 2⍴⍬
+
+ #.⎕SHADOW'TEMP'
+ 'TEMP'#.⎕NS''
+ #.TEMP.OnHelp←{
+     n←⍵
+     parms←##.APLGUI.Dialogs.CreateParmsForShowMsg
+     parms.addToCaption←'HELP!'
+     parms.centerIn←n.∆Form
+     _←n.∆globalParms parms ##.APLGUI.Dialogs.ShowMsg'You pressed the "Help" button'
+     ⍬
+ }
+
+ #.TEMP.OnPushButton←{
+     (btn n)←⍵
+     parms←##.APLGUI.Dialogs.CreateParmsForShowMsg
+     parms.addToCaption←'CVC'
+     parms.centerIn←n.∆Form
+     msg←⊂'You pressed the "CVC?" button.'
+     msg,←⊂'Hover with the mouse over the CVC field'
+     msg,←⊂'tio get further information.'
+     _←n.∆globalParms parms ##.APLGUI.Dialogs.ShowMsg msg
+     ⍬
+ }
+
+ #.TEMP.OnKeyPress←{
+     (rf event key)←3↑msg←⍵
+     n←⍺
+     n.UPPERCASE≢rf:1
+     msg[2]←⊂#.APLTreeUtils.Uppercase key
+     msg
+     ⍬
+ }
+
+ #.TEMP.OnInitial←{
+     n←⍵
+     n.HelpCVC.Posn[1]←10+1⊃+⌿⊃n.CVC.(Posn Size)
+     n.HelpCVC.Size[1]←10+1⊃n.HelpCVC.GetTextSize n.HelpCVC.Caption
+     ⍬
+ }
+
+ #.TEMP.OnChange←{
+     (rf n)←⍵
+     n.Card_number≠rf:1
+     300>1↑n.Card_number.Value:1
+     msg←'The maximum number is 299'
+     0 msg
+ }
+
+ tips←0 2⍴''
+
+ defMat←0 7⍴''
+
+ defMat⍪←'Address' '' ''DT.Tab 0 1 1
+ defMat⍪←'Key' '' 1 DT.Numeric 6 0 1
+ defMat⍪←'Active' '' 1 DT.YesNo 0 1 1
+ defMat⍪←'Firstname' 'First name' 'John'DT.Character 30 1 2
+ defMat⍪←'Lastname' 'Last name' 'Does'DT.Character 30 1 2
+ defMat⍪←'Street' 'House no + Street' '41 Ginger street'DT.Character(30 60)1 2
+ defMat⍪←'ZIP' 'Postcode' 'SG1 234'DT.Character 10 1 2
+ defMat⍪←'UPPERCASE' '' ''DT.Character 10 1 2
+ tips⍪←'UPPERCASE'('All input intot this field is converted into' 'UPPERCASE by the user-defined onKeyPress callback.')
+
+ defMat⍪←'Credit_card' '' ''DT.Tab 0 1 1
+ defMat⍪←'Card_number' '' ''DT.Numeric 16 1 1
+ list←'Visa' 'Mastercard' 'American Express' 'Diners Club'
+ defMat⍪←'Credit_card_type' ''list DT.DropDown 0 1 1
+ defMat⍪←'CVC' '' ''DT.Numeric 3 1 1
+ tips⍪←'CVC'('This is a three-digit number on the' 'back of your credit card.')
+ defMat⍪←'Valid_until' '' ''DT.Date 0 1 1
+ defMat⍪←'CardName' 'Your name on the card' ''DT.Character 30 1 1
+ defMat⍪←'SaveCard' 'Save credit card details for future shoppings' ''DT.YesNo 0 1 1
+ defMat⍪←'PH1' '' ''DT.PlaceHolder 2 1 2
+ defMat⍪←'HelpCVC' 'What is CVC?' ''DT.Button 0 1 2
+
+ defMat⍪←'Misc' '' ''DT.Tab 0 1 1
+ defMat⍪←'Class' 'Customer Class'(1+⍳5)DT.Spinner 0 1 1
+ defMat⍪←'Newletters' 'Your Newsletter subscriptions⋄General⋄IT⋄Sales⋄Special offers'(1 1 0 0)DT.YesNo 0 1 1
+ defMat⍪←'Credit_limit' '' 1000 DT.Currency 0 1 1
+
+ defMat⍪←'Sales' '' ''DT.Tab 0 1 1
+ list←⊂'2000-01-03' 'PC' '2300.23'
+ list,←⊂'2012-11-12' 'Tablet' ' 800.00'
+ list,←⊂'2014-05-30' 'Iphone' ' 654.00'
+ defMat⍪←'Sales2' ''(⊃list)DT.ListView(¯1 ¯1)0 1
+
+ defMat⍪←'Notes' '' ''DT.Tab 0 1 1
+ defMat⍪←'Notes2' 'Notes' ''DT.Notepad(¯1 ¯1)1 1
+
+ parms←##.APLGUI.Input.CreateParms
+ parms.posn←55 35
+ parms.focus←'Firstname'
+ parms.helpBtnCaption←'Help me!'
+ parms.alignButtons←##.APLGUI.Enums.Align.Center
+ parms.onHelp←'#.TEMP.OnHelp'
+ parms.onPushButton←'#.TEMP.OnPushButton'
+ parms.onKeyPress←'#.TEMP.OnKeyPress'
+ parms.onInitial←'#.TEMP.OnInitial'
+ parms.onChange←'#.TEMP.OnChange'
+ parms.props←props
+ parms.tips←tips
+
+ (globalParms parms)←##.APLGUI.Input.CreateParms ##.APLGUI.Input.GetParms parms
+ globalParms.icon←'file:///',(GetFile'Sample.ico')
+ r←globalParms parms ##.APLGUI.Input.Run defMat
+ ⎕SE.aplteam.Display r
+⍝Done

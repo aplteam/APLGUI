@@ -1,0 +1,4 @@
+ OnShowDefMat←{
+     n←↑⍵
+     ⍬⊣{##.APLGUI.Input.ViewDefinitionMatrix ⍵}&n.∆g.defMat
+ }

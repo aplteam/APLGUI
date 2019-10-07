@@ -1,0 +1,32 @@
+ r←Test_CreateButtonForm_005(stopFlag batchFlag);myGuiParms;parms;n;⎕TRAP
+⍝ Exercise "Dialog.Create": width test; the "autoPress" message defines the width of the text
+ r←∆Failed
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+
+ myGuiParms←#.APLGUI.APLGUI.APLGuiGlobalParms.CreateDefaults
+ myGuiParms.regKey←'MyApp\Kai1'
+ myGuiParms.icon←⎕NEW'Icon'(⊂'File'(GetFile'Sample.ico'))
+ parms←#.APLGUI.APLGUI.Dialogs.CreateParmsForYesOrNo
+
+ parms.addToCaption←'Hi there'
+ parms.question←'Sure?'
+ parms.buttons←'Yes' 'No'
+ parms.autoPress←1
+ parms.timeout←0.1
+ parms.minSize←⍬ ⍬
+ parms←#.APLGUI.APLGUI.APLGuiUtils.CheckParmsForProgressbarAndStatusbar parms
+ n←#.APLGUI.APLGUI.Dialogs.CreateButtonForm myGuiParms parms
+ ⎕DL 0.1
+ n←#.APLGUI.APLGUI.Dialogs.AdjustSize n
+ :If ⍬ ⍬≡parms.posn
+     {}n.∆Form #.APLGUI.APLGUI.APLGuiHelpers.CenterIn myGuiParms.centerIn{(0∊⍴⍵):⍺ ⋄ ⍵}parms.centerIn
+ :EndIf
+ n←#.APLGUI.APLGUI.Dialogs.HandleFocus n
+ n(#.APLGUI.APLGUI.Dialogs.CreateAutoPressTimer)←parms.timeout
+ n.∆Form.Wait
+ →(0≡PassesIf{(120<⍵)∧(300>⍵)}n.∆Form.Size[1])/∆TidyUp
+
+∆TidyUp:
+ n.∆CloseForm
+
+ r←∆OK

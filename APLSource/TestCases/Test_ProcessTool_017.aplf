@@ -1,0 +1,32 @@
+ r←Test_ProcessTool_017(stopFlag batchFlag);⎕TRAP;rf;data;parms;globalParms;n
+⍝ Exercise "ProcessTool" with a "onQuit" callback and checkboxes.
+ r←∆Failed
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+
+ data←{⍵,[0.5]⍵}⍕¨10001+⍳10
+
+ #.⎕SHADOW'MyNS'
+ 'MyNS'#.⎕NS''
+ #.MyNS.Flag←0
+ #.MyNS.⎕FX'r←OnQuit n' 'r←Flag'
+
+ globalParms←#.APLGUI.APLGUI.APLGuiGlobalParms.CreateDefaults
+ globalParms.testMode←1
+ parms←#.APLGUI.APLGUI.ProcessTool.CreateParms
+ parms.timeout←3
+ parms.checkboxes←1
+ parms.default←(↑⍴data)↑0 1 1
+ parms.onQuit←'#.MyNS.OnQuit'
+ n←globalParms parms #.APLGUI.APLGUI.ProcessTool.Create data'#.MyNS.OnHandler'
+
+ 1 ⎕NQ n.Btn_01'Select'
+ →GoToTidyUp 0≠n.∆Form.∆closed
+ #.MyNS.Flag←1
+ 1 ⎕NQ n.Btn_01'Select'
+
+ r←∆OK
+
+∆TidyUp:
+ :Trap 0
+     n.∆CloseForm
+ :EndTrap

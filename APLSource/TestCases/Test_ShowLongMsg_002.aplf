@@ -1,0 +1,13 @@
+ r←Test_ShowLongMsg_002(stopFlag batchFlag);parms;n;⎕TRAP
+⍝ Exercise "ShowLongMsg" with an APL font and just a "Cancel" button
+ r←∆Failed
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+
+ parms←#.APLGUI.APLGUI.Dialogs.CreateParmsForShowLongMsg
+ parms.buttons←⊂'Cancel'
+ parms.APL←1
+ n←parms ∆ShowLongMsg ⎕SRC #.APLGUI.APLGUI.Dialogs
+ ⎕DL 1
+ n.∆CloseForm
+
+ r←∆OK

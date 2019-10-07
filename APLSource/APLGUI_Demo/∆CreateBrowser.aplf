@@ -1,0 +1,7 @@
+ {n}←∆CreateBrowser dummy;parms;vtv
+ parms←##.APLGUI.Notepad.CreateParms
+ parms.aplMode←1
+ parms.caption←'Code:'
+ parms.fontAPL←⎕NEW'Font'(('PName' 'APL385 Unicode')('Size' 16))
+ n←parms ##.APLGUI.Notepad.CreateBrowse''
+⍝Done

@@ -1,0 +1,109 @@
+ r←Test_Notepad_002(stopFlag batchFlag);VTV;parms;n;cl;VTV2;⎕TRAP
+⍝ Exercise the "Paste" functionality
+ r←∆Failed
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+
+⍝⍝⍝ Preconditions
+ VTV←''
+ VTV,←⊂'This is a simple integer scalar.'
+ VTV,←⊂'A side effect of using ⎕WA is an internal reorganisation of the workspace.'
+ VTV,←⊂'Any un-referenced memory is discarded.'
+ VTV,←⊂'Numeric arrays are demoted to their tightest form.'
+ VTV,←⊂'All remaining used memory blocks are copied to the low-address end of the workspace.'
+ VTV,←⊂'Workspace above a small amount of working memory is returned to the Operating System.'
+
+ parms←#.APLGUI.APLGUI.Notepad.CreateParms
+ parms.posn←35 25
+ parms.aplMode←1
+
+ n←parms #.APLGUI.APLGUI.Notepad.Create VTV #.APLGUI.APLGUI.Notepad.CreateParms
+
+ cl←⎕NEW⊂'Clipboard'
+
+⍝⍝⍝ Tests
+ n.Edit.SelText←(1 1)(1 1)
+ cl.Text←'APL is great! '
+ VTV2←VTV
+ (0⊃VTV2)←'APL is great! ',(0⊃VTV2)
+ ⎕DL 0.01
+ #.APLGUI.APLGUI.Notepad.OnPaste n.∆Form ⍬
+ →GoToTidyUp VTV2≢n.Edit.Text
+ n.Edit.Text←VTV
+
+ n.Edit.SelText←(1 1)(1,(1+⍴'This '))
+ cl.Text←'APL is great! '
+ VTV2←VTV
+ (0⊃VTV2)←'APL is great! ',((⍴'This ')↓0⊃VTV2)
+ ⎕DL 0.01
+ #.APLGUI.APLGUI.Notepad.OnPaste n.∆Form ⍬
+ →GoToTidyUp VTV2≢n.Edit.Text
+ n.Edit.Text←VTV
+
+ n.Edit.SelText←(1 1)(1 33)
+ cl.Text←'APL is great! '
+ VTV2←VTV
+ (0⊃VTV2)←'APL is great! '
+ ⎕DL 0.01
+ #.APLGUI.APLGUI.Notepad.OnPaste n.∆Form ⍬
+ →GoToTidyUp VTV2≢n.Edit.Text
+ n.Edit.Text←VTV
+
+ n.Edit.SelText←(1 6)(1 8)
+ cl.Text←'⌹'
+ VTV2←VTV
+ (0⊃VTV2)←'This ⌹ a simple integer scalar.'
+ ⎕DL 0.01
+ #.APLGUI.APLGUI.Notepad.OnPaste n.∆Form ⍬
+ →GoToTidyUp VTV2≢n.Edit.Text
+ n.Edit.Text←VTV
+
+ n.Edit.SelText←(1 6)(1 8)
+ cl.Text←'IS'
+ VTV2←VTV
+ (0⊃VTV2)←'This IS a simple integer scalar.'
+ ⎕DL 0.01
+ #.APLGUI.APLGUI.Notepad.OnPaste n.∆Form ⍬
+ →GoToTidyUp VTV2≢n.Edit.Text
+ n.Edit.Text←VTV
+
+ n.Edit.SelText←(1 5)(1 8)
+ cl.Text←''
+ VTV2←VTV
+ (0⊃VTV2)←'This a simple integer scalar.'
+ ⎕DL 0.01
+ #.APLGUI.APLGUI.Notepad.OnPaste n.∆Form ⍬
+ →GoToTidyUp VTV2≢n.Edit.Text
+ n.Edit.Text←VTV
+
+ n.Edit.SelText←(2 3)(3 2)
+ cl.Text←''
+ VTV2←VTV
+ (1⊃VTV2)←'A ny un-referenced memory is discarded.'
+ VTV2←(~(⍴VTV2)↑0 0 1)/VTV2
+ ⎕DL 0.01
+ #.APLGUI.APLGUI.Notepad.OnPaste n.∆Form ⍬
+ →GoToTidyUp VTV2≢n.Edit.Text
+ n.Edit.Text←VTV
+
+ n.Edit.SelText←(2 3)(3 2)
+ cl.Text←'ABC'
+ VTV2←VTV
+ (1⊃VTV2)←'A ABCny un-referenced memory is discarded.'
+ VTV2←(~(⍴VTV2)↑0 0 1)/VTV2
+ ⎕DL 0.01
+ #.APLGUI.APLGUI.Notepad.OnPaste n.∆Form ⍬
+ →GoToTidyUp VTV2≢n.Edit.Text
+ n.Edit.Text←VTV
+
+ n.Edit.SelText←(2 3)(3 2)
+ cl.Text←'111' '22'
+ VTV2←VTV
+ VTV2[1 2]←'A 111' '22ny un-referenced memory is discarded.'
+ ⎕DL 0.01
+ #.APLGUI.APLGUI.Notepad.OnPaste n.∆Form ⍬
+ →GoToTidyUp VTV2≢n.Edit.Text
+ n.Edit.Text←VTV
+ r←∆OK
+
+∆TidyUp:
+ n.∆CloseForm

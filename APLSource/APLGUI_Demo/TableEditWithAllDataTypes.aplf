@@ -1,0 +1,30 @@
+ TableEditWithAllDataTypes;table;parms;result;settings;shires
+⍝ The "Table" class is under construction and not ready yet
+ →0 ⍝ "Table" is not ready yet <Table>
+ parms←##.APLGUI.Table.CreateParms
+ table←⍪'Barak' 'Kennedy' 'Reagon' 'Bush' 'Clinton' 'Ford'
+ parms.dataTypes←⊂'CH'
+ table,←¯100,?5⍴100
+ parms.dataTypes,←⊂'NU'
+ table,←'2010-01-01' '1834-12-31' '1990-06-30' '3000-01-01' '2015-12-24' '1953-10-17'
+ parms.dataTypes,←⊂'DA'
+ table,←'09:12:34' '00:00:00' '23:59:59' '01:02:02' '02:00:34' '16:45:00'
+ parms.dataTypes,←⊂'TI'
+ shires←'Hertfordshire' 'Cambridgeshire' 'Wiltshire' 'London' 'Yorkshire' 'Cumbria'
+ table,←shires
+ parms.dataTypes,←⊂'DD'
+ table,←shires
+ parms.dataTypes,←⊂'DE'
+ table,←0 1 0 1 1 0
+ parms.dataTypes,←⊂'YN'
+ table,←1000 78.67 0 ¯34.12 9999999 123
+ parms.dataTypes,←⊂'CU'
+ parms.caption←'Table Editor with all data types'
+ parms.posn←80 40
+ parms.debug←1
+ parms.autoExpand←0
+ parms.colTitles←parms.dataTypes
+ parms.lists←((5 shires)(4 shires))
+ (result settings)←2↑parms ##.APLGUI.Table.Edit table
+ ⎕←result
+⍝Done

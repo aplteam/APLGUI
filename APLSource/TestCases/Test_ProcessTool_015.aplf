@@ -1,0 +1,54 @@
+ r←Test_ProcessTool_015(stopFlag batchFlag);⎕TRAP;rf;data;parms
+⍝ Exercise "ProcessTool" and check "regKey2"
+ r←∆Failed
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+
+ :If batchFlag
+     r←¯1
+ :Else
+     ⎕←(⎕PW-1)⍴'-'
+     ⎕←'The following eight GUIs should be sized properly'
+     ⎕←'Please check; you will be prompted at the end'
+     ⎕←''
+     ⎕←'Press <enter> when your are ready'
+     {}⍞
+     data←{⍵,[0.5]⍵}⍕¨10001+⍳1
+
+     #.⎕SHADOW'MyNS'
+     'MyNS'#.⎕NS''
+     rf←#.MyNS.⎕NEW'Font'(('PName' 'APL385 Unicode')('Size' 24))
+     #.MyNS.OnHandler←{0}
+
+     parms←#.APLGUI.APLGUI.ProcessTool.CreateParms
+
+     parms #.APLGUI.APLGUI.ProcessTool.Run data'#.MyNS.OnHandler'
+
+     parms.colTitles←'First' 'Second'
+     parms #.APLGUI.APLGUI.ProcessTool.Run data'#.MyNS.OnHandler'
+
+     parms.(fontInput fontStandard)←rf
+     parms.colTitles←''
+     parms #.APLGUI.APLGUI.ProcessTool.Run data'#.MyNS.OnHandler'
+
+     parms.colTitles←'First' 'Second'
+     parms #.APLGUI.APLGUI.ProcessTool.Run data'#.MyNS.OnHandler'
+
+     data←{⍵,[0.5]⍵}⍕¨10001+⍳20
+
+     parms←#.APLGUI.APLGUI.ProcessTool.CreateParms
+
+     parms #.APLGUI.APLGUI.ProcessTool.Run data'#.MyNS.OnHandler'
+
+     parms.colTitles←'First' 'Second'
+     parms #.APLGUI.APLGUI.ProcessTool.Run data'#.MyNS.OnHandler'
+
+     parms.(fontInput fontStandard)←rf
+     parms.colTitles←''
+     parms #.APLGUI.APLGUI.ProcessTool.Run data'#.MyNS.OnHandler'
+
+     parms.colTitles←'First' 'Second'
+     parms #.APLGUI.APLGUI.ProcessTool.Run data'#.MyNS.OnHandler'
+
+     r←~1 ∆PromptForSuccess'Did the GUIs look fine in terms of size?'
+
+ :EndIf

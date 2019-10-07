@@ -1,0 +1,22 @@
+ ProcessTool_WithBigFont;globalParms;list;parms;n1;result
+⍝ Presents a list of any length with a big font; allows processing selected rows via context menu
+ globalParms←##.APLGUI.APLGuiGlobalParms.CreateDefaults
+ globalParms.regKey←'MyApp'
+ globalParms.caption←'My App'
+ globalParms.icon←#.⎕NEW'Icon'(⊂'File'(GetFile'Sample.ico'))
+ globalParms.(fontStandard fontInput)←2⍴⎕NEW'Font'(('PName' 'Courier New')('Size' 22))
+ list←∪300⍴#.⎕NL-3
+ list←list[⍋⊃list]
+ parms←##.APLGUI.ProcessTool.CreateParms
+ parms.caption←'Process selected items'
+ parms.colTitles←,⊂'Numbers'
+ parms.style←##.APLGUI.Enums.SelectionStyles.multi
+ parms.info←'Select as many items as you like and then select "Process my items" from the context menu'
+ parms.useWindowsRegistry←1
+ parms.processBtnCaption←''
+ parms.contextMenuCaptions←'Process my items'
+⍝ parms.default←{(⍳⍵)∊3?⎕IO⊃⍵}⍴list
+ n1←globalParms parms ##.APLGUI.ProcessTool.Create list'##.##.##.APLGUI.APLGUI_Demo.∆OnTestHandler_ProcessTool'
+
+ result←##.APLGUI.ProcessTool.ModalWait n1
+ ⎕←(⍕result),' item(s) were processed'

@@ -1,0 +1,20 @@
+ IE_HTML_WithinForm;txt;n;res;text;changeFlag;Done;parms;n2
+⍝ Simple IE
+
+ #.⎕SHADOW'Temp'
+ 'Temp'#.⎕NS''
+
+ parms←##.APLGUI.StdForm.CreateParms
+ parms.addToCaption←'IE test'
+ n←##.APLGUI.StdForm.Create parms
+ n2←##.APLGUI.IE.CreateIE n.∆Form
+
+ #.Temp.html1←⊂'<h1>Demo for the IE object</h1>'
+ #.Temp.html1,←⊂'<p>Very simple demo for the IE object with an external link.</p>'
+ #.Temp.html1,←⊂'<p>External link to the <a href="http://aplwiki.com">APL Wiki</a> which will be opened in your default browser.</p>'
+
+ ##.APLGUI.IE.ShowHtml n2.IEobject #.Temp.html1
+ ⍝⎕←##.APLGUI.IE.GetBody n2.IEobject
+ ⍝⎕←##.APLGUI.IE.GetHTML n2.IEobject
+ ⎕DQ n.∆Form
+⍝Done

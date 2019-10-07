@@ -1,6 +1,0 @@
- ShowMsgAutoPress;msg;parms
- parms←##.GUI.Dialogs.CreateParmsForShowMsg
- parms.autoPress←1
- parms.timeout←4
- msg←'This is a message' '' 'It serves as an example for what Dialogs.ShowMsg can do for you'
- parms ##.GUI.Dialogs.ShowMsg msg

@@ -1,0 +1,22 @@
+ OptionsTool_Checkboxes;globalParms;list;parms;n1;flag;boolean
+⍝ Presents a list (typically small) with check boxes
+ globalParms←##.APLGUI.APLGuiGlobalParms.CreateDefaults
+ globalParms.regKey←'MyApp'
+ globalParms.caption←'My App'
+ globalParms.icon←#.⎕NEW'Icon'(⊂'File'(GetFile'Sample.ico'))
+ list←'White' 'Red' 'Green' 'Yellow' 'Black' 'Pink' 'Magenta' 'Black' 'Blue'
+ parms←##.APLGUI.OptionsTool.CreateParms
+ parms.caption←'Select proper color'
+ parms.info←'Select the most appropriate color(s):'
+ parms.style←##.APLGUI.Enums.OptionsStyles.check
+⍝ parms.default←list∊'Green' 'Black' 'Blue'
+ parms.default←(⍴,list)↑0 1 1
+ n1←globalParms parms ##.APLGUI.OptionsTool.Create list
+
+ (flag boolean)←##.APLGUI.OptionsTool.ModalWait n1
+ :If flag
+     ⎕←' User pressed the OK button'
+     ⎕←⍪boolean/list
+ :Else
+     ⎕←'User did NOT press the OK button'
+ :EndIf

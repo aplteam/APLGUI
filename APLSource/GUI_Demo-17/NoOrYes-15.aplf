@@ -1,7 +1,0 @@
- NoOrYes;globalParms
-⍝ Simple "No-or-Yes" dialog with default settings
- globalParms←##.GUI.APLGuiGlobalParms.CreateDefaults
- globalParms.regKey←'MyApp\Kai1'
- globalParms.icon←⎕NEW'Icon'(⊂'File'(GetFile'Sample.ico'))   ⍝ Domain Error?! Run ⎕LX!
- ⎕←globalParms ##.GUI.Dialogs.NoOrYes'Are you really sure about this?'
-⍝Done

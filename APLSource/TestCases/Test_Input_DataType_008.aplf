@@ -1,0 +1,37 @@
+ r←Test_Input_DataType_008(stopFlag batchFlag);n;⎕TRAP;defMat;res;DT;globalParms;parms;props;month;values;colors;Okay
+⍝ Exercise "Input" with data type "PlaceHolder".
+ r←∆Failed
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+
+ DT←#.APLGUI.APLGUI.Enums.InputDataTypes
+
+ defMat←0 7⍴0
+ defMat⍪←'Text1a' '' ''DT.Character 5 1 1
+ defMat⍪←'Text2a' '' ''DT.Character 5 1 1
+ defMat⍪←'Text3a' '' ''DT.Character 5 1 1
+ defMat⍪←'Text4a' '' ''DT.Character 5 1 1
+ defMat⍪←'Text5a' '' ''DT.Character 5 1 1
+ defMat⍪←'Text6a' '' ''DT.Character 5 1 1
+ defMat⍪←'Text1b' 'Any input field' ''DT.Character 0 1 2
+ defMat⍪←'Check1b' 'I read the conditions' 1 DT.YesNo 0 1 2
+ defMat⍪←'PlaceHolder' '' ''DT.PlaceHolder 3 1 2
+ defMat⍪←'Text2b' 'another field' ''DT.Character 0 1 2
+
+ defMat⍪←'Text1c' 'Any input field' ''DT.Character 0 1 3
+ defMat⍪←'Check1c' 'Recipients⋄Nils⋄Kai⋄Wolfgang⋄Phil⋄John⋄Barack⋄Peter⋄Richard' 0 DT.YesNo 0 1 3
+ defMat⍪←'Text2c' 'another field' ''DT.Character 0 1 3
+
+ globalParms←∆GetGlobalParms
+ parms←#.APLGUI.APLGUI.Input.CreateParms
+ parms.posn←50 50
+ parms.addToCaption←'No. ',⍕∆GetTestCaseNo
+
+ n←#.APLGUI.APLGUI.Input.Create defMat globalParms parms
+ 0 ∆Process n.∆Form
+
+ →GoToTidyUp~n.PlaceHolder.Size[0]∊(¯5+n.∆g.Height×3)+⍳10
+
+ r←∆OK
+
+∆TidyUp:
+ n.∆CloseForm

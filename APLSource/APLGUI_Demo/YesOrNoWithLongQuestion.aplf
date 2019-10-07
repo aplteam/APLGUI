@@ -1,0 +1,6 @@
+ YesOrNoWithLongQuestion;globalParms;msg;parms
+⍝ Presents a "Yes" and a "No" button together with a long message.
+ globalParms←##.APLGUI.APLGuiGlobalParms.CreateDefaults
+ globalParms.icon←⎕NEW'Icon'(⊂'File'(GetFile'Sample.ico'))
+ msg←'I have to make sure that you are really really certain about your decision, therefore please confirm:'
+ ⎕←globalParms ##.APLGUI.Dialogs.YesOrNo msg

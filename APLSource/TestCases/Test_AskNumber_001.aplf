@@ -1,0 +1,25 @@
+ r←Test_AskNumber_001(stopFlag batchFlag);myGuiParms;parms;n;⎕TRAP
+⍝ Exercise the "AskForNumber" method with defaults parameters only.
+ r←∆Failed
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+
+ myGuiParms←#.APLGUI.APLGUI.APLGuiGlobalParms.CreateDefaults
+ myGuiParms.regKey←'MyApp\Kai1'
+ parms←#.APLGUI.APLGUI.Request.CreateParmsForNumber
+ parms.addToCaption←'My request'
+ parms.question←'How many copies?'
+
+ n←myGuiParms parms(#.APLGUI.APLGUI.Request.CreateParmsForNumber ∆Ask)''
+ ⎕DL 0.2
+ ∆Process n.∆Form
+ n.Input ∆KeyPress'33'
+ ⎕NQ n.Input 9995
+ ∆Process n.∆Form
+ ⎕NQ n.Btn0'Select'
+ ∆Process n.∆Form
+ →FailsIf 33≢n.∆result
+
+ r←∆OK
+
+∆TidyUp:
+ n.∆CloseForm

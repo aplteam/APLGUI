@@ -1,0 +1,44 @@
+ r←Test_TableEdit_004(stopFlag batchFlag);parms;n;⎕TRAP;table;rowTitles;buff
+⍝ Duplicate rows, including syncing with "data" property.
+ r←∆Inactive
+ :Return
+
+ r←∆Failed
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+
+⍝⍝⍝ Preconditions
+ table←⍉⊃('Obama' 'Bush' 'Clinton' 'Reagan' 'Kennedy' 'Carter')(1 0 1 0 1 1)(20150102 20150630 20151231)(1 2 235659)
+ parms←#.APLGUI.APLGUI.Table.CreateParms
+ parms.posn←35 25
+ parms.size←400 600
+ parms.colTitles←'Name' 'Democrat' 'Date' 'Time'
+ parms.dataTypes←#.APLGUI.APLGUI.Enums.TableDataTypes.(Character Numeric)
+ parms.addToCaption←'Testing Table.Run'
+ parms.confirmQuit←0
+ parms.data←1 100×⍤1⊣1 1\6 1⍴1+⍳6
+
+ n←#.APLGUI.APLGUI.Table.Create table #.APLGUI.APLGUI.APLGuiGlobalParms.CreateDefaults parms
+ #.APLGUI.APLGUI.Table.ExecPrivateFns'RowDuplicate'n  ⍝ Duplicate the first row
+ →GoToTidyUp(⍴n.Grid.Values)≢1 0+⍴table
+ →GoToTidyUp 1≠⍴∪↓2↑n.Grid.Values
+ buff←(1+(↑⍴parms.data)↑1)⍀parms.data
+ →GoToTidyUp n.∆data≢buff
+
+ n.Grid.CurCell[0]←↑⍴n.Grid.Values
+ #.APLGUI.APLGUI.Table.ExecPrivateFns'RowDuplicate'n  ⍝ Duplicate the last row
+ →GoToTidyUp(⍴n.Grid.Values)≢2 0+⍴table
+ →GoToTidyUp 1≠⍴∪↓¯2↑n.Grid.Values
+ buff←(⌽1+(↑⍴buff)↑1)⍀buff
+ →GoToTidyUp n.∆data≢buff
+
+ n.Grid.CurCell[0]←3
+ #.APLGUI.APLGUI.Table.ExecPrivateFns'RowDuplicate'n  ⍝ Duplicate the forth row
+ →GoToTidyUp(⍴n.Grid.Values)≢3 0+⍴table
+ →GoToTidyUp 1≠⍴∪↓n.Grid.Values[3+0 1;]
+ buff←(1+(↑⍴buff)↑¯4↑1)⍀buff
+ →GoToTidyUp n.∆data≢buff
+
+ r←∆OK
+
+∆TidyUp:
+ n.∆CloseForm

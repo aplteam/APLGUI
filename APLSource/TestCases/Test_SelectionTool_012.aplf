@@ -1,0 +1,25 @@
+ r←Test_SelectionTool_012(stopFlag batchFlag);parms;n;v;data;⎕TRAP
+⍝ Shows several columns and uses checkboxes without setting style. Checks result.
+⍝ "style" defaults to "single" but is ignored when "checkboxes"=1.
+ r←∆Failed
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+
+ parms←#.APLGUI.APLGUI.SelectionTool.CreateParms
+ parms.autoPress←0
+ parms.addToCaption←'Multiple columns'
+ parms.minSize←⍬ 700
+ parms.posn←60 70
+ parms.size←⍬ 720
+ parms.timeout←0.1
+ parms.checkboxes←1
+ (data parms.colTitles)←∆BuildMatrixForListView
+ parms.default←(⍳0⊃⍴data)∊2 3 5
+ n←parms #.APLGUI.APLGUI.SelectionTool.Create data
+⍝⍝ This does not work - pity ⍝⍝ {}n.List{2 ⎕NQ ⍺'ItemUp'⍵ 1 0 8}¨n.List{⍵⊣2 ⎕NQ ⍺'ItemDown'⍵ 1 0 8}¨10 11 40 50
+ ⎕DQ n.∆Form
+ →GoToTidyUp parms.default≢n.∆result
+
+ r←∆OK
+
+∆TidyUp:
+ n.∆CloseForm

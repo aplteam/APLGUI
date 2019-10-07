@@ -1,0 +1,35 @@
+ r←Test_TableEdit_100(stopFlag batchFlag);parms;n;⎕TRAP;table;rowTitles
+⍝ Test the "onDblClick" callback
+ r←∆Inactive
+ :Return
+
+ r←∆Failed
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+
+ #.⎕SHADOW'TEMP'
+ 'TEMP'#.⎕NS''
+ #.TEMP.flag←0
+ #.TEMP.OnDblClick←{
+     ⎕THIS.flag←1
+     ⍬
+ }
+
+ table←⍪'Obama' 'Bush' 'Clinton' 'Reagan' 'Kennedy'
+ table,←'Barak' 'George' 'Bill' 'Ronald' 'John'
+ table,←?5 20⍴1000000
+ parms←#.APLGUI.APLGUI.Table.CreateParms
+ parms.posn←35 25
+ parms.size←400 600
+ parms.caption←'Test_TableEdit_100: onDblClick callback'
+ parms.confirmQuit←0
+ parms.testMode←1
+ parms.onDblClick←'#.TEMP.OnDblClick'
+
+ n←#.APLGUI.APLGUI.Table.Create table #.APLGUI.APLGUI.APLGuiGlobalParms.CreateDefaults parms
+ ⎕NQ n.Grid'CellDblClick' 2 2 1 0 0 0 0
+
+ →GoToTidyUp 1≠#.TEMP.flag
+ r←∆OK
+
+∆TidyUp:
+ n.∆CloseForm

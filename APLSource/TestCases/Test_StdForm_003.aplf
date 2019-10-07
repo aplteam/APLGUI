@@ -1,0 +1,25 @@
+ r←Test_StdForm_003(stopFlag batchFlag);⎕TRAP;parms;n;globalParms;MyGuiParms
+⍝ Bring up a form up and test the progress bar
+ r←∆Failed
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+
+ CreateGlobalParms
+ globalParms←⎕NS MyGuiParms
+ parms←#.APLGUI.APLGUI.StdForm.CreateParms
+ :If ⍬ ⍬≡parms.size
+     parms.size←200 400
+ :EndIf
+ parms.posn←45 35
+ parms.hasProgressbar←1
+ n←#.APLGUI.APLGUI.StdForm.Create globalParms parms
+
+⍝ Test progress bar
+ #.APLGUI.APLGUI.StdForm.InitProgressbar n 3462
+ #.APLGUI.APLGUI.StdForm.SetProgressbarThumb n ¯25
+ n.∆Form.GotFocus ⍬
+ {}n{_←⎕DL 0.4 ⋄ #.APLGUI.APLGUI.StdForm.SetProgressbarThumb ⍺ ⍵}¨1800 2400 2800 3100 3400
+ n.Progressbar.Visible←0
+ ⎕DL 1
+ ⎕NQ n.∆Form'Close'
+
+ r←∆OK

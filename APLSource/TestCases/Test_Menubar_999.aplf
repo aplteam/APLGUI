@@ -1,0 +1,13 @@
+ r←Test_Menubar_999(stopFlag batchFlag);menu2;⎕TRAP
+⍝ Try to instanciate the Menubar class
+ r←∆Failed
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+
+ :Trap 0
+     ⎕NEW #.APLGUI.APLGUI.Menubar
+     →FailsIf 1
+ :Else
+     →FailsIf'This class must not be instanciated'≢0⊃⎕DM
+ :EndTrap
+
+ r←∆OK

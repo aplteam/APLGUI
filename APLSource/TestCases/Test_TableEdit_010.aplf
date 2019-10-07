@@ -1,0 +1,26 @@
+ r←Test_TableEdit_010(stopFlag batchFlag);parms;n;⎕TRAP;table
+⍝ Make a table read-only
+ r←∆Inactive
+ :Return
+
+ r←∆Failed
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+
+⍝⍝⍝ Preconditions
+ table←⍉⊃('Bush' 'Clinton' 'Reagan')('George' 'Bill' 'Ronald')(1986 1994 2002)
+ parms←#.APLGUI.APLGUI.Table.CreateParms
+ parms.posn←35 25
+ parms.size←250 500
+ parms.confirmQuit←0
+ parms.testMode←1
+ parms.readOnly←1
+
+ n←#.APLGUI.APLGUI.Table.Create table #.APLGUI.APLGUI.APLGuiGlobalParms.CreateDefaults parms
+
+ n.Grid ∆KeyPress'a'
+ →GoToTidyUp(,'a')≡,↑n.Grid.Values
+
+ r←∆OK
+
+∆TidyUp:
+ n.∆CloseForm

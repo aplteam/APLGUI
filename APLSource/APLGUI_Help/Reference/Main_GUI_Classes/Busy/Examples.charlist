@@ -1,0 +1,35 @@
+# Examples
+
+## Simplest possible application
+
+~~~
+n←#.APLGUI.Busy.Create'This may take a moment...'
+~~~
+
+![](Images/Busy/Busy_01.png)
+
+## With an "Abort" button
+
+~~~
+parms←#.APLGUI.Busy.CreateParms
+parms.addToCaption←'This is "#.APLGUI_Demo.BusyWithAbortButton"'
+parms.hasAbortButton←1
+parms.align←#.APLGUI.Enums.Align.Center
+msg←'This may take a moment' 'Please stay patient' 'It won't last forever'
+n←parms #.APLGUI.Busy.Create msg
+~~~
+
+![](Images/Busy/Busy_02.png)
+
+## Wrapping around
+
+~~~
+parms←#.APLGUI.Busy.CreateParms
+parms.addToCaption←'This is "',(↑⎕XSI),'"'
+parms.auto←1
+parms.onTop←1
+msg←'This may well take a moment but we don't know how long'
+n←parms #.APLGUI.Busy.Create msg
+~~~
+
+![](Images/Busy/Busy_03.png)

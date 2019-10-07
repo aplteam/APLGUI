@@ -1,0 +1,21 @@
+ OptionsTool_RadioBtnsWithRightAlignedButtons;globalParms;list;parms;n1;flag;boolean
+⍝ ⍝ Presents a list (typically small) with check boxes and right-aligned buttons
+ globalParms←##.APLGUI.APLGuiGlobalParms.CreateDefaults
+ globalParms.regKey←'MyApp'
+ globalParms.caption←'My App'
+ globalParms.icon←#.⎕NEW'Icon'(⊂'File'(GetFile'Sample.ico'))
+ list←'White' 'Red' 'Green' 'Yellow' 'Black'
+ parms←##.APLGUI.OptionsTool.CreateParms
+ parms.caption←'Select proper color'
+ parms.info←'Select the most appropriate color:'
+ parms.default←0 0 0 1 0
+ parms.style←##.APLGUI.Enums.OptionsStyles.radio
+ parms.alignButtons←##.APLGUI.Enums.Align.Right
+ n1←globalParms parms ##.APLGUI.OptionsTool.Create list
+ (flag boolean)←##.APLGUI.OptionsTool.ModalWait n1
+ :If flag
+     ⎕←' User pressed the OK button'
+     ⎕←⍪boolean/list
+ :Else
+     ⎕←'User did NOT press the OK button'
+ :EndIf

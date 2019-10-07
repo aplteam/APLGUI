@@ -1,0 +1,15 @@
+ AskForStringWithDefault2;parms
+ parms←##.APLGUI.Request.CreateParmsForString
+ #.⎕SHADOW'AskForStringWithDefaults'
+ parms.default←'kai@aplteam'
+ parms.maxLength←50
+ parms.onOkay←'#.OnOkayInAskForStringWithDefaults'
+ #.OnOkayInAskForStringWithDefaults←{
+     n←⍵
+     ∧/'@.'∊n.∆result:1
+     n.StatusField1.Text←'This is not a valid email address!'
+     n.StatusField1.BCol←n.∆globalParms.alarmColor
+     0
+ }
+ ⎕←parms ##.APLGUI.Request.AskForString'Enter your email address:'
+⍝Done

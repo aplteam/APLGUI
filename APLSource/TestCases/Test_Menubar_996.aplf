@@ -1,0 +1,14 @@
+ r←Test_Menubar_996(stopFlag batchFlag);menu2;TheForm;parms;⎕TRAP
+⍝ Passes a menu definition that uses ∆ and ⍙ in names.
+ r←∆Failed
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+
+ 'TheForm'⎕WC'Form'('Coord' 'Pixel')('Posn'(35 45))('Size'(300 400))
+ :Trap 0
+     n←#.APLGUI.APLGUI.Menubar.Create TheForm MenuNamesWith∆And⍙ ⍬(⎕NEW #.APLGUI.APLGUI.KeyCodes)
+     →FailsIf 1
+ :Else
+     →FailsIf'These contains invalid character(s): new∆, c⍙lose'≢0⊃⎕DM
+ :EndTrap
+
+ r←∆OK

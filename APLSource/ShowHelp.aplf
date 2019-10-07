@@ -1,0 +1,3 @@
+ {r}←ShowHelp
+ r←APLGUI.APLGuiAdmin.StartHelp 1
+⍝Done

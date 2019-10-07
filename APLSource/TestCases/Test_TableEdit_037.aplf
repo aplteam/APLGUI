@@ -1,0 +1,27 @@
+ r←Test_TableEdit_037(stopFlag batchFlag);parms;n;⎕TRAP;table;rowTitles;was
+⍝ Test whether "cellWidths" is processed as intended.
+ r←∆Inactive
+ :Return
+
+ r←∆Failed
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+ was←2035⌶'RealPixel'
+
+ table←⍪'Obama' 'Bush' 'Clinton' 'Reagan' 'Kennedy'
+ table,←?5 199⍴1000000
+ table[;4]←100
+ parms←#.APLGUI.APLGUI.Table.CreateParms
+ parms.posn←35 25
+ parms.size←400 600
+ parms.caption←'Test_Table_006: set cell widths'
+ parms.confirmQuit←0
+ parms.testMode←1
+ parms.cellWidths←80 0 2 4 ¯2,5↓⍳200
+
+ n←#.APLGUI.APLGUI.Table.Create table #.APLGUI.APLGUI.APLGuiGlobalParms.CreateDefaults parms
+ →GoToTidyUp 80 0 2 4 34 5≢6↑n.Grid.CellWidths
+ →GoToTidyUp(6+⍳194)≢6↓n.Grid.CellWidths
+
+∆TidyUp:
+ {}2035⌶was
+ n.∆CloseForm

@@ -1,0 +1,44 @@
+ r←Test_DisplayButtons_004(stopFlag batchFlag);⎕TRAP;n;buttons;focusHas;parms;btn;text
+⍝ Exercise "DisplayButtons" with `onButtonPressed` with all possible variations.
+ r←∆Failed
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+
+ #.⎕SHADOW'TEMP'
+ 'TEMP'#.⎕NS''
+ #.TEMP.flag←0
+ #.TEMP.⎕FX⊃'r←n OnButtonPressed msg' 'r←flag←1'
+
+ buttons←2 3⍴'PDF' 'HTML' 'XML' 'OK' 'Don''t know' 'Cancel'
+ parms←#.APLGUI.APLGUI.Dialogs.CreateParmsForDisplayButtons
+ parms.cancelButton←¯1+⍴,buttons
+ parms.onButtonPressed←#.TEMP'OnButtonPressed'
+ n←parms ∆DisplayButtons'Please select the appropriate action:'buttons
+ btn←parms.cancelButton⊃,n.∆buttons  ⍝ The "Cancel" button
+ 1 ⎕NQ btn'Select'
+ →GoToTidyUp #.TEMP.flag≠1
+ n.∆CloseForm
+ #.TEMP.flag←0
+
+ parms←#.APLGUI.APLGUI.Dialogs.CreateParmsForDisplayButtons
+ parms.cancelButton←¯1+⍴,buttons
+ parms.onButtonPressed←'#.TEMP.OnButtonPressed'
+ n←parms ∆DisplayButtons'Please select the appropriate action:'buttons
+ btn←parms.cancelButton⊃,n.∆buttons  ⍝ The "Cancel" button
+ 1 ⎕NQ btn'Select'
+ →GoToTidyUp #.TEMP.flag≠1
+ n.∆CloseForm
+ #.TEMP.flag←0
+
+ parms←#.APLGUI.APLGUI.Dialogs.CreateParmsForDisplayButtons
+ parms.cancelButton←¯1+⍴,buttons
+ parms.onButtonPressed←'OnButtonPressed'
+ text←'Please select the appropriate action:'
+ n←parms #.TEMP.{⍺ #.APLGUI.APLGUI.Dialogs.CreateDisplayButtons'Please select the appropriate action:'⍵}buttons
+ btn←parms.cancelButton⊃,n.∆buttons  ⍝ The "Cancel" button
+ 1 ⎕NQ btn'Select'
+ →GoToTidyUp #.TEMP.flag≠1
+
+ r←∆OK
+
+∆TidyUp:
+ n.∆CloseForm

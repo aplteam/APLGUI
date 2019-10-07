@@ -1,0 +1,25 @@
+ r←Test_Input_Misc_027(stopFlag batchFlag);n;⎕TRAP;defMat;res;DT;parms;F;menubar;txt
+⍝ Exercise "Input" with a multi-line label that is a URL.
+ r←∆Failed
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+
+ DT←#.APLGUI.APLGUI.Enums.InputDataTypes
+
+ defMat←0 4⍴0
+ txt←'This is the project page of the APLTree project:'
+ txt,←'⋄<https://github.com/aplteam/apltreeutils>'
+ txt,←'⋄Refer to this page for details.'
+ defMat⍪←'URL' ''txt DT.Label
+
+ parms←#.APLGUI.APLGUI.Input.CreateParms
+ parms.testMode←1
+ n←#.APLGUI.APLGUI.Input.Create defMat parms ⍬
+ →GoToTidyUp~(⊂0 0 255)∊n.URL.FCol
+ →GoToTidyUp 0 600 0≢n.URL.FontObj.Weight
+ →GoToTidyUp 0 1 0≢n.URL.FontObj.Underline
+ →GoToTidyUp'https://'≢{⍺ ⍺⍺(⍴,⍺)↑⍵}1⊃n.URL.Caption
+ r←∆OK
+
+∆TidyUp:
+ :Trap 0 ⋄ {}n.∆CloseForm ⋄ :EndTrap
+⍝Done

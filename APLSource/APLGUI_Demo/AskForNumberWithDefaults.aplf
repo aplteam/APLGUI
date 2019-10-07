@@ -1,0 +1,5 @@
+ AskForNumberWithDefaults;parms
+ parms←##.APLGUI.Request.CreateParmsForNumber
+ parms.value←10
+ ⎕←parms ##.APLGUI.Request.AskForNumber'Number of copies:'
+⍝Done

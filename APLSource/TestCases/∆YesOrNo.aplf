@@ -1,0 +1,18 @@
+ n←{x}∆YesOrNo question;globalParms;parms;⎕TRAP
+⍝ Modal dialog asking a yes-no question with "Yes" being the default button.
+ :Access Public Shared
+ ⎕TRAP←(#.APLGUI.APLGUI.APLGuiUtils.APLGuiError'C' '(⎕IO⊃⎕DM) ⎕SIGNAL ⎕en')(0 'N')
+ x←{(0<⎕NC ⍵):⍎⍵ ⋄ ⍬}'x'
+ (globalParms parms)←#.APLGUI.APLGUI.Dialogs.CreateParmsForYesOrNo #.APLGUI.APLGUI.APLGuiUtils.GetParms x
+ parms←#.APLGUI.APLGUI.APLGuiUtils.CheckTimeout globalParms parms
+ :If 0∊⍴parms.autoPress
+     parms.focusButton←0
+ :Else
+     parms.focusButton←parms.autoPress
+ :EndIf
+ parms.question{(0∊⍴⍵):⍺ ⋄ ⍵}←question
+ parms.buttons←'Yes' 'No'
+ n←#.APLGUI.APLGUI.Dialogs.CreateButtonForm globalParms parms
+ n←#.APLGUI.APLGUI.Dialogs.HandleFocus n
+ n(#.APLGUI.APLGUI.Dialogs.CreateAutoPressTimer)←parms.timeout
+⍝Done

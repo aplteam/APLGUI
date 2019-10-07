@@ -1,0 +1,23 @@
+ r←Test_DirSelect_003(stopFlag batchFlag);myGuiParms;parms;n;⎕TRAP;startDir
+⍝ Exercise the "DirSelect" method with a fixed directory
+ r←∆Failed
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+
+ myGuiParms←#.APLGUI.APLGUI.APLGuiGlobalParms.CreateDefaults
+ myGuiParms.regKey←'MyApp\Kai1'
+
+ parms←#.APLGUI.APLGUI.DirSelect.CreateParms
+ parms.addToCaption←'My request'
+ parms.posn←72 2073
+ parms.fixDefaultDir←1
+
+ startDir←'C:\Windows\system32'
+ startDir←'C:\Users\All Users\TEMP'
+ n←myGuiParms parms #.APLGUI.APLGUI.DirSelect.Create startDir
+ ⎕DL 0.1
+ 1 ⎕NQ n.Btn_00'Select'
+ →GoToTidyUp≢/#.APLTreeUtils.Lowercase startDir n.∆result
+ r←∆OK
+
+∆TidyUp:
+ :Trap 6 ⋄ n.∆CloseForm ⋄ :EndTrap

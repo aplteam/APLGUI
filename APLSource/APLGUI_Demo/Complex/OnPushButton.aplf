@@ -1,0 +1,11 @@
+ OnPushButton←{
+     (btn n)←⍵
+     parms←##.APLGUI.Dialogs.CreateParmsForShowMsg
+     parms.addToCaption←'CVC'
+     parms.centerIn←n.∆Form
+     msg←⊂'You''ve pressed the "CVC?" button.'
+     msg,←⊂'Hover with the mouse over the CVC field'
+     msg,←⊂'in order to get further information.'
+     _←n.∆globalParms parms ##.APLGUI.Dialogs.ShowMsg msg
+     ⍬
+ }

@@ -1,0 +1,8 @@
+ NoOrYesWithoutStatusbar;myGuiParms;parms
+⍝ "No-or-Yes" dialog without a status bar
+ myGuiParms←##.APLGUI.APLGuiGlobalParms.CreateDefaults
+ myGuiParms.regKey←'MyApp\Kai1'
+ myGuiParms.icon←⎕NEW'Icon'(⊂'File'(GetFile'Sample.ico'))
+ parms←##.APLGUI.Dialogs.CreateParmsForNoOrYes
+ parms.(hasProgressbar hasStatusbar)←2⍴0
+ ⎕←myGuiParms parms ##.APLGUI.Dialogs.NoOrYes'Are you really sure about this?'

@@ -1,0 +1,14 @@
+ n←{x}(fns ∆Ask)question;n;buffer;globalParms;parms;⎕TRAP
+⍝ Non-modal cover for `CreateRequest`; used by test cases.
+ :Access Public Shared
+ ⎕TRAP←(999 'C' '(0⊃⎕DM )⎕signal 999')(0 'N')
+ x←{(0<⎕NC ⍵):⍎⍵ ⋄ ⍬}'x'
+ (globalParms parms)←fns #.APLGUI.APLGUI.APLGuiUtils.GetParms x
+ parms.(onHelp onOkay)←'"Help"' '"Okay"'#.APLGUI.APLGUI.Request.CheckUserCallback¨parms.(onHelp onOkay)
+ :If ~0∊⍴question
+     parms.question←question
+ :EndIf
+ n←globalParms #.APLGUI.APLGUI.Request.CreateRequest parms
+ n←#.APLGUI.APLGUI.Request.PolishRequest n
+ n.Btn1.onSelect←1 ⍝ Enable the "Cancel" button
+ ⎕NQ n.Input'GotFocus'

@@ -1,0 +1,30 @@
+ r←Test_TableEdit_033(stopFlag batchFlag);parms;n;⎕TRAP;table;rowTitles
+⍝ The user is asked whether she sees just a horizontal scrollbar.
+ r←∆Inactive
+ :Return
+
+ r←∆Failed
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+
+ :If batchFlag
+     r←¯1
+ :Else
+     table←⍉⊃('Obama' 'Bush' 'Clinton' 'Reagan' 'Kennedy' 'Carter')(1 0 1 0 1 1)
+     table←200 200⍴table
+     parms←#.APLGUI.APLGUI.Table.CreateParms
+     parms.posn←35 25
+     parms.size←400 600
+     parms.caption←'Test_Table_002: just a horizontal scroll bars'
+     parms.confirmQuit←0
+     parms.testMode←1
+
+     ⎕←'This test requires just one scroll bar (horizontal) to show up. When you are ready to continue press <Enter>'
+     0⍴⍞
+
+     n←#.APLGUI.APLGUI.Table.Create table #.APLGUI.APLGUI.APLGuiGlobalParms.CreateDefaults parms
+
+     r←~1 ∆PromptForSuccess'Do you see just a horizontal scroll bar?'
+
+∆TidyUp:
+     n.∆CloseForm
+ :EndIf

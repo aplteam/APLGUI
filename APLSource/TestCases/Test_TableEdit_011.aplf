@@ -1,0 +1,47 @@
+ r←Test_TableEdit_011(stopFlag batchFlag);parms;n;⎕TRAP;table
+⍝ Make two  columns in a table read-only.
+ r←∆Inactive
+ :Return
+
+ r←∆Failed
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+
+⍝⍝⍝ Preconditions
+ table←⍉⊃('Bush' 'Clinton' 'Reagan')('George' 'Bill' 'Ronald')(1986 1994 2002)(10 20 30)
+ parms←#.APLGUI.APLGUI.Table.CreateParms
+ parms.posn←35 25
+ parms.size←200 600
+ parms.confirmQuit←0
+ parms.testMode←1
+ parms.readOnly←0 1 0 1
+
+ n←#.APLGUI.APLGUI.Table.Create table #.APLGUI.APLGUI.APLGuiGlobalParms.CreateDefaults parms
+
+ n.Grid.CurCell←0 0
+ n.Grid ∆KeyPress'a'
+ ⎕NQ n.Grid'CellMove' 1 0
+ 0.1 ∆Process n.∆Form
+ →GoToTidyUp(,'a')≢,↑n.Grid.Values[0;0]
+
+ n.Grid.CurCell←0 1
+ n.Grid ∆KeyPress'a'
+ ⎕NQ n.Grid'CellMove' 1 0
+ 0.1 ∆Process n.∆Form
+ →GoToTidyUp(,'a')≡,↑n.Grid.Values[0;1]
+
+ n.Grid.CurCell←0 2
+ n.Grid ∆KeyPress'7'
+ ⎕NQ n.Grid'CellMove' 1 0
+ 0.1 ∆Process n.∆Form
+ →GoToTidyUp(,7)≢,↑n.Grid.Values[0;2]
+
+ n.Grid.CurCell←0 3
+ n.Grid ∆KeyPress'9'
+ ⎕NQ n.Grid'CellMove' 1 0
+ 0.1 ∆Process n.∆Form
+ →GoToTidyUp(,10)≢,↑n.Grid.Values[0;3]
+
+ r←∆OK
+
+∆TidyUp:
+ n.∆CloseForm

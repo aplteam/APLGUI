@@ -1,0 +1,15 @@
+ BusyWithOnTopNotChecked;parms;n;i;msg
+
+ parms←##.APLGUI.Busy.CreateParms
+ parms.addToCaption←'This is "',(↑⎕XSI),'"'
+ parms.showOnTop←1
+
+ msg←'This may well take a moment'
+ n←parms ##.APLGUI.Busy.Create msg
+
+ :For i :In 2+⍳8
+     ⎕DL 0.25
+     n ##.APLGUI.Busy.SetPercent 10×i
+ :EndFor
+
+ n.∆CloseForm

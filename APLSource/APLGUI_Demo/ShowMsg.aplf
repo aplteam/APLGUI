@@ -1,0 +1,3 @@
+ ShowMsg;msg
+ msg←'This is a message' '' 'It serves as an example for what Dialogs.ShowMsg can do for you'
+ ##.APLGUI.Dialogs.ShowMsg msg

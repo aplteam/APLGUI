@@ -1,0 +1,18 @@
+ r←Test_DisplayButtons_003(stopFlag batchFlag);⎕TRAP;n;buttons;rf;focusHas;parms
+⍝ Exercise "DisplayButtons". Simulates "Cancel.
+ r←∆Failed
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+
+ buttons←2 3⍴'PDF' 'HTML' 'XML' 'OK' 'Cancel' 'Don''t know'
+ parms←#.APLGUI.APLGUI.Dialogs.CreateParmsForDisplayButtons
+ parms.cancelButton←¯1+⍴,buttons
+ n←parms ∆DisplayButtons'Please select the appropriate action:'buttons
+ rf←parms.cancelButton⊃,n.∆buttons  ⍝ Which button shall have the focus?
+ ⎕NQ rf'GotFocus' ⋄ ⎕NQ rf'KeyPress' 'EP'
+ ⎕NQ n.∆Form'KeyPress' 'ER'
+ ∆Process n.∆Form
+ →GoToTidyUp'Don''t know'≢n.∆buttonPressed.Caption
+ r←∆OK
+
+∆TidyUp:
+ n.∆CloseForm

@@ -1,0 +1,32 @@
+ r←Test_AskNumber_004(stopFlag batchFlag);myGuiParms;parms;n;⎕TRAP
+⍝ Exercise the "Create" method with some props.
+ r←∆Failed
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+
+ myGuiParms←#.APLGUI.APLGUI.APLGuiGlobalParms.CreateDefaults
+ myGuiParms.regKey←'MyApp\Kai1'
+ myGuiParms.caption←0⊃⎕XSI
+ myGuiParms.icon←⎕NEW'Icon'(⊂'File'(GetFile'Sample.ico'))
+ myGuiParms.TestMode←0
+
+ parms←#.APLGUI.APLGUI.Request.CreateParmsForNumber
+ parms.addToCaption←'My request'
+ parms.question←'Number of copies:'
+ parms.value←¯2
+ parms.maxLength←60
+ parms.timeout←0.1
+
+ n←myGuiParms parms(#.APLGUI.APLGUI.Request.CreateParmsForNumber ∆Ask)''
+ ⎕DL 0.2
+ →GoToTidyUp 0=n.Progressbar.Visible
+ ⎕NQ n.Input'GotFocus'
+ ⎕NQ n.Btn1'GotFocus'
+ 2 ∆Process n.∆Form
+ →GoToTidyUp 1=n.Progressbar.Visible
+ ⎕NQ n.Btn1'Select'
+ →GoToTidyUp~0∊⍴n.∆result
+ →GoToTidyUp 0≠n.∆OK
+ r←∆OK
+
+∆TidyUp:
+ n.∆CloseForm

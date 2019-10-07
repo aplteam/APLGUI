@@ -1,0 +1,22 @@
+ r←Test_Busy_004(stopFlag batchFlag);n;i;⎕TRAP;parms;globalParms;msg;noOfThreads
+⍝ Exercise `Busy` with long caption.
+ r←∆Failed
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+
+ noOfThreads←⍴⎕TNUMS
+
+ parms←#.APLGUI.APLGUI.Busy.CreateParms
+ parms.addToCaption←'This is a "Busy" test with a long caption!'
+
+ msg←'This may take a moment' 'Please stay patient'
+ n←parms #.APLGUI.APLGUI.Busy.Create msg
+
+ :For i :In 2+⍳9
+     ⎕DL 0.15
+     n #.APLGUI.APLGUI.Busy.SetPercent 10×i
+ :EndFor
+
+ n.∆CloseForm
+ →FailsIf noOfThreads≠⍴⎕TNUMS
+
+ r←∆OK

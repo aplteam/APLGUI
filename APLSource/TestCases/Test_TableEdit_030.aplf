@@ -1,0 +1,36 @@
+ r←Test_TableEdit_030(stopFlag batchFlag);parms;n;⎕TRAP;table;rowTitles
+⍝ Ctrl+C and Ctrl+V in in-cell mode.
+ r←∆Inactive
+ :Return
+
+ r←∆Failed
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+
+ table←⍉⊃('Obama' 'Bush' 'Clinton' 'Reagan' 'Kennedy' 'Carter')(1 0 1 0 1 1)
+ table←table,table
+ parms←#.APLGUI.APLGUI.Table.CreateParms
+ parms.posn←35 25
+ parms.size←400 600
+ parms.colTitles←'Name' 'Democrat'
+ parms.addToCaption←'Testing Table.Run'
+ parms.confirmQuit←0
+ parms.testMode←1
+ parms.dataTypes←#.APLGUI.APLGUI.Enums.TableDataTypes.(Character Numeric Character YesNo)
+
+ n←#.APLGUI.APLGUI.Table.Create table #.APLGUI.APLGUI.APLGuiGlobalParms.CreateDefaults parms
+
+ n.Grid.CurCell←4 0
+ n.Grid ∆KeyPress⊂'F2'    ⍝ Go into in-cell mode
+ ∆Process n.∆Form
+ n.Grid.CH.SelText←3 5
+ n.Grid ∆KeyPress⊂'CP'
+ n.Grid.CH.SelText←4 2
+ n.Grid ∆KeyPress⊂'PT'
+ ∆Process n.∆Form
+ table[4;0]←⊂'Knnnedy'
+ →GoToTidyUp n.Grid.Values≢table  ⍝ This is bug <01042>
+
+ r←∆OK
+
+∆TidyUp:
+ n.∆CloseForm

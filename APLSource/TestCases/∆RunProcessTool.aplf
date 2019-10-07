@@ -1,0 +1,4 @@
+ n←{x}∆RunProcessTool(list callback);n;globalParms;parms
+ (globalParms parms)←#.APLGUI.APLGUI.ProcessTool.CreateParms #.APLGUI.APLGUI.APLGuiUtils.GetParms{(0=⎕NC ⍵):'' ⋄ ⍎⍵}'x'
+ n←globalParms parms #.APLGUI.APLGUI.ProcessTool.Create list callback
+⍝Done

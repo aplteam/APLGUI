@@ -1,0 +1,32 @@
+ r←Test_TableEdit_002(stopFlag batchFlag);parms;n;⎕TRAP;table;rowTitles
+⍝ Test "Create" with basic parms.
+ r←∆Inactive
+ :Return
+
+ r←∆Failed
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+
+⍝⍝⍝ Preconditions
+ table←⍉⊃('Obama' 'Bush' 'Clinton')(1 0 1)
+ parms←#.APLGUI.APLGUI.Table.CreateParms
+ parms.posn←35 25
+ parms.size←150 1000
+ parms.colTitles←'Name' 'Democrat'
+ parms.dataTypes←#.APLGUI.APLGUI.Enums.TableDataTypes.(Character Numeric)
+ parms.addToCaption←'Testing Table.Run'
+ parms.rowTitles←rowTitles←'First' 'Second' 'Third'
+ parms.confirmQuit←0
+
+ n←#.APLGUI.APLGUI.Table.Create table #.APLGUI.APLGUI.APLGuiGlobalParms.CreateDefaults parms
+ n.Grid ∆KeyPress¨'Obhama'
+ ∆Process n.∆Form
+ n.Grid ∆KeyPress⊂'HT'
+ 0.1 ∆Process n.∆Form
+ ⎕NQ n.∆Form'Close'
+ ∆Process n.∆Form
+ table[0;0]←⊂'Obhama'
+ →GoToTidyUp n.∆result≢table
+ r←∆OK
+
+∆TidyUp:
+ n.∆CloseForm

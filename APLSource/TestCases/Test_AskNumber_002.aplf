@@ -1,0 +1,28 @@
+ r←Test_AskNumber_002(stopFlag batchFlag);globalParms;parms;value;⎕TRAP;okFlag
+⍝ Exercise the "Create" method with a complex and valid definition. "OK" is pressed automatically.
+ r←∆Failed
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+
+ globalParms←#.APLGUI.APLGUI.APLGuiGlobalParms.CreateDefaults
+ globalParms.regKey←'MyApp\Kai1'
+ globalParms.testMode←1
+ globalParms.caption←0⊃⎕XSI
+ globalParms.icon←⎕NEW'Icon'(⊂'File'(GetFile'Sample.ico'))
+
+ parms←#.APLGUI.APLGUI.Request.CreateParmsForNumber
+ parms.addToCaption←'My request'
+ parms.question←'Please enter number of copies:' '(4 are suggested)'
+ parms.posn←50 1050
+ parms.default←4
+ parms.length←100
+ parms.maxLength←140
+ parms.hasHelpBtn←1
+ parms.onHelp←'#.APLGUI.TestCases.∆OnShowMsg'
+ parms.validIfEmpty←0
+ parms.timeout←0.1
+
+ (okFlag value)←globalParms parms #.APLGUI.APLGUI.Request.AskForNumber''
+ →FailsIf 1≠okFlag
+ →FailsIf 4≠value
+
+ r←∆OK

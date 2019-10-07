@@ -1,0 +1,18 @@
+ ProcessTool_WithOnQuit;globalParms;list;n1;parms
+⍝ Has a user-defined callback "onQuit"
+
+ globalParms←##.APLGUI.APLGuiGlobalParms.CreateDefaults
+ globalParms.regKey←'MyApp'
+ globalParms.caption←'My App'
+ globalParms.icon←#.⎕NEW'Icon'(⊂'File'(GetFile'Sample.ico'))
+ parms←##.APLGUI.ProcessTool.CreateParms
+ parms.checkboxes←1
+ list←∪300⍴#.⎕NL-3
+ list←list[⍋⊃list]
+ parms.default←(↑⍴list)↑0 0 0 1 0 0 1 1 1
+ parms.onQuit←'∆OnQuit'
+
+ n1←globalParms parms ##.APLGUI.ProcessTool.Create list'##.GUI_Demo.∆OnTestHandler_ProcessTool'
+ ⎕←##.APLGUI.ProcessTool.ModalWait n1
+
+⍝Done

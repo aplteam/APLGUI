@@ -1,0 +1,8 @@
+ n←{parms}∆DisplayButtons(text buttons);globalGuiParms
+⍝ Presents any number of buttons together with a message.
+ globalGuiParms←#.APLGUI.APLGUI.APLGuiGlobalParms.CreateDefaults
+ globalGuiParms.regKey←'MyApp\Kai1'
+ globalGuiParms.icon←⎕NEW'Icon'(⊂'File'(GetFile'Sample.ico'))
+ parms←{0=⎕NC ⍵:#.APLGUI.APLGUI.Dialogs.CreateParmsForDisplayButtons ⋄ ⍎⍵}'parms'
+ n←globalGuiParms parms #.APLGUI.APLGUI.Dialogs.CreateDisplayButtons text buttons
+⍝Done

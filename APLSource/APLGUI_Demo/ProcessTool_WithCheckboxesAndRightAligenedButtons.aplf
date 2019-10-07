@@ -1,0 +1,14 @@
+ ProcessTool_WithCheckboxesAndRightAligenedButtons;globalParms;list;n1;parms
+⍝ Presents a list of any length and allows processing selected rows with check boxes and right-aligned buttons
+ globalParms←##.APLGUI.APLGuiGlobalParms.CreateDefaults
+ globalParms.regKey←'MyApp'
+ globalParms.caption←'My App'
+ globalParms.icon←#.⎕NEW'Icon'(⊂'File'(GetFile'Sample.ico'))
+ parms←##.APLGUI.ProcessTool.CreateParms
+ parms.checkboxes←1
+ parms.alignButtons←##.APLGUI.Enums.Align.Right
+ list←∪300⍴#.⎕NL-3
+ list←list[⍋⊃list]
+ n1←globalParms parms ##.APLGUI.ProcessTool.Create list'##.##.##.APLGUI.APLGUI_Demo.∆OnTestHandler_ProcessTool'
+
+ {}##.APLGUI.ProcessTool.ModalWait n1

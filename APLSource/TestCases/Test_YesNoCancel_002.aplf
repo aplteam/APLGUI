@@ -1,0 +1,15 @@
+ r←Test_YesNoCancel_002(stopFlag batchFlag);msg;parms;result;⎕TRAP;F
+⍝ Exercise "YesNoCancel" with a parent form
+ r←∆Failed
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+
+ msg←'Are you sure?'
+ parms←#.APLGUI.APLGUI.Dialogs.CreateParmsForYesNoCancel
+ parms.style←#.APLGUI.APLGUI.Enums.DialogStyles.Error
+ parms.timeout←0.1
+ parms.autoPress←2
+ parms.parent←⍎'F'⎕WC'Form'
+ result←parms #.APLGUI.APLGUI.Dialogs.YesNoCancel msg
+ ⎕NQ parms.parent'Close'
+
+ r←∆OK

@@ -1,0 +1,2 @@
+ AskForString
+ ⎕←##.APLGUI.Request.AskForString'Enter your name:'

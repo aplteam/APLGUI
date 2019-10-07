@@ -1,0 +1,49 @@
+ r←Test_IE_004(stopFlag batchFlag);⎕TRAP;ref;html;parms;code;msg;n1;n2;testNo
+⍝ Test IE with a user-defined callback
+⍝ It would be really nice if we could automate this fully (SendKeys?!)
+ r←∆Failed
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+
+ :If batchFlag
+     r←¯1
+ :Else
+
+     #.⎕SHADOW'Temp'
+     'Temp'#.⎕NS''
+     #.Temp.flag←0
+
+     parms←#.APLGUI.APLGUI.StdForm.CreateParms
+     testNo←¯3↑↑⎕XSI
+     parms.caption←'IE Test Case Number "',testNo,'"'
+     n1←#.APLGUI.APLGUI.StdForm.Create parms
+
+     #.Temp.html1←⊂'<h1>Test number ',testNo,'</h1>'
+     #.Temp.html1,←⊂'<p><b>Please first click on the link then close the window</b></p>'
+     #.Temp.html1,←⊂'<p>Internal <a href="!first">link 1</a></p>'
+
+     code←''
+     code,←⊂'{r}←n OnBeforeNavigate page;i'
+     code,←⊂' r←0'
+     code,←⊂' flag←1'
+     #.Temp.⎕FX code
+
+     parms←#.APLGUI.APLGUI.IE.CreateParms
+     parms.onBeforeNavigate←'#.Temp.OnBeforeNavigate'
+     parms.redirectHttpToDefaultBrowser←1
+     n2←parms #.APLGUI.APLGUI.IE.CreateIE n1.∆Form
+
+     #.APLGUI.APLGUI.IE.ShowHtml n2.IEobject #.Temp.html1
+     →GoToTidyUp #.Temp.flag≠0
+     ⎕DL 0.25
+
+     ⎕DQ n1.∆Form
+     ∆Process n1.∆Form
+     →GoToTidyUp #.Temp.flag≠1
+
+     r←∆OK
+ :EndIf
+
+∆TidyUp:
+ :Trap 0 ⋄ n1.∆container.Close ⋄ :EndTrap
+ :Trap 0 ⋄ ##.FilesAndDirs.DeleteFile n2.∆container.IEobject.∆Filename ⋄ :EndTrap
+⍝Done

@@ -1,0 +1,8 @@
+ ∆NotepadCmdHandler←{
+     (n caption)←⍵
+     parms←##.APLGUI.Dialogs.CreateParmsForShowMsg
+     parms.caption←'Notepad demo'
+     parms.centerIn←n.∆Form
+     _←parms ##.APLGUI.Dialogs.ShowMsg'User has selected:' ''caption
+     ⍬
+ }

@@ -1,0 +1,12 @@
+ ShowMsgBigFont2;msg;parms;myFnt;myFnt2
+ parms←##.APLGUI.Dialogs.CreateParmsForShowMsg
+ myFnt←⎕NEW'Font'(('PName' 'APL385 Unicode')('Size' 30))
+ parms.fontLabel←myFnt
+ myFnt2←⎕NEW'Font'(('PName' 'Freestyle Script')('Size' 28))
+ parms.fontStandard←myFnt2
+ parms.posn←35 15
+ parms.buttons←⊂'Carry on now'
+ parms.statusbarMessage←'Uses APL385 for ther message but not elsewhere'
+ msg←'This is a message' '' 'It serves as an example for what Dialogs.ShowMsg can do for you'
+ parms ##.APLGUI.Dialogs.ShowMsg msg
+⍝Done

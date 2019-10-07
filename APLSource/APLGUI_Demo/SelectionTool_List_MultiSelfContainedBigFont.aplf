@@ -1,0 +1,25 @@
+ SelectionTool_List_MultiSelfContainedBigFont;globalParms;list;parms;n1;flag;boolean
+⍝ Presents a list of any length and allows selecting of multiple rows with a big font
+ globalParms←##.APLGUI.APLGuiGlobalParms.CreateDefaults
+ globalParms.regKey←'MyApp'
+ globalParms.caption←'My App'
+ globalParms.icon←#.⎕NEW'Icon'(⊂'File'(GetFile'Sample.ico'))
+ globalParms.(fontStandard fontInput)←2⍴⎕NEW'Font'(('PName' 'Courier New')('Size' 22))
+
+ list←((⊂'. '),¨⍨⍕¨⍳200),¨200⍴#.⎕NL-3
+ parms←##.APLGUI.SelectionTool.CreateParms
+ parms.caption←'Select from list'
+ parms.colTitles←⊂'Numbers'
+ parms.style←##.APLGUI.Enums.SelectionStyles.multi
+ parms.info←'Select as many items from the list as you like:'
+
+ parms.default←{⍵∊110 112 114}⍳⍴list
+ n1←globalParms parms ##.APLGUI.SelectionTool.Create list
+
+ (flag boolean)←##.APLGUI.SelectionTool.ModalWait n1
+ :If flag
+     ⎕←' User pressed the OK button'
+     ⎕←⍪boolean/list
+ :Else
+     ⎕←'User did NOT press the OK button'
+ :EndIf

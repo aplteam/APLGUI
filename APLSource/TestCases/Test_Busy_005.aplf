@@ -1,0 +1,35 @@
+ r←Test_Busy_005(stopFlag batchFlag);n;i;⎕TRAP;parms;msg;noOfThreads
+⍝ Exercise `Busy` with an "Abort" button. Checks the global-variable approach.
+ r←∆Failed
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+
+ #.⎕SHADOW'TEMP'
+ #.TEMP←#.⎕NS''
+
+ noOfThreads←⍴⎕TNUMS
+
+ parms←#.APLGUI.APLGUI.Busy.CreateParms
+ parms.addToCaption←'This is "Busy" test no 5'
+ parms.onTop←1
+ parms.hasAbortButton←1
+
+ msg←'This may take a moment'
+ n←parms #.APLGUI.APLGUI.Busy.Create msg
+
+ :For i :In 1+⍳10
+     n #.APLGUI.APLGUI.Busy.SetPercent 10×i
+     :If 5=i
+         ⎕NQ n.AbortBtn'Select'
+     :EndIf
+     ⎕DL 1
+     :If 0≠n.∆ABORTED
+         :Leave
+     :EndIf
+ :EndFor
+
+ n.∆CloseForm
+ →GoToTidyUp noOfThreads≠⍴⎕TNUMS
+ r←∆OK
+
+∆TidyUp:
+ :Trap 0 ⋄ #.TEMP.f.Close ⍬ ⋄ :EndTrap

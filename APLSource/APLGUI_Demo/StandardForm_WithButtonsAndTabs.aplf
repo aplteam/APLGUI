@@ -1,0 +1,23 @@
+ StandardForm_WithButtonsAndTabs;parms;n;globalParms
+⍝ Presents a standard form with a status bar and three buttons, "OK", "Help" and "Close"
+ globalParms←##.APLGUI.APLGuiGlobalParms.CreateDefaults
+ globalParms.regKey←'MyApp'
+ globalParms.caption←'My App'
+ globalParms.icon←⎕NEW'Icon'(⊂'File'(GetFile'Sample.ico'))
+ parms←##.APLGUI.StdForm.CreateParms
+ parms.caption←'MyForm'
+ :If ⍬ ⍬≡parms.size
+     parms.size←200 400
+ :EndIf
+ parms.minSize←100 200
+ n←##.APLGUI.StdForm.Create globalParms parms
+ n←##.APLGUI.StdForm.AddTabs n('Address' 'Turnover' 'Misc')
+ n←##.APLGUI.StdForm.AddButtons n('OK' 'Help' 'Cancel')
+ #.⎕SHADOW'OnSelect'
+ #.APLGUI.OnSelect←{⎕←((0⊃⍵).Caption),' was pressed' ⋄ n←APLGUI.APLGuiUtils.GetRefTo_n 0⊃⍵ ⋄ n.∆CloseForm}
+ n.∆buttons.onSelect←⊂'#.APLGUI.OnSelect'
+
+ n.∆Form.Wait
+ n.∆CloseForm
+ #.APLGUI.⎕EX'OnSelect'
+⍝Done

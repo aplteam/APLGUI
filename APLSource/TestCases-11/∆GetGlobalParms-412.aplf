@@ -1,3 +1,0 @@
- r←∆GetGlobalParms
- r←#._APLGUI.GUI.APLGuiGlobalParms.CreateDefaults
- r.caption←'Test cases'

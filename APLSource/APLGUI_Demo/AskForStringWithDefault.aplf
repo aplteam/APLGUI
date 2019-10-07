@@ -1,0 +1,5 @@
+ AskForStringWithDefault;parms
+ parms←##.APLGUI.Request.CreateParmsForString
+ parms.default←'Kai Jaeger'
+ ⎕←parms ##.APLGUI.Request.AskForString'Enter your name:'
+⍝Done
