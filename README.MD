@@ -1,26 +1,18 @@
-# APLGui Intro
+# APLGUI Intro
 
-APLGui is a set of GUI utilities. Read "About" and "Introduction" in the help file for information why APLGui was created.
+APLGUI is a set of GUI utilities. Read "About" and "Introduction" in the help file for information why APLGUI was created.
 
-There are two different ways to explore the power of APLGui:
+## Run the demo functions
 
-## 1. Run the demo functions
+The best way to investigate the power of the APLGUI utilities is to run the Demo functions.
     
-Load APLGui.dws from the APLGui\ folder into Dyalog 15.0 Unicode or better. This workspace does not only contain all the APLGui stuff (in `#.GUI`) and some utilities needed by it (see the help file for details), it also contains test cases (in `#.TestCases`) and plenty of demo functions (in `#.GUI_Demo`).
+Open the project with acre. You can then run **all** demo functions by execuing `#.APLGUI_Demo.∆Run.
     
-You can run **all** demo functions by execuing `#.GUI_Demo.∆Run.
-    
-You can run demo functions of a particular flavour by executing one of the `#.GUI_Demo.∆Run*` functions.
-    
-## 2. Run the Demo app
-    
-Load the workspace APLGuiDemoApp.DWS from the Demo\ folder. It's a simple application that makes use of many (though by no means all) of the features of the APLGui project.
-    
-This application was implemented to give an example of how to put things together, in particular in the early stage of the application.
+Instead you can run demo functions of a particular flavour by executing one of the `#.APLGUI_Demo.∆Run*` functions.    
     
 ## Examples
     
-There are also plenty of test cases. You can run all test cases with `#.TestCases.RunDebug 0` or selected ones with `#.TestCases.RunThese`.
+There are also plenty of test cases. You can run all test cases with `#.APLGUI.TestCases.RunDebug 0` or selected ones with `#.APLGUI.TestCases.RunThese`.
     
 `RunThese` accepts three different arguments:    
 
