@@ -8,7 +8,7 @@
  list←(⊂'#.'),¨↓#.⎕NL 3
  list,←{(⊂⍵,'.'),¨↓(⍎⍵).⎕NL 3}'#.APLTreeUtils'
  list,←{(⊂⍵,'.'),¨↓(⍎⍵).⎕NL 3}'##.APLGUI.APLGuiUtils'
- list,←{(⊂⍵,'.'),¨↓(⍎⍵).⎕NL 3}'##.GUI_Demo'
+ list,←{(⊂⍵,'.'),¨↓(⍎⍵).⎕NL 3}'##.APLGUI_Demo'
  list,←{(⊂⍵,'.'),¨↓(⍎⍵).⎕NL 3}'##.TestCases'
  list,←{(↓##.APLTreeUtils.FormatDateTime⊃{⍵[;1+⎕IO]}⍵),[0.5+⎕IO]({⍵[;3]}⍵)}⎕AT list
  list,←↓⎕FMT⍪↑∘⍴∘⎕NR¨list[;0+⎕IO]

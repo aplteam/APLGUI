@@ -1,12 +1,12 @@
 :Namespace APLGuiAdmin
 
     ∇ r←Version
-      r←(⍕⎕THIS.##)'0.21.0.34' '2019-10-07'
+      r←(⍕⎕THIS.##)'0.21.1.41' '2019-11-01'
     ∇
 
     ∇ r←History 
-      ⍝ * 0.21.0
-      ⍝   * Project renamed from "GUI" to "APLGUI" to make it compatible with all the other projects.
+      ⍝ * 0.21.1
+      ⍝   * Measurements put in place to find dependencies. This is fluid until the package manager arrives.
       ⍝\\
       ⍝ For information regarding older version see <https://github.com/aplteam/APLGUI/releases>
     ∇

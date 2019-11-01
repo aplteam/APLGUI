@@ -2,6 +2,10 @@
 
     ⎕IO←0 ⋄ ⎕ML←3
 
+∇ EndNamespace
+
+∇
+
     ∇ r←GetSelection n
       :Access Public Shared
       :If n.List.CheckBoxes
