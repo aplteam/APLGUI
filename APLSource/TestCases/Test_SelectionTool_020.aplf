@@ -1,6 +1,6 @@
  r←Test_SelectionTool_020(stopFlag batchFlag);⎕TRAP;parms;data;rf;n
 ⍝ Exercise "SelectionTool" with `parent`.
- r←∆Failed
+ r←T._Failed
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
 
  parms←#.APLGUI.APLGUI.ProcessTool.CreateParms
@@ -9,4 +9,4 @@
 
  n.∆CloseForm
  2 ⎕NQ'F' 'Close'
- r←∆OK
+ r←T._OK

@@ -1,6 +1,6 @@
  r←Test_Input_Misc_003(stopFlag batchFlag);n;⎕TRAP;DT;defMat;month;globalParms;parms
 ⍝ Exercise "Input" with "size" specified in parms.
- r←∆Failed
+ r←T._Failed
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
 
  DT←#.APLGUI.APLGUI.Enums.InputDataTypes
@@ -18,7 +18,7 @@
  n←#.APLGUI.APLGUI.Input.Create defMat globalParms parms
  ∆Process n.∆Form
 
- →GoToTidyUp n.∆Form.Size≢parms.size
+ →T.GoToTidyUp n.∆Form.Size≢parms.size
  n.∆CloseForm
 
 ⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝ That's smaller than needed, so it is ignored.
@@ -32,7 +32,7 @@
  n←#.APLGUI.APLGUI.Input.Create defMat globalParms parms
  ∆Process n.∆Form
 
- →GoToTidyUp n.∆Form.Size≡parms.size
+ →T.GoToTidyUp n.∆Form.Size≡parms.size
  n.∆CloseForm
 
 ⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝ That's smaller and bigger than needed, so it is partly ignored.
@@ -46,7 +46,7 @@
  n←#.APLGUI.APLGUI.Input.Create defMat globalParms parms
  ∆Process n.∆Form
 
- →GoToTidyUp~(n.∆Form.Size[0]>parms.size[0])∧n.∆Form.Size[1]=parms.size[1]
+ →T.GoToTidyUp~(n.∆Form.Size[0]>parms.size[0])∧n.∆Form.Size[1]=parms.size[1]
  n.∆CloseForm
 
 ⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝ That's bigger and smaller than needed, so it is partly ignored.
@@ -60,9 +60,9 @@
  n←#.APLGUI.APLGUI.Input.Create defMat globalParms parms
  ∆Process n.∆Form
 
- →GoToTidyUp~(n.∆Form.Size[0]=parms.size[0])∧n.∆Form.Size[1]>parms.size[1]
+ →T.GoToTidyUp~(n.∆Form.Size[0]=parms.size[0])∧n.∆Form.Size[1]>parms.size[1]
 
- r←∆OK
+ r←T._OK
 
 ∆TidyUp:
  n.∆CloseForm

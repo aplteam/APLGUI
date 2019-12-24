@@ -6,7 +6,7 @@
  :If 1=batchFlag
      r←¯1
  :Else
-     r←∆Failed
+     r←T._Failed
      ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
      msg←⊂(⎕PW-1)⍴'-'
      msg,←⊂'Test of the context menu'
@@ -28,9 +28,9 @@
      ⎕DL 0.3
      1 ⎕NQ n.List'ContextMenu'
      ∆Process n.∆Form
-     →GoToTidyUp n.∆result≢,⊂list[3 5-1;]
-     →GoToTidyUp 1≠⍴n.∆buttons
-     r←∆OK
+     →T.GoToTidyUp n.∆result≢,⊂list[3 5-1;]
+     →T.GoToTidyUp 1≠⍴n.∆buttons
+     r←T._OK
 
 ∆TidyUp:
      n.∆CloseForm

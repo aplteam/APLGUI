@@ -1,6 +1,6 @@
  r←Test_Notepad_007(stopFlag batchFlag);VTV;parms;n;was;⎕TRAP
 ⍝ Establish (and exercise) the "onFileSaveAs" callback function in all possible ways.
- r←∆Failed
+ r←T._Failed
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
 
 ⍝⍝⍝ Preconditions
@@ -32,7 +32,7 @@
  ⎕NQ n.menubar.saveAs'Select'
  ⎕NQ n.menubar.quit'Select'
  ∆Process n.∆Form
- →GoToTidyUp 1≠#.TEMP.wasCalled
+ →T.GoToTidyUp 1≠#.TEMP.wasCalled
 
  #.TEMP.wasCalled←0
  parms.onFileSaveAs←#.TEMP'MyCallback'
@@ -43,7 +43,7 @@
  ⎕NQ n.menubar.saveAs'Select'
  ⎕NQ n.menubar.quit'Select'
  ∆Process n.∆Form
- →GoToTidyUp 1≠#.TEMP.wasCalled
+ →T.GoToTidyUp 1≠#.TEMP.wasCalled
 
  was←⎕CS'#.TEMP'
  #.TEMP.wasCalled←0
@@ -59,8 +59,8 @@
  ⎕NQ n.menubar.quit'Select'
  #.APLGUI.TestCases.∆Process n.∆Form
  ⎕CS was
- →GoToTidyUp 1≠#.TEMP.wasCalled
- r←∆OK
+ →T.GoToTidyUp 1≠#.TEMP.wasCalled
+ r←T._OK
 
 ∆TidyUp:
  :Trap 0 ⋄ n.∆CloseForm ⋄ :EndTrap

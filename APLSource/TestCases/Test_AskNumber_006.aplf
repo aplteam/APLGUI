@@ -1,6 +1,6 @@
  r←Test_AskNumber_006(stopFlag batchFlag);parms;was;msg;n;⎕TRAP
 ⍝ Exercise the "OnOkay" callback with all possible ways to define it.
- r←∆Failed
+ r←T._Failed
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
 
  #.⎕SHADOW'TEMP'
@@ -19,14 +19,14 @@
 
  n←#.TEMP.parms(#.APLGUI.APLGUI.Request.CreateParmsForNumber ∆Ask)'Number of copies:'
  2 ∆Process n.∆Form
- →GoToTidyUp n.StatusField1.Text≢'Too low'
+ →T.GoToTidyUp n.StatusField1.Text≢'Too low'
  n.Input ∆KeyPress'4'
  ⎕NQ n.Input 9995
  ∆Process n.∆Form
  ⎕NQ n.Btn0'Select'
  ∆Process n.∆Form
- →FailsIf 4≢n.∆result
- r←∆OK
+ →T.FailsIf 4≢n.∆result
+ r←T._OK
 
 ∆TidyUp:
  n.∆CloseForm

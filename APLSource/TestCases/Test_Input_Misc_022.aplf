@@ -1,6 +1,6 @@
  r←Test_Input_Misc_022(stopFlag batchFlag);n;⎕TRAP;defMat;res;DT;parms
 ⍝ Exercise "Input" with no buttons at all
- r←∆Failed
+ r←T._Failed
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
 
  DT←#.APLGUI.APLGUI.Enums.InputDataTypes
@@ -16,9 +16,9 @@
 
  n.Name ∆KeyPress'Kai Jaeger'
  ∆Process n.∆Form
- →GoToTidyUp~0∊⍴'Button'⎕WN n.∆Form
+ →T.GoToTidyUp~0∊⍴'Button'⎕WN n.∆Form
 
- r←∆OK
+ r←T._OK
 
 ∆TidyUp:
  n.∆CloseForm

@@ -2,7 +2,7 @@
 ⍝ Test IE with an user-defined callback. Allows just Google but nothing else.
 ⍝ The page should not change but the user-defined callback is supposed to increase the value of `counter`.
 ⍝ It would be really nice if we could automate this fully (SendKeys?!)
- r←∆Failed
+ r←T._Failed
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
 
  :If batchFlag
@@ -24,7 +24,7 @@
      code,←⊂' ⎕IO←1 ⋄ ⎕ML←1'
      code,←⊂' self←⊃msg'
      code,←⊂' n←self.n'
-     code,←⊂' url←#.APLTreeUtils.Lowercase URL←2⊃msg'
+     code,←⊂' url←##.APLTreeUtils.Lowercase URL←2⊃msg'
      code,←⊂' :If r←''about:blank''≢url'
      code,←⊂'     allowed←''http://google'' ''https://google'' ''http://www.google'' ''https://www.google'''
      code,←⊂'     r←∨/allowed{⍺≡(≢⍺)↑⍵}¨⊂url'
@@ -47,9 +47,9 @@
 
      ⎕DQ n1.∆Form
 
-     →PassesIf 1 ∆PromptForSuccess'Did the Browser control act in the expected way?'
+     →T.PassesIf 1 ∆PromptForSuccess'Did the Browser control act in the expected way?'
 
-     r←∆OK
+     r←T._OK
 
  :EndIf
 

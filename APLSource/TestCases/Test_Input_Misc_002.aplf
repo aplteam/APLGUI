@@ -1,6 +1,6 @@
  r←Test_Input_Misc_002(stopFlag batchFlag);n;⎕TRAP;DT;defMat;month;globalParms;parms;props
 ⍝ Exercise "Input" with invalid "props" definitions.
- r←∆Failed
+ r←T._Failed
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
 
  DT←#.APLGUI.APLGUI.Enums.InputDataTypes
@@ -18,9 +18,9 @@
 
  :Trap 11
      n←#.APLGUI.APLGUI.Input.Create defMat globalParms parms
-     →FailsIf 1
+     →T.FailsIf 1
  :Else
-     →FailsIf'"props" has an invalid rank'≢↑⎕DM
+     →T.FailsIf'"props" has an invalid rank'≢↑⎕DM
  :EndTrap
 
- r←∆OK
+ r←T._OK

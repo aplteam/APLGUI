@@ -1,6 +1,6 @@
  r←Test_DirSelect_004(stopFlag batchFlag);myGuiParms;parms;n;⎕TRAP;startDir;result
 ⍝ Exercise the "DirSelect" method. Allows creation and removal of directories.
- r←∆Failed
+ r←T._Failed
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
 
  myGuiParms←#.APLGUI.APLGUI.APLGuiGlobalParms.CreateDefaults
@@ -14,15 +14,15 @@
  parms.allowCreate←1
  parms.allowRemove←1
 
- startDir←#.FilesAndDirs.GetTempFilename''
+ startDir←##.FilesAndDirs.GetTempFilename''
  1 ⎕NDELETE startDir
- 'Create!'#.FilesAndDirs.CheckPath startDir  ⍝ Create a directory that does not contain a sub dir.
+ 'Create!'##.FilesAndDirs.CheckPath startDir  ⍝ Create a directory that does not contain a sub dir.
  n←myGuiParms parms #.APLGUI.APLGUI.DirSelect.Create startDir
  ⎕DL 0.1
  1 ⎕NQ n.Btn_01'Select'
- →GoToTidyUp~0∊⍴n.∆result
- r←∆OK
+ →T.GoToTidyUp~0∊⍴n.∆result
+ r←T._OK
 
 ∆TidyUp:
- #.FilesAndDirs.RmDir startDir
+ ##.FilesAndDirs.RmDir startDir
  :Trap 6 ⋄ n.∆CloseForm ⋄ :EndTrap

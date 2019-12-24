@@ -1,6 +1,6 @@
  r←Test_Menubar_005(stopFlag batchFlag);parms;n;TheForm;⎕TRAP
 ⍝ Exercise the "Create" method with an invalid definition (invalid names)
- r←∆Failed
+ r←T._Failed
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
 
  parms←#.APLGUI.APLGUI.Menubar.CreateParms
@@ -8,9 +8,9 @@
 
  :Trap 0
      n←#.APLGUI.APLGUI.Menubar.Create TheForm MenuDefInvalidName parms(⎕NEW #.APLGUI.APLGUI.KeyCodes)
-     →FailsIf 1
+     →T.FailsIf 1
  :Else
-     →FailsIf'Invalid name:'{⍺≢(⍴⍺)↑⍵}0⊃⎕DM
+     →T.FailsIf'Invalid name:'{⍺≢(⍴⍺)↑⍵}0⊃⎕DM
  :EndTrap
 
- r←∆OK
+ r←T._OK

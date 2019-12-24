@@ -1,6 +1,6 @@
  r←Test_CreateButtonForm_012(stopFlag batchFlag);myGuiParms;parms;n;⎕TRAP
 ⍝ Exercise "Dialog.Create": height test; the "size" parameter defines the height.
- r←∆Failed
+ r←T._Failed
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
 
  myGuiParms←#.APLGUI.APLGUI.APLGuiGlobalParms.CreateDefaults
@@ -13,9 +13,9 @@
  n←#.APLGUI.APLGUI.Dialogs.CreateButtonForm myGuiParms parms
  ⎕DL 0.2
  n←#.APLGUI.APLGUI.Dialogs.AdjustSize n
- →(0≡PassesIf n.∆Form.Size[0]∊445+⍳10)/∆TidyUp
+ →(0≡T.PassesIf n.∆Form.Size[0]∊445+⍳10)/∆TidyUp
 
 ∆TidyUp:
  n.∆CloseForm
 
- r←∆OK
+ r←T._OK

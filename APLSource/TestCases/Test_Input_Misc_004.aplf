@@ -1,6 +1,6 @@
  r←Test_Input_Misc_004(stopFlag batchFlag);n;⎕TRAP;DT;defMat;globalParms;parms;focusHas
 ⍝ Exercise "Input" with the "ForceFocusTo" method.
- r←∆Failed
+ r←T._Failed
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
 
  DT←#.APLGUI.APLGUI.Enums.InputDataTypes
@@ -22,10 +22,10 @@
  n #.APLGUI.APLGUI.Input.ForceFocusTo'Char3'
  ∆Process n.∆Form
  focusHas←2 ⎕NQ'#' 'GetFocusObj'
- →GoToTidyUp~∧/n.∆Form.Size∊¨(parms.size-5)+¨⊂⍳10
+ →T.GoToTidyUp~∧/n.∆Form.Size∊¨(parms.size-5)+¨⊂⍳10
  n.∆CloseForm
 
- r←∆OK
+ r←T._OK
 
 ∆TidyUp:
  :Trap 0 ⋄ n.∆CloseForm ⋄ :EndTrap

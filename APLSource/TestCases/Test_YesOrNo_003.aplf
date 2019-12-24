@@ -1,6 +1,6 @@
  r←Test_YesOrNo_003(stopFlag batchFlag);myGuiParms;parms;msg;⎕TRAP
 ⍝ Exercise "YesOrNo" with default parms but a long question. Should return "Cancel".
- r←∆Failed
+ r←T._Failed
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
 
  myGuiParms←#.APLGUI.APLGUI.APLGuiGlobalParms.CreateDefaults
@@ -11,6 +11,6 @@
  parms←#.APLGUI.APLGUI.Dialogs.CreateParmsForYesOrNo
  parms.autoPress←#.APLGUI.APLGUI.Enums.Buttons.Cancel
  parms.timeout←0.1
- →PassesIf #.APLGUI.APLGUI.Enums.Buttons.Cancel≠parms myGuiParms #.APLGUI.APLGUI.Dialogs.YesOrNo msg
+ →T.PassesIf #.APLGUI.APLGUI.Enums.Buttons.Cancel≠parms myGuiParms #.APLGUI.APLGUI.Dialogs.YesOrNo msg
 
- r←∆OK
+ r←T._OK

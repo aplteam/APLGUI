@@ -1,6 +1,6 @@
  r←Test_AskNumber_002(stopFlag batchFlag);globalParms;parms;value;⎕TRAP;okFlag
 ⍝ Exercise the "Create" method with a complex and valid definition. "OK" is pressed automatically.
- r←∆Failed
+ r←T._Failed
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
 
  globalParms←#.APLGUI.APLGUI.APLGuiGlobalParms.CreateDefaults
@@ -22,7 +22,7 @@
  parms.timeout←0.1
 
  (okFlag value)←globalParms parms #.APLGUI.APLGUI.Request.AskForNumber''
- →FailsIf 1≠okFlag
- →FailsIf 4≠value
+ →T.FailsIf 1≠okFlag
+ →T.FailsIf 4≠value
 
- r←∆OK
+ r←T._OK

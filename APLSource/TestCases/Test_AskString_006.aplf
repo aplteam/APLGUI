@@ -1,6 +1,6 @@
  r←Test_AskString_006(stopFlag batchFlag);parms;was;msg;n;⎕TRAP
 ⍝ Exercise the "OnOkay" callback with  a real check.
- r←∆Failed
+ r←T._Failed
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
 
  #.⎕SHADOW'TEMP'
@@ -19,7 +19,7 @@
 
  n←#.TEMP.parms(#.APLGUI.APLGUI.Request.CreateParmsForString ∆Ask)'Your name:'
  ∆Process n.∆Form
- →GoToTidyUp 0≠' '+.=n.∆result
+ →T.GoToTidyUp 0≠' '+.=n.∆result
  ⎕NQ n.Input'GotFocus'
  n.Input ∆KeyPress⊂'RL'
  n.Input ∆KeyPress' Jaeger'
@@ -27,8 +27,8 @@
  ⎕NQ n.Input 9995
  ⎕NQ n.Btn0'Select'
  ∆Process n.∆Form
- →GoToTidyUp n.∆result≢'Kai Jaeger'
- r←∆OK
+ →T.GoToTidyUp n.∆result≢'Kai Jaeger'
+ r←T._OK
 
 ∆TidyUp:
  n.∆CloseForm

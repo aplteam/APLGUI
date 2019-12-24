@@ -1,6 +1,6 @@
  r←Test_Busy_005(stopFlag batchFlag);n;i;⎕TRAP;parms;msg;noOfThreads
 ⍝ Exercise `Busy` with an "Abort" button. Checks the global-variable approach.
- r←∆Failed
+ r←T._Failed
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
 
  #.⎕SHADOW'TEMP'
@@ -28,8 +28,8 @@
  :EndFor
 
  n.∆CloseForm
- →GoToTidyUp noOfThreads≠⍴⎕TNUMS
- r←∆OK
+ →T.GoToTidyUp noOfThreads≠⍴⎕TNUMS
+ r←T._OK
 
 ∆TidyUp:
  :Trap 0 ⋄ #.TEMP.f.Close ⍬ ⋄ :EndTrap

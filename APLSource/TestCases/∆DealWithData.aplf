@@ -1,5 +1,5 @@
  {r}←∆DealWithData(type bool n);A
  ⍝ Belongs to one of the ProcessTools" test cases
  r←⍬
- A←#.APLTreeUtils
+ A←##.APLTreeUtils
  .

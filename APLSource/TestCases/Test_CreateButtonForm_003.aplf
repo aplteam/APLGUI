@@ -1,6 +1,6 @@
  r←Test_CreateButtonForm_003(stopFlag batchFlag);myGuiParms;parms;n;⎕TRAP;oldPixelSettings
 ⍝ Exercise "Dialog.Create": width test; the caption defines the width.
- r←∆Failed
+ r←T._Failed
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
 
  oldPixelSettings←2035⌶'RealPixel'
@@ -19,10 +19,10 @@
  :If ⍬ ⍬≡parms.posn
      {}n.∆Form #.APLGUI.APLGUI.APLGuiHelpers.CenterIn myGuiParms.centerIn{(0∊⍴⍵):⍺ ⋄ ⍵}parms.centerIn
  :EndIf
- →GoToTidyUp∧/n.∆Form.Size∊(160+20)(450+⍳40)
+ →T.GoToTidyUp∧/n.∆Form.Size∊(160+20)(450+⍳40)
 
 ∆TidyUp:
  n.∆CloseForm
  {}2035⌶oldPixelSettings
 
- r←∆OK
+ r←T._OK

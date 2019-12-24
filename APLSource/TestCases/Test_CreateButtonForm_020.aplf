@@ -1,6 +1,6 @@
  r←Test_CreateButtonForm_020(stopFlag batchFlag);myGuiParms;parms;n;⎕TRAP
 ⍝ Exercise "Dialog.Create": 6 buttons
- r←∆Failed
+ r←T._Failed
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
 
  myGuiParms←#.APLGUI.APLGUI.APLGuiGlobalParms.CreateDefaults
@@ -22,9 +22,9 @@
  :EndIf
  n←#.APLGUI.APLGUI.Dialogs.HandleFocus n
  n.∆Form.Wait
- →GoToTidyUp(parms.focusButton⊃,parms.buttons)≢↑(,parms.buttons)[(,n.∆buttons)⍳1↑n.∆buttonPressed]
- →GoToTidyUp~{(120<⍵)∧(300>⍵)}n.∆Form.Size[0]
- r←∆OK
+ →T.GoToTidyUp(parms.focusButton⊃,parms.buttons)≢↑(,parms.buttons)[(,n.∆buttons)⍳1↑n.∆buttonPressed]
+ →T.GoToTidyUp~{(120<⍵)∧(300>⍵)}n.∆Form.Size[0]
+ r←T._OK
 
 ∆TidyUp:
  n.∆CloseForm

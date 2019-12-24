@@ -1,6 +1,6 @@
  r←Test_SelectionTool_011(stopFlag batchFlag);parms;n;v;data;⎕TRAP
 ⍝ Exercise "SelectionTool. Shows several columns and uses checkboxes and style="multi".
- r←∆Failed
+ r←T._Failed
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
 
  parms←#.APLGUI.APLGUI.SelectionTool.CreateParms
@@ -16,8 +16,8 @@
  n←parms #.APLGUI.APLGUI.SelectionTool.Create data
  ∆Process n.∆Form
  ⎕DQ n.∆Form
- →GoToTidyUp 0≠+/n.∆result
- r←∆OK
+ →T.GoToTidyUp 0≠+/n.∆result
+ r←T._OK
 
 ∆TidyUp:
  n.∆CloseForm

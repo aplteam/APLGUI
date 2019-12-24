@@ -1,10 +1,10 @@
  r←Test_TableEdit_007(stopFlag batchFlag);parms;n;⎕TRAP;table;rowTitles
 ⍝ Press <enter> in the last row. That should add a row without further ado.
 ⍝ See also Test_TableEdit_012 and Test_TableEdit_013.
- r←∆Inactive
+ r←T._Inactive
  :Return
 
- r←∆Failed
+ r←T._Failed
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
 
 ⍝⍝⍝ Preconditions
@@ -22,10 +22,10 @@
  n.Grid.CurCell←⍴n.Grid.Values
  n.Grid ∆KeyPress⊂'ER'
  0.5 ∆Process n.∆Form
- →GoToTidyUp(⍴n.Grid.Values)≢1 0+⍴table
- →GoToTidyUp n.Grid.Values[¯1+↑⍴n.Grid.Values;]≢'' 0
+ →T.GoToTidyUp(⍴n.Grid.Values)≢1 0+⍴table
+ →T.GoToTidyUp n.Grid.Values[¯1+↑⍴n.Grid.Values;]≢'' 0
 
- r←∆OK
+ r←T._OK
 
 ∆TidyUp:
  n.∆CloseForm

@@ -1,6 +1,6 @@
  r←Test_Input_DataType_004(stopFlag batchFlag);n;⎕TRAP;DT;defMat;month;globalParms;parms;props
 ⍝ Exercise "Input" with data type "DropDown".
- r←∆Failed
+ r←T._Failed
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
 
  DT←#.APLGUI.APLGUI.Enums.InputDataTypes
@@ -20,7 +20,7 @@
  n←#.APLGUI.APLGUI.Input.Create defMat globalParms parms
  ∆Process n.∆Form
 
- →GoToTidyUp n.DD.SelItems≢12↑¯4↑1
+ →T.GoToTidyUp n.DD.SelItems≢12↑¯4↑1
  n.DD ∆KeyPress⊂'DS'
  n.DD ∆KeyPress⊂'US'
 
@@ -30,7 +30,7 @@
  n.DD ∆KeyPress⊂'UC'
  n.DD ∆KeyPress⊂'DC'
 
- r←∆OK
+ r←T._OK
 
 ∆TidyUp:
  n.∆CloseForm

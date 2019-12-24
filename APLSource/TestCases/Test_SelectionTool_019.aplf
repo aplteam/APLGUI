@@ -1,6 +1,6 @@
  r←Test_SelectionTool_019(stopFlag batchFlag);⎕TRAP;parms;data;rf
 ⍝ Exercise "SelectionTool" and check "regKey2"
- r←∆OK
+ r←T._OK
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
 
  :If batchFlag

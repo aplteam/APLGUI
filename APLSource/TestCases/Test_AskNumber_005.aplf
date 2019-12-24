@@ -1,6 +1,6 @@
  r←Test_AskNumber_005(stopFlag batchFlag);parms;msg;was;⎕TRAP
 ⍝ Exercise the "OnOkay" callback with all possible ways to define it.
- r←∆Failed
+ r←T._Failed
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
 
  #.⎕SHADOW'TEMP'
@@ -19,13 +19,13 @@
  #.TEMP.parms.onOkay←'#.TEMP.MyCallback'
 
  {}#.TEMP.parms #.APLGUI.APLGUI.Request.AskForNumber'Number of copies:'
- →FailsIf 1≠#.TEMP.Result
+ →T.FailsIf 1≠#.TEMP.Result
  #.TEMP.(⎕EX ⎕NL 2)
 
  ⎕THIS.Result←¯1
  #.TEMP.parms.onOkay←#.TEMP'MyCallback'
  {}#.TEMP.parms #.APLGUI.APLGUI.Request.AskForNumber'Number of copies:'
- →FailsIf 1≠#.TEMP.Result
+ →T.FailsIf 1≠#.TEMP.Result
  #.TEMP.(⎕EX ⎕NL 2)
 
  ⎕THIS.Result←¯1
@@ -37,6 +37,6 @@
  parms.onOkay←'#.TEMP.MyCallback'
  {}parms #.APLGUI.APLGUI.Request.AskForNumber'Number of copies:'
  ⎕CS was
- →FailsIf 1≠#.TEMP.Result
+ →T.FailsIf 1≠#.TEMP.Result
 
- r←∆OK
+ r←T._OK

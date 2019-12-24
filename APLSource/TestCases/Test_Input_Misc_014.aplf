@@ -1,6 +1,6 @@
  r←Test_Input_Misc_014(stopFlag batchFlag);n;⎕TRAP;defMat;res;DT;globalParms;parms;list
 ⍝ Exercise "Input" with an icon.
- r←∆Failed
+ r←T._Failed
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
 
  DT←#.APLGUI.APLGUI.Enums.InputDataTypes
@@ -17,7 +17,7 @@
 
  n←#.APLGUI.APLGUI.Input.Create defMat globalParms ⍬
 
- →GoToTidyUp 0∊⍴n.∆Form.IconObj
+ →T.GoToTidyUp 0∊⍴n.∆Form.IconObj
 
  n.∆CloseForm
  globalParms←∆GetGlobalParms
@@ -28,8 +28,8 @@
 
  n←#.APLGUI.APLGUI.Input.Create defMat globalParms parms
 
- →GoToTidyUp 0∊⍴n.∆Form.IconObj
- r←∆OK
+ →T.GoToTidyUp 0∊⍴n.∆Form.IconObj
+ r←T._OK
 
 ∆TidyUp:
  n.∆CloseForm

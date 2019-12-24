@@ -1,7 +1,7 @@
  r←Test_SelectionTool_013(stopFlag batchFlag);parms;n;v;data;⎕TRAP
 ⍝ Exercise "SelectionTool. Very long "info"
 ⍝ "style" defaults to "single" but is ignored when "checkboxes"=1.
- r←∆Failed
+ r←T._Failed
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
 
  parms←#.APLGUI.APLGUI.SelectionTool.CreateParms
@@ -17,4 +17,4 @@
  ∆Process n.∆Form
 
  n.∆CloseForm
- r←∆OK
+ r←T._OK

@@ -1,6 +1,6 @@
  r←Test_ProcessTool_007(stopFlag batchFlag);rc;parms;n;list;⎕TRAP
 ⍝ Exercise "ProcessTool". Process via the menu bar. Supresses the "Process" button.
- r←∆Failed
+ r←T._Failed
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
 
  parms←#.APLGUI.APLGUI.ProcessTool.CreateParms
@@ -15,11 +15,11 @@
  n←parms #.APLGUI.APLGUI.ProcessTool.Create list'∆HarvestSelections'
  ⎕DL 0.3
  {}1 ⎕NQ n.menubar.processCmd0'Select'
- →GoToTidyUp n.∆result≢,⊂list[3 5-1;]
- →GoToTidyUp n.menubar.processCmd0.Caption≢⎕IO⊃,parms.menuItemCaptions
- →GoToTidyUp n.menubar.special.Caption≢parms.menuCaption
- →GoToTidyUp 1≠⍴n.∆buttons
- r←∆OK
+ →T.GoToTidyUp n.∆result≢,⊂list[3 5-1;]
+ →T.GoToTidyUp n.menubar.processCmd0.Caption≢⎕IO⊃,parms.menuItemCaptions
+ →T.GoToTidyUp n.menubar.special.Caption≢parms.menuCaption
+ →T.GoToTidyUp 1≠⍴n.∆buttons
+ r←T._OK
 
 ∆TidyUp:
  n.∆CloseForm

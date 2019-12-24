@@ -1,6 +1,6 @@
  r←Test_ProcessTool_018(stopFlag batchFlag);n;⎕TRAP;parms;F
 ⍝ Exercise "ProcessTool.Run" with a specific parent
- r←∆Failed
+ r←T._Failed
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
 
  parms←#.APLGUI.APLGUI.ProcessTool.CreateParms
@@ -9,4 +9,4 @@
 
  n.∆CloseForm
  2 ⎕NQ'F' 'Close'
- r←∆OK
+ r←T._OK

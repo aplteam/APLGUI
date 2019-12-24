@@ -1,6 +1,6 @@
  r←Test_Input_Callbacks_006(stopFlag batchFlag);n;⎕TRAP;defMat;res;DT;globalParms;parms;txt;props
 ⍝ Exercise "Input" with on "onChange" callback.
- r←∆Failed
+ r←T._Failed
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
 
  DT←#.APLGUI.APLGUI.Enums.InputDataTypes
@@ -41,28 +41,28 @@
      #.TEMP.counter←0
      ⎕NQ n.YesNo'GotFocus' ⍝ Force "Change" event on "Caracter"
      ∆Process n.∆Form
-     →GoToTidyUp #.TEMP.counter≠1  ⍝ Reported to Dyalog as <01019>, <01020>
+     →T.GoToTidyUp #.TEMP.counter≠1  ⍝ Reported to Dyalog as <01019>, <01020>
 
      ⎕NQ n.YesNo'GotFocus' ⍝ Force "Change" event on "Caracter"
      ∆Process n.∆Form
-     →GoToTidyUp #.TEMP.counter≠2
+     →T.GoToTidyUp #.TEMP.counter≠2
 
      ⎕NQ n.YesNo'GotFocus' ⍝ Force "Change" event on "Caracter"
      ∆Process n.∆Form
-     →GoToTidyUp #.TEMP.counter≠3
+     →T.GoToTidyUp #.TEMP.counter≠3
 
      ⎕NQ n.YesNo'GotFocus' ⍝ Force "Change" event on "Caracter"
      ∆Process n.∆Form
-     →GoToTidyUp #.TEMP.counter≠4
+     →T.GoToTidyUp #.TEMP.counter≠4
 
      ⎕NQ n.Character'GotFocus' ⍝ Force "Change" event on "Caracter"
      ⎕NQ n.YesNo'GotFocus' ⍝ Force "Change" event on "Caracter"
      ∆Process n.∆Form
-     →GoToTidyUp #.TEMP.counter≠4
+     →T.GoToTidyUp #.TEMP.counter≠4
 
  :EndIf
 
- r←∆OK
+ r←T._OK
 
 ∆TidyUp:
  :Trap 0 ⋄ n.∆CloseForm ⋄ :EndTrap

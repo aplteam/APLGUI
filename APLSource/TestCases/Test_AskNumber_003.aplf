@@ -1,6 +1,6 @@
  r←Test_AskNumber_003(stopFlag batchFlag);myGuiParms;parms;value;⎕TRAP;okFlag
 ⍝ Exercise the "Create" method with some props. "Cancel" is pressed automatically via "autoPress".
- r←∆Failed
+ r←T._Failed
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
 
  myGuiParms←#.APLGUI.APLGUI.APLGuiGlobalParms.CreateDefaults
@@ -17,7 +17,7 @@
  parms.autoPress←#.APLGUI.APLGUI.Enums.Buttons.Cancel
 
  (okFlag value)←myGuiParms parms #.APLGUI.APLGUI.Request.AskForNumber''
- →FailsIf 0≠okFlag
- →FailsIf value≡3
+ →T.FailsIf 0≠okFlag
+ →T.FailsIf value≡3
 
- r←∆OK
+ r←T._OK

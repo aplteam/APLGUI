@@ -1,6 +1,6 @@
  r←Test_ProcessTool_001(stopFlag batchFlag);n;⎕TRAP
 ⍝ Exercise "ProcessTool.Run" just with defaults.
- r←∆Failed
+ r←T._Failed
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
 
  n←∆RunProcessTool(⍕¨1+⍳10)'∆HarvestSelections'
@@ -15,6 +15,6 @@
  ⎕NQ n.Btn_01'Select'
  ∆Process n.∆Form
  n.∆CloseForm
- →PassesIf(,5)≡#.APLTreeUtils.Where n.∆result
+ →T.PassesIf(,5)≡##.APLTreeUtils.Where n.∆result
 
- r←∆OK
+ r←T._OK

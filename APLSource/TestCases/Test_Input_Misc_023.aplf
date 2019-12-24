@@ -1,6 +1,6 @@
  r←Test_Input_Misc_023(stopFlag batchFlag);n;⎕TRAP;defMat;res;DT;parms;F
 ⍝ Exercise "Input" with a parent
- r←∆Failed
+ r←T._Failed
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
 
  DT←#.APLGUI.APLGUI.Enums.InputDataTypes
@@ -17,4 +17,4 @@
  ∆Process n.∆Form
  ⎕NQ parms.parent'Close'
 
- r←∆OK
+ r←T._OK

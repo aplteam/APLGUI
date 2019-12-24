@@ -1,6 +1,6 @@
  r←Test_AskString_005(stopFlag batchFlag);parms;msg;was;⎕TRAP
 ⍝ Exercise the "OnOkay" callback with all possible ways to define it.
- r←∆Failed
+ r←T._Failed
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
 
  #.⎕SHADOW'TEMP'
@@ -18,12 +18,12 @@
  #.TEMP.parms.onOkay←'#.TEMP.MyCallback'
 
  {}#.TEMP.parms #.APLGUI.APLGUI.Request.AskForString'Your name:'
- →FailsIf~#.TEMP.Result
+ →T.FailsIf~#.TEMP.Result
  #.TEMP.(⎕EX ⎕NL 2)
 
  #.TEMP.parms.onOkay←#.TEMP'MyCallback'
  {}#.TEMP.parms #.APLGUI.APLGUI.Request.AskForString'Your name:'
- →FailsIf~#.TEMP.Result
+ →T.FailsIf~#.TEMP.Result
  #.TEMP.(⎕EX ⎕NL 2)
 
  #.TEMP.parms.onOkay←'MyCallback'
@@ -34,6 +34,6 @@
  parms.onOkay←'#.TEMP.MyCallback'
  {}parms #.APLGUI.APLGUI.Request.AskForString'Your name:'
  ⎕CS was
- →FailsIf~#.TEMP.Result
+ →T.FailsIf~#.TEMP.Result
 
- r←∆OK
+ r←T._OK

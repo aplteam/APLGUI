@@ -1,6 +1,6 @@
  r←Test_Input_DataType_013(stopFlag batchFlag);n;⎕TRAP;defMat;res;DT;globalParms;parms
 ⍝ Exercise "Input" with data type "Character".
- r←∆Failed
+ r←T._Failed
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
 
  DT←#.APLGUI.APLGUI.Enums.InputDataTypes
@@ -18,17 +18,17 @@
 
  n←#.APLGUI.APLGUI.Input.Create defMat globalParms parms
  0 ∆Process n.∆Form
- →GoToTidyUp~n.Char1.Size[1]∊(5+1⊃n.Char1.GetTextSize #.APLGUI.APLGUI.Enums.InputDefaultLength.Character⍴'W')+⍳30
- →GoToTidyUp~n.Char2.Size[1]∊(5+1⊃n.Char2.GetTextSize n.Char2.Text)+⍳30
- →GoToTidyUp~n.Char3.Size[1]∊(5+1⊃n.Char2.GetTextSize defMat[2;#.APLGUI.APLGUI.Enums.DefMatIndices.Length]⍴'W')+⍳30
+ →T.GoToTidyUp~n.Char1.Size[1]∊(5+1⊃n.Char1.GetTextSize #.APLGUI.APLGUI.Enums.InputDefaultLength.Character⍴'W')+⍳30
+ →T.GoToTidyUp~n.Char2.Size[1]∊(5+1⊃n.Char2.GetTextSize n.Char2.Text)+⍳30
+ →T.GoToTidyUp~n.Char3.Size[1]∊(5+1⊃n.Char2.GetTextSize defMat[2;#.APLGUI.APLGUI.Enums.DefMatIndices.Length]⍴'W')+⍳30
 
  n.Char1 ∆KeyPress'John Doe'
  0 ∆Process n.∆Form
  ⎕NQ n.∆OK'Select'
  0 ∆Process n.∆Form
- →GoToTidyUp'John Doe'≢↑n.∆result[0;1]
+ →T.GoToTidyUp'John Doe'≢↑n.∆result[0;1]
 
- r←∆OK
+ r←T._OK
 
 ∆TidyUp:
  n.∆CloseForm

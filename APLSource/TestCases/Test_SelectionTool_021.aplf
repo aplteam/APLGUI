@@ -1,15 +1,15 @@
  r←Test_SelectionTool_021(stopFlag batchFlag);⎕TRAP;parms;data;rf;n
 ⍝ Exercise "SelectionTool" with invalid `default`.
- r←∆Failed
+ r←T._Failed
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
 
  parms←#.APLGUI.APLGUI.ProcessTool.CreateParms
  parms.default←1 2
  :Trap 11
      n←parms #.APLGUI.APLGUI.ProcessTool.Create(⍕¨1+⍳10)'∆HarvestSelections'
-     →FailsIf 1
+     →T.FailsIf 1
  :Else
-     →PassesIf'Invalid: "default"; must be Boolean'≡↑⎕DM
+     →T.PassesIf'Invalid: "default"; must be Boolean'≡↑⎕DM
  :EndTrap
 
- r←∆OK
+ r←T._OK

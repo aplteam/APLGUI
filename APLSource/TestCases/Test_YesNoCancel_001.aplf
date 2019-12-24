@@ -1,6 +1,6 @@
  r←Test_YesNoCancel_001(stopFlag batchFlag);myGuiParms;msg;parms;result;⎕TRAP
 ⍝ Exercise "YesNoCancel" with a question spanning several lines and "Cancel" as default button.
- r←∆Failed
+ r←T._Failed
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
 
  myGuiParms←#.APLGUI.APLGUI.APLGuiGlobalParms.CreateDefaults
@@ -17,6 +17,6 @@
  parms.timeout←0.1
  parms.autoPress←2
  result←parms myGuiParms #.APLGUI.APLGUI.Dialogs.YesNoCancel msg
- →FailsIf ¯1≠result
+ →T.FailsIf ¯1≠result
 
- r←∆OK
+ r←T._OK

@@ -1,6 +1,6 @@
  r←Test_CreateButtonForm_010(stopFlag batchFlag);myGuiParms;parms;n;⎕TRAP
 ⍝ Exercise "Dialog.Create": height test; the (simple) question defines the height
- r←∆Failed
+ r←T._Failed
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
 
  myGuiParms←#.APLGUI.APLGUI.APLGuiGlobalParms.CreateDefaults
@@ -15,9 +15,9 @@
  :If ⍬ ⍬≡parms.posn
      {}n.∆Form #.APLGUI.APLGUI.APLGuiHelpers.CenterIn myGuiParms.centerIn{(0∊⍴⍵):⍺ ⋄ ⍵}parms.centerIn
  :EndIf
- →(0≡PassesIf{(100<⍵)∧(200>⍵)}n.∆Form.Size[0])/∆TidyUp
+ →(0≡T.PassesIf{(100<⍵)∧(200>⍵)}n.∆Form.Size[0])/∆TidyUp
 
 ∆TidyUp:
  n.∆CloseForm
 
- r←∆OK
+ r←T._OK

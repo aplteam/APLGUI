@@ -1,9 +1,9 @@
  r←Test_TableEdit_103(stopFlag batchFlag);parms;n;⎕TRAP;table;rowTitles
 ⍝ Test the "onClose" callback
- r←∆Inactive
+ r←T._Inactive
  :Return
 
- r←∆Failed
+ r←T._Failed
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
 
  #.⎕SHADOW'TEMP'
@@ -35,16 +35,16 @@
  ∆Process n.∆Form
  1 ⎕NQ n.∆Form'Close'
  0.1 ∆Process n.∆Form
- →GoToTidyUp 0≠#.TEMP.flag
- →GoToTidyUp 1≠#.TEMP.counter
+ →T.GoToTidyUp 0≠#.TEMP.flag
+ →T.GoToTidyUp 1≠#.TEMP.counter
  1 ⎕NQ n.∆Form'Close'
  ∆Process n.∆Form
 
- →GoToTidyUp 1≠#.TEMP.flag
- →GoToTidyUp 2≠#.TEMP.counter
- →GoToTidyUp'Ford'≢↑0 0⌷n.∆result
+ →T.GoToTidyUp 1≠#.TEMP.flag
+ →T.GoToTidyUp 2≠#.TEMP.counter
+ →T.GoToTidyUp'Ford'≢↑0 0⌷n.∆result
 
- r←∆OK
+ r←T._OK
 
 ∆TidyUp:
  n.∆CloseForm

@@ -1,6 +1,6 @@
  r←Test_AskNumber_009(stopFlag batchFlag);myGuiParms;parms;n;cl;⎕TRAP
 ⍝ Feed AskForNumber an incompatible parameter space.
- r←∆Failed
+ r←T._Failed
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
 
  myGuiParms←#.APLGUI.APLGUI.APLGuiGlobalParms.CreateDefaults
@@ -12,10 +12,10 @@
 
  :Trap 0
      {}myGuiParms parms #.APLGUI.APLGUI.Request.AskForNumber''
-     →FailsIf 1
+     →T.FailsIf 1
  :Else
      ⎕DL 0.2
-     →FailsIf'Invalid: "parmType"'≢0⊃⎕DM
+     →T.FailsIf'Invalid: "parmType"'≢0⊃⎕DM
  :EndTrap
 
- r←∆OK
+ r←T._OK

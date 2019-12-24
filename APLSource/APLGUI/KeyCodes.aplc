@@ -17,7 +17,7 @@
 ⍝ own independent keycodes while slash, minus and <Enter> don't.\\
 ⍝ Kai Jaeger ⋄ APL Team Ltd\\
 
-    :Include ##.##.APLTreeUtils
+    :Include ##.APLTreeUtils
     :Include APLGuiUtils
 
     ⎕IO←0 ⋄ ⎕ML←3

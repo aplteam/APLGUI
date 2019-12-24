@@ -1,6 +1,6 @@
  r←Test_Input_DataType_005(stopFlag batchFlag);n;⎕TRAP;defMat;res;DT;globalParms;parms;callback
 ⍝ Exercise "Input" with data type "Button" together with a callback.
- r←∆Failed
+ r←T._Failed
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
 
  DT←#.APLGUI.APLGUI.Enums.InputDataTypes
@@ -26,11 +26,11 @@
      0 ∆Process n.∆Form
      1 ⎕NQ n.Rotate'Select'
      0 ∆Process n.∆Form
-     →GoToTidyUp'neger'≢n.ToBeRotated.Text
+     →T.GoToTidyUp'neger'≢n.ToBeRotated.Text
      n.∆CloseForm
  :EndFor
 
- r←∆OK
+ r←T._OK
 
 ∆TidyUp:
  n.∆CloseForm

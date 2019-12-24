@@ -1,8 +1,8 @@
  r←Test_Menubar_002(stopFlag batchFlag);menu2;⎕TRAP
 ⍝ Exercise the "Reformat" method.
- r←∆Failed
+ r←T._Failed
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
 
  menu2←#.APLGUI.APLGUI.Menubar.Reformat MenuSample
 
- r←∆OK
+ r←T._OK

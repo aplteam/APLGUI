@@ -1,7 +1,7 @@
  r←Test_Input_Misc_016(stopFlag batchFlag);n;⎕TRAP;defMat;res;DT;tips;double;parms;props
 ⍝ Exercise "Input" with tips.
 ⍝ Comes with all data types that may actually have a tip.
- r←∆Failed
+ r←T._Failed
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
 
  DT←#.APLGUI.APLGUI.Enums.InputDataTypes
@@ -47,4 +47,4 @@
  ∆Process n
  n.∆CloseForm
 
- r←∆OK
+ r←T._OK

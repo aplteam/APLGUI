@@ -1,6 +1,6 @@
  r←Test_Notepad_005(stopFlag batchFlag);parms;n;was;⎕TRAP;filename
 ⍝ Establish (and exercise) the "onFileOpen" callback function in all possible ways.
- r←∆Failed
+ r←T._Failed
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
 
 ⍝⍝⍝ Preconditions
@@ -25,7 +25,7 @@
  ⎕NQ n.menubar.open'Select'
  ⎕NQ n.menubar.quit'Select'
  ∆Process n.∆Form
- →GoToTidyUp 1≠#.TEMP.wasCalled
+ →T.GoToTidyUp 1≠#.TEMP.wasCalled
 
  #.TEMP.wasCalled←0
  parms.onFileOpen←#.TEMP'MyCallback'
@@ -34,7 +34,7 @@
  ⎕NQ n.menubar.open'Select'
  ⎕NQ n.menubar.quit'Select'
  ∆Process n.∆Form
- →GoToTidyUp 1≠#.TEMP.wasCalled
+ →T.GoToTidyUp 1≠#.TEMP.wasCalled
 
  was←⎕CS'#.TEMP'
  #.TEMP.wasCalled←0
@@ -50,8 +50,8 @@
  ⎕NQ n.menubar.quit'Select'
  1 #.APLGUI.TestCases.∆Process n.∆Form
  ⎕CS was
- →GoToTidyUp 1≠#.TEMP.wasCalled
- r←∆OK
+ →T.GoToTidyUp 1≠#.TEMP.wasCalled
+ r←T._OK
 
 ∆TidyUp:
  :Trap 0 ⋄ n.∆CloseForm ⋄ :EndTrap

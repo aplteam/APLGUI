@@ -1,9 +1,9 @@
  r←Test_TableEdit_201(stopFlag batchFlag);parms;n;⎕TRAP;table;rowTitles
 ⍝ Test quitting the table editor. Changes are made and the user shall be prompted and will press "No".
- r←∆Inactive
+ r←T._Inactive
  :Return
 
- r←∆Failed
+ r←T._Failed
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
 
  table←⍪'Obama' 'Bush' 'Clinton' 'Reagan' 'Kennedy'
@@ -24,9 +24,9 @@
  1 ⎕NQ n.∆Form'Close'
  0.1 ∆Process n.∆Form
 
- →GoToTidyUp table≢n.∆result
+ →T.GoToTidyUp table≢n.∆result
 
- r←∆OK
+ r←T._OK
 
 ∆TidyUp:
  n.∆CloseForm

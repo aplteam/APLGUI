@@ -1,6 +1,6 @@
  r←Test_ProcessTool_002(stopFlag batchFlag);rc;parms;n;⎕TRAP
 ⍝ Exercise "ProcessTool" and check props: default, dblClick, menuCaption, menuItemCaption, processBtnCaption
- r←∆Failed
+ r←T._Failed
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
 
  parms←#.APLGUI.APLGUI.ProcessTool.CreateParms
@@ -15,13 +15,13 @@
  parms.info←'Checks "default", "dblClick", "menuCaption", "menuItemCaption" and "processBtnCaption"'
  n←parms #.APLGUI.APLGUI.ProcessTool.Create(⍕¨1+⍳10)'∆HarvestSelections'
  ⎕DL 0.3
- →GoToTidyUp n.List.Style≢'Multi'
- →GoToTidyUp n.List.SelItems≢parms.default
- →GoToTidyUp n.menubar.special.Caption≢parms.menuCaption
- →GoToTidyUp n.menubar.processCmd0.Caption≢⎕IO⊃,parms.menuItemCaptions
- →GoToTidyUp n.Btn_00.Caption≢parms.processBtnCaption
- →GoToTidyUp n.Btn_01.Caption≢'Close'
- r←∆OK
+ →T.GoToTidyUp n.List.Style≢'Multi'
+ →T.GoToTidyUp n.List.SelItems≢parms.default
+ →T.GoToTidyUp n.menubar.special.Caption≢parms.menuCaption
+ →T.GoToTidyUp n.menubar.processCmd0.Caption≢⎕IO⊃,parms.menuItemCaptions
+ →T.GoToTidyUp n.Btn_00.Caption≢parms.processBtnCaption
+ →T.GoToTidyUp n.Btn_01.Caption≢'Close'
+ r←T._OK
 
 ∆TidyUp:
  n.∆CloseForm

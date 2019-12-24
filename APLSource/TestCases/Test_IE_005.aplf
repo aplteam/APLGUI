@@ -2,7 +2,7 @@
 ⍝ Test IE with a local page that carries an "external" link. We need the user to click this link and judge whether it all worked.
 ⍝ The page should not change. The URL should be displayed with the default browser.
 ⍝ It would be really nice if we could automate this fully (SendKeys?!)
- r←∆Failed
+ r←T._Failed
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
 
  :If batchFlag
@@ -35,9 +35,9 @@
      ⎕DQ n1.∆Form
      ∆Process n1.∆Form
 
-     →PassesIf 1 ∆PromptForSuccess'Did the Browser control act in the expected way?'
+     →T.PassesIf 1 ∆PromptForSuccess'Did the Browser control act in the expected way?'
 
-     r←∆OK
+     r←T._OK
 
  :EndIf
 

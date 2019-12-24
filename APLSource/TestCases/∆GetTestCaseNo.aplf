@@ -1,3 +1,3 @@
  r←∆GetTestCaseNo
  r←{(⌽2>+\(⌽⍵)='_')/⍵}↑1↓⎕XSI
- r←↑{⍺,' no. ',⍵}/'_'#.APLTreeUtils.Split r
+ r←↑{⍺,' no. ',⍵}/'_'##.APLTreeUtils.Split r

@@ -1,6 +1,6 @@
  r←Test_StdForm_013(stopFlag batchFlag);⎕TRAP;globalParms;parms;n
 ⍝ Test "Icon"
- r←∆Failed
+ r←T._Failed
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
 
  parms←#.APLGUI.APLGUI.StdForm.CreateParms
@@ -10,7 +10,7 @@
  parms.minSize←100 200
  n←#.APLGUI.APLGUI.StdForm.Create parms
  0.2 ∆Process n.∆Form
- →PassesIf n.∆Form.IconObj.Type≡'Icon'
+ →T.PassesIf n.∆Form.IconObj.Type≡'Icon'
  n.∆CloseForm
 
- r←∆OK
+ r←T._OK

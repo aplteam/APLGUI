@@ -1,6 +1,6 @@
  r←Test_DirSelect_002(stopFlag batchFlag);myGuiParms;parms;n;⎕TRAP;startDir
 ⍝ Exercise the "DirSelect" method with some parameters.
- r←∆Failed
+ r←T._Failed
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
 
  myGuiParms←#.APLGUI.APLGUI.APLGuiGlobalParms.CreateDefaults
@@ -13,8 +13,8 @@
  startDir←'C:\Users\All Users\TEMP'
  n←myGuiParms parms #.APLGUI.APLGUI.DirSelect.Create startDir
  ⎕DL 0.1
- →GoToTidyUp≢/#.APLTreeUtils.Lowercase startDir({⍵↓⍨-'\'=¯1↑⍵}(n #.APLGUI.APLGUI.DirSelect.GetPathFromTreeItems n.Tree.SelItems))
- r←∆OK
+ →T.GoToTidyUp≢/##.APLTreeUtils.Lowercase startDir({⍵↓⍨-'\'=¯1↑⍵}(n #.APLGUI.APLGUI.DirSelect.GetPathFromTreeItems n.Tree.SelItems))
+ r←T._OK
 
 ∆TidyUp:
  :Trap 6 ⋄ n.∆CloseForm ⋄ :EndTrap

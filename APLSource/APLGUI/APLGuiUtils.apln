@@ -266,13 +266,14 @@
       GetRefTo←{
       ⍝ Once the package manager has arrived this needs a rewrite  ⍝TODO⍝ 
           name←⍵
-          9.4=#.⎕NC⊂name:#.⍎name
-          9.4=##.⎕NC⊂name:##.⍎name
+          9.1 9.4∊⍨#.⎕NC⊂name:#.⍎name
+          9.1 9.4∊⍨##.⎕NC⊂name:##.⍎name
           ref←(+/∧\∨/¨'._dependencies.'∘⍷¨⎕NSI)⊃⎕RSI
-          9.4=ref.##.⎕NC⊂name:ref.##⍎name
-          9.4=ref.##.##.⎕NC⊂name:ref.##.##⍎name
-          9.4=ref.##.##.##.⎕NC⊂name:ref.##.##.##⍎name
-          9.4=(↑⎕RSI).⎕NC⊂name:parent.⍎name
+          9.1 9.4∊⍨ref.⎕NC⊂name:ref.##⍎name
+          9.1 9.4∊⍨ref.##.⎕NC⊂name:ref.##⍎name
+          9.1 9.4∊⍨ref.##.##.⎕NC⊂name:ref.##.##⍎name
+          9.1 9.4∊⍨ref.##.##.##.⎕NC⊂name:ref.##.##.##⍎name
+          9.1 9.4∊⍨(↑⎕RSI).⎕NC⊂name:parent.⍎name
           6 ⎕SIGNAL⍨'Cannot find ',name,'?!'
       }
 

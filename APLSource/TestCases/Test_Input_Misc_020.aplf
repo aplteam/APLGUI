@@ -1,6 +1,6 @@
  r←Test_Input_Misc_020(stopFlag batchFlag);n;⎕TRAP;DT;defMat;parms
 ⍝ Exercise "Input" with testMode←1 and autoPress←1 and timeout←2
- r←∆Failed
+ r←T._Failed
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
 
  DT←#.APLGUI.APLGUI.Enums.InputDataTypes
@@ -15,9 +15,9 @@
  parms.autoPress←1
  n←#.APLGUI.APLGUI.Input.Create defMat ⍬ parms
  1 ∆Process n.∆Form
- →GoToTidyUp~0∊⍴n.∆result
+ →T.GoToTidyUp~0∊⍴n.∆result
 
- r←∆OK
+ r←T._OK
 
 ∆TidyUp:
  n.∆CloseForm

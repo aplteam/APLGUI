@@ -1,6 +1,6 @@
  r←Test_ShowLongMsg_005(stopFlag batchFlag);n;⎕TRAP;globalParms;parms;btn
 ⍝ Exercise "ShowLongMsg" with a callback acting on a button pressed by specifying a full path name.
- r←∆Failed
+ r←T._Failed
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
 
  :If batchFlag
@@ -28,9 +28,9 @@
      parms.buttons←'OK' 'Show'
 
      btn←parms #.APLGUI.APLGUI.Dialogs.ShowLongMsg'Are you sure?'
-     →PassesIf 0=btn
-     →PassesIf'Show'≡#.TEMP.∆MSG
+     →T.PassesIf 0=btn
+     →T.PassesIf'Show'≡#.TEMP.∆MSG
 
-     r←∆OK
+     r←T._OK
 
  :EndIf

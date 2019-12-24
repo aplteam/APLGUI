@@ -1,7 +1,7 @@
  r←Test_IE_004(stopFlag batchFlag);⎕TRAP;ref;html;parms;code;msg;n1;n2;testNo
 ⍝ Test IE with a user-defined callback
 ⍝ It would be really nice if we could automate this fully (SendKeys?!)
- r←∆Failed
+ r←T._Failed
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
 
  :If batchFlag
@@ -33,14 +33,14 @@
      n2←parms #.APLGUI.APLGUI.IE.CreateIE n1.∆Form
 
      #.APLGUI.APLGUI.IE.ShowHtml n2.IEobject #.Temp.html1
-     →GoToTidyUp #.Temp.flag≠0
+     →T.GoToTidyUp #.Temp.flag≠0
      ⎕DL 0.25
 
      ⎕DQ n1.∆Form
      ∆Process n1.∆Form
-     →GoToTidyUp #.Temp.flag≠1
+     →T.GoToTidyUp #.Temp.flag≠1
 
-     r←∆OK
+     r←T._OK
  :EndIf
 
 ∆TidyUp:

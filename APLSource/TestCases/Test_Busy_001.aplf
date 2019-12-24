@@ -1,6 +1,6 @@
  r←Test_Busy_001(stopFlag batchFlag);n;i;⎕TRAP;noOfThreads
 ⍝ Exercise the simplest possible case with `Busy`.
- r←∆Failed
+ r←T._Failed
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
 
  noOfThreads←⍴⎕TNUMS
@@ -12,6 +12,6 @@
      n #.APLGUI.APLGUI.Busy.SetPercent 10×i
  :EndFor
  n.∆CloseForm
- →FailsIf noOfThreads≠⍴⎕TNUMS
+ →T.FailsIf noOfThreads≠⍴⎕TNUMS
 
- r←∆OK
+ r←T._OK

@@ -1,6 +1,6 @@
  r←Test_SelectionTool_004(stopFlag batchFlag);parms;n;v;⎕TRAP
 ⍝ Exercise "SelectionTool.Create" with "size" specified.
- r←∆Failed
+ r←T._Failed
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
 
  parms←#.APLGUI.APLGUI.SelectionTool.CreateParms
@@ -15,8 +15,8 @@
  parms.timeout←0.1
  n←parms #.APLGUI.APLGUI.SelectionTool.Create⍕¨1+⍳10
  ∆Process n.∆Form
- →GoToTidyUp n.∆Form.Size≢parms.size
- r←∆OK
+ →T.GoToTidyUp n.∆Form.Size≢parms.size
+ r←T._OK
 
 ∆TidyUp:
  n.∆CloseForm

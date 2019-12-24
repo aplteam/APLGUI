@@ -1,6 +1,6 @@
  r←Test_Input_Misc_019(stopFlag batchFlag);n;⎕TRAP;res;DT;double;parms;props;defMat;defMat2;this;that;counter;flag
 ⍝ Exercise "Input" with testMode←1 and autoPress←0
- r←∆Failed
+ r←T._Failed
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
 
  DT←#.APLGUI.APLGUI.Enums.InputDataTypes
@@ -17,9 +17,9 @@
  ∆Process n.∆Form
  ⎕NQ n.∆OK'Select'
  ∆Process n.∆Form
- →GoToTidyUp n.∆result[;1]≢'Kai Jaeger' 123  ⍝ Value Error?! Simply try →⎕LC
+ →T.GoToTidyUp n.∆result[;1]≢'Kai Jaeger' 123  ⍝ Value Error?! Simply try →⎕LC
 
- r←∆OK
+ r←T._OK
 
 ∆TidyUp:
  n.∆CloseForm

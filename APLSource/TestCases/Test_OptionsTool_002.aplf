@@ -1,7 +1,7 @@
  r←Test_OptionsTool_002(stopFlag batchFlag);⎕TRAP;parms;globalParms
 ⍝ Exercise "OptionsTools" with just the default.
 ⍝ Exception: when "autoPress" is not ¯1.
- r←∆Failed
+ r←T._Failed
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
 
  globalParms←#.APLGUI.APLGUI.APLGuiGlobalParms.CreateDefaults
@@ -10,7 +10,7 @@
  parms←#.APLGUI.APLGUI.OptionsTool.CreateParms
  parms.timeout←0.1
  parms.default←0 1 0
- →FailsIf(1(3↑0 1))≢globalParms parms #.APLGUI.APLGUI.OptionsTool.Run⍕¨1000000+⍳3
- →FailsIf(1(3↑0 1))≢parms globalParms #.APLGUI.APLGUI.OptionsTool.Run⍕¨1000000+⍳3
+ →T.FailsIf(1(3↑0 1))≢globalParms parms #.APLGUI.APLGUI.OptionsTool.Run⍕¨1000000+⍳3
+ →T.FailsIf(1(3↑0 1))≢parms globalParms #.APLGUI.APLGUI.OptionsTool.Run⍕¨1000000+⍳3
 
- r←∆OK
+ r←T._OK

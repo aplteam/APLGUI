@@ -1,6 +1,6 @@
  r←Test_Notepad_003(stopFlag batchFlag);VTV;parms;n;was;⎕TRAP
 ⍝ Establish (and exercise) the "onInitial" callback function in all possible ways.
- r←∆Failed
+ r←T._Failed
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
 
 ⍝⍝⍝ Preconditions
@@ -26,19 +26,19 @@
 
  n←parms #.APLGUI.APLGUI.Notepad.Create VTV #.APLGUI.APLGUI.Notepad.CreateParms
  ∆Process n.∆Form
- →GoToTidyUp 1≠#.TEMP.wasCalled
+ →T.GoToTidyUp 1≠#.TEMP.wasCalled
  n.∆CloseForm
 
  #.TEMP.wasCalled←0
  parms.onInitial←#.TEMP'MyCallback'
  n←parms #.APLGUI.APLGUI.Notepad.Create VTV #.APLGUI.APLGUI.Notepad.CreateParms
  ∆Process n.∆Form
- →GoToTidyUp 1≠#.TEMP.wasCalled
+ →T.GoToTidyUp 1≠#.TEMP.wasCalled
  n.∆CloseForm
 
  was←⎕CS'#.TEMP'
  #.TEMP.wasCalled←0
- r←#.APLGUI.TestCases.∆OK
+ r←#.APLGUI.TestCases.T._OK
 
 ∆TidyUp:
  :Trap 0 ⋄ n.∆CloseForm ⋄ :EndTrap

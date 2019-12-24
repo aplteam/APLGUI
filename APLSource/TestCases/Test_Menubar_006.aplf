@@ -1,6 +1,6 @@
  r←Test_Menubar_006(stopFlag batchFlag);parms;n;TheForm;⎕TRAP
 ⍝ Exercise the "Create" method with an invalid definition (using the name "Menubar")
- r←∆Failed
+ r←T._Failed
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
 
  parms←#.APLGUI.APLGUI.Menubar.CreateParms
@@ -8,9 +8,9 @@
 
  :Trap 0
      n←#.APLGUI.APLGUI.Menubar.Create TheForm MenuUsesNameMenubar parms(⎕NEW #.APLGUI.APLGUI.KeyCodes)
-     →FailsIf 1
+     →T.FailsIf 1
  :Else
-     →FailsIf'The name "Menubar" is reserved and must not be used'≢0⊃⎕DM
+     →T.FailsIf'The name "Menubar" is reserved and must not be used'≢0⊃⎕DM
  :EndTrap
 
- r←∆OK
+ r←T._OK

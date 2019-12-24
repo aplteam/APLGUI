@@ -1,8 +1,7 @@
  {r}←Initial;∆;msg
  r←1
  ⎕IO←0 ⋄ ⎕ML←3
- #.Tester.EstablishHelpersIn''
- #.FilesAndDirs.PolishCurrentDir
+ ##.FilesAndDirs.PolishCurrentDir
  ∆←⊂'Form'
  ∆,←⊂'Coord' 'Pixel'
  ∆,←⊂'Caption' 'Parent Form - don''t close!'

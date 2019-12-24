@@ -1,6 +1,6 @@
  r←Test_AskString_002(stopFlag batchFlag);myGuiParms;parms;string;⎕TRAP;okFlag
 ⍝ Exercise the "Create" method with a complex and valid definition. "OK" is pressed automatically.
- r←∆Failed
+ r←T._Failed
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
 
  myGuiParms←#.APLGUI.APLGUI.APLGuiGlobalParms.CreateDefaults
@@ -22,7 +22,7 @@
  parms.timeout←0.1
 
  (okFlag string)←myGuiParms parms #.APLGUI.APLGUI.Request.AskForString''
- →FailsIf 0=okFlag
- →FailsIf string≢parms.default
+ →T.FailsIf 0=okFlag
+ →T.FailsIf string≢parms.default
 
- r←∆OK
+ r←T._OK

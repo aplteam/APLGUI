@@ -1,6 +1,6 @@
  r←Test_YesOrNo_005(stopFlag batchFlag);myGuiParms;msg;parms;⎕TRAP
 ⍝ Exercise "YesOrNo" with a question spanning several lines. Needs the user.
- r←∆Failed
+ r←T._Failed
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
 
  myGuiParms←#.APLGUI.APLGUI.APLGuiGlobalParms.CreateDefaults
@@ -16,4 +16,4 @@
  parms.timeout←0.1
  {}parms myGuiParms #.APLGUI.APLGUI.Dialogs.YesOrNo msg
 
- r←∆OK
+ r←T._OK

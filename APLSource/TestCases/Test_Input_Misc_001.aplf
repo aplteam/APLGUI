@@ -1,6 +1,6 @@
  r←Test_Input_Misc_001(stopFlag batchFlag);n;⎕TRAP;defMat;res;DT
 ⍝ Exercise "Input" with just the bare minimum of data and properties.
- r←∆Failed
+ r←T._Failed
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
 
  DT←#.APLGUI.APLGUI.Enums.InputDataTypes
@@ -12,7 +12,7 @@
  n.Name ∆KeyPress'Kai Jaeger'
  ⎕NQ n.∆OK'Select'
  ∆Process n.∆Form
- →PassesIf 1=↑⍴n.∆result
- →PassesIf'Kai Jaeger'≡1⊃n.∆result[0;]
+ →T.PassesIf 1=↑⍴n.∆result
+ →T.PassesIf'Kai Jaeger'≡1⊃n.∆result[0;]
 
- r←∆OK
+ r←T._OK

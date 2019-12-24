@@ -1,6 +1,6 @@
  r←Test_Input_Callbacks_001(stopFlag batchFlag);n;⎕TRAP;defMat;res;DT;globalParms;parms;focusHas
 ⍝ Exercise "Input" with an "onOkay" callback
- r←∆Failed
+ r←T._Failed
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
 
  DT←#.APLGUI.APLGUI.Enums.InputDataTypes
@@ -30,14 +30,14 @@
  1 ⎕NQ n.∆OK'Select'
  focusHas←2 ⎕NQ'#' 'GetFocusObj'
  0 ∆Process n.∆Form
- →GoToTidyUp n.∆Form.∆closed
- →GoToTidyUp 2≠focusHas.⎕NC'∆MyName'
- →GoToTidyUp'Text4a'≢focusHas.∆MyName
+ →T.GoToTidyUp n.∆Form.∆closed
+ →T.GoToTidyUp 2≠focusHas.⎕NC'∆MyName'
+ →T.GoToTidyUp'Text4a'≢focusHas.∆MyName
  1 ⎕NQ n.∆OK'Select'
  ∆Process n.∆Form
- →GoToTidyUp~n.∆Form.∆closed
+ →T.GoToTidyUp~n.∆Form.∆closed
 
- r←∆OK
+ r←T._OK
 
 ∆TidyUp:
  n.∆CloseForm

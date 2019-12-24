@@ -1,6 +1,6 @@
  r←Test_SelectionTool_002(stopFlag batchFlag);rc;parms;⎕TRAP
 ⍝ Exercise "SelectionTool.Run" with just autoPress set and no global parms.
- r←∆Failed
+ r←T._Failed
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
 
  parms←#.APLGUI.APLGUI.SelectionTool.CreateParms
@@ -8,6 +8,6 @@
  parms.timeout←0.1
  parms.posn←100 100
  rc←parms #.APLGUI.APLGUI.SelectionTool.Run⍕¨1+⍳10
- →FailsIf 2≠⍴rc
- →FailsIf 0≠0⊃rc
- r←∆OK
+ →T.FailsIf 2≠⍴rc
+ →T.FailsIf 0≠0⊃rc
+ r←T._OK

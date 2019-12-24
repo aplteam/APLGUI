@@ -1,6 +1,6 @@
  r←Test_Input_DataType_007(stopFlag batchFlag);n;⎕TRAP;defMat;res;DT;globalParms;parms;month;values;colors;Okay
 ⍝ Exercise "Input" with data type "Radio" with a "OnOK" callback.
- r←∆Failed
+ r←T._Failed
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
 
  DT←#.APLGUI.APLGUI.Enums.InputDataTypes
@@ -22,6 +22,6 @@
  0 ∆Process n.∆Form
  ⎕NQ n.∆OK'Select'
  0 ∆Process n.∆Form
- →FailsIf 0 0 0 1 0 0≢1⊃n.∆result[n.∆result[;0]⍳⊂'Radios';]
+ →T.FailsIf 0 0 0 1 0 0≢1⊃n.∆result[n.∆result[;0]⍳⊂'Radios';]
 
- r←∆OK
+ r←T._OK

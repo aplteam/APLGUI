@@ -1,6 +1,6 @@
  r←Test_Input_DataType_003(stopFlag batchFlag);n;⎕TRAP;defMat;res;DT;globalParms;parms;props
 ⍝ Exercise "Input" with data type "Currency".
- r←∆Failed
+ r←T._Failed
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
 
  DT←#.APLGUI.APLGUI.Enums.InputDataTypes
@@ -23,14 +23,14 @@
  n←#.APLGUI.APLGUI.Input.Create defMat globalParms parms
  0 ∆Process n.∆Form
 
- →GoToTidyUp 1 0 1≢n.(Curr1 Curr2 Curr3).Active
+ →T.GoToTidyUp 1 0 1≢n.(Curr1 Curr2 Curr3).Active
  n.Curr3 ∆KeyPress'9.123'
  0 ∆Process n.∆Form
  ⎕NQ n.∆OK'Select'
  0 ∆Process n.∆Form
- →GoToTidyUp 786.89≢+/n.∆result[;1]
+ →T.GoToTidyUp 786.89≢+/n.∆result[;1]
 
- r←∆OK
+ r←T._OK
 
 ∆TidyUp:
  n.∆CloseForm

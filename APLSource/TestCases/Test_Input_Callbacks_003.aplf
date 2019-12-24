@@ -1,6 +1,6 @@
  r←Test_Input_Callbacks_003(stopFlag batchFlag);n;⎕TRAP;defMat;res;DT;globalParms;parms;txt
 ⍝ Exercise "Input" with on "onKeyPress" callback.
- r←∆Failed
+ r←T._Failed
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
 
  DT←#.APLGUI.APLGUI.Enums.InputDataTypes
@@ -13,7 +13,7 @@
      msg←⍵
      key←2⊃msg
      1≠⍴,key:1
-     msg[2]←⊂#.APLTreeUtils.Uppercase key
+     msg[2]←⊂#.APLGUI.APLTreeUtils.Uppercase key
      msg
  }
 
@@ -34,9 +34,9 @@
  n.Text ∆KeyPress'This is mixed text'
  0 ∆Process n.∆Form
 
- →GoToTidyUp'THIS IS MIXED TEXT'≢n.Text.Text
+ →T.GoToTidyUp'THIS IS MIXED TEXT'≢n.Text.Text
 
- r←∆OK
+ r←T._OK
 
 ∆TidyUp:
  n.∆CloseForm

@@ -1,6 +1,6 @@
  r←Test_SelectionTool_007(stopFlag batchFlag);parms;n;v;⎕TRAP
 ⍝ Exercise "SelectionTool. Create" with "minsize" and "size" (greater!) specified.
- r←∆Failed
+ r←T._Failed
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
 
  parms←#.APLGUI.APLGUI.SelectionTool.CreateParms
@@ -16,11 +16,11 @@
  parms.size←520 720
  n←parms #.APLGUI.APLGUI.SelectionTool.Create⍕¨1+⍳10
  ∆Process n.∆Form
- →GoToTidyUp n.∆Form.Size≢parms.size
+ →T.GoToTidyUp n.∆Form.Size≢parms.size
  ⎕NQ n.∆Form'Configure',n.∆Form.Posn,100 150  ⍝ Make it much smaller
  ∆Process n.∆Form
- →GoToTidyUp n.∆Form.Size≢parms.minSize
- r←∆OK
+ →T.GoToTidyUp n.∆Form.Size≢parms.minSize
+ r←T._OK
 
 ∆TidyUp:
  n.∆CloseForm

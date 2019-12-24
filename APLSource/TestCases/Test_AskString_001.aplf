@@ -1,7 +1,7 @@
  r←Test_AskString_001(stopFlag batchFlag);myGuiParms;parms;n;⎕TRAP
 ⍝ Exercise the "AskForString" method with defaults parameters only. Input via "KeyPress".
 ⍝ See also number 8
- r←∆Failed
+ r←T._Failed
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
 
  myGuiParms←#.APLGUI.APLGUI.APLGuiGlobalParms.CreateDefaults
@@ -19,9 +19,9 @@
  ∆Process n.∆Form
  ⎕NQ n.Btn0'Select'
  ∆Process n.∆Form
- →FailsIf'Kai'≢n.∆result  ⍝ Just execute →⎕lc and it will work  ⍝TODO⍝ discuss with Dyalog why that failes!
+ →T.FailsIf'Kai'≢n.∆result  ⍝ Just execute →⎕lc and it will work  ⍝TODO⍝ discuss with Dyalog why that failes!
 
- r←∆OK
+ r←T._OK
 
 ∆TidyUp:
  n.∆CloseForm

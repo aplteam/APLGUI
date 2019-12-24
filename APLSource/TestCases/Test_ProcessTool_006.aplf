@@ -1,6 +1,6 @@
  r←Test_ProcessTool_006(stopFlag batchFlag);rc;parms;n;list;⎕TRAP
 ⍝ Exercise "ProcessTool" with a tailored "Process" caption and check <enter>. "Items" are all longer than 1.
- r←∆Failed
+ r←T._Failed
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
 
  parms←#.APLGUI.APLGUI.ProcessTool.CreateParms
@@ -14,19 +14,19 @@
  ⎕DL 0.3
  ⎕NQ n.∆Form'KeyPress' 'ER'
  0.5 ∆Process n.∆Form
- →GoToTidyUp n.∆result≢,⊂list[3 5-1;]
+ →T.GoToTidyUp n.∆result≢,⊂list[3 5-1;]
  n.List.SelItems←(1+⍳10)∊4 5 6
  n.∆result←⍬
  ⎕NQ n.∆Form'KeyPress' 'ER'
  0.5 ∆Process n.∆Form
- →GoToTidyUp n.∆result≢,⊂list[4 5 6-1;]
+ →T.GoToTidyUp n.∆result≢,⊂list[4 5 6-1;]
  n.List.SelItems[]←0
  n.List.SelItems[3]←1
  n.∆result←⍬
  ⎕NQ n.∆Form'KeyPress' 'ER'
  0.5 ∆Process n.∆Form
- →GoToTidyUp n.∆result≢,⊂list[,4-1;]
- r←∆OK
+ →T.GoToTidyUp n.∆result≢,⊂list[,4-1;]
+ r←T._OK
 
 ∆TidyUp:
  n.∆CloseForm

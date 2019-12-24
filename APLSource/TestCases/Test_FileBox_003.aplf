@@ -1,6 +1,6 @@
  r←Test_FileBox_003(stopFlag batchFlag);myGuiParms;parms;⎕TRAP;path;n
 ⍝ Exercise the "Create" method with `parent`
- r←∆Failed
+ r←T._Failed
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
 
  myGuiParms←#.APLGUI.APLGUI.APLGuiGlobalParms.CreateDefaults
@@ -16,4 +16,4 @@
 
  n←myGuiParms parms #.APLGUI.APLGUI.FileBox.Create'C:\Windows\'
 
- r←∆OK
+ r←T._OK

@@ -1,6 +1,6 @@
  r←Test_Input_DataType_006(stopFlag batchFlag);n;⎕TRAP;defMat;res;DT;globalParms;parms;props;values
 ⍝ Exercise "Input" with data type "Spinner" with a "OnOkay" callback.
- r←∆Failed
+ r←T._Failed
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
 
  DT←#.APLGUI.APLGUI.Enums.InputDataTypes
@@ -25,28 +25,28 @@
 
  n.Numbers ∆KeyPress⊂'RL'  ⍝ End
  ∆Process n.∆Form
- →GoToTidyUp 1≠n.Numbers.((Thumb-1)⊃Items)
+ →T.GoToTidyUp 1≠n.Numbers.((Thumb-1)⊃Items)
 
  n.Numbers ∆KeyPress⊂'LL'  ⍝ Home
  0 ∆Process n.∆Form
- →GoToTidyUp 20≠n.Numbers.((Thumb-1)⊃Items)
+ →T.GoToTidyUp 20≠n.Numbers.((Thumb-1)⊃Items)
 
  n.Numbers ∆KeyPress⊂'DC'  ⍝ ↓
  0 ∆Process n.∆Form
- →GoToTidyUp 19≠n.Numbers.((Thumb-1)⊃Items)
+ →T.GoToTidyUp 19≠n.Numbers.((Thumb-1)⊃Items)
 
  n.Numbers ∆KeyPress⊂'DS'  ⍝ PgDwn
  0 ∆Process n.∆Form
- →GoToTidyUp 18≠n.Numbers.((Thumb-1)⊃Items)
+ →T.GoToTidyUp 18≠n.Numbers.((Thumb-1)⊃Items)
 
  n.Numbers ∆KeyPress⊂'US'  ⍝ PgUp
  0 ∆Process n.∆Form
- →GoToTidyUp 19≠n.Numbers.((Thumb-1)⊃Items)
+ →T.GoToTidyUp 19≠n.Numbers.((Thumb-1)⊃Items)
  n.Numbers ∆KeyPress⊂'UC'  ⍝ ↑
  0 ∆Process n.∆Form
- →GoToTidyUp 20≠n.Numbers.((Thumb-1)⊃Items)
+ →T.GoToTidyUp 20≠n.Numbers.((Thumb-1)⊃Items)
 
- r←∆OK
+ r←T._OK
 
 ∆TidyUp:
  n.∆CloseForm

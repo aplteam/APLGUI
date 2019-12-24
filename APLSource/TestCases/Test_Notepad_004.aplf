@@ -1,6 +1,6 @@
  r←Test_Notepad_004(stopFlag batchFlag);VTV;parms;n;was;⎕TRAP
 ⍝ Establish (and exercise) the "onClose" callback function in all possible ways.
- r←∆Failed
+ r←T._Failed
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
 
 ⍝⍝⍝ Preconditions
@@ -30,9 +30,9 @@
  ∆Process n.∆Form
  ⎕NQ n.menubar.quit'Select'
  ∆Process n.∆Form
- →GoToTidyUp 1≠#.TEMP.wasCalled
- →GoToTidyUp n.∆Form.∆closed
- →GoToTidyUp 0={6::1 ⋄ 0⊣n.Form}⍬
+ →T.GoToTidyUp 1≠#.TEMP.wasCalled
+ →T.GoToTidyUp n.∆Form.∆closed
+ →T.GoToTidyUp 0={6::1 ⋄ 0⊣n.Form}⍬
 
  #.TEMP.wasCalled←0
  #.TEMP.MyCallback←{
@@ -42,9 +42,9 @@
 
  ⎕NQ n.menubar.quit'Select'
  ∆Process n.∆Form
- →GoToTidyUp 1≠#.TEMP.wasCalled
- →GoToTidyUp 0=n.∆Form.∆closed
- →GoToTidyUp 0={6::1 ⋄ 0⊣n.Form}⍬
+ →T.GoToTidyUp 1≠#.TEMP.wasCalled
+ →T.GoToTidyUp 0=n.∆Form.∆closed
+ →T.GoToTidyUp 0={6::1 ⋄ 0⊣n.Form}⍬
 
  #.TEMP.wasCalled←0
  parms.onClose←#.TEMP'MyCallback'
@@ -54,7 +54,7 @@
  ∆Process n.∆Form
  ⎕NQ n.menubar.quit'Select'
  ∆Process n.∆Form
- →GoToTidyUp 1≠#.TEMP.wasCalled
+ →T.GoToTidyUp 1≠#.TEMP.wasCalled
 
  was←⎕CS'#.TEMP'
  #.TEMP.wasCalled←0
@@ -70,8 +70,8 @@
  ⎕NQ n.menubar.quit'Select'
  2 #.APLGUI.TestCases.∆Process n.∆Form
  ⎕CS was
- →GoToTidyUp 1≠#.TEMP.wasCalled
- r←∆OK
+ →T.GoToTidyUp 1≠#.TEMP.wasCalled
+ r←T._OK
 
 ∆TidyUp:
  :Trap 0 ⋄ n.∆CloseForm ⋄ :EndTrap

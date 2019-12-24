@@ -1,6 +1,6 @@
  r←Test_DisplayButtons_002(stopFlag batchFlag);⎕TRAP;n;buttons;rf;focusHas;parms
 ⍝ Exercise "DisplayButtons". Button 2 (XML) is auto-pressed.
- r←∆Failed
+ r←T._Failed
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
 
  buttons←2 3⍴'PDF' 'HTML' 'XML' 'OK' 'Cancel' 'Don''t know'
@@ -12,8 +12,8 @@
  ⎕NQ rf'GotFocus' ⋄ ⎕NQ rf'KeyPress' 'ER'
  ⎕NQ n.∆Form'KeyPress' 'ER'
  ∆Process n.∆Form
- →GoToTidyUp'XML'≢n.∆buttonPressed.Caption
- r←∆OK
+ →T.GoToTidyUp'XML'≢n.∆buttonPressed.Caption
+ r←T._OK
 
 ∆TidyUp:
  n.∆CloseForm

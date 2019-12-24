@@ -1,9 +1,9 @@
  r←Test_TableEdit_021(stopFlag batchFlag);parms;n;⎕TRAP;table;rowTitles
 ⍝ Ctrl+C and Ctrl+V on a block of cells in "Scroll" mode.
- r←∆Inactive
+ r←T._Inactive
  :Return
 
- r←∆Failed
+ r←T._Failed
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
 
  table←⍉⊃('Obama' 'Bush' 'Clinton' 'Reagan' 'Kennedy' 'Carter')(1 0 1 0 1 1)
@@ -28,9 +28,9 @@
  n.Grid ∆KeyPress⊂'PT'
  ∆Process n.∆Form
  table[2 3;2 3]←2 2⍴'Bush' 0 'Clinton' 1
- →GoToTidyUp n.Grid.Values≢table
+ →T.GoToTidyUp n.Grid.Values≢table
 
- r←∆OK
+ r←T._OK
 
 ∆TidyUp:
  n.∆CloseForm

@@ -1,6 +1,6 @@
  r←Test_Input_Misc_021(stopFlag batchFlag);n;⎕TRAP;defMat;res;DT;parms
 ⍝ Exercise "Input" with `conformCancel←1`
- r←∆Failed
+ r←T._Failed
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
 
  DT←#.APLGUI.APLGUI.Enums.InputDataTypes
@@ -16,7 +16,7 @@
  n.Name ∆KeyPress'Kai Jaeger'
  ⎕NQ n.∆Cancel'Select'
  ∆Process n.∆Form
- →PassesIf ⍬≡n.∆result
- →PassesIf n.∆Form.∆closed
+ →T.PassesIf ⍬≡n.∆result
+ →T.PassesIf n.∆Form.∆closed
 
- r←∆OK
+ r←T._OK

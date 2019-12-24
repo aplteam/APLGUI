@@ -1,6 +1,6 @@
  r←Test_Menubar_004(stopFlag batchFlag);parms;n;TheForm;rf;⎕TRAP
 ⍝ Exercise the "Create" method with multiple status bar fields.
- r←∆Failed
+ r←T._Failed
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
 
  parms←#.APLGUI.APLGUI.Menubar.CreateParms
@@ -13,4 +13,4 @@
  n←#.APLGUI.APLGUI.Menubar.Create TheForm MenuSample parms(⎕NEW #.APLGUI.APLGUI.KeyCodes)
 
 
- r←∆OK
+ r←T._OK

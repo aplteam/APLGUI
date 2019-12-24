@@ -1,6 +1,6 @@
  r←Test_ProcessTool_016(stopFlag batchFlag);⎕TRAP;rf;data;parms;globalParms;n;code
 ⍝ Exercise "ProcessTool" with non-existing callback. In test mode a stub will be created automatically.
- r←∆Failed
+ r←T._Failed
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
 
  data←{⍵,[0.5]⍵}⍕¨10001+⍳10
@@ -17,14 +17,14 @@
  1 ⎕NQ n.menubar.editCallback'Select'
  {}1 ⎕NQ n.Btn_00'Select'
 
- →FailsIf 0=#.MyNS.⎕NC'OnHandler'
+ →T.FailsIf 0=#.MyNS.⎕NC'OnHandler'
 
  code←#.MyNS.⎕NR'OnHandler'
  code,←⊂'GLOBAL←1'
  code←#.MyNS.⎕FX code
 
  1 ⎕NQ n.Btn_00'Select'
- →FailsIf 0=#.MyNS.⎕NC'GLOBAL'
- →FailsIf 1≢#.MyNS.GLOBAL
+ →T.FailsIf 0=#.MyNS.⎕NC'GLOBAL'
+ →T.FailsIf 1≢#.MyNS.GLOBAL
 
- r←∆OK
+ r←T._OK

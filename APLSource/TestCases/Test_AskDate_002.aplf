@@ -1,6 +1,6 @@
  r←Test_AskDate_002(stopFlag batchFlag);myGuiParms;parms;n;⎕TRAP
 ⍝ Exercise the "AskForDate" method with defaults parameters only.
- r←∆Failed
+ r←T._Failed
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
 
  myGuiParms←#.APLGUI.APLGUI.APLGuiGlobalParms.CreateDefaults
@@ -12,8 +12,8 @@
  parms.timeout←0.1
  parms.date←2015 5 30
 
- →GoToTidyUp 1(2015 5 30)≢parms myGuiParms #.APLGUI.APLGUI.Request.AskForDate''
- r←∆OK
+ →T.GoToTidyUp 1(2015 5 30)≢parms myGuiParms #.APLGUI.APLGUI.Request.AskForDate''
+ r←T._OK
 
 ∆TidyUp:
  :Trap 0 ⋄ n.∆CloseForm ⋄ :EndTrap

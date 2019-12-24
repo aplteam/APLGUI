@@ -1,6 +1,6 @@
  r←Test_Notepad_006(stopFlag batchFlag);VTV;parms;n;was;⎕TRAP;buffer
 ⍝ Establish (and exercise) the "onFileSave" callback function in all possible ways.
- r←∆Failed
+ r←T._Failed
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
 
 ⍝⍝⍝ Preconditions
@@ -20,15 +20,15 @@
  n←parms #.APLGUI.APLGUI.Notepad.Create VTV #.APLGUI.APLGUI.Notepad.CreateParms
  n.Edit ∆KeyPress'Kai Jaeger'
  ∆Process n.∆Form
- n.∆filename←#.FilesAndDirs.GetTempFilename''
+ n.∆filename←##.FilesAndDirs.GetTempFilename''
  ⎕NQ n.menubar.save'Select'
  ∆Process n.∆Form
  ⎕NQ n.menubar.quit'Select'
  ∆Process n.∆Form
 
- buffer←#.APLTreeUtils.ReadUtf8File n.∆filename
- →GoToTidyUp'Kai Jaeger'{⍺≢(⍴⍺)↑⍵}↑buffer
- r←∆OK
+ buffer←##.APLTreeUtils.ReadUtf8File n.∆filename
+ →T.GoToTidyUp'Kai Jaeger'{⍺≢(⍴⍺)↑⍵}↑buffer
+ r←T._OK
 
 ∆TidyUp:
  :Trap 0 ⋄ n.∆CloseForm ⋄ :EndTrap

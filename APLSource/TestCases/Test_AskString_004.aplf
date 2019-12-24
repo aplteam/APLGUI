@@ -1,6 +1,6 @@
  r←Test_AskString_004(stopFlag batchFlag);myGuiParms;parms;msg;n;⎕TRAP
 ⍝ Exercise the "Create" method with some props.
- r←∆Failed
+ r←T._Failed
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
 
  myGuiParms←#.APLGUI.APLGUI.APLGuiGlobalParms.CreateDefaults
@@ -19,15 +19,15 @@
 
  n←myGuiParms parms(#.APLGUI.APLGUI.Request.CreateParmsForString ∆Ask)''
  ⎕DL 0.2
- →GoToTidyUp 0=n.Progressbar.Visible
+ →T.GoToTidyUp 0=n.Progressbar.Visible
  ⎕NQ n.Input'GotFocus'
  ⎕NQ n.Btn1'GotFocus'
  2 ∆Process n.∆Form
- →GoToTidyUp 1=n.Progressbar.Visible
+ →T.GoToTidyUp 1=n.Progressbar.Visible
  ⎕NQ n.Btn1'Select'
- →GoToTidyUp~0∊⍴n.∆result
- →GoToTidyUp 0≠n.∆OK
- r←∆OK
+ →T.GoToTidyUp~0∊⍴n.∆result
+ →T.GoToTidyUp 0≠n.∆OK
+ r←T._OK
 
 ∆TidyUp:
  n.∆CloseForm

@@ -1,6 +1,6 @@
  r←Test_ProcessTool_008(stopFlag batchFlag);rc;parms;n;list;⎕TRAP
 ⍝ Exercise "ProcessTool". There is no "Process" button. Processing is triggered by "Ctrl+Enter"
- r←∆Failed
+ r←T._Failed
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
 
  parms←#.APLGUI.APLGUI.ProcessTool.CreateParms
@@ -15,8 +15,8 @@
  n←parms #.APLGUI.APLGUI.ProcessTool.Create list'∆HarvestSelections'
  ⎕DL 0.3
  1 ⎕NQ n.List'KeyPress' '' 10 13 2  ⍝ That is Ctrl+Enter; better than TC: that might be re-assigned!
- →GoToTidyUp n.∆result≢,⊂list[3 5-1;]
- →GoToTidyUp 1≠⍴n.∆buttons
- r←∆OK
+ →T.GoToTidyUp n.∆result≢,⊂list[3 5-1;]
+ →T.GoToTidyUp 1≠⍴n.∆buttons
+ r←T._OK
 ∆TidyUp:
  n.∆CloseForm

@@ -1,6 +1,6 @@
  r←Test_CreateButtonForm_006(stopFlag batchFlag);myGuiParms;parms;n;⎕TRAP
 ⍝ Exercise "Dialog.Create": width test; the "size" parameter defines the width
- r←∆Failed
+ r←T._Failed
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
 
  myGuiParms←#.APLGUI.APLGUI.APLGuiGlobalParms.CreateDefaults
@@ -18,9 +18,9 @@
  n←#.APLGUI.APLGUI.Dialogs.HandleFocus n
  n(#.APLGUI.APLGUI.Dialogs.CreateAutoPressTimer)←parms.timeout
  n.∆Form.Wait
- →(0≡PassesIf 500=n.∆Form.Size[1])/∆TidyUp
+ →(0≡T.PassesIf 500=n.∆Form.Size[1])/∆TidyUp
 
 ∆TidyUp:
  n.∆CloseForm
 
- r←∆OK
+ r←T._OK

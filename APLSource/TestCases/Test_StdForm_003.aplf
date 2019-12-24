@@ -1,6 +1,6 @@
  r←Test_StdForm_003(stopFlag batchFlag);⎕TRAP;parms;n;globalParms;MyGuiParms
 ⍝ Bring up a form up and test the progress bar
- r←∆Failed
+ r←T._Failed
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
 
  CreateGlobalParms
@@ -22,4 +22,4 @@
  ⎕DL 1
  ⎕NQ n.∆Form'Close'
 
- r←∆OK
+ r←T._OK

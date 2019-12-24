@@ -1,13 +1,13 @@
  r←Test_IE_002(stopFlag batchFlag);⎕TRAP;ref;n;filename;html
 ⍝ Test IE: view an HTML file with links to sub pages
- r←∆Failed
+ r←T._Failed
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
 
  #.⎕SHADOW'TEMP'
  'TEMP'#.⎕NS''
  ref←∆Create_IEcontainer #.TEMP
  n←#.APLGUI.APLGUI.IE.CreateIE ref
- filename←(#.FilesAndDirs.PWD,'\HTML\A\index.html')
+ filename←(##.FilesAndDirs.PWD,'\HTML\A\index.html')
  #.APLGUI.APLGUI.IE.ShowHtmlFile n.IEobject filename
  ⎕DL 0.5
  :Trap 0
@@ -15,9 +15,9 @@
  :Else
      html←¯1
  :EndTrap
- →FailsIf' '≠1↑0⍴html
- →FailsIf 0∊⍴html
- r←∆OK
+ →T.FailsIf' '≠1↑0⍴html
+ →T.FailsIf 0∊⍴html
+ r←T._OK
 
 ∆TidyUp:
  :Trap 0 ⋄ n.∆container.Close ⋄ :EndTrap

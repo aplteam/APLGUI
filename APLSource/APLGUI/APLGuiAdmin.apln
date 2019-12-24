@@ -1,12 +1,14 @@
 :Namespace APLGuiAdmin
 
     ∇ r←Version
-      r←(⍕⎕THIS.##)'0.21.1.41' '2019-11-01'
+      r←(⍕⎕THIS.##)'0.21.2.49' '2019-12-24'
     ∇
 
     ∇ r←History 
-      ⍝ * 0.21.1
-      ⍝   * Measurements put in place to find dependencies. This is fluid until the package manager arrives.
+      ⍝ * 0.21.2
+      ⍝   * Bug fix in `APLGuiUtils.GetRefTo`/
+      ⍝   * `OptionsTool` visually polished
+      ⍝   * Invalid addressing ofm APLTreeUtils etc. fixed.
       ⍝\\
       ⍝ For information regarding older version see <https://github.com/aplteam/APLGUI/releases>
     ∇
@@ -102,7 +104,7 @@
     ∇
 
     ∇ TransFormParms fullName;class;fns;body;code;b;A;headers;name;children;helpPath;this;text;child;path;buf
-      A←##.##.APLTreeUtils
+      A←##.APLTreeUtils
       (class fns)←'.'A.SplitPath fullName
       class←¯1↓class
       code←⎕SRC⍎class

@@ -1,6 +1,6 @@
  r←Test_Busy_003(stopFlag batchFlag);n;i;⎕TRAP;parms;globalParms;msg;noOfThreads
 ⍝ Exercise `Busy` with "centerIn" set.
- r←∆Failed
+ r←T._Failed
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
 
  #.⎕SHADOW'TEMP'
@@ -25,8 +25,8 @@
      n #.APLGUI.APLGUI.Busy.SetPercent 10×i
  :EndFor
  n.∆CloseForm
- →GoToTidyUp noOfThreads≠⍴⎕TNUMS
- r←∆OK
+ →T.GoToTidyUp noOfThreads≠⍴⎕TNUMS
+ r←T._OK
 
 ∆TidyUp:
  :Trap 0 ⋄ {}#.TEMP.f.Close ⍬ ⋄ :EndTrap

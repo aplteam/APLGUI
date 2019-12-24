@@ -1,6 +1,6 @@
  r←Test_ProcessTool_012(stopFlag batchFlag);rc;parms;n;⎕TRAP;buffer;data
 ⍝ Exercise "ProcessTool". Suppress "Sort by column" and checks whether it is honoured.
- r←∆Failed
+ r←T._Failed
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
 
  parms←#.APLGUI.APLGUI.ProcessTool.CreateParms
@@ -15,10 +15,10 @@
  n←parms #.APLGUI.APLGUI.ProcessTool.Create buffer'∆DealWithData'
  ⎕DL 0.3
  ⎕NQ n.List'ColumnClick' 1 1 0
- →PassesIf buffer≡¯1↓[1]n.List.(Items,ReportInfo)
- →PassesIf n.∆parms.data≡data
+ →T.PassesIf buffer≡¯1↓[1]n.List.(Items,ReportInfo)
+ →T.PassesIf n.∆parms.data≡data
 
- r←∆OK
+ r←T._OK
 
 ∆TidyUp:
  n.∆CloseForm

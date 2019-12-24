@@ -1,6 +1,6 @@
  r←Test_SelectionTool_010(stopFlag batchFlag);parms;n;v;data;⎕TRAP
 ⍝ Exercise "SelectionTool. Shows several columns
- r←∆Failed
+ r←T._Failed
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
 
  parms←#.APLGUI.APLGUI.SelectionTool.CreateParms
@@ -14,8 +14,8 @@
  n←parms #.APLGUI.APLGUI.SelectionTool.Create data
  ∆Process n.∆Form
  ⎕DQ n.∆Form
- →GoToTidyUp n.∆result≢(⍴n.∆result)↑1
- r←∆OK
+ →T.GoToTidyUp n.∆result≢(⍴n.∆result)↑1
+ r←T._OK
 
 ∆TidyUp:
  n.∆CloseForm

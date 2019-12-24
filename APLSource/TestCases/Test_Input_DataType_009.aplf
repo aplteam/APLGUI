@@ -1,6 +1,6 @@
  r←Test_Input_DataType_009(stopFlag batchFlag);n;⎕TRAP;defMat;res;DT;globalParms;parms;props;month;values;colors;Okay
 ⍝ Exercise "Input" with data type "Numeric".
- r←∆Failed
+ r←T._Failed
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
 
  DT←#.APLGUI.APLGUI.Enums.InputDataTypes
@@ -20,14 +20,14 @@
  n.Number1.SelText←0 20
  n.Number1 ∆KeyPress'456'
  0 ∆Process n.∆Form
- →GoToTidyUp n.Number1.Value≠456
+ →T.GoToTidyUp n.Number1.Value≠456
 
  ⎕NQ n.∆OK'Select'
  0 ∆Process n.∆Form
- →GoToTidyUp 456≠↑n.∆result[n.∆result[;0]⍳⊂'Number1';1]
- →GoToTidyUp 656.23≠+/n.∆result[;1]
+ →T.GoToTidyUp 456≠↑n.∆result[n.∆result[;0]⍳⊂'Number1';1]
+ →T.GoToTidyUp 656.23≠+/n.∆result[;1]
 
- r←∆OK
+ r←T._OK
 
 ∆TidyUp:
  n.∆CloseForm

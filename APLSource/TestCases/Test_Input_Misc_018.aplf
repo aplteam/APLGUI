@@ -1,7 +1,7 @@
  r←Test_Input_Misc_018(stopFlag batchFlag);n;⎕TRAP;res;DT;double;parms;props;defMat1;defMat2;this;that;counter;flag
 ⍝ Exercise "Input" with tabs and tries to switch tabs with keystroke from within all data types.
 ⍝ This is done because some native controls may consume <ctrl+tab> and <ctrl+shift+tab>.
- r←∆Failed
+ r←T._Failed
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
 
  DT←#.APLGUI.APLGUI.Enums.InputDataTypes
@@ -53,10 +53,10 @@
      ∆Process n.∆Form
      :Repeat
          :Trap 999
-             →GoToTidyUp 0 1≢n.(Tab1 Tab2).State
+             →T.GoToTidyUp 0 1≢n.(Tab1 Tab2).State
              flag←1
          :Else
-             →GoToTidyUp 5<counter←counter+1
+             →T.GoToTidyUp 5<counter←counter+1
              0.01 ∆Process n.∆Form
          :EndTrap
      :Until flag
@@ -65,16 +65,16 @@
      flag←counter←0
      :Repeat
          :Trap 999
-             →GoToTidyUp 1 0≢n.(Tab1 Tab2).State
+             →T.GoToTidyUp 1 0≢n.(Tab1 Tab2).State
              flag←1
          :Else
-             →GoToTidyUp 5<counter←counter+1
+             →T.GoToTidyUp 5<counter←counter+1
              0.01 ∆Process n.∆Form
          :EndTrap
      :Until flag
  :EndFor
 
- r←∆OK
+ r←T._OK
 
 ∆TidyUp:
  n.∆CloseForm

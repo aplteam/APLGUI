@@ -1,6 +1,6 @@
  r←Test_CreateButtonForm_011(stopFlag batchFlag);myGuiParms;parms;n;msg;⎕TRAP;oldPixelSettings
 ⍝ Exercise "Dialog.Create": height test; the (nested) question defines the height
- r←∆Failed
+ r←T._Failed
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
 
  oldPixelSettings←2035⌶'RealPixel'
@@ -17,7 +17,7 @@
  :If ⍬ ⍬≡parms.posn
      {}n.∆Form #.APLGUI.APLGUI.APLGuiHelpers.CenterIn myGuiParms.centerIn{(0∊⍴⍵):⍺ ⋄ ⍵}parms.centerIn
  :EndIf
- r←∆OK
+ r←T._OK
 
 ∆TidyUp:
  n.∆CloseForm

@@ -1,6 +1,6 @@
  r←Test_Input_DataType_018(stopFlag batchFlag);n;⎕TRAP;defMat;res;DT;txt
 ⍝ Exercise "Input" with a "Notepad".
- r←∆Failed
+ r←T._Failed
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
 
  DT←#.APLGUI.APLGUI.Enums.InputDataTypes
@@ -11,7 +11,7 @@
 
  n←#.APLGUI.APLGUI.Input.Create defMat ⍬ ⍬
 
- r←∆OK
+ r←T._OK
 
 ∆TidyUp:
  n.∆CloseForm

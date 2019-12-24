@@ -1,6 +1,6 @@
  r←Test_Input_Callbacks_002(stopFlag batchFlag);n;⎕TRAP;defMat;res;DT;globalParms;parms
 ⍝ Exercise "Input" with an "onHelp" callback
- r←∆Failed
+ r←T._Failed
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
 
  DT←#.APLGUI.APLGUI.Enums.InputDataTypes
@@ -29,9 +29,9 @@
  0 ∆Process n.∆Form
 
  1 ⎕NQ n.∆Help'Select'
- →GoToTidyUp 1≠#.TEMP.flag
+ →T.GoToTidyUp 1≠#.TEMP.flag
 
- r←∆OK
+ r←T._OK
 
 ∆TidyUp:
  n.∆CloseForm

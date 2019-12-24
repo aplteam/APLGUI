@@ -1,6 +1,6 @@
  r←Test_SelectionTool_003(stopFlag batchFlag);parms;n;v;⎕TRAP
 ⍝ Exercise "SelectionTool.Create" with "autoPress"
- r←∆Failed
+ r←T._Failed
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
 
  parms←#.APLGUI.APLGUI.SelectionTool.CreateParms
@@ -15,16 +15,16 @@
  parms.timeout←0.1
  n←parms #.APLGUI.APLGUI.SelectionTool.Create⍕¨1+⍳10
  ∆Process n.∆Form
- →GoToTidyUp(,4)≢#.APLTreeUtils.Where n.List.SelItems
- →GoToTidyUp v≢n.StatusField1.Text
+ →T.GoToTidyUp(,4)≢##.APLTreeUtils.Where n.List.SelItems
+ →T.GoToTidyUp v≢n.StatusField1.Text
  0.5 ∆Process n.∆Form
- →GoToTidyUp 1≠{6::1 ⋄ 0⊣⍵.Interval}n.Timer
- →GoToTidyUp 4≠#.APLTreeUtils.Where n.List.SelItems
+ →T.GoToTidyUp 1≠{6::1 ⋄ 0⊣⍵.Interval}n.Timer
+ →T.GoToTidyUp 4≠##.APLTreeUtils.Where n.List.SelItems
  2 ⎕NQ n.Btn_00'Select'
  ⎕DL 0.5
- →GoToTidyUp n.∆buttons[0]≢n.∆buttonPressed
- →GoToTidyUp n.∆result≢parms.default
- r←∆OK
+ →T.GoToTidyUp n.∆buttons[0]≢n.∆buttonPressed
+ →T.GoToTidyUp n.∆result≢parms.default
+ r←T._OK
 
 ∆TidyUp:
  n.∆CloseForm

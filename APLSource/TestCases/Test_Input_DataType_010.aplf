@@ -1,6 +1,6 @@
  r←Test_Input_DataType_010(stopFlag batchFlag);n;⎕TRAP;defMat;res;DT;globalParms;parms;props;month;values;colors;Okay;msg;list
 ⍝ Exercise "Input" with data type "YesNo".
- r←∆Failed
+ r←T._Failed
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
 
  DT←#.APLGUI.APLGUI.Enums.InputDataTypes
@@ -28,9 +28,9 @@
  n.Options_check_03 ∆KeyPress' '
  0 ∆Process n.∆Form
 
- →GoToTidyUp 0 1 0 1≢list.State
+ →T.GoToTidyUp 0 1 0 1≢list.State
 
- r←∆OK
+ r←T._OK
 
 ∆TidyUp:
  n.∆CloseForm

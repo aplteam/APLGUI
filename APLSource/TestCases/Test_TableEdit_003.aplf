@@ -1,9 +1,9 @@
  r←Test_TableEdit_003(stopFlag batchFlag);parms;n;⎕TRAP;table;rowTitles
 ⍝ Inserting rows, including syncing with "data" property.
- r←∆Inactive
+ r←T._Inactive
  :Return
 
- r←∆Failed
+ r←T._Failed
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
 
 ⍝⍝⍝ Preconditions
@@ -20,22 +20,22 @@
 
  n←#.APLGUI.APLGUI.Table.Create table #.APLGUI.APLGUI.APLGuiGlobalParms.CreateDefaults parms
  #.APLGUI.APLGUI.Table.ExecPrivateFns'RowInsert'n             ⍝ Insert one row before the first one
- →GoToTidyUp(⍴n.Grid.Values)≢1 0+⍴table
- →GoToTidyUp 0 0≢n.∆data[0;]                        ⍝ Is ∆data kept in sync?
- →GoToTidyUp n.Grid.Values[0;2]≢2 ⎕NQ #'DateToIDN'(3↑⎕TS)  ⍝ Inserted line should carry today's date
- →GoToTidyUp(⌊n.Grid.Values[0;3]÷10)≢⌊(24 60 60⊥3↑3↓⎕TS)÷10 ⍝ Inserted line should carry "now" as time - roughly
+ →T.GoToTidyUp(⍴n.Grid.Values)≢1 0+⍴table
+ →T.GoToTidyUp 0 0≢n.∆data[0;]                        ⍝ Is ∆data kept in sync?
+ →T.GoToTidyUp n.Grid.Values[0;2]≢2 ⎕NQ #'DateToIDN'(3↑⎕TS)  ⍝ Inserted line should carry today's date
+ →T.GoToTidyUp(⌊n.Grid.Values[0;3]÷10)≢⌊(24 60 60⊥3↑3↓⎕TS)÷10 ⍝ Inserted line should carry "now" as time - roughly
 
  #.APLGUI.APLGUI.Table.ExecPrivateFns'RowInsert'(n(↑⍴n.Grid.Values)1) ⍝ Insert one row after the last one
- →GoToTidyUp(⍴n.Grid.Values)≢2 0+⍴table
- →GoToTidyUp 0 0≢n.∆data[¯1+↑⍴n.∆data;]             ⍝ Is ∆data kept in sync?
+ →T.GoToTidyUp(⍴n.Grid.Values)≢2 0+⍴table
+ →T.GoToTidyUp 0 0≢n.∆data[¯1+↑⍴n.∆data;]             ⍝ Is ∆data kept in sync?
 
  #.APLGUI.APLGUI.Table.ExecPrivateFns'RowInsert'(n 2 2)       ⍝ Insert two rows after the third one
- →GoToTidyUp(⍴n.Grid.Values)≢4 0+⍴table
- →GoToTidyUp n.Grid.Values[;1]≢0 1 0 0 0 1 0 1 1 0
- →GoToTidyUp(2 2⍴0 0)≢n.∆data[2+⍳2;]
- →GoToTidyUp≢/↑¨⍴¨n.Grid.Values n.∆data             ⍝ Is ∆data kept in sync?
+ →T.GoToTidyUp(⍴n.Grid.Values)≢4 0+⍴table
+ →T.GoToTidyUp n.Grid.Values[;1]≢0 1 0 0 0 1 0 1 1 0
+ →T.GoToTidyUp(2 2⍴0 0)≢n.∆data[2+⍳2;]
+ →T.GoToTidyUp≢/↑¨⍴¨n.Grid.Values n.∆data             ⍝ Is ∆data kept in sync?
 
- r←∆OK
+ r←T._OK
 
 ∆TidyUp:
  n.∆CloseForm

@@ -1,6 +1,6 @@
  r←Test_Input_DataType_016(stopFlag batchFlag);n;⎕TRAP;defMat;res;DT;mat
 ⍝ Exercise "Input" with data type "ListView".
- r←∆Failed
+ r←T._Failed
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
 
  DT←#.APLGUI.APLGUI.Enums.InputDataTypes
@@ -8,16 +8,16 @@
  defMat←0 7⍴''
  defMat⍪←'Tab1' 'First' ''DT.Tab 0 1 1
  defMat⍪←'LV1' 'List'('Peter' 'Paul' 'Mary')DT.ListView(3 30)1 1
- mat←{(' '~⍨¨↓⍵),[0.5]↓#.APLTreeUtils.FormatDateTime⊃(⎕AT ⍵)[;1]}⎕NL 3
+ mat←{(' '~⍨¨↓⍵),[0.5]↓##.APLTreeUtils.FormatDateTime⊃(⎕AT ⍵)[;1]}⎕NL 3
  defMat⍪←'LV2' 'Table'mat DT.ListView(20 50)1 1
  defMat⍪←'Tab2' 'First' ''DT.Tab 0 1 1
  defMat⍪←'LV3' 'Table'mat DT.ListView(20 60)1 1
 
  n←#.APLGUI.APLGUI.Input.Create defMat ⍬ ⍬
 
- →GoToTidyUp 3≠⍴n.∆GetRefs'ListView'
+ →T.GoToTidyUp 3≠⍴n.∆GetRefs'ListView'
 
- r←∆OK
+ r←T._OK
 
 ∆TidyUp:
  n.∆CloseForm

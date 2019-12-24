@@ -1,7 +1,7 @@
  r←Test_SelectionTool_016(stopFlag batchFlag);parms;n;v;data;⎕TRAP
 ⍝ Preselect some item with checkboxes and then performs a sort by column. Is result still usable?
 ⍝ "style" defaults to "single" but is ignored when "checkboxes"=1.
- r←∆Failed
+ r←T._Failed
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
 
  parms←#.APLGUI.APLGUI.SelectionTool.CreateParms
@@ -17,9 +17,9 @@
  n←parms #.APLGUI.APLGUI.SelectionTool.Create data
  1 ⎕NQ n.List'ColumnClick' 3 1 0
  ⎕DQ'.'
- →PassesIf(parms.default⌿data[;0])≡n.∆result⌿data[;0]
+ →T.PassesIf(parms.default⌿data[;0])≡n.∆result⌿data[;0]
 
- r←∆OK
+ r←T._OK
 
 ∆TidyUp:
  n.∆CloseForm

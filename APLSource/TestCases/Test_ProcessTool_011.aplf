@@ -1,6 +1,6 @@
  r←Test_ProcessTool_011(stopFlag batchFlag);rc;parms;n;⎕TRAP;buffer
 ⍝ Exercise "ProcessTool". Specifies additional data via the "data" property and performs a column sort.
- r←∆Failed
+ r←T._Failed
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
 
  parms←#.APLGUI.APLGUI.ProcessTool.CreateParms
@@ -14,9 +14,9 @@
  n←parms #.APLGUI.APLGUI.ProcessTool.Create buffer'∆DealWithData'
  ⎕DL 0.3
  ⎕NQ n.List'ColumnClick' 1 1 0
- →PassesIf(,[0.5]n.List.Items)≡n.∆data
+ →T.PassesIf(,[0.5]n.List.Items)≡n.∆data
 
- r←∆OK
+ r←T._OK
 
 ∆TidyUp:
  n.∆CloseForm

@@ -1,6 +1,6 @@
  r←Test_YesOrNo_001(stopFlag batchFlag);myGuiParms;⎕TRAP;n
 ⍝ Exercise "YesOrNo" with no specific parameters; that's why this test needs a user.
- r←∆Failed
+ r←T._Failed
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
 
  myGuiParms←#.APLGUI.APLGUI.APLGuiGlobalParms.CreateDefaults
@@ -10,4 +10,4 @@
  ⎕NQ n.∆Form'Close'
  ⎕DL 0.2
 
- r←∆OK
+ r←T._OK

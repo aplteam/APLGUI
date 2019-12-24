@@ -1,6 +1,6 @@
  r←Test_CreateButtonForm_004(stopFlag batchFlag);myGuiParms;parms;n;⎕TRAP
 ⍝ Exercise "Dialog.Create": width test; the status bar message defines the width.
- r←∆Failed
+ r←T._Failed
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
 
  myGuiParms←#.APLGUI.APLGUI.APLGuiGlobalParms.CreateDefaults
@@ -18,9 +18,9 @@
  :If ⍬ ⍬≡parms.posn
      {}n.∆Form #.APLGUI.APLGUI.APLGuiHelpers.CenterIn myGuiParms.centerIn{(0∊⍴⍵):⍺ ⋄ ⍵}parms.centerIn
  :EndIf
- →(0≡PassesIf{(200<⍵)∧(300>⍵)}n.∆Form.Size[1])/∆TidyUp
+ →(0≡T.PassesIf{(200<⍵)∧(300>⍵)}n.∆Form.Size[1])/∆TidyUp
 
 ∆TidyUp:
  n.∆CloseForm
 
- r←∆OK
+ r←T._OK

@@ -6,7 +6,7 @@
 ⍝ Author: Kai Jaeger ⋄ Copyright: APL Team Ltd
 
 
-    :Include ##.##.APLTreeUtils
+    :Include ##.APLTreeUtils
     :Include APLGuiUtils
 
     ⎕IO←0 ⋄ ⎕ml←3
@@ -33,7 +33,7 @@
       (globalParms parms)←CreateParms GetParms x
       parms←CheckParmsForProgressbarAndStatusbar parms
       'Invalid: style'⎕SIGNAL APLGuiError/⍨~(⊂Lowercase parms.style)∊##.Enums.OptionsStyles.(radio check)
-      'Invalid: "default"; must be Boolean'⎕signal 11/⍨(¯1≢parms.default)∧~∧/(parms.default)∊0 1
+      'Invalid: "default"; must be Boolean'⎕SIGNAL 11/⍨(¯1≢parms.default)∧~∧/(parms.default)∊0 1
       parms2←CopyNamespace parms
       parms2.(fontAPL fontInput fontLabel fontStandard)←parms.(fontAPL fontInput fontLabel fontStandard)
       parms2.(sysMenu maxButton minButton sizeable)←1
@@ -244,9 +244,9 @@
           ∆,←⊂'Caption'(this,' ')
           ∆,←⊂'Attach'(4⍴'Top' 'Left')
           n.Options,←n.Group.⎕NEW'Button'∆
-          n.Options[i].Posn←(n.∆Vgap+i×n.Options[i].Size[0]),n.∆Hgap
           i+←1
       :EndFor
+      n.Options.Posn←(n.∆Vgap{⍺+(+\⍵)-⍵[0]}(≢n.Options)⍴↑n.Options[0].Size),¨n.∆Hgap
       2 ⎕NQ n.Group'Configure',n.Group.Posn,((↑n.Options).Posn[0]+0⊃+⌿⊃(↑¯1↑n.Options).(Posn Size)),20+(2×n.∆Hgap)+⌈/1⊃¨n.Options.Size
       n.Options.Event←⊂RefreshEvent'OnRefreshEvent'n
       n.Options.onKeyPress←⊂'OnKeyPressInOptions'
@@ -344,7 +344,7 @@
 ⍝ "ctrl" must be the "last" control (but the push buttons) on the form.
       r←⍬
       needed←n.(∆initialVgap ∆Hgap)++⌿⊃ctrl.(Posn Size)
-      needed[1]⌈←n.Info.Size[1]+n.∆Hgap                     ⍝ Take the "Info" field into account
+      needed[1]⌈←({1=≡⍵:1⊃⍵ ⋄ ⌈/1⊃¨⍵}n.Info.Size)+2×n.∆Hgap ⍝ Take the "Info" field into account
       needed[1]⌈←n.∆Hgap+1⊃↑↑¯1↑+/¨n.∆buttons.(Posn Size)   ⍝ Take right-most button into account
       corr←(n.∆Vgap×0≠≢n.∆parms.info)+RefToWinSys.(GetSystemMetrics SM_CYCAPTION)      ⍝ Menubar ...
       corr+←RefToWinSys.(GetSystemMetrics SM_CYMENU)        ⍝ ... gymnastics.
@@ -407,4 +407,3 @@
     ∇
 
 :EndClass
-

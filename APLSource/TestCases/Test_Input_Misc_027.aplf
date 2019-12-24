@@ -1,6 +1,6 @@
  r←Test_Input_Misc_027(stopFlag batchFlag);n;⎕TRAP;defMat;res;DT;parms;F;menubar;txt
 ⍝ Exercise "Input" with a multi-line label that is a URL.
- r←∆Failed
+ r←T._Failed
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
 
  DT←#.APLGUI.APLGUI.Enums.InputDataTypes
@@ -14,11 +14,11 @@
  parms←#.APLGUI.APLGUI.Input.CreateParms
  parms.testMode←1
  n←#.APLGUI.APLGUI.Input.Create defMat parms ⍬
- →GoToTidyUp~(⊂0 0 255)∊n.URL.FCol
- →GoToTidyUp 0 600 0≢n.URL.FontObj.Weight
- →GoToTidyUp 0 1 0≢n.URL.FontObj.Underline
- →GoToTidyUp'https://'≢{⍺ ⍺⍺(⍴,⍺)↑⍵}1⊃n.URL.Caption
- r←∆OK
+ →T.GoToTidyUp~(⊂0 0 255)∊n.URL.FCol
+ →T.GoToTidyUp 0 600 0≢n.URL.FontObj.Weight
+ →T.GoToTidyUp 0 1 0≢n.URL.FontObj.Underline
+ →T.GoToTidyUp'https://'≢{⍺ ⍺⍺(⍴,⍺)↑⍵}1⊃n.URL.Caption
+ r←T._OK
 
 ∆TidyUp:
  :Trap 0 ⋄ {}n.∆CloseForm ⋄ :EndTrap

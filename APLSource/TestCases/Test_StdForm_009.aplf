@@ -1,6 +1,6 @@
  r←Test_StdForm_009(stopFlag batchFlag);⎕TRAP;parms;n;appName;formName;rk;posn;size;rk2;globalParms;MyGuiParms
 ⍝ Check whether Posn and Size got saved in the Registry properly. "regKey2" is set and must be used.
- r←∆Failed
+ r←T._Failed
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
 
  CreateGlobalParms
@@ -11,8 +11,8 @@
  rk2←rk,'\Foo'
 
 ⍝⍝⍝ Preconditions - just in case of any leftovers
- :If #.WinReg.DoesKeyExist rk
-     #.WinReg.DeleteSubKey rk2
+ :If ##.WinReg.DoesKeyExist rk
+     ##.WinReg.DeleteSubKey rk2
  :EndIf
 
  parms←#.APLGUI.APLGUI.StdForm.CreateParms
@@ -27,9 +27,9 @@
  ⎕NQ n.∆Form'Close'
  1 ∆Process n.∆Form
 
- →GoToTidyUp posn size≢⍎¨#.WinReg.GetValue¨(rk2,'\posn')(rk2,'\size')
- r←∆OK
+ →T.GoToTidyUp posn size≢⍎¨##.WinReg.GetValue¨(rk2,'\posn')(rk2,'\size')
+ r←T._OK
 
 ∆TidyUp:
- #.WinReg.DeleteSubKey rk2
- #.WinReg.DeleteSubKey rk
+ ##.WinReg.DeleteSubKey rk2
+ ##.WinReg.DeleteSubKey rk

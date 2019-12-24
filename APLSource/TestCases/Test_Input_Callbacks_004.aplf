@@ -1,6 +1,6 @@
  r←Test_Input_Callbacks_004(stopFlag batchFlag);n;⎕TRAP;defMat;res;DT;globalParms;parms;printerList
 ⍝ Exercise "Input" with on "onInitial" callback. See also Test_Input_Callbacks_007 and Test_Input_Callbacks_008.
- r←∆Failed
+ r←T._Failed
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
 
  DT←#.APLGUI.APLGUI.Enums.InputDataTypes
@@ -26,9 +26,9 @@
 
  n←#.APLGUI.APLGUI.Input.Create defMat globalParms parms
  0 ∆Process n.∆Form
- →GoToTidyUp #.TEMP.flag=0
+ →T.GoToTidyUp #.TEMP.flag=0
 
- r←∆OK
+ r←T._OK
 
 ∆TidyUp:
  n.∆CloseForm

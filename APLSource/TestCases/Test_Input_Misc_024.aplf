@@ -1,6 +1,6 @@
  r←Test_Input_Misc_024(stopFlag batchFlag);n;⎕TRAP;defMat;res;DT;parms;F
 ⍝ Exercise "Input" with a user-defined menubar that replaces the default menubar
- r←∆Failed
+ r←T._Failed
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
 
  DT←#.APLGUI.APLGUI.Enums.InputDataTypes
@@ -13,10 +13,10 @@
  parms.menubar←'[Edit] {edit}' ' Cut=Ctrl+X : <cut> {cut}' ' Copy=Ctrl+C : <copy> {copy}' ' Paste=Ctrl+V : <paste> {paste}'
  parms.menubar,←'[View] {view}' ' HTML=F11 : OnView {html}' ' XML=F12 : OnView {xml}'
  n←#.APLGUI.APLGUI.Input.Create defMat parms ⍬
- →GoToTidyUp 2≠≢n.menubar.∆List'Menu'
- →GoToTidyUp 5≠≢n.menubar.∆List'MenuItem'
+ →T.GoToTidyUp 2≠≢n.menubar.∆List'Menu'
+ →T.GoToTidyUp 5≠≢n.menubar.∆List'MenuItem'
 
- r←∆OK
+ r←T._OK
 
 ∆TidyUp:
  :Trap 0 ⋄ {}n.∆CloseForm ⋄ :EndTrap

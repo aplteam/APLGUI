@@ -1,15 +1,15 @@
  r←Test_OptionsTool_004(stopFlag batchFlag);⎕TRAP;parms;n
 ⍝ Exercise "OptionsTool" with invalid `default`.
- r←∆Failed
+ r←T._Failed
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
 
  parms←#.APLGUI.APLGUI.OptionsTool.CreateParms
  parms.default←1 2
  :Trap 11
      n←parms #.APLGUI.APLGUI.OptionsTool.Create(⍕¨1+⍳10)
-     →FailsIf 1
+     →T.FailsIf 1
  :Else
-     →PassesIf'Invalid: "default"; must be Boolean'≡↑⎕DM
+     →T.PassesIf'Invalid: "default"; must be Boolean'≡↑⎕DM
  :EndTrap
 
- r←∆OK
+ r←T._OK

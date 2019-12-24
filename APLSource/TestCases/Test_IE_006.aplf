@@ -1,7 +1,7 @@
  r←Test_IE_006(stopFlag batchFlag);⎕TRAP;ref;code;msg;orig;n1;n2;parms1;parms2
 ⍝ Test IE with an web page (Google). We need the user to search for something and click a link and judge success.
 ⍝ It would be really nice if we could automate this fully (SendKeys?!)
- r←∆Failed
+ r←T._Failed
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
 
  :If batchFlag
@@ -28,9 +28,9 @@
 
      ⎕DQ n1.∆Form
 
-     →PassesIf 1 ∆PromptForSuccess'Did the Browser control act in the expected way?'
+     →T.PassesIf 1 ∆PromptForSuccess'Did the Browser control act in the expected way?'
 
-     r←∆OK
+     r←T._OK
 
  :EndIf
 

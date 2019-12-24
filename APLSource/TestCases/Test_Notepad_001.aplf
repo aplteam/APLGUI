@@ -1,6 +1,6 @@
  r←Test_Notepad_001(stopFlag batchFlag);VTV;parms;n;⎕TRAP
 ⍝ Exercise the "Copy" functionality.
- r←∆Failed
+ r←T._Failed
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
 
 ⍝⍝⍝ Preconditions
@@ -19,18 +19,18 @@
 
 ⍝⍝⍝ Tests
  n.Edit.SelText←(1 1)(1 2)
- →GoToTidyUp(,'T')≢,#.APLGUI.APLGUI.Notepad.GetSelection n.Edit.(Text SelText)
+ →T.GoToTidyUp(,'T')≢,#.APLGUI.APLGUI.Notepad.GetSelection n.Edit.(Text SelText)
  n.Edit.SelText←(1 1)(1 6)
- →GoToTidyUp(,'This ')≢,#.APLGUI.APLGUI.Notepad.GetSelection n.Edit.(Text SelText)
+ →T.GoToTidyUp(,'This ')≢,#.APLGUI.APLGUI.Notepad.GetSelection n.Edit.(Text SelText)
  n.Edit.SelText←(1 144)(1 147)
- →GoToTidyUp(,'ld.')≢,#.APLGUI.APLGUI.Notepad.GetSelection n.Edit.(Text SelText)
+ →T.GoToTidyUp(,'ld.')≢,#.APLGUI.APLGUI.Notepad.GetSelection n.Edit.(Text SelText)
  n.Edit.SelText←(6 210)(6 217)
- →GoToTidyUp(,'nager. ')≢,#.APLGUI.APLGUI.Notepad.GetSelection n.Edit.(Text SelText)
+ →T.GoToTidyUp(,'nager. ')≢,#.APLGUI.APLGUI.Notepad.GetSelection n.Edit.(Text SelText)
  n.Edit.SelText←(1 140)(2 10)
- →GoToTidyUp('d hold.' 'A side ef')≢,#.APLGUI.APLGUI.Notepad.GetSelection n.Edit.(Text SelText)
+ →T.GoToTidyUp('d hold.' 'A side ef')≢,#.APLGUI.APLGUI.Notepad.GetSelection n.Edit.(Text SelText)
  n.Edit.SelText←(1 140)(3 10)
- →GoToTidyUp('d hold.'(1⊃VTV)'Any un-re')≢,#.APLGUI.APLGUI.Notepad.GetSelection n.Edit.(Text SelText)
- r←∆OK
+ →T.GoToTidyUp('d hold.'(1⊃VTV)'Any un-re')≢,#.APLGUI.APLGUI.Notepad.GetSelection n.Edit.(Text SelText)
+ r←T._OK
 
 ∆TidyUp:
  n.∆CloseForm

@@ -1,6 +1,6 @@
  r←Test_StdForm_010(stopFlag batchFlag);⎕TRAP;parms;n;globalParms;MyGuiParms
 ⍝ Bring up a form and add 3 tabs to it
- r←∆Failed
+ r←T._Failed
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
 
  CreateGlobalParms
@@ -14,4 +14,4 @@
  ⎕DL 1
  ⎕NQ n.∆Form'Close'
 
- r←∆OK
+ r←T._OK

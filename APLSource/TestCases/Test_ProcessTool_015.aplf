@@ -1,6 +1,6 @@
  r←Test_ProcessTool_015(stopFlag batchFlag);⎕TRAP;rf;data;parms
 ⍝ Exercise "ProcessTool" and check "regKey2"
- r←∆Failed
+ r←T._Failed
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
 
  :If batchFlag

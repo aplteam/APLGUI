@@ -1,6 +1,6 @@
  r←Test_ShowMsg_001(stopFlag batchFlag);n;⎕TRAP;globalParms;parms
 ⍝ Exercise "ShowMsg" with defaults.
- r←∆Failed
+ r←T._Failed
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
 
  globalParms←#.APLGUI.APLGUI.APLGuiGlobalParms.CreateDefaults
@@ -12,4 +12,4 @@
 
  ⎕←globalParms parms #.APLGUI.APLGUI.Dialogs.ShowMsg'This is a short message.'
 
- r←∆OK
+ r←T._OK

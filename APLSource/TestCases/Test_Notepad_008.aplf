@@ -1,6 +1,6 @@
  r←Test_Notepad_008(stopFlag batchFlag);VTV;parms;n;⎕TRAP;tx
 ⍝ Exercise the "Undo/Redo" functionality.
- r←∆Failed
+ r←T._Failed
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
 
 ⍝⍝⍝ Preconditions
@@ -20,16 +20,16 @@
  n.Edit.SelText←(5 0)(5 0)
  n.Edit ∆KeyPress tx←'||| This is text entered by the User ||| '
 
- →FailsIf 1≠∨/tx⍷(∊n.Edit.Text)
+ →T.FailsIf 1≠∨/tx⍷(∊n.Edit.Text)
  ∆Process n.∆Form
  1 ⎕NQ n.menubar.undo'Select'
  ∆Process n.∆Form
  1 ⎕NQ n.menubar.undo'Select'
- →FailsIf 0≠∨/tx⍷(∊n.Edit.Text)
+ →T.FailsIf 0≠∨/tx⍷(∊n.Edit.Text)
  1 ⎕NQ n.menubar.redo'Select'
- →FailsIf 1≠∨/tx⍷(∊n.Edit.Text)
+ →T.FailsIf 1≠∨/tx⍷(∊n.Edit.Text)
 
- r←∆OK
+ r←T._OK
 
 ∆TidyUp:
  n.∆CloseForm
