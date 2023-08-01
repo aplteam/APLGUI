@@ -1,3 +1,0 @@
- r←∆Input
-⍝ Returns those main classes "Input" really needs.
- r←'StdForm' 'Menubar' 'KeyCodes' 'SelAndProcess'

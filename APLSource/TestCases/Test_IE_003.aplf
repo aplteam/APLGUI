@@ -7,7 +7,7 @@
  'TEMP'#.⎕NS''
  ref←∆Create_IEcontainer #.TEMP
  n←#.APLGUI.APLGUI.IE.CreateIE ref
- #.APLGUI.APLGUI.IE.ShowHtmlFile n.IEobject(##.FilesAndDirs.EnforceSlash ##.FilesAndDirs.PWD,'\readmefirst.html')
+ #.APLGUI.APLGUI.IE.ShowHtmlFile n.IEobject(FilesAndDirs.EnforceSlash FilesAndDirs.PWD,'\readmefirst.html')
  ⎕DL 0.5
  :Trap 0
      html←#.APLGUI.APLGUI.IE.GetHTML n.IEobject
@@ -20,5 +20,5 @@
 
 ∆TidyUp:
  :Trap 0 ⋄ n.∆container.Close ⋄ :EndTrap
- :Trap 0 ⋄ ##.FilesAndDirs.DeleteFile n.∆container.IEobject.∆Filename ⋄ :EndTrap
+ :Trap 0 ⋄ FilesAndDirs.DeleteFile n.∆container.IEobject.∆Filename ⋄ :EndTrap
 ⍝Done

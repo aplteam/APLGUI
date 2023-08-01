@@ -13,7 +13,7 @@
  startDir←'C:\Users\All Users\TEMP'
  n←myGuiParms parms #.APLGUI.APLGUI.DirSelect.Create startDir
  ⎕DL 0.1
- →T.GoToTidyUp≢/##.APLTreeUtils.Lowercase startDir({⍵↓⍨-'\'=¯1↑⍵}(n #.APLGUI.APLGUI.DirSelect.GetPathFromTreeItems n.Tree.SelItems))
+ →T.GoToTidyUp≢/⎕C startDir({⍵↓⍨-'\'=¯1↑⍵}(n #.APLGUI.APLGUI.DirSelect.GetPathFromTreeItems n.Tree.SelItems))
  r←T._OK
 
 ∆TidyUp:

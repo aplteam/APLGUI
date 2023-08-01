@@ -3,7 +3,7 @@
  globalParms←##.APLGUI.APLGuiGlobalParms.CreateDefaults
  globalParms.regKey←'MyApp'
  globalParms.caption←'This is my main application'
- globalParms.icon←#.⎕NEW'Icon'(⊂'File'(GetFile'Sample.ico'))
+ globalParms.icon←#.⎕NEW'Icon'(⊂'File'(GetFile'Misc\Sample.ico'))
  list←((⊂'. '),¨⍨⍕¨⍳200),¨200⍴#.⎕NL-3
  parms←##.APLGUI.SelectionTool.CreateParms
  parms.addToCaption←'Please select from list the items you would like to process'

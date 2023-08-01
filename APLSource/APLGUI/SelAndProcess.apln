@@ -2,9 +2,9 @@
 
     ⎕IO←0 ⋄ ⎕ML←3
 
-∇ EndNamespace
-
-∇
+    ∇ EndNamespace
+     
+    ∇
 
     ∇ r←GetSelection n
       :Access Public Shared
@@ -238,7 +238,7 @@
       :EndIf
       n.∆origOrder←n.∆origOrder[ind]
       nci←n.∆origOrder⍳ci                   ⍝ New current item
-      {}rf n∘{SetItemState ⍺,⍵}¨Where sel
+      {}rf n∘{SetItemState ⍺,⍵}¨⍸sel
       {}SetFocusTo rf nci
       :If 'ProcessTool'≡n.∆parms.parmType
       :AndIf 0≠≢n.∆parms.data
@@ -266,12 +266,12 @@
               n.List.SelItems{1↑⍨≢⍺}←⍬
               {}SetFocusTo n.List 0
           :Else
-              :For ci :In Where bool
+              :For ci :In ⍸bool
                   b←n.List GetItemState ci
                   b[12]←~b[12]
                   {}n.List.SetItemState ci(Power2 b)
               :EndFor
-              {}SetFocusTo n.List(¯1↑Where bool)
+              {}SetFocusTo n.List(¯1↑⍸bool)
           :EndIf
       :Else
           :If ¯1≡bool
@@ -352,7 +352,7 @@
               b←n.List GetItemState ⍵
               b[12]←~b[12]
               ⍺.SetItemState ⍵(Power2 b)
-          }¨⍳ ≢n.List.Items
+          }¨⍳≢n.List.Items
       :Else
           n.List.(SelItems←~SelItems)
       :EndIf

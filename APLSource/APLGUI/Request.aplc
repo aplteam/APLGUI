@@ -14,9 +14,8 @@
 ⍝ Naturally it can be useful to be able to easily add a check box "Remember
 ⍝ my password" to the `Password` module.
 ⍝
-⍝ Author: Kai Jaeger ⋄ Copyright: APL Team Ltd
+⍝ Author: Kai Jaeger
 
-    :Include ##.APLTreeUtils
     :Include APLGuiUtils
 
     ⎕IO←0 ⋄ ⎕ML←3
@@ -357,7 +356,7 @@
       :Access Public Shared
       (parms globalParms)←n.(∆parms ∆globalParms)
       ∆←''
-      question←,Nest parms.question
+      question←,⊆parms.question
       i←0
       n.Question←⍬      ⍝ Keeps a vector with refs to all labels.
       startPosn←n.(∆initialVgap ∆Hgap)
@@ -411,7 +410,7 @@
           rf←⍎'n.',name,'←n.∆Form.⎕NEW''Button'' ∆'
           rf.⎕DF'[Button]:',name
           :If 0=i  ⍝ ⍝ OK button?!
-              rf.onSelect←'OnOkay_',1⊃'.'SplitPath n.∆parms.parmType
+              rf.onSelect←'OnOkay_',1⊃'.'RefToAPLTreeUtils.SplitPath n.∆parms.parmType
           :EndIf
           rf.Posn[0]←n.∆Form.Size[0]-n.∆Vgap+rf.Size[0]+{(0=⍵.⎕NC'Statusbar'):0 ⋄ ⍵.Statusbar.Size[0]}n
           rf.Posn[1]←n.∆Hgap+{⍵:0 ⋄ 1⊃+⌿⊃(↑⌽n.∆buttons).(Posn Size)}0=i

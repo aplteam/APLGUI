@@ -3,7 +3,7 @@
  globalParms←##.APLGUI.APLGuiGlobalParms.CreateDefaults
  globalParms.regKey←'MyApp'
  globalParms.caption←'My App'
- globalParms.icon←#.⎕NEW'Icon'(⊂'File'(GetFile'Sample.ico'))
+ globalParms.icon←#.⎕NEW'Icon'(⊂'File'(GetFile'Misc\Sample.ico'))
  parms←##.APLGUI.ProcessTool.CreateParms
  parms.checkboxes←1
  parms.alignButtons←##.APLGUI.Enums.Align.Right

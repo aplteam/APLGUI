@@ -1,0 +1,12 @@
+(
+ '# CreateDefaults'
+ ''
+ 'Syntax:'
+ ''
+ '~~~'
+ 'r←CreateStandardFonts dummy'
+ '~~~'
+ ''
+ 'Creates 4 fonts to be used as standard, input, label and APL font.'
+ ''
+)

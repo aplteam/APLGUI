@@ -1,7 +1,6 @@
 :Class Input
  ⍝TODO⍝  Add proper documentation
 
-    :Include ##.APLTreeUtils
     :Include APLGuiUtils
 
     ⎕IO←0 ⋄ ⎕ML←3
@@ -258,7 +257,7 @@
       m,←⊂' Paste=Ctrl+V    : ',(⍕⎕THIS),'.OnCutCopyPaste   {paste}     ;Paste the contents of the clipboard'
       :If 0<debugFlag
           m,←⊂'[Developers] {developers}'
-          m,←⊂' Toggle magic grid : ',(⍕⎕THIS),'.OnToggleMagicGrid {toggleMagic} ;Toggle the magix grid (rows and cols)'
+          m,←⊂' Toggle magic grid : ',(⍕⎕THIS),'.OnToggleMagicGrid {toggleMagic} ;Toggle the magic grid (rows and cols)'
           m,←⊂' Edit user-defined callbacks... : ',(⍕⎕THIS),'.OnEditCallbacks {editCallbacks} ;Allow the programmer to edit all user-defined callbacks'
           m,←⊂' Browse "Input" class : ',(⍕⎕THIS),'.OnBrowseInput {editInput} ;Views the "Input" class with the editor (read-only)'
       :EndIf
@@ -310,38 +309,42 @@
     ∇ p←CheckInDefMatResult_Length(n p);length;b;b2
     ⍝ Has "length a length of 1 or 2?
       length←n.Grid.Values[;##.Enums.DefMatIndices.Length]
-      :If 0<+/b←~{1 2∊⍨↑⍴' 'Split ⍵}¨length
-          p.msg,←⊂'Length of "Length" is invalid in row(s) ',↑{⍺,', ',⍵}/⍕¨1+Where b
+      :If 0<+/b←~{1 2∊⍨↑⍴' 'RefToAPLTreeUtils.Split ⍵}¨length
+          p.msg,←⊂'Length of "Length" is invalid in row(s) ',↑{⍺,', ',⍵}/⍕¨1+⍸b
           p.curCell←b⍳0
       :EndIf
     ⍝ Does "length" contain just numerically valid stuff?
       b←~{∧/↑⎕VFI ⍵}¨length
       b∨←~{∧/⍵∊⎕D,'¯ '}¨length  ⍝ Because 1e6 is numeric but still invalid
       :If 0<+/b
-          p.msg,←⊂'Invalid "Length" in row(s) ',↑{⍺,', ',⍵}/⍕¨1+Where b
+          p.msg,←⊂'Invalid "Length" in row(s) ',↑{⍺,', ',⍵}/⍕¨1+⍸b
       :EndIf
     ∇
 
     ∇ OnEditCallbacks(n rf);list;active;parms
       :Access Public Shared
       list←GetAllUserDefinedCallbacks n
-      active←0<≢¨list
-      parms←##.ProcessTool.CreateParms
-      :If 0=≢n.∆Form.Caption
-          parms.caption←'Edit Callbacks'
+      :If 0=≢list
+          ##.Dialogs.ShowMsg 'No callbacks assigned'
       :Else
-          parms.caption←'Callbacks of "',n.∆Form.Caption,'"'
+          active←0<≢¨list
+          parms←##.ProcessTool.CreateParms
+          :If 0=≢n.∆Form.Caption
+              parms.caption←'Edit Callbacks'
+          :Else
+              parms.caption←'Callbacks of "',n.∆Form.Caption,'"'
+          :EndIf
+          parms.centerIn←n.∆Form
+          parms.info←'Select the callbacks you want to edit:'
+          parms.processBtnCaption←'Edit'
+          parms.colTitles←'Name' 'Edited'
+          parms.sortByCol←0
+          parms.dblClick←1
+          parms.ctrlEnter←1
+          parms.debug←{0<⎕NC ⍵:⍎⍵ ⋄ 0}'n.∆parms.debug'
+          parms.data←⊃GetAllUserDefinedCallbacks n
+          n.∆globalParms parms ##.ProcessTool.Run((1⊃¨list),[0.7]⊂'Not yet')((⍕⎕THIS),'.OnEditCallback')
       :EndIf
-      parms.centerIn←n.∆Form
-      parms.info←'Select the callbacks you want to edit:'
-      parms.processBtnCaption←'Edit'
-      parms.colTitles←'Name' 'Edited'
-      parms.sortByCol←0
-      parms.dblClick←1
-      parms.ctrlEnter←1
-      parms.debug←{0<⎕NC ⍵:⍎⍵ ⋄ 0}'n.∆parms.debug'
-      parms.data←⊃GetAllUserDefinedCallbacks n
-      n.∆globalParms parms ##.ProcessTool.Run((1⊃¨list),[0.7]⊂'Not yet')((⍕⎕THIS),'.OnEditCallback')
       ⍝Done
     ∇
 
@@ -355,7 +358,7 @@
       (parent.⎕ED⍠('ReadOnly' 0)('EditName' 'Allow'))name
       body2←getBody name
       :If body≢body2
-          n.List.ReportInfo[Where bool;0]←⊂'Edited'
+          n.List.ReportInfo[⍸bool;0]←⊂'Edited'
       :EndIf
     ∇
 
@@ -974,7 +977,7 @@
       combo←p.ctrl.⎕NEW'Combo'∆
       ⍎'n.',d.name,'←combo'
       CalcBestSizeForEditFieldsAndSetMaxLength combo d.length ##.Enums.InputDefaultLength.Numeric(GetLargestTextFrom combo)
-      :If 0=(⊂'selitems')∊Lowercase↑¨∆
+      :If 0=(⊂'selitems')∊⎕C↑¨∆
           combo.SelItems←(≢d.default)↑1
       :EndIf
       combo.Posn←p.startAt
@@ -1003,7 +1006,7 @@
       combo←p.ctrl.⎕NEW'Combo'∆
       ⍎'n.',d.name,'←combo'
       CalcBestSizeForEditFieldsAndSetMaxLength combo d.length ##.Enums.InputDefaultLength.Numeric(GetLargestTextFrom combo)
-      :If 0=(⊂'selitems')∊Lowercase↑¨∆
+      :If 0=(⊂'selitems')∊⎕C↑¨∆
           combo.SelItems←(≢d.default)↑1
       :EndIf
       combo.Posn←p.startAt
@@ -1022,7 +1025,7 @@
 
     ∇ {label}←AddLabel(d n p lo);∆;pattern;isUrl
       :If '⋄'∊d.default
-          d.default←'⋄'Split d.default
+          d.default←'⋄'RefToAPLTreeUtils.Split d.default
           label←AddLabels d n p lo
       :Else
           ∆←''
@@ -1089,7 +1092,7 @@
       ∆,←⊂'Posn'p.startAt
       ∆,←d.props
       ∆,←⊂'Active'd.active
-      ∆,←⊂'Header'((0=≢d.props)⊃((⊂'coltitles')∊Lowercase↑¨d.props)0)
+      ∆,←⊂'Header'((0=≢d.props)⊃((⊂'coltitles')∊⎕C↑¨d.props)0)
       ∆,←⊂'Items'({0=≢⍵:⍵ ⋄ 2≠⍴⍴⍵:⍵ ⋄ ⍵[;0]}d.default)
       :If 2=⍴⍴d.default
       :AndIf 1<1⊃⍴d.default
@@ -1111,7 +1114,7 @@
           {}listView.SetColSize 1 0
       :EndIf
       :If 0<+/listView.SelItems  ⍝ Might have been set via "Props"
-          {}##.SelAndProcess.SetFocusTo listView(¯1↑Where listView.SelItems)
+          {}##.SelAndProcess.SetFocusTo listView(¯1↑⍸listView.SelItems)
       :EndIf
       listView.∆DataType←##.Enums.InputDataTypes.ListView
       listView.∆Default←d.default
@@ -1193,7 +1196,7 @@
           data←##.APLGuiIcons.⍎d.default⊃'' 'Query' 'Info' 'Error' 'Warn' 'Stop'
           icon←⎕NEW'Icon'({('Bits'(0⊃⍵))('CMap'(1⊃⍵))('Mask'(2⊃⍵))('KeepBits' 1)}data)
           ∆,←⊂'Picture'icon
-      :ElseIf 'file:///'{⍺≡Lowercase(≢⍺)↑⍵}d.default
+      :ElseIf 'file:///'{⍺≡⎕C(≢⍺)↑⍵}d.default
           bitmap←⎕NEW'Bitmap'(⊂'File'((≢'file:///')↓d.default))
           ∆,←⊂'Picture'bitmap
       :ElseIf 9=⎕NC d.default
@@ -1232,7 +1235,7 @@
     ∇
 
     ∇ {group}←AddRadio(d n p lo);∆;rf2;buffer;buttons;captions
-      captions←'⋄'Split d.label
+      captions←'⋄'RefToAPLTreeUtils.Split d.label
       'Invalid "YesNo" definition'⎕SIGNAL 11/⍨0 1∊⍨≡captions
       :If 1=≢d.default
           d.default←(¯1+≢captions){b←⍺⍴0 ⋄ b[⍵]←1 ⋄ b}d.default
@@ -1368,7 +1371,7 @@
     ∇
 
     ∇ group←AddMultipleYesdNo(d n p lo);∆;checkboxes;captions
-      captions←'⋄'Split d.label
+      captions←'⋄'RefToAPLTreeUtils.Split d.label
       :If 1<≢d.default
       :AndIf (≢captions)<1+≢d.default
           captions←(⊂Replace_ByBlank d.name),captions
@@ -1564,7 +1567,7 @@
           :If 0≠≢parms.focus
               'Has invalid value: parameter "focus"'⎕SIGNAL 11/⍨~(⊂parms.focus)∊defMat[;0]
           :EndIf
-          :If ~IsDevelopment
+          :If ~RefToAPLTreeUtils.IsDevelopment
               parms.debug←0
           :EndIf
           :If ¯1≡parms.menubar
@@ -1663,7 +1666,7 @@
       :ElseIf 1=≢ctrl.∆Default
           r←100⊥3↑2 ⎕NQ #'IDNToDate'(↑ctrl.DateTime)
       :ElseIf ' '=1↑0⍴ctrl.∆Default
-          r←3 FormatDateTime 3↑2 ⎕NQ #'IDNToDate'(↑ctrl.DateTime)
+          r←3 RefToAPLTreeUtils.FormatDateTime 3↑2 ⎕NQ #'IDNToDate'(↑ctrl.DateTime)
       :Else
           . ⍝ Huuh?!
       :EndIf
@@ -1678,7 +1681,7 @@
       :AndIf (≢ctrl.∆Default)∊6 7
           r←(3↑ctrl.∆Default),(1↓ctrl.DateTime),6↓ctrl.∆Default
       :ElseIf ' '=1↑0⍴ctrl.∆Default
-          r←¯8↑FormatDateTime(3↑⎕TS),1↓ctrl.DateTime
+          r←¯8↑RefToAPLTreeUtils.FormatDateTime(3↑⎕TS),1↓ctrl.DateTime
       :ElseIf 3=≢ctrl.∆Default
       :OrIf 0=≢ctrl.∆Default
           r←1↓ctrl.DateTime
@@ -1750,7 +1753,7 @@
     ⍝ Returns a value that can be used for setting `DateTime` in a `DateTimePicker`.
       :If ' '=1↑0⍴val
           :If (10=⍴val)∧(2='-'+.=val)∧8=+/val∊⎕D    ⍝ Something like '2015-02-02'
-              r←(2 ⎕NQ'#' 'DateToIdn'({↑↑(//)⎕VFI ⍵}¨'-'Split val)),3⍴0
+              r←(2 ⎕NQ'#' 'DateToIdn'({↑↑(//)⎕VFI ⍵}¨'-'RefToAPLTreeUtils.Split val)),3⍴0
           :Else
               ('Data for "',name,'" (Date) is invalid')⎕SIGNAL 11
           :EndIf
@@ -1782,10 +1785,10 @@
     ⍝ which is why the IDN is added.
       :If ' '=1↑0⍴val
           :If 0=≢val
-              val←¯8↑FormatDateTime ⎕TS
+              val←¯8↑RefToAPLTreeUtils.FormatDateTime ⎕TS
           :EndIf
           :If (8=≢val)∧(2=':'+.=val)∧6=+/val∊⎕D
-              r←(2 ⎕NQ'#' 'DateToIdn'(3↑⎕TS)),{↑↑(//)⎕VFI ⍵}¨':'Split val
+              r←(2 ⎕NQ'#' 'DateToIdn'(3↑⎕TS)),{↑↑(//)⎕VFI ⍵}¨':'RefToAPLTreeUtils.Split val
           :Else
               ('Data for "',name,'" (Time) is invalid')⎕SIGNAL 11
           :EndIf

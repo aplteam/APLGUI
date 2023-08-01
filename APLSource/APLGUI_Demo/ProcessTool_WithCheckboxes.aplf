@@ -3,13 +3,13 @@
  globalParms←##.APLGUI.APLGuiGlobalParms.CreateDefaults
  globalParms.regKey←'MyApp'
  globalParms.caption←'My App'
- globalParms.icon←#.⎕NEW'Icon'(⊂'File'(GetFile'Sample.ico'))
+ globalParms.icon←#.⎕NEW'Icon'(⊂'File'(GetFile'Misc\Sample.ico'))
  parms←##.APLGUI.ProcessTool.CreateParms
  parms.checkboxes←1
  list←∪300⍴#.⎕NL-3
  list←list[⍋⊃list]
  parms.default←(↑⍴list)↑0 0 0 1 0 0 1 1 1
- n1←globalParms parms ##.APLGUI.ProcessTool.Create list'##.GUI_Demo.∆OnTestHandler_ProcessTool'
+ n1←globalParms parms ##.APLGUI.ProcessTool.Create list((⍕⎕THIS),'.∆OnTestHandler_ProcessTool')
 
  ⎕←##.APLGUI.ProcessTool.ModalWait n1
 

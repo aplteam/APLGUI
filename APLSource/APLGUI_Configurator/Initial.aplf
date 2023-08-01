@@ -1,8 +1,0 @@
- Initial;body
-⍝ Call this while #.GUI is available.
-⍝ It establishes variables which then allow the main methods to act WITHOUT #.GUI being around (= via a user command).
- 'Missing: #.GUI!'⎕SIGNAL 11/⍨9≠#.⎕NC'GUI'
- body←2↑⎕NR'GetHelpers'
- body,←⊂'r←',∊' ',¨'''',¨'''',¨⍨(' '~¨⍨↓#.GUI.⎕NL 9)~GetMainClasses,NotReadyYet
- ⎕FX body
-⍝Done

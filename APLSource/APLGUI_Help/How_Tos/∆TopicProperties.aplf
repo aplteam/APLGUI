@@ -1,6 +1,6 @@
  ∆TopicProperties←{
-⍝ This function is needed by the Markdown2Help system.
-⍝ You can edit this function from the Markdown2Help GUI via the context menu.
+⍝ This function is needed by the Laguntza system.
+⍝ You can edit this function from the Laguntza GUI via the context menu.
 ⍝ *** NOTE:
 ⍝     Make only changes to this function that affect the explicit result.
 ⍝     Any other changes will eventually disappear because these functions are rebuild
@@ -16,9 +16,7 @@
 ⍝ [;2] active flag.
 ⍝ [;3] developmentOnly flag; 1=the corresponding node does not show in user mode.
      r←0 4⍴''
-     r⍪←'Get_an_impression' 'Get an impression' 1 0
-     r⍪←'Start_using_APLGui' 'Start using APLGui' 1 0
-     r⍪←'See_APLGui_in_action' 'See APLGui in Action' 1 0
-     r⍪←'Load_modules' 'Load modules' 1 0
+     r⍪←'Get_an_impression' 'Try out APLGUI' 1 0
+     r⍪←'Start_using_APLGui' 'Start using APLGUI' 1 0
      r
  }

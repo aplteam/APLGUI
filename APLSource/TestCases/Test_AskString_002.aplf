@@ -7,7 +7,7 @@
  myGuiParms.regKey←'MyApp\Kai1'
  myGuiParms.testMode←1
  myGuiParms.caption←0⊃⎕XSI
- myGuiParms.icon←⎕NEW'Icon'(⊂'File'(GetFile'Sample.ico'))
+ myGuiParms.icon←⎕NEW'Icon'(⊂'File'(GetFile'Misc\Sample.ico'))
 
  parms←#.APLGUI.APLGUI.Request.CreateParmsForString
  parms.addToCaption←'My request'

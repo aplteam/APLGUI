@@ -13,7 +13,7 @@
      msg←⍵
      key←2⊃msg
      1≠⍴,key:1
-     msg[2]←⊂#.APLGUI.APLTreeUtils.Uppercase key
+     msg[2]←⊂1 ⎕C key
      msg
  }
 

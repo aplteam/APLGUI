@@ -1,0 +1,6 @@
+(
+ '# noDCROM'
+ ''
+ 'Booleans that defaults to 1 meaning: mask all CD rom drives.'
+ ''
+)

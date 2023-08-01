@@ -1,0 +1,7 @@
+(
+ '# hintObj'
+ ''
+ '¯1 means: take first status bar field, if there is any. 0 means no hint object at all. Can also be'
+ 'a ref.'
+ ''
+)

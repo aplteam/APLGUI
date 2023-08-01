@@ -1,6 +1,6 @@
  ∆TopicProperties←{
-⍝ This function is needed by the Markdown2Help system.
-⍝ You can edit this function from the Markdown2Help GUI via the context menu.
+⍝ This function is needed by the Laguntza system.
+⍝ You can edit this function from the Laguntza GUI via the context menu.
 ⍝ *** NOTE:
 ⍝     Make only changes to this function that affect the explicit result.
 ⍝     Any other changes will eventually disappear because these functions are rebuild
@@ -21,6 +21,6 @@
      r⍪←'ParameterSpaces' '' 1 0
      r⍪←'Enumerations' '' 1 0
      r⍪←'Misc' '' 1 0
-     r⍪←'The_GUI_Demo_workspace' '' 1 0
+     r⍪←'GUI_Demo' '' 1 0
      r
  }

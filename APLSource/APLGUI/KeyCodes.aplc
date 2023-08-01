@@ -15,9 +15,8 @@
 ⍝ Alternatively use shared method `List` to list all names with their values.\\
 ⍝ Note two specialties: On the NumBlock, the asterisk and "plus" have their
 ⍝ own independent keycodes while slash, minus and <Enter> don't.\\
-⍝ Kai Jaeger ⋄ APL Team Ltd\\
+⍝ Kai Jaeger 
 
-    :Include ##.APLTreeUtils
     :Include APLGuiUtils
 
     ⎕IO←0 ⋄ ⎕ML←3
@@ -29,26 +28,26 @@
         ∇
     :EndProperty
 
-
     ∇ make0
       :Implements Constructor
       :Access Public Instance
       _allKeys←CreateNames
+      A←RefToAPLTreeUtils
     ∇
 
     ∇ r←GetKeyCodeFor keystroke;possibleModifiers;mod;modifier
       :Access Public Instance
-      keystroke←,Lowercase keystroke
+      keystroke←,⎕C keystroke
       :If '+'∊keystroke
       :AndIf 1<≢keystroke
           :If '++'≡¯2↑keystroke     ⍝ Special case?!
               modifier←¯2↓keystroke
               keystroke←,'+'
           :Else
-              (modifier keystroke)←¯1 0↓¨'+'SplitPath keystroke
+              (modifier keystroke)←'+'A.SplitPath keystroke
           :EndIf
           :If '+'∊modifier
-              modifier←'+'Split modifier
+              modifier←'+'A.Split modifier
           :EndIf
       :Else
           modifier←''

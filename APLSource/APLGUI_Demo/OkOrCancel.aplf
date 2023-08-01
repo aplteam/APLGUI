@@ -2,7 +2,7 @@
 ⍝ Presents a "Yes" and a "No" button together with a message
  globalGuiParms←##.APLGUI.APLGuiGlobalParms.CreateDefaults
  globalGuiParms.regKey←'MyApp\Kai1'
- globalGuiParms.icon←⎕NEW'Icon'(⊂'File'(GetFile'Sample.ico'))
+ globalGuiParms.icon←⎕NEW'Icon'(⊂'File'(GetFile'Misc\Sample.ico'))
  parms←##.APLGUI.Dialogs.CreateParmsForOkOrCancel
  parms.timeout←4
  parms.autoPress←0

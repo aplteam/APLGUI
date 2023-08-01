@@ -23,7 +23,7 @@
  parms.(fontAPL fontInput fontLabel fontStandard)←fonts.(apl input label standard)
  parms.props←props
  globalParms←##.APLGUI.APLGuiGlobalParms.CreateDefaults
- globalParms.icon←'file:///',(GetFile'Sample.ico')
+ globalParms.icon←'file:///',(GetFile'Misc\Sample.ico')
  r←globalParms parms ##.APLGUI.Input.Run defMat
  ⎕SE.aplteam.Display r
 ⍝Done

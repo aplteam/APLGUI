@@ -1,6 +1,0 @@
-# vGap
-
-Defines the vertical gap between controls. 
-
-If this is a fraction of 1 then it defines the % of the hight (sic!) of `fontStandard`,
-otherwise it is interpreted as number of pixels. Defaults to 0.75.

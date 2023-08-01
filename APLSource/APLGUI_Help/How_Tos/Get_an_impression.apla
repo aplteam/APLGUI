@@ -1,0 +1,18 @@
+(
+ '# Try out APLGUI'
+ ''
+ 'In order to find out whether `APLGUI` suits your needs you are advised to run one of the '
+ '`∆Run`\\* functions from the `GUI_Demo` namespace. '
+ ''
+ 'Note that this namespace is not part of the package. You must use the project manager '
+ '[Cider](https://github.com/aplteam/Cider) and clone/fork the '
+ '[APLGUI project on GitHub](https://github.com/aplteam.APLGUI).'
+ ''
+ 'All the `Run` functions require a right argument: a Boolean that defines whether the code'
+ 'of the demo function that is currently executed shall be shown in a separate Form. That is by the'
+ 'way implemented with the `Browse` method of the `Notepad` class. It is recommended to specify a 1.'
+ ''
+ 'Note that the test cases are **not** a good source (unless you look for something specific) for'
+ 'examples because they test, at least partly, edge conditions, and that may well result in ugly'
+ 'forms. Also, many of them can quite boring.'
+)

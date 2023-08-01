@@ -15,7 +15,7 @@
  defMat1⍪←'Currency1' '' ''DT.Currency 0 1 1
  defMat1⍪←'YesNo1' '' ''DT.YesNo 0 1 1
  defMat1⍪←'Button1' '' ''DT.Button 0 1 1
- defMat1⍪←'Image1' ''('file:///',GetFile'KaiJaeger.jpg')DT.Image 0 1 1
+ defMat1⍪←'Image1' ''('file:///',GetFile'Images\KaiJaeger.jpg')DT.Image 0 1 1
  defMat1⍪←'DropDown1' ''('This' 'That' 'More')DT.DropDown 0 1 1
  defMat1⍪←'DropEdit1' ''('One' 'Two' 'Three')DT.DropEdit 0 1 1
  defMat1⍪←'ListView1' ''('Kai' 'Thomas' 'Max')DT.ListView(5 5)1 2
@@ -33,7 +33,7 @@
  defMat2⍪←'Currency2' '' ''DT.Currency 0 1 1
  defMat2⍪←'YesNo2' '' ''DT.YesNo 0 1 1
  defMat2⍪←'Button2' '' ''DT.Button 0 1 1
- defMat2⍪←'Image2' ''('file:///',GetFile'KaiJaeger.jpg')DT.Image 0 1 1
+ defMat2⍪←'Image2' ''('file:///',GetFile'Images\KaiJaeger.jpg')DT.Image 0 1 1
  defMat2⍪←'DropDown2' ''('This' 'That' 'More')DT.DropDown 0 1 1
  defMat2⍪←'DropEdit2' ''('One' 'Two' 'Three')DT.DropEdit 0 1 1
  defMat2⍪←'ListView2' ''('Kai' 'Thomas' 'Max')DT.ListView(5 5)1 2

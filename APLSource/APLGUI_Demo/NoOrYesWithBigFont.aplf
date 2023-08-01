@@ -2,7 +2,7 @@
 ⍝ "No-or-Yes" dialog with a big font
  myGuiParms←##.APLGUI.APLGuiGlobalParms.CreateDefaults
  myGuiParms.regKey←'MyApp\Kai1'
- myGuiParms.icon←⎕NEW'Icon'(⊂'File'(GetFile'Sample.ico'))
+ myGuiParms.icon←⎕NEW'Icon'(⊂'File'(GetFile'Misc\Sample.ico'))
  myGuiParms.(fontStandard fontInput)←2⍴⎕NEW'Font'(('PName' 'Courier New')('Size' 24))
 
  ⎕←myGuiParms ##.APLGUI.Dialogs.NoOrYes'Are you really sure about this?'

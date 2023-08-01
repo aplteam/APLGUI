@@ -17,7 +17,7 @@
 ⍝ to, say, the default browser, or to suppress the request or show something else
 ⍝ instead you **must** call `(msg[⎕IO]).Stop` first inside your own function to make that
 ⍝ work.\\
-⍝ You can use the methods `ShowHTML` and `ShowHtmlFile` from `IE` or `APLTreeUtils.GoToWebPage`
+⍝ You can use the methods `ShowHTML` and `ShowHtmlFile` from `IE` or `APLTreeUtils2.GoToWebPage`
 ⍝ inside your user-defined function.\\
 ⍝ ## Rending engine
 ⍝ The capabilities of the underlying default engine is quite limited because by default the
@@ -37,9 +37,8 @@
 ⍝ ## Misc
 ⍝ The name of the ActiveX control is "Microsoft Web Browser".\\
 ⍝ [Documentation on MSDN](https://msdn.microsoft.com/en-us/library/aa752040(v=vs.85).aspx)\\
-⍝ Author: Kai Jaeger ⋄ Copyright: APL Team Ltd
+⍝ Author: Kai Jaeger
 
-    :Include ##.APLTreeUtils
     :Include APLGuiUtils
 
     ⎕IO←0 ⋄ ⎕ML←3
@@ -102,7 +101,7 @@
       :AndIf n.IEobject.∆parms.redirectHttpToDefaultBrowser
           was←n.IEobject.LocationURL
           self.Stop
-          GoToWebPage url
+          RefToAPLTreeUtils.GoToWebPage url
           r←0
       :Else
           :If 0≠≢n.IEobject.∆parms.onBeforeNavigate
@@ -123,7 +122,7 @@
     ⍝ Intranet for that matter) because otherwise, depending on the parameters, it might
     ⍝ not work! Note that this method displays anything, not matter what the parameter
     ⍝ `redirectHttpToDefaultBrowser` is telling. If you want to view a certain url in your
-    ⍝ default browser then use `APLTreeUtils.GoToWebPage` instead.\\
+    ⍝ default browser then use `APLTreeUtils2.GoToWebPage` instead.\\
     ⍝ * `ref` must point to the WebBrowser control.
     ⍝ * `url` is what you want to view.
       ref.onBeforeNavigate←0  ⍝ We switch this off for the moment.
@@ -160,7 +159,7 @@
       :If 0=ref.⎕NC'∆Filename'
           ref.∆Filename←'html'RefToFilesAndDirs.GetTempFilename2''
       :EndIf
-      RefToAPLTreeUtils.WriteUtf8File ref.∆Filename html
+      (⊂,html)⎕NPUT ref.∆Filename 1
       ref.Navigate⊂'file:///',ref.∆Filename
       r←⍬
       ref.Size←100 100×0≠≢html
@@ -174,7 +173,7 @@
     ⍝ Returns always `⍬`.
       'Invalid: "webBrowserControl"'⎕SIGNAL 11/⍨'HTML Document'≢webBrowserControl.⎕WG'Type'
       r←⍬
-      filename←'file:///'{((⍺≢(≢⍺)↑⍵)/'file:///'),⍵}Lowercase filename~'"'
+      filename←'file:///'{((⍺≢(≢⍺)↑⍵)/'file:///'),⍵}⎕C filename~'"'
       {}NavigateTo webBrowserControl filename
       webBrowserControl.Size←100 100
     ∇

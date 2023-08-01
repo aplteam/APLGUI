@@ -1,3 +1,0 @@
- r←∆SelAndProcess
-⍝ Returns those main classes "Menubar" really needs.
- r←,⊂'Menubar'

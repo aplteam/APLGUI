@@ -4,6 +4,8 @@
  props←0 2⍴⍬
  #.⎕SHADOW'TEMP'
  'TEMP'#.⎕NS''
+ #.TEMP.⎕IO←0 ⋄ #.TEMP.⎕ML←3
+
  #.TEMP.OnHelp←{
      n←⍵
      parms←##.APLGUI.Dialogs.CreateParmsForShowMsg
@@ -23,7 +25,7 @@
      (rf event key)←3↑msg←⍵
      n←⍺
      n.UPPERCASE≢rf:1
-     msg[2]←⊂#.APLTreeUtils.Uppercase key
+     msg[2]←⊂1 ⎕C key
      msg
  }
  #.TEMP.OnInitial←{
@@ -82,7 +84,7 @@
  parms.props←props
  parms.tips←tips
  (globalParms parms)←##.APLGUI.Input.CreateParms ##.APLGUI.Input.GetParms parms
- globalParms.icon←'file:///',(GetFile'Sample.ico')
+ globalParms.icon←'file:///',(GetFile'Misc\Sample.ico')
  r←globalParms parms ##.APLGUI.Input.Run defMat
  ⎕SE.aplteam.Display r
 ⍝Done

@@ -3,19 +3,20 @@
  globalParms←##.APLGUI.APLGuiGlobalParms.CreateDefaults
  globalParms.regKey←'MyApp'
  globalParms.caption←'My App'
- globalParms.icon←⎕NEW'Icon'(⊂'File'(GetFile'Sample.ico'))
+ globalParms.icon←⎕NEW'Icon'(⊂'File'(GetFile'Misc\Sample.ico'))
  parms←##.APLGUI.StdForm.CreateParms
  parms.caption←'MyForm'
  :If ⍬ ⍬≡parms.size
      parms.size←200 400
  :EndIf
  parms.minSize←100 200
+ parms.hasStatusbar←1
  n←##.APLGUI.StdForm.Create globalParms parms
  n←##.APLGUI.StdForm.AddButtons n('OK' 'Help' 'Cancel')
  #.⎕SHADOW'OnSelect'
- #.APLGUI.OnSelect←{⎕←((0⊃⍵).Caption),' was pressed' ⋄ n←GUI.APLGuiUtils.GetRefTo_n 0⊃⍵ ⋄ n.∆CloseForm}
+ #.APLGUI.OnSelect←{⎕←((0⊃⍵).Caption),' was pressed' ⋄ n←APLGUI.APLGuiUtils.GetRefTo_n 0⊃⍵ ⋄ n.∆CloseForm}
  n.∆buttons.onSelect←⊂'#.APLGUI.OnSelect'
- n.VersionNo.Text←1⊃##.APLGUI.APLGuiAdmin.Version
+ n.VersionNo.Text←1⊃##.APLGUI.Version
 
  n.∆Form.Wait
  n.∆CloseForm

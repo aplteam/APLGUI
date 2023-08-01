@@ -3,5 +3,5 @@
  globalParms←##.APLGUI.APLGuiGlobalParms.CreateDefaults
  globalParms.regKey←'MyApp\Kai1'
  globalParms.caption←'My App'
- globalParms.icon←'File:///',(GetFile'Sample.ico')
+ globalParms.icon←'File:///',(GetFile'Misc\Sample.ico')
  ⎕←globalParms ##.APLGUI.Dialogs.YesNoCancel'Do you want to fix them before carrying on?'

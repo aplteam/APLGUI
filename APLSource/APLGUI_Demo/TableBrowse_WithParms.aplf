@@ -11,11 +11,9 @@
  parms.colTitles←'Name' 'Type' 'Parent' 'Author' 'Date' 'Time' 'Amount' 'Active'
 ⍝parms.modalWait←0
 ⍝parms.rowTitles←0
- #.⎕SHADOW'Temp'
- 'Temp'#.⎕NS''
+ #.⎕SHADOW'Temp' ⋄ 'Temp'#.⎕NS''
+ #.TEMP.⎕IO←0 ⋄ #.TEMP.⎕ML←3
  #.Temp.MyFont←⎕NEW'Font'(('PName' 'APL385 Unicode')('Size' 16)('Weight' 100))
  parms.fontInput←#.Temp.MyFont
-
  parms ##.APLGUI.Table.Browse table
-
 ⍝Done

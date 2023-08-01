@@ -2,4 +2,4 @@
  MyGuiParms←#.APLGUI.APLGUI.APLGuiGlobalParms.CreateDefaults
  MyGuiParms.regKey←'APLGui-Tests'
  MyGuiParms.caption←'App-name'
- MyGuiParms.icon←'file:///',GetFile'Sample.ico'
+ MyGuiParms.icon←'file:///',GetFile'Misc\Sample.ico'

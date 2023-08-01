@@ -1,0 +1,15 @@
+(
+ '# WriteToStatusbar'
+ ''
+ 'This function allows you to write to the status bar:'
+ '                                                    '
+ '~~~'
+ '{r}←{color} WriteToStatusbar (n text)'
+ '~~~'
+ ''
+ '`color` is optional and might be a single scalar, including negative ones, or three-item vector.'
+ 'Refer to the Dyalog GUI help on BCol for details.'
+ ''
+ 'Calling this function makes sense only from a user-defined callback. In such cases the `n` namespace'
+ 'will be provided as an argument to the callback.'
+)

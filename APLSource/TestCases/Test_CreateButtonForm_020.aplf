@@ -5,7 +5,7 @@
 
  myGuiParms←#.APLGUI.APLGUI.APLGuiGlobalParms.CreateDefaults
  myGuiParms.regKey←'MyApp\Kai1'
- myGuiParms.icon←⎕NEW'Icon'(⊂'File'(GetFile'Sample.ico'))
+ myGuiParms.icon←⎕NEW'Icon'(⊂'File'(GetFile'Misc\Sample.ico'))
  parms←#.APLGUI.APLGUI.Dialogs.CreateParms
  parms.addToCaption←'Hi there'
  parms.question←'Sure?'

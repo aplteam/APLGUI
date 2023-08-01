@@ -7,9 +7,8 @@
 ⍝ The modal method requires not only a list (or table) but also the name
 ⍝ of a callback function that does the processing.\\
 ⍝ See the `Create` method for more details.\\
-⍝ Author: Kai Jaeger ⋄ Copyright: APL Team Ltd
+⍝ Author: Kai Jaeger
 
-    :Include ##.APLTreeUtils
     :Include APLGuiUtils
     :Include SelAndProcess
 
@@ -71,7 +70,7 @@
       x←{(0<⎕NC ⍵):⍎⍵ ⋄ ⍬}'x'
       (globalParms parms)←CreateParms GetParms x
       parms←CheckParms parms
-      'Invalid: style'⎕SIGNAL APLGuiError/⍨~(⊂Lowercase parms.style)∊##.Enums.SelectionStyles.⎕NL-3
+      'Invalid: style'⎕SIGNAL APLGuiError/⍨~(⊂⎕C parms.style)∊##.Enums.SelectionStyles.⎕NL-3
       parms.contextMenuCaptions←PrepareContextMenu parms.contextMenuCaptions
       :If ↑parms.checkboxes
           parms.style←##.Enums.SelectionStyles.multi

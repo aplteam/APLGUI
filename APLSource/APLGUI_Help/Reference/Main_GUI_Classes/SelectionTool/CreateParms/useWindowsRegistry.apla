@@ -1,0 +1,6 @@
+(
+ '# useWindowsRegistry'
+ ''
+ 'If this is one then "Posn" & "Size" are saved/loaded in/from the Windows Registry.'
+ ''
+)

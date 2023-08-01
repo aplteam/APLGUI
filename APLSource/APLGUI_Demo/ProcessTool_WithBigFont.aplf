@@ -3,7 +3,7 @@
  globalParms←##.APLGUI.APLGuiGlobalParms.CreateDefaults
  globalParms.regKey←'MyApp'
  globalParms.caption←'My App'
- globalParms.icon←#.⎕NEW'Icon'(⊂'File'(GetFile'Sample.ico'))
+ globalParms.icon←#.⎕NEW'Icon'(⊂'File'(GetFile'Misc\Sample.ico'))
  globalParms.(fontStandard fontInput)←2⍴⎕NEW'Font'(('PName' 'Courier New')('Size' 22))
  list←∪300⍴#.⎕NL-3
  list←list[⍋⊃list]

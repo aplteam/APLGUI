@@ -1,7 +1,6 @@
 :Class SelectionTool
 ⍝ This is the base class of `OptionsTool` and `ProcessTool`.
 
-    :Include ##.APLTreeUtils
     :Include APLGuiUtils
     :Include SelAndProcess
 
@@ -42,7 +41,7 @@
       x←{(0<⎕NC ⍵):⍎⍵ ⋄ ⍬}'x'
       (globalParms parms)←CreateParms GetParms x
       parms←CheckParmsForProgressbarAndStatusbar parms
-      'Invalid: style'⎕SIGNAL APLGuiError/⍨~(⊂Lowercase parms.style)∊##.Enums.SelectionStyles.⎕NL-3
+      'Invalid: style'⎕SIGNAL APLGuiError/⍨~(⊂⎕C parms.style)∊##.Enums.SelectionStyles.⎕NL-3
       parms←CheckParms parms
       parms2←CopyNamespace parms
       parms2.(sysMenu maxButton minButton sizeable)←1
@@ -257,10 +256,10 @@
       :EndIf
       :If n.List.CheckBoxes
           :If {(0=≢⍵):0 ⋄ 0<+/⍵}ind←parms.default
-              :If 0≠≢ind←1+Where ind
+              :If 0≠≢ind←1+⍸ind
                   {n.List.SetItemState ⍵ 4096}¨ind
                   n.List.SelItems[0]←1
-                  {}SetFocusTo n.List(¯1↑Where parms.default)
+                  {}SetFocusTo n.List(¯1↑⍸parms.default)
               :EndIf
           :EndIf
       :Else
@@ -274,7 +273,7 @@
       :AndIf 0=parms.checkboxes
           n.List.onItemDblClick←1
       :EndIf
-      {}SetFocusTo n.List(¯1↑Where parms.default)
+      {}SetFocusTo n.List(¯1↑{⍵/⍳≢⍵}parms.default)
       n.menubar.adjustHeight.onSelect←'OnAdjustHeight'n
       :If parms.sortByCol
           n.List.onColumnClick←'OnColumnClick'
@@ -405,4 +404,3 @@
     ∇
 
 :EndClass
-

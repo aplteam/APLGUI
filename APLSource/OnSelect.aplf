@@ -1,0 +1,1 @@
+ OnSelect←{⎕←((0⊃⍵).Caption),' was pressed' ⋄ n←APLGUI.APLGuiUtils.GetRefTo_n 0⊃⍵ ⋄ n.∆CloseForm}

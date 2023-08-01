@@ -11,7 +11,7 @@
 ⍝ thousands of rows and hundred or so columns, it's not designed for tables with millions of rows _
 ⍝ and / or thousands of columns.
 
-⍝ Author: Kai Jaeger ⋄ Copyright: APL Team Ltd
+⍝ Author: Kai Jaeger
 
     :Include APLGuiUtils
 

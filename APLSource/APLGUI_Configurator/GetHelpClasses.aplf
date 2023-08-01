@@ -1,3 +1,0 @@
- r←GetHelpClasses
-⍝ Returns a list with all classes and namespace scripts in #.GUI that are **not** main classes.
- r←'APLGuiGlobalParms' 'APLGuiHelpers' 'APLGuiParameterSpace' 'APLGuiUtils' 'FormRefNamespace' 'RefNamespace'

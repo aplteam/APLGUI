@@ -1,7 +1,7 @@
  NotepadEditFile;txt;parms;n;VTV;res;globalParms;changeFlag;filename
 ⍝ Simple NotePad with default parameters
  globalParms←##.APLGUI.APLGuiGlobalParms.CreateDefaults
- globalParms.icon←#.⎕NEW'Icon'(⊂'File'(GetFile'Sample.ico'))
+ globalParms.icon←#.⎕NEW'Icon'(⊂'File'(GetFile'Misc\Sample.ico'))
  globalParms.regKey←∆GetRegPath,'Notepad_Test\'
 
  VTV←''
@@ -14,8 +14,8 @@
  VTV,←⊂'All remaining used memory blocks are copied to the low-address end of the workspace, leaving a single free block at the high-address end. This process is known as compaction. '
  VTV,←⊂'Workspace above a small amount (1/16 of the configured maximum workspace size) of working memory is returned to the Operating System. On a Windows system, you can see the process size changing by using Task Manager. '
  VTV,←⊂'A{: chars: ×∧∨≠>≥=≤<¯¨→←*○⍳↓↑~⍴∊⍵?#⍕⍎⎕∘∆∇_⌊⌈⍺⌿⍀⍝|⊤⊥∪∩⊃⊂⊢|⊣⌹!⍲⍱⍟⊖⍉⌽⍋⍒⍫⌶⍬⍞⍣≢≡⍠⍙⍪⍷`⋄'
- filename←#.FilesAndDirs.GetTempFileName''
- #.APLTreeUtils.WriteUtf8File filename VTV
+ filename←##.APLGUI.FilesAndDirs.GetTempFilename  ''
+ (⊂,VTV)⎕NPUT filename 1
 
  parms←##.APLGUI.Notepad.CreateParmsForFile
  parms.addToCaption←'Copyright notice'
@@ -32,7 +32,7 @@
  }
  #.OnClose←{
      n←⍵
-     txt←#.APLTreeUtils.Lowercase n.Edit.Text
+     txt←⎕C n.Edit.Text
      txt←' ',⊃,/txt,¨' '
      0=+/' fuck '⍷txt:0
      _←##.APLGUI.Dialogs.ShowMsg'Sorry, but you disobeyed the rules!'

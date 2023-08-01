@@ -11,8 +11,8 @@
  rk2←rk,'\Foo'
 
 ⍝⍝⍝ Preconditions - just in case of any leftovers
- :If ##.WinReg.DoesKeyExist rk
-     ##.WinReg.DeleteSubKey rk2
+ :If WinReg.DoesKeyExist rk
+     WinReg.DeleteSubKey rk2
  :EndIf
 
  parms←#.APLGUI.APLGUI.StdForm.CreateParms
@@ -27,9 +27,9 @@
  ⎕NQ n.∆Form'Close'
  1 ∆Process n.∆Form
 
- →T.GoToTidyUp posn size≢⍎¨##.WinReg.GetValue¨(rk2,'\posn')(rk2,'\size')
+ →T.GoToTidyUp posn size≢⍎¨WinReg.GetValue¨(rk2,'\posn')(rk2,'\size')
  r←T._OK
 
 ∆TidyUp:
- ##.WinReg.DeleteSubKey rk2
- ##.WinReg.DeleteSubKey rk
+ WinReg.DeleteSubKey rk2
+ WinReg.DeleteSubKey rk

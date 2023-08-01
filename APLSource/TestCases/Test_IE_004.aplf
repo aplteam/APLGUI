@@ -45,5 +45,5 @@
 
 ∆TidyUp:
  :Trap 0 ⋄ n1.∆container.Close ⋄ :EndTrap
- :Trap 0 ⋄ ##.FilesAndDirs.DeleteFile n2.∆container.IEobject.∆Filename ⋄ :EndTrap
+ :Trap 0 ⋄ FilesAndDirs.DeleteFile n2.∆container.IEobject.∆Filename ⋄ :EndTrap
 ⍝Done

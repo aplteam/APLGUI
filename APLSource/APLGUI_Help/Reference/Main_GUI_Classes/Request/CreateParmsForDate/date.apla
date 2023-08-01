@@ -1,0 +1,6 @@
+(
+ '# date'
+ ''
+ 'The preselected date as a single Integer. Defaults to `100⊥3↑⎕TS`.'
+ ''
+)

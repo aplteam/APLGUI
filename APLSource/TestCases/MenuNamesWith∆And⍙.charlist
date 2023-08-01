@@ -1,7 +1,0 @@
-[&File] {file}
- Open=Ctrl+O : OnTestHandler {open}        ;Specify an alias name between "{" and "}"
- New=Ctrl+N  : OnTestHandler {new∆} ;Opens a new document
- ~Close      : OnTestHandler   {c⍙lose} ;Close a document  ⍝ Note the typo!!
- -
- &Quit=Alt+F4            : #.APLGUI.TestCases.OnTestHandler {quit}  ;Quit the program
-

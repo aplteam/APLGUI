@@ -1,0 +1,6 @@
+(
+ '# PublicMethods'
+ ''
+ 'This niladic function returns a vector of text vectors with the names of all the function in `Input` that can be meaningful'
+ 'used by the user.'
+)

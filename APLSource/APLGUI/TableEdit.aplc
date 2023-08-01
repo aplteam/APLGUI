@@ -487,7 +487,7 @@
       m.n←n
       i←0
       :For this :In menuItems
-          (caption cmd)←2↑(Nest this),⊂''
+          (caption cmd)←2↑(⊆this),⊂''
           :If (,'-')≡,caption
               rf←m.⎕NEW⊂'Separator'
               ⍎'Sep_',(¯2↑'00',⍕i),'←rf'
@@ -516,7 +516,7 @@
           r,←n.∆parms.row_Insert⊂'Insert' 'INS'
           r,←n.∆parms.row_Del⊂'Delete' 'DEL'
       :EndIf
-      flag←0∊⍴. ⍝TODO⍝ 
+      flag←0∊⍴. ⍝TODO⍝
       r,←(~flag)/⊂'-' ''
       :If n.∆parms.moveRows
           flag←(,'-')≡,↑¯1↑r
@@ -689,11 +689,11 @@
       :If ' '=1↑0⍴↑old
           r←new
       :ElseIf (≢old)∊3 6 7
-          r←{↑↑(//)⎕VFI ⍵}¨'-'Split new
+          r←{↑↑(//)⎕VFI ⍵}¨'-'RefToAPLTreeUtils.Split new
       :ElseIf 645=⎕DR old
           r←↑(//)⎕VFI new~'-'
       :ElseIf (old>0)∧(old<2958465)
-          r←2 ⎕NQ #'DateToIDN'({↑↑(//)⎕VFI ⍵}¨'-'Split new)
+          r←2 ⎕NQ #'DateToIDN'({↑↑(//)⎕VFI ⍵}¨'-'RefToAPLTreeUtils.Split new)
       :Else
           r←↑(//)⎕VFI new~'-'
       :EndIf
@@ -846,7 +846,7 @@
       r←⍬
       ¯3{2 ⎕NQ n.Grid'SetColSize'⍵ ⍺}¨⍳1⊃⍴n.Grid.Values
       :If 1∊b←'DA'∘≡¨n.∆g.dataTypes
-          (Where b){2 ⎕NQ n.Grid'SetColSize'⍺ ⍵}1⊃n.Grid.DA.GetTextSize'2010-01-01WW'
+          (⍸b){2 ⎕NQ n.Grid'SetColSize'⍺ ⍵}1⊃n.Grid.DA.GetTextSize'2010-01-01WW'
       :EndIf
     ∇
 
@@ -902,7 +902,7 @@
        ⍝ ⍺ is a single name (when simple) or a list of names (when nested)
        ⍝ ← is always a nested vector.
        ⍝ Crashes in case ⍺ is not found.
-          names←Nest ⍺
+          names←⊆⍺
           ⍵[⍵[;0]⍳names;1]
       }
 
@@ -927,7 +927,7 @@
       parms←CheckParms_askNewRowTitle parms
       parms←CheckParms_contextMenu parms
       parms←CheckParms_menu parms
-      parms.ctrl_Pos1_End←Uppercase⍕parms.ctrl_Pos1_End
+      parms.ctrl_Pos1_End←1 ⎕C⍕parms.ctrl_Pos1_End
       parms←CheckParms_comments parms
       parms←CheckParms_selItems parms
       parms←CheckParms_curCell parms
@@ -978,10 +978,10 @@
       :If 0≠≢,parms.colTitles
           :If 0 1∊⍨≡parms.colTitles
           :AndIf ';'∊parms.colTitles
-              parms.colTitles←';'Nest parms.colTitles
+              parms.colTitles←';'(≠⊆⊢)parms.colTitles
           :EndIf
       :EndIf
-      parms.colTitles←Nest⍣(0≠≢parms.colTitles)⊣parms.colTitles
+      parms.colTitles←⊆⍣(0≠≢parms.colTitles)⊣parms.colTitles
     ∇
 
     ∇ parms←CheckParms_debug parms
@@ -990,7 +990,7 @@
           :If 0 1∊⍨≡parms.debug
               parms.debug←,⊂parms.debug
           :EndIf
-          parms.debug←{0=1↑0⍴⍵:⍵ ⋄ Uppercase ⍵}¨parms.debug
+          parms.debug←{0=1↑0⍴⍵:⍵ ⋄ 1 ⎕C ⍵}¨parms.debug
       :EndIf
     ∇
 
@@ -1001,10 +1001,10 @@
           :EndIf
           :If 0 1∊⍨≡parms.rowTitles
           :AndIf ';'∊parms.rowTitles
-              parms.rowTitles←';'Nest parms.rowTitles
+              parms.rowTitles←';'(≠⊆⊢)parms.rowTitles
           :EndIf
       :EndIf
-      parms.rowTitles←Nest⍣(0≠≢parms.rowTitles)⊣parms.rowTitles
+      parms.rowTitles←⊆⍣(0≠≢parms.rowTitles)⊣parms.rowTitles
     ∇
 
     ∇ parms←CheckParms_cellSelect parms
@@ -1100,7 +1100,7 @@
               parms.maxLength←parms.maxLength[⍋parms.colTitles⍳parms.maxLength[;0];]
               bool←parms.colTitles∊parms.maxLength[;0]
               parms.maxLength⍀⍨←bool
-              parms.maxLength[Where~bool;1]←0
+              parms.maxLength[⍸~bool;1]←0
               parms.maxLength←parms.maxLength[;1]
           :Else
               parms.maxLength←(1⊃⍴table)↑parms.maxLength,(1⊃⍴table)⍴0
@@ -1122,7 +1122,7 @@
 
     ∇ {r}←n AddComment(row col comment)
       r←⍬
-      comment←Split⍣('⋄'∊comment)⊣comment
+      comment←RefToAPLTreeUtils.Split⍣('⋄'∊comment)⊣comment
       2 ⎕NQ n.Grid'AddComment'row col comment
     ∇
 
@@ -1441,10 +1441,10 @@
       :If ⍬ ⍬≢noOf row
           :If 0≠≢protoRow←GetProtoRow n row
               :If 0<+/bool←(⊂'DA')≡¨2↑¨(GetInputDataTypes n)[n.∆g.cellTypes]
-                  protoRow[Where bool]←⊂Date2IDF 3↑⎕TS
+                  protoRow[⍸bool]←⊂Date2IDF 3↑⎕TS
               :EndIf
               :If 0<+/bool←(⊂'TI')≡¨2↑¨(GetInputDataTypes n)[n.∆g.cellTypes]
-                  protoRow[Where bool]←⊂24 60 60⊥3↑3↓⎕TS
+                  protoRow[⍸bool]←⊂24 60 60⊥3↑3↓⎕TS
               :EndIf
               n.Grid.Values←(row↑[0]n.Grid.Values)⍪(⊃noOf⍴⊂protoRow)⍪row↓[0]n.Grid.Values
               n.Grid.CellTypes←(row↑[0]n.Grid.CellTypes)⍪(⊃noOf⍴⊂n.∆g.cellTypes)⍪row↓[0]n.Grid.CellTypes
@@ -1714,14 +1714,14 @@
       values←cols/n.Grid.Values
       types←cols/n.∆g.dataTypes
       :If ~n.∆g.searchCaseSensitive
-          searchFor←Uppercase n.∆g.search_for
+          searchFor←1 ⎕C n.∆g.search_for
           charFlag←' '=↑¨0⍴¨values[0;]
-          values[;Where charFlag]←Uppercase⍕¨values[;Where charFlag]
+          values[;⍸charFlag]←1 ⎕C⍕¨values[;⍸charFlag]
       :Else
           searchFor←n.∆g.search_for
       :EndIf
       r←⍬
-      :For value type index :InEach (↓⍉values)types(Where cols)
+      :For value type index :InEach (↓⍉values)types(⍸cols)
           :If (⊂type)∊'NU' 'NUL'
               ((searchFor='-')/searchFor)←'¯'
           :EndIf
@@ -1731,7 +1731,7 @@
               value←(⎕UCS 13),⎕FMT⍪value
               where←∨/searchFor⍷value
           :EndIf
-          r,←⊂index(Where,where)
+          r,←⊂index(⍸,where)
       :EndFor
       :If 0≠≢r←⊃r
           r←(0<≢¨r[;1])⌿r
@@ -1811,7 +1811,7 @@
       rf←↑msg
       n←GetRefTo_n rf
       :If 0≠≢,rf.Text
-      :AndIf 3=≢buff←'-'Split rf.Text
+      :AndIf 3=≢buff←'-'RefToAPLTreeUtils.Split rf.Text
       :AndIf ∧/↑¨⎕VFI¨buff
           r←1
       :Else
@@ -1826,7 +1826,7 @@
       rf←↑msg
       n←GetRefTo_n rf
       →(0=≢rf.Text)/0   ⍝TODO⍝ Provide info in statusbar
-      buff←':'Split rf.Text
+      buff←':'RefToAPLTreeUtils.Split rf.Text
       :If 1=⍴buff
           .
       :ElseIf 2=≢buff
@@ -1923,7 +1923,7 @@
       :Access Public Shared
       rf←↑msg
       n←GetRefTo_n rf
-      callbackName←1⊃' 'Split rf.Caption
+      callbackName←1⊃' 'RefToAPLTreeUtils.Split rf.Caption
       def←⍎'n.∆parms.o',1↓callbackName
       ((↑def).⎕ED⍠('EditName' 'Disallow'))1⊃def
     ∇
@@ -2354,7 +2354,7 @@
           CurCol←1⊃CurCell←'Grid'⎕WG'CurCell'
           CellTypes←('Grid'⎕WG'CellTypes')[0;]
           InputList←{⍵↓⍨⍵⍳'.'}¨'Grid'⎕WG'Input'
-          Combos←Where CellTypes∊Where InputList∊'DD' 'DE' ⍝ where are the combos?!
+          Combos←⍸CellTypes∊⍸InputList∊'DD' 'DE' ⍝ where are the combos?!
           :If CurCol∊Combos
               No←Combos⍳CurCol
               :If 0=⎕NC Name←'∆LIST_',⍕No
@@ -2443,7 +2443,7 @@
       row←{0=≢⍵.RowTitles:'no. ',⍕1+⍵.CurCell[0] ⋄ '"',(⍵.CurCell[0]⊃⍵.RowTitles),'"'}n.Grid
       col←{0=≢⍵.ColTitles:'no. ',⍵.CurCell[1] ⋄ '"',(⍵.CurCell[1]⊃⍵.ColTitles),'"'}n.Grid
       parms.question←'Date for row ',(row),' / column ',col,':'
-      (flag newDate)←n.∆globalParms parms ##.Request.AskForDate{↑↑(//)⎕VFI ⍵}¨'-'Split↑n.Grid.CurCell⌷n.Grid.Values
+      (flag newDate)←n.∆globalParms parms ##.Request.AskForDate{↑↑(//)⎕VFI ⍵}¨'-'RefToAPLTreeUtils.Split↑n.Grid.CurCell⌷n.Grid.Values
       :If flag
           (n.Grid.CurCell⌷n.Grid.Values)←⊂,Date2IDF newDate
       :EndIf
@@ -2547,4 +2547,3 @@
     :EndSection AskFor
 
 :EndClass
-

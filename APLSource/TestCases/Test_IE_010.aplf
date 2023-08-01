@@ -39,6 +39,6 @@
 
 ∆TidyUp:
  :Trap 0 ⋄ FF.Close ⋄ :EndTrap
- :Trap 0 ⋄ ##.FilesAndDirs.DeleteFile n1.∆container.IEobject.∆Filename ⋄ :EndTrap
- :Trap 0 ⋄ ##.FilesAndDirs.DeleteFile n2.∆container.IEobject.∆Filename ⋄ :EndTrap
+ :Trap 0 ⋄ FilesAndDirs.DeleteFile n1.∆container.IEobject.∆Filename ⋄ :EndTrap
+ :Trap 0 ⋄ FilesAndDirs.DeleteFile n2.∆container.IEobject.∆Filename ⋄ :EndTrap
 ⍝Done

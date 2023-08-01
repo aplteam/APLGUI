@@ -14,7 +14,7 @@
  parms.info←'We need a directory for the installation of the software:'
  parms.allowCreate←1
  parms.allowRemove←1
- parms.defaultDrive←##.FilesAndDirs.GetTempPath
+ parms.defaultDrive←FilesAndDirs.GetTempPath
 
  n←myGuiParms parms #.APLGUI.APLGUI.DirSelect.Create''
  ⎕DL 0.1

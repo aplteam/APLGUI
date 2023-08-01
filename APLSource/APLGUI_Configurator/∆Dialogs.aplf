@@ -1,3 +1,0 @@
- r←∆Dialogs
-⍝ Returns those main classes "Dialogs" really needs.
- r←,⊂'StdForm'

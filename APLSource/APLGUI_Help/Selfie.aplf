@@ -2,16 +2,16 @@
 ⍝ `parms` must either be a parameter space or an empty vector (`⍬`).
  enforceCompile←{0<⎕NC ⍵:⍎⍵ ⋄ 0}'enforceCompile'
  :If 0=≢parms
-     parms←#.Laguntza.CreateParms''
-     parms.folderName←'expand'##.FilesAndDirs.NormalizePath'Help\'
-     parms.helpAbout←'APL GUI Utilities' 'Written by Kai Jaeger' 'Copyright APL Team Ltd'
+     parms←##.APLGUI.Laguntza.CreateParms''
+     parms.folderName←'expand'##.APLGUI.FilesAndDirs.NormalizePath'Help\'
+     parms.helpAbout←'APL GUI Utilities' 'Written by Kai Jaeger'
      parms.helpCaption←'APLGUI'
-     parms.helpVersion←1⊃##.APLGUI.APLGuiAdmin.Version
-     parms.helpVersionDate←2⊃##.APLGUI.APLGuiAdmin.Version
-     :If 0=##.FilesAndDirs.IsDir parms.folderName
+     parms.helpVersion←1⊃##.APLGUI.Version
+     parms.helpVersionDate←2⊃##.APLGUI.Version
+     :If 0=##.APLGUI.FilesAndDirs.IsDir parms.folderName
          ⍝ Huuh?!
      :EndIf
-     parms.source←##.APLGUI_Help
+     parms.source←⍎(⍕##),'.APLGUI_Help'
  :EndIf
- r←enforceCompile #.Laguntza.New parms
+ r←enforceCompile ##.APLGUI.Laguntza.New parms
 ⍝Done

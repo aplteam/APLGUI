@@ -3,14 +3,14 @@
  globalParms←##.APLGUI.APLGuiGlobalParms.CreateDefaults
  globalParms.regKey←'MyApp'
  globalParms.caption←'My App'
- globalParms.icon←#.⎕NEW'Icon'(⊂'File'(GetFile'Sample.ico'))
+ globalParms.icon←#.⎕NEW'Icon'(⊂'File'(GetFile'Misc\Sample.ico'))
 
  list←(⊂'#.'),¨↓#.⎕NL 3
- list,←{(⊂⍵,'.'),¨↓(⍎⍵).⎕NL 3}'#.APLTreeUtils'
+ list,←{(⊂⍵,'.'),¨↓(⍎⍵).⎕NL 3}'##.APLGUI.APLTreeUtils2'
  list,←{(⊂⍵,'.'),¨↓(⍎⍵).⎕NL 3}'##.APLGUI.APLGuiUtils'
  list,←{(⊂⍵,'.'),¨↓(⍎⍵).⎕NL 3}'##.APLGUI_Demo'
  list,←{(⊂⍵,'.'),¨↓(⍎⍵).⎕NL 3}'##.TestCases'
- list,←{(↓##.APLTreeUtils.FormatDateTime⊃{⍵[;1+⎕IO]}⍵),[0.5+⎕IO]({⍵[;3]}⍵)}⎕AT list
+ list,←{(↓##.APLGUI.APLTreeUtils2.FormatDateTime⊃{⍵[;1+⎕IO]}⍵),[0.5+⎕IO]({⍵[;3]}⍵)}⎕AT list
  list,←↓⎕FMT⍪↑∘⍴∘⎕NR¨list[;0+⎕IO]
 
  parms←##.APLGUI.SelectionTool.CreateParms

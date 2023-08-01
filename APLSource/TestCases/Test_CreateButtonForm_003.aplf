@@ -6,7 +6,7 @@
  oldPixelSettings←2035⌶'RealPixel'
  myGuiParms←#.APLGUI.APLGUI.APLGuiGlobalParms.CreateDefaults
  myGuiParms.regKey←'MyApp\Kai1'
- myGuiParms.icon←⎕NEW'Icon'(⊂'File'(GetFile'Sample.ico'))
+ myGuiParms.icon←⎕NEW'Icon'(⊂'File'(GetFile'Misc\Sample.ico'))
  parms←#.APLGUI.APLGUI.Dialogs.CreateParmsForYesOrNo
  parms.addToCaption←'This caption defines the actual width of the form as such'
  parms.question←'Are you really sure about this?'

@@ -35,7 +35,7 @@
      ⎕DQ n1.∆Form
      ∆Process n1.∆Form
 
-     →T.PassesIf 1 ∆PromptForSuccess'Did the Browser control act in the expected way?'
+     →T.PassesIf 1 CommTools.YesOrNo'Did the Browser control act in the expected way?'
 
      r←T._OK
 
@@ -43,5 +43,5 @@
 
 ∆TidyUp:
  :Trap 0 ⋄ n1.∆container.Close ⋄ :EndTrap
- :Trap 0 ⋄ ##.FilesAndDirs.DeleteFile n2.∆container.IEobject.∆Filename ⋄ :EndTrap
+ :Trap 0 ⋄ FilesAndDirs.DeleteFile n2.∆container.IEobject.∆Filename ⋄ :EndTrap
 ⍝Done

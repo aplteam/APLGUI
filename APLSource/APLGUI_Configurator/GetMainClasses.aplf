@@ -1,4 +1,0 @@
- r←GetMainClasses
- r←' '~¨⍨↓'∆'⎕NL 3
- r←1↓¨r
-⍝Done

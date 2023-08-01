@@ -1,0 +1,7 @@
+(
+ '# Design principles'
+ ''
+ 'This part of the help file covers the design principles shared by all `APLGUI` classes.'
+ 'Note that `APLGUI` prefers convention over configuration. That means although you can actually'
+ 'configure plenty of things you don''t have to. If you don''t then reasonable defaults take place.'
+)

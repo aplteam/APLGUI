@@ -11,7 +11,7 @@
     ∇ {r}←{array}ExecPrivateFns(fnsName args);fns
       :Access Public Shared
       ⍝ The sole purpose of this is to execute private functions of a class when running the test suite.
-      ⍝ This is the only way to test provate functions directly.
+      ⍝ This is the only way to test private functions directly.
       fns←⍎fnsName
       :If 0=⎕NC'array'
           r←fns args
@@ -76,7 +76,7 @@
       ⍝ ⍵[0] = The "global" caption
       ⍝ ⍵[1] = The form-specific caption
           (gp lp)←⍵                         ⍝ Global and local parms.
-          gc←{(0=≢↑⍵)⊃⍵}(lp gp).caption    ⍝ Local or global caption.
+          gc←{(0=≢↑⍵)⊃⍵}(lp gp).caption     ⍝ Local or global caption.
           lc←lp.addToCaption                ⍝ Additional Local caption.
           (0=≢gc):lc                        ⍝ No global caption? Return the local caption.
           (0=≢lc):gc                        ⍝ No local caption?
@@ -84,9 +84,9 @@
       }
 
       CompileDisplayFormatString←{
- ⍝ Takes a parameter namespace (must contain `addToCaption`)
- ⍝ Returns a string useful to set `⎕DF` either with `addToCaption` (if not empty)
- ⍝ or ⍺ which normally would be `n.∆globalParms.caption`.
+     ⍝ Takes a parameter namespace (must contain `addToCaption`)
+     ⍝ Returns a string useful to set `⎕DF` either with `addToCaption` (if not empty)
+     ⍝ or ⍺ which normally would be `n.∆globalParms.caption`.
           ⍺←''
           0=≢⍵.addToCaption:(⍕⎕THIS),'[',⍺,']'
           (⍕⎕THIS),'[',(⍵.addToCaption),']'
@@ -156,9 +156,9 @@
     ∇
 
       GetFormCaptionTextSize←{
-⍝ Returns the size needed for displaying the caption in a form.
-⍝ At the moment we lack the skills for doing this, so we make something up.
-⍝ Right argument is "n".
+    ⍝ Returns the size needed for displaying the caption in a form.
+    ⍝ At the moment we lack the skills for doing this, so we make something up.
+    ⍝ Right argument is "n".
           rf←⎕NEW'Form'(('Coord' 'Pixel')('Visible' 0)('Size'(5 5)))
           n←⍵
           size←rf.GetTextSize n.∆Form.Caption
@@ -168,9 +168,9 @@
       }
 
       GetListViewItemHeight←{
-⍝ ⍵ is ref pointing to a ListView
-⍝ Returns the height of a single item
-⍝ ⍺ is the index into the ListView. It's default is 0.
+    ⍝ ⍵ is ref pointing to a ListView
+    ⍝ Returns the height of a single item
+    ⍝ ⍺ is the index into the ListView. It's default is 0.
           ref←⍵
           h←ref.Handle
           LVM_GETITEMRECT←4110
@@ -183,18 +183,18 @@
 
     ∇ r←x GetParms y;types;bool;msg;defaults;noCheckFlag;this;filename
       :Access Public Shared
-⍝ Makes sure that `globalParms` and `parms` (in this sequence) are returned.\\
-⍝ `y` may be empty or a scalar with a single parameter namespace or a two-item-vector with any combination.
-⍝ `x` is the default parameter space for the given class.
+    ⍝ Makes sure that `globalParms` and `parms` (in this sequence) are returned.\\
+    ⍝ `y` may be empty or a scalar with a single parameter namespace or a two-item-vector with any combination.
+    ⍝ `x` is the default parameter space for the given class.
       (defaults noCheckFlag)←x,(≢x)↓⍬ 0
       y←2↑y,r←⍬ ⍬
       types←{''≡⍵:'' ⋄ ⍬≡⍵:'' ⋄ 6::'Invalid parameter'⎕SIGNAL 605 ⋄ ⍵.parmType}¨y
-⍝ Check parmType for matching the defaults
+    ⍝ Check parmType for matching the defaults
       :If 0=noCheckFlag ⍝ For some (StdForm) noch check is performed
       :AndIf 0≠≢msg←defaults CheckParmsTypes types
           msg ⎕SIGNAL 605 ⍝ APLGuiError
       :EndIf
-⍝ Make sure that [0] becomes "APLGuiGlobalParms":
+    ⍝ Make sure that [0] becomes "APLGuiGlobalParms":
       :If (⊂'APLGuiGlobalParms')∊types
           r[0]←y[types⍳⊂'APLGuiGlobalParms']
       :Else
@@ -204,7 +204,7 @@
               r[0]←⊂##.APLGuiGlobalParms.CreateDefaults
           :EndTrap
       :EndIf
-⍝ Make sure that [1] becomes the other one if not empty or "defaults":
+    ⍝ Make sure that [1] becomes the other one if not empty or "defaults":
       bool←types≢¨⊂'APLGuiGlobalParms'
       bool∧←~0∊¨⍴¨y
       :If 1=+/bool
@@ -230,7 +230,7 @@
       :AndIf 0<+/≢¨r.icon
           :For this :In r
               :If 0≠≢this.icon
-              :AndIf 'file:///'{⍺≡Lowercase(≢⍺)↑⍵}this.icon
+              :AndIf 'file:///'{⍺≡⎕C(≢⍺)↑⍵}this.icon
                   filename←((≢'file:///')↓this.icon)
                   this.icon←⎕NEW'Icon'(⊂'File'filename)
                   this.icon.⎕DF'[Icon ',filename,']'
@@ -264,7 +264,7 @@
     ∇
 
       GetRefTo←{
-      ⍝ Once the package manager has arrived this needs a rewrite  ⍝TODO⍝ 
+      ⍝ Once the package manager has arrived this needs a rewrite  ⍝TODO⍝
           name←⍵
           9.1 9.4∊⍨#.⎕NC⊂name:#.⍎name
           9.1 9.4∊⍨##.⎕NC⊂name:##.⍎name
@@ -274,23 +274,25 @@
           9.1 9.4∊⍨ref.##.##.⎕NC⊂name:ref.##.##⍎name
           9.1 9.4∊⍨ref.##.##.##.⎕NC⊂name:ref.##.##.##⍎name
           9.1 9.4∊⍨(↑⎕RSI).⎕NC⊂name:parent.⍎name
+          9=(↑↑⎕CLASS ⎕THIS).##.⎕NC name:(↑↑⎕CLASS ⎕THIS).##.⍎name
+          APLTreeUtils2
           6 ⎕SIGNAL⍨'Cannot find ',name,'?!'
       }
 
       GetRefTo_n←{
- ⍝ Takes a ref (typically the first element of a callback) and walks up
- ⍝ the hirarchy until it finds a control that contains a namespace "n".
- ⍝ Returns a ref to the "n" namespace.
+     ⍝ Takes a ref (typically the first element of a callback) and walks up
+     ⍝ the hirarchy until it finds a control that contains a namespace "n".
+     ⍝ Returns a ref to the "n" namespace.
           (9=⍵.⎕NC'n'):⍵.n
           ∇ ⍵.##
       }
 
       GetRegPath←{
-⍝ Examples:
-⍝ 'HKCU\Software\Foo\Me' ←→ GetRegPath 'Foo\Me'
-⍝ 'HKCU\Software\Foo\Me' ←→ GetRegPath 'Foo' 'Me'
-⍝ '' ←→ GetRegPath ''
-⍝ '' ←→ GetRegPath 'Foo' ''
+    ⍝ Examples:
+    ⍝ 'HKCU\Software\Foo\Me' ←→ GetRegPath 'Foo\Me'
+    ⍝ 'HKCU\Software\Foo\Me' ←→ GetRegPath 'Foo' 'Me'
+    ⍝ '' ←→ GetRegPath ''
+    ⍝ '' ←→ GetRegPath 'Foo' ''
           (0=≢⍵):''
           (1=≡⍵):'HKCU\Software\',⍵
           (0=≢1⊃⍵):''
@@ -298,10 +300,10 @@
       }
 
       GetWinRegKeyForForm←{
-⍝ Takes globalParms and parms and compiles a Window Registry Key (including "Value" name)
-⍝ that can be used to save "Posn" and "Size" in the Windows Registry
-⍝ In general the more specific RegKey (that's parms) overrule globalParms.
-⍝ globalParms.Caption and, if not empty, parms.addToCaption are then added as Value name.
+    ⍝ Takes globalParms and parms and compiles a Window Registry Key (including "Value" name)
+    ⍝ that can be used to save "Posn" and "Size" in the Windows Registry
+    ⍝ In general the more specific RegKey (that's parms) overrule globalParms.
+    ⍝ globalParms.Caption and, if not empty, parms.addToCaption are then added as Value name.
           (2≠≡,¨⍵):11 ⎕SIGNAL⍨'Invalid right argument'
           (0∊≢¨⍵):''
           (globalParms parms)←⍵
@@ -335,12 +337,12 @@
     ∇
 
     ∇ r←OnCloseForm msg;rf;n;fns
- ⍝ "Posn" and "Size" of the Form 0⊃⍵ is pointing to are saved in the Windows Registry
- ⍝ if a key is found in ∆globalParms and ∆parms.
- ⍝ This functon also sets the global ∆closed←1 which is why any APLGui Form
- ⍝ must associate this function with the "Close" event.
- ⍝ In case there is a parameter `onCLose` defined on `parms` it's expected to be a function
- ⍝ which should return a 1 (close goes through) or 0 (prevent the close).
+     ⍝ "Posn" and "Size" of the Form 0⊃⍵ is pointing to are saved in the Windows Registry
+     ⍝ if a key is found in ∆globalParms and ∆parms.
+     ⍝ This functon also sets the global ∆closed←1 which is why any APLGui Form
+     ⍝ must associate this function with the "Close" event.
+     ⍝ In case there is a parameter `onCLose` defined on `parms` it's expected to be a function
+     ⍝ which should return a 1 (close goes through) or 0 (prevent the close).
       rf←0⊃msg                                  ⍝ The form we are dealing with.
       n←GetRefTo_n rf
       r←1
@@ -405,7 +407,7 @@
 
     ∇ r←RefToAPLTreeUtils;⎕TRAP
       ⎕TRAP←0 'N'
-      r←GetRefTo'APLTreeUtils'
+      r←GetRefTo'APLTreeUtils2'
     ∇
 
     ∇ r←RefToFilesAndDirs;⎕TRAP
@@ -435,7 +437,7 @@
       :ElseIf 2=≡callback
           r←callback
       :ElseIf '.'∊callback
-          r←{(⍎↑⍵)(1⊃⍵)}¯1 0↓¨'.'##.##.APLTreeUtils.SplitPath callback
+          r←{(⍎↑⍵)(1⊃⍵)}¯1 0↓¨'.'(GetRefTo 'APLTreeUtils2').SplitPath callback
       :Else
           r←({↑⍵↓⍨+/∧\⍵=↑⍵}⎕RSI)callback
       :EndIf
@@ -628,13 +630,13 @@
       ⍝    find it where the tool in question was called from.
           0=≢⍵:⍵
           2=≡⍵:⍵            ⍝ Alread ref to parent and string with function name?
-          ('.'∊⍵)∧3=⌊|⎕NC⊂⍵:{(⍎¯1↓0⊃⍵)(1⊃⍵)}'.'SplitPath ⍵ ⍝ Do we see it? (dot is needed to avoid name clashes)
+          ('.'∊⍵)∧3=⌊|⎕NC⊂⍵:{(⍎¯1↓0⊃⍵)(1⊃⍵)}'.'##.APLTreeUtils2.SplitPath ⍵ ⍝ Do we see it? (dot is needed to avoid name clashes)
           calledFrom←{↑⍵↓⍨+/∧\⍵≡¨⊂↑⍵}⎕RSI
           home←calledFrom{2=|≡⍵:0⊃⍵ ⋄ ⍺}⍵
           3=⌊|home.⎕NC⊂⍵:home ⍵
           msg←'Cannot see callback ',⍵
           ~'.'∊⍵:msg ⎕SIGNAL APLGuiError
-          (calledFrom name)←{(⍎¯1↓0⊃⍵)(1⊃⍵)}'.'SplitPath ⍵
+          (calledFrom name)←{(⍎¯1↓0⊃⍵)(1⊃⍵)}'.'##.APLTreeUtils2.SplitPath ⍵
           3≠⌊|calledFrom.⎕NC⊂name:msg ⎕SIGNAL APLGuiError
           calledFrom name
       }
@@ -677,7 +679,7 @@
       CalcSizeOfFormCaption←{
       ⍝ The name says it all but see also the comment in ##.Enums.Globals.AddToCaptionWidth
           n←⍵
-          buff←##.##.WinSys.GetFormCaptionFontInfo
+          buff←##.WinSys.GetFormCaptionFontInfo
           ns←⎕NS''
           font←ns.⎕NEW'Font'(('Size'(|buff[0]))('Weight'(buff[4])))
           ##.Enums.Globals.AddToCaptionWidth+1⊃n.∆Form.GetTextSize n.∆Form.Caption font

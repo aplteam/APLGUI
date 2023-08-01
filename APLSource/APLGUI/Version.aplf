@@ -1,4 +1,3 @@
  r←Version
- ⍝ See also `History`
- :Access Public Shared
- r←APLGuiAdmin.Version
+⍝ See also: `History`
+ r←'APLGUI' '0.31.0+121' '2023-07-18'

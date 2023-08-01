@@ -24,7 +24,7 @@
      r⍪←'Caption_and_AddToCaption' '"Caption" and "AddToCaption"' 1 0
      r⍪←'Fonts' '' 1 0
      r⍪←'System_variables' 'System variables: ⎕IO and ⎕ML' 1 0
-     r⍪←'Closing_an_APLGui_form' 'Closing an APLGui form' 1 0
+     r⍪←'Closing_an_APLGui_form' 'Closing an APLGUI form' 1 0
      r⍪←'Testing' '' 1 0
      r⍪←'Errors' '' 1 0
      r⍪←'Form_size_calculation' 'Form size calculation' 1 0

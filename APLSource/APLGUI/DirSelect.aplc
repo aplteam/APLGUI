@@ -3,9 +3,8 @@
 ⍝ By default the user is free to switch freely between disk as well as folders. By setting `fixDrive` to 1 she
 ⍝ can be prevented from switching to another disk and by setting `fixDefaultDir` she can also be prevented
 ⍝ from switching folders. Naturally setting `fixDefaultDir` to 1 implies that `fixDefaultDrive` gets 1 as well.\\
-⍝ Author: Kai Jaeger ⋄ Copyright: APL Team Ltd
+⍝ Author: Kai Jaeger
 
-    :Include ##.APLTreeUtils
     :Include APLGuiUtils
 
     :Field Shared ReadOnly RefreshEvent←9999
@@ -170,13 +169,13 @@
       :Else
           items←Sort items
           {}DeleteChildren n.Tree in
-          {}2 ⎕NQ n.Tree'AddChildren'in('\'Last¨items)0
+          {}2 ⎕NQ n.Tree'AddChildren'in('\'RefToAPLTreeUtils.Last¨items)0
           {}2 ⎕NQ n.Tree'Expanding'in
       :EndIf
       :If 0<≢items
       :AndIf 0<≢hasSubDirs←0<≢¨RefToFilesAndDirs.ListDirs¨items
       :AndIf 1<+/hasSubDirs
-          {2 ⎕NQ n.Tree'AddChildren'⍵(⊂'dummy')0}¨in+1+⌽Where hasSubDirs
+          {2 ⎕NQ n.Tree'AddChildren'⍵(⊂'dummy')0}¨in+1+⌽⍸hasSubDirs
       :EndIf
       n.∆Form.CursorObj←saveCursorObj
     ∇
@@ -214,7 +213,7 @@
       CreateDriveCombo←{
           n←⍺
           startDir←⍵
-          drives←##.##.WinSys.GetDriveAndType
+          drives←##.WinSys.GetDriveAndType
           drives{⍵:⍺⌿⍨'CD-ROM'∘≢¨⍺[;2] ⋄ ⍺}←n.∆parms.noCDROM
           drives⍪⍨←(~(⊂startDir)∊drives[;0])⌿⍉⍪startDir ¯1 'UNC path'
           ∆←''
@@ -223,7 +222,7 @@
           ∆,←⊂'Active'(~n.∆parms.fixDefaultDrive)
           ∆,←⊂'Attach'(4⍴'Top' 'Left')
           n.Drives←n.∆Form.⎕NEW'Combo'∆
-          n.Drives.Size[1]←40+⌈/1⊃∘n.Drives.GetTextSize¨n.Drives.Items   ⍝TODO⍝  We would like to calculate the size of the triangle box
+          n.Drives.Size[1]←40+⌈/1⊃∘n.Drives.GetTextSize¨n.Drives.Items   
           _←n.Drives.⎕DF'[Combo]:Drives'
           n.Drives.onSelect←'OnSelectDrive'
           0=≢startDir:Make_C_DefaultDrive n
@@ -295,7 +294,7 @@
       :If n.∆parms.fixDefaultDir
           paths←,⊂n.∆startDrive,n.∆startDir
       :Else
-          paths←(⊂n.∆startDrive),{0=≢⍵:⍵ ⋄ '\'Split ⍵}n.∆startDir
+          paths←(⊂n.∆startDrive),{0=≢⍵:⍵ ⋄ '\'RefToAPLTreeUtils.Split ⍵}n.∆startDir
       :EndIf
       depth←in←0
       2 ⎕NQ n.Tree'AddChildren' 0(1↑paths)0
@@ -304,16 +303,16 @@
           path←↑{⍺,(('\'≠¯1↑⍺)/'\'),⍵}/(i+1)↑paths
           items←RefToFilesAndDirs.ListDirs path,'\'
           :If ~firstFlag
-              in←Where(n.Tree.Depth=depth)∧(Lowercase n.Tree.Items)≡¨Lowercase paths[i]
+              in←⍸(n.Tree.Depth=depth)∧(⎕C n.Tree.Items)≡¨⎕C paths[i]
               2 ⎕NQ n.Tree'DeleteChildren'in
           :EndIf
           :If 0<≢items
-              2 ⎕NQ n.Tree'AddChildren'in('\'Last¨items)((≢items)⍴0)
+              2 ⎕NQ n.Tree'AddChildren'in('\'RefToAPLTreeUtils.Last¨items)((≢items)⍴0)
               2 ⎕NQ n.Tree'Expanding'in
           :EndIf
           :If 0<≢items
               hasSubDirs←0<≢¨RefToFilesAndDirs.ListDirs¨items
-              {2 ⎕NQ n.Tree'AddChildren'⍵(⊂'dummy')0}¨in+1+⌽Where hasSubDirs
+              {2 ⎕NQ n.Tree'AddChildren'⍵(⊂'dummy')0}¨in+1+⌽⍸hasSubDirs
           :EndIf
           firstFlag←0
           depth+←1
@@ -326,7 +325,7 @@
       PopulateTree_←{
           (Tree path items)←⍵
           bool←{0≠≢⍵ RefToFilesAndDirs.ListDirs ⍵}¨items
-          items←⊂¨'\'Last¨items
+          items←⊂¨'\'RefToAPLTreeUtils.Last¨items
           (bool/items)←(bool/items),¨⊂⊂'dummy'
           Tree.Items←(⊂path),↑,/items
           (bool/bool)←⊂0 1
@@ -526,7 +525,7 @@
     ∇
 
       Sort←{
-          ⍵[⍋Lowercase⊃⍵]
+          ⍵[⍋⎕C⊃⍵]
       }
 
 :EndClass

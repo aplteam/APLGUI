@@ -15,11 +15,11 @@
  parms.timeout←0.1
  n←parms #.APLGUI.APLGUI.SelectionTool.Create⍕¨1+⍳10
  ∆Process n.∆Form
- →T.GoToTidyUp(,4)≢##.APLTreeUtils.Where n.List.SelItems
+ →T.GoToTidyUp(,4)≢⍸n.List.SelItems
  →T.GoToTidyUp v≢n.StatusField1.Text
  0.5 ∆Process n.∆Form
  →T.GoToTidyUp 1≠{6::1 ⋄ 0⊣⍵.Interval}n.Timer
- →T.GoToTidyUp 4≠##.APLTreeUtils.Where n.List.SelItems
+ →T.GoToTidyUp 4≠⍸n.List.SelItems
  2 ⎕NQ n.Btn_00'Select'
  ⎕DL 0.5
  →T.GoToTidyUp n.∆buttons[0]≢n.∆buttonPressed

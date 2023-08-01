@@ -5,9 +5,8 @@
 ⍝ menus and menu items, so manipulating them is easy.\\
 ⍝ The name "Menubar" is reserved and must not be used for menus or menu items.\\
 ⍝ Note that this class does not need to be instanciated.\\
-⍝ Copyright: Kai Jaeger ⋄ APL Team Ltd ⋄ http://aplteam.com\\
+⍝ Copyright: Kai Jaeger 
 
-    :Include ##.APLTreeUtils
     :Include APLGuiUtils
 
     (⎕IO ⎕ML)←0 3
@@ -52,22 +51,22 @@
     ⍝ Reformat a menu definition properly.
       ⎕TRAP←(APLGuiError'E'('⎕DMX.EM ⎕SIGNAL ',⍕APLGuiError))(0 'N')
       bool←0<≢¨{⍵~' ',⎕TC,⎕UCS 9}¨def
-      bool∧←'⍝'≠↑¨dlb def
+      bool∧←'⍝'≠↑¨RefToAPLTreeUtils.DLB def
       def2←bool/def
       KeyCodesInstance←⎕NEW ##.KeyCodes
       def2←Interpret def2
       def2[;3]←{w←⍵ ⋄ ((w=⎕UCS 9)/w)←'=' ⋄ w}¨def2[;3]
-      rows←Where~def2[;4]
+      rows←⍸~def2[;4]
       def2[rows;3]←def2[rows;3],⍨¨'~'
-      rows←Where def2[;5]
+      rows←⍸def2[;5]
       def2[rows;3]←def2[rows;3],⍨¨'#'
-      rows←Where def2[;0]≡¨⊂'Menu'
+      rows←⍸def2[;0]≡¨⊂'Menu'
       def2[rows;3]←{'[',⍵,']'}¨def2[rows;3]
       def2[;2]←{'{',⍵,'}'}¨def2[;2]
       def2[;3]←(def2[;1]⍴¨' '),¨def2[;3]
       def2[;8]←'; '∘,¨def2[;8]
       def2[;6]←{' : ',⍵}¨def2[;6]
-      rows←Where def2[;0]≡¨⊂'Separator'
+      rows←⍸def2[;0]≡¨⊂'Separator'
       def2[rows;2 6 8]←⊂''
       def2[rows;3]←⊂'-'
       def2←def2[;3 6 2 8]
@@ -150,11 +149,11 @@
       r←((≢def),9)⍴''
       :For i :In ⍳⍴def
           this←i⊃def
-          type←{('-'=1↑⍵):'Separator' ⋄ ('['=↑⍵)⊃'MenuItem' 'Menu'}dlb this
+          type←{('-'=1↑⍵):'Separator' ⋄ ('['=↑⍵)⊃'MenuItem' 'Menu'}RefToAPLTreeUtils.DLB this
           level←+/∧\' '=this
-          this←dlb this
+          this←RefToAPLTreeUtils.DLB this
           (caption this)←{w←⌊/⍵⍳':{' ⋄ ('[]'~⍨w↑⍵)(w↓⍵)}this
-          caption←dtb caption
+          caption←RefToAPLTreeUtils.DTB caption
           (caption keyCode)←HandleKeyCode caption
           :If '='∊caption
               caption[caption⍳'=']←↑⎕UCS 9
@@ -185,8 +184,8 @@
                   :EndIf
               :EndIf
           :EndIf
-          active←~'~'=↑dlb caption
-          checked←'#'=↑dlb caption
+          active←~'~'=↑RefToAPLTreeUtils.DLB caption
+          checked←'#'=↑RefToAPLTreeUtils.DLB caption
           caption←((↑caption)∊'#~')↓caption
           r[i;]←type level name caption active checked callback keyCode hint
       :EndFor
@@ -220,7 +219,7 @@
       ⍝ Get rid of comments and blanks lines
           definition←⍵
           definition←{(0 1∊⍨≡⍵):⊂,⍵ ⋄ ⍵}definition
-          def2←dlb definition
+          def2←RefToAPLTreeUtils.DLB definition
           bool←';'≠↑¨def2
           (definition def2)←bool∘/¨definition def2
           bool←'⍎'=↑¨def2
@@ -238,7 +237,7 @@
           (~':'∊⍵):''⍵
           s←{⍵↓⍨1+⍵⍳':'}⍵
           (h r)←{⍵{(⍵↑⍺)(⍵↓⍺)}⍵⍳'{'}s
-          h←FindHandler dmb h
+          h←FindHandler RefToAPLTreeUtils.DMB h
           h r
       }
 
@@ -246,8 +245,8 @@
       ⍝ Returns the name part and the remains of ⍵ as a two-item vector.
           s←⍵↑⍨⍵⍳'⍝'
           (~'{'∊s):''⍵
-          s←dmb{1↓⍵↑⍨⍵⍳'}'}s
-          s(dmb{(~';'∊⍵):1↓⍵ ⋄ ⍵↓⍨1+⍵⍳';'}{⍵↓⍨⍵⍳'}'}⍵)
+          s←RefToAPLTreeUtils.DMB{1↓⍵↑⍨⍵⍳'}'}s
+          s(RefToAPLTreeUtils.DMB{(~';'∊⍵):1↓⍵ ⋄ ⍵↓⍨1+⍵⍳';'}{⍵↓⍨⍵⍳'}'}⍵)
       }
 
       HandleKeyCode←{
@@ -255,11 +254,11 @@
           (~'='∊⍵):⍵ ⍬
           sc←1↓⍵↓⍨⍵⍳'='
           code←KeyNo sc
-          ##.##.APLTreeUtils.IsDevelopment∧0=≢code:'Invalid key shortcut'⎕SIGNAL APLGuiError
+          RefToAPLTreeUtils.IsDevelopment∧0=≢code:'Invalid key shortcut'⎕SIGNAL APLGuiError
           ⍵(KeyNo sc)
       }
 
-    GetCaption←{dtb ⍵↑⍨⍵⍳'{'}
+    GetCaption←{RefToAPLTreeUtils.DTB ⍵↑⍨⍵⍳'{'}
 
       Between←{
       ⍝ (0 0 1 1 1 0 0)←'ab(c)de' Between '()'
@@ -344,4 +343,3 @@
     ∇
 
 :Endclass
-

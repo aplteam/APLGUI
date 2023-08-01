@@ -4,9 +4,6 @@
 ⍝ * `CreateGrid` returns a ref pointing to a grid.
 ⍝ Note that any Grid instance create by `CreateGrid` depends on the class `GridCallbacks`.
 
-⍝⍝⍝⍝⍝⍝⍝ See function #.APLGUI.GUI.test for "testing" the Grid.
-
-
     ∇ parms←CreateParms parent
     ⍝ Right argument must be a reference pointing to either a Form or a SubForm.
       :Access Public Shared

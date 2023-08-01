@@ -8,10 +8,10 @@
 
 ⍝⍝⍝ Preconditions
  globalParms←#.APLGUI.APLGUI.APLGuiGlobalParms.CreateDefaults
- parms←#.APLGUI.APLGUI.Table.CreateParms
+ parms←#.APLGUI.APLGUI.TableEdit.CreateParms
  parms.testMode←1
  table←⍉⊃('Obama' 'Bush' 'Clinton')(1 0 1)
- n←#.APLGUI.APLGUI.Table.Create table globalParms parms
+ n←#.APLGUI.APLGUI.TableEdit.Create table globalParms parms
  ⎕NQ n.∆Form'Close'
  ∆Process n.∆Form
  →T.FailsIf n.∆result≢table

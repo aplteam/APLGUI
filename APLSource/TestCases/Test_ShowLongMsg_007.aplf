@@ -14,7 +14,7 @@
          ⎕←'When the GUI appears, perform the following actions:'
          ⎕←' * Press the "Show" button'
          ⎕←' * Press the "OK" button'
-     :Until 1 ∆PromptForSuccess'Are you ready?'
+     :Until 1 CommTools.YesOrNo'Are you ready?'
 
      (globalParms parms)←#.APLGUI.APLGUI.Dialogs.CreateParmsForShowLongMsg #.APLGUI.APLGUI.APLGuiUtils.GetParms ⍬
 

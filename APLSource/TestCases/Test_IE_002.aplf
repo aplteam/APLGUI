@@ -7,7 +7,7 @@
  'TEMP'#.⎕NS''
  ref←∆Create_IEcontainer #.TEMP
  n←#.APLGUI.APLGUI.IE.CreateIE ref
- filename←(##.FilesAndDirs.PWD,'\HTML\A\index.html')
+ filename←(FilesAndDirs.PWD,'\HTML\A\index.html')
  #.APLGUI.APLGUI.IE.ShowHtmlFile n.IEobject filename
  ⎕DL 0.5
  :Trap 0
@@ -21,5 +21,5 @@
 
 ∆TidyUp:
  :Trap 0 ⋄ n.∆container.Close ⋄ :EndTrap
- :Trap 0 ⋄ ##.FilesAndDirs.DeleteFile n.∆container.IEobject.∆Filename ⋄ :EndTrap
+ :Trap 0 ⋄ FilesAndDirs.DeleteFile n.∆container.IEobject.∆Filename ⋄ :EndTrap
 ⍝Done

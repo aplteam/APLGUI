@@ -2,7 +2,7 @@
 ⍝ Allows the user to select a directory.
  myGuiParms←##.APLGUI.APLGuiGlobalParms.CreateDefaults
  myGuiParms.regKey←'MyApp\Kai1'
- myGuiParms.icon←⎕NEW'Icon'(⊂'File'(GetFile'Sample.ico'))
+ myGuiParms.icon←⎕NEW'Icon'(⊂'File'(GetFile'\Misc\Sample.ico'))
  #.⎕SHADOW'MyFonts'
  #.MyFonts←∆CreateFonts 48
  info←'Where would you like to install the software?'

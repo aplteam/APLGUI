@@ -4,7 +4,7 @@
  table,←⊂⍕⎕THIS
  buffer←⎕AT table[;0]
  table,←buffer[;3]
- buffer←#.APLTreeUtils.FormatDateTime⊃buffer[;1]
+ buffer←##.APLTreeUtils2.FormatDateTime⊃buffer[;1]
  table,←↓buffer[;⍳10]
  table,←10↓¨↓buffer
  table,←{0.01×?⍵⍴100000}↑⍴table

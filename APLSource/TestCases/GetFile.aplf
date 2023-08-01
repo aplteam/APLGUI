@@ -1,10 +1,5 @@
  r←GetFile name
-⍝ Tries to locate the file "name" either in the current dir
-⍝ or in File\
- :If ⎕NEXISTS name
-     r←name
- :ElseIf ⎕NEXISTS'Files\',name
-     r←'Files\',name
- :Else
+ r←##.CiderConfig.HOME,'\Assets\',name
+ :If ~⎕NEXISTS r
      6 ⎕SIGNAL⍨'Cannot find "',name,'"'
  :EndIf

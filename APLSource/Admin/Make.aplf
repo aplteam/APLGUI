@@ -1,0 +1,22 @@
+ Make flag;targetPathToSource;⎕IO;⎕ML;M;A;F;targetPath;tempFolder;zipFilename;rc;msg
+⍝ Version 2.0.0 ⋄ 2023-07-14
+ ⎕IO←1 ⋄ ⎕ML←1
+ :If flag
+     M←⎕SE.MakeHelpers ⋄ A←##.APLGUI.APLTreeUtils2 ⋄ F←##.APLGUI.FilesAndDirs
+     targetPath←'expand'F.NormalizePath ##.CiderConfig.HOME,'\Dist\'
+     M.RecreateFolder targetPath
+     M.IncreaseBuildIDInFunction(⍕##),'.APLGUI.Version'
+     tempFolder←(F.GetTempSubDir'APLGUI'),'\'
+     (##.CiderConfig.HOME,'\apl-package.json')M.CopyTo tempFolder
+     (##.CiderConfig.HOME,'\packages\apl-dependencies.txt')M.CopyTo tempFolder
+     (##.CiderConfig.HOME,'\Assets')M.CopyTo tempFolder
+     (##.CiderConfig.HOME,'\APLSource\APLGUI')M.CopyTo tempFolder,'APLSource/'
+     (##.CiderConfig.HOME,'\APLSource\APLGUI_Help')M.CopyTo tempFolder,'APLSource/'
+     {}CompileHelp ##.APLGUI_Help tempFolder
+     zipFilename←M.CreateZipFile'aplteam-APLGUI'tempFolder ##.APLGUI.Version
+     F.DeleteFile targetPath,↑,/1↓⎕NPARTS zipFilename
+     targetPath ⎕NMOVE zipFilename
+     (rc msg)←F.RmDirByForce tempFolder
+     msg Assert rc=0
+     ⎕←'*** Successfully created: ',zipFilename
+ :EndIf

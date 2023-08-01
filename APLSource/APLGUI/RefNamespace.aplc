@@ -14,7 +14,7 @@
 ⍝ * `∆GetVersion` returns name, version number and version date.
 ⍝ * `∆GetMethods` returns a nested list with the names of all methods.
 ⍝
-⍝ Kai Jaeger ⋄ APL Team Ltd
+⍝ Kai Jaeger
     ⎕IO←0 ⋄ ⎕ml←3
 
     ∇ n←Create displayName
@@ -27,7 +27,7 @@
       :Access Public Shared
       n←⎕NS⊃'∆List' '∆GetRefs' '∆GetMethods'
       :If 0≠≢displayName
-          n.⎕DF'[',({⍵↓⍨2×'#.'≡2↑⍵}¯1↓0⊃'.'##.##.APLTreeUtils.SplitPath 1⊃⎕XSI),':',displayName,']'
+          n.⎕DF'[',({⍵↓⍨2×'#.'≡2↑⍵}¯1↓0⊃'.'##.APLTreeUtils2.SplitPath 1⊃⎕XSI),':',displayName,']'
       :EndIf
     ∇
 

@@ -1,7 +1,7 @@
  NotepadWithMultipleFonts;txt;parms;n;VTV;res;globalParms;text;changeFlag;fnt1;fnt2;fnt3
 ⍝ Simple NotePad with default parameters
  globalParms←##.APLGUI.APLGuiGlobalParms.CreateDefaults
- globalParms.icon←#.⎕NEW'Icon'(⊂'File'(GetFile'Sample.ico'))
+ globalParms.icon←#.⎕NEW'Icon'(⊂'File'(GetFile'Misc\Sample.ico'))
  globalParms.regKey←∆GetRegPath,'Notepad_Test\'
 
  VTV←''
@@ -34,7 +34,7 @@
  }
  #.OnClose←{
      n←⍵
-     txt←#.APLTreeUtils.Lowercase n.Edit.Text
+     txt←⎕C n.Edit.Text
      txt←' ',⊃,/txt,¨' '
      0=+/' fuck '⍷txt:0
      _←##.APLGUI.Dialogs.ShowMsg'Sorry, but you disobeyed the rules!'

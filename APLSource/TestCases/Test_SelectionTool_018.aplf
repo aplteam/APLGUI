@@ -6,7 +6,7 @@
  globalParms←#.APLGUI.APLGUI.APLGuiGlobalParms.CreateDefaults
  globalParms.regKey←'TestAPLGui'
  rk←'HKCU\Software\',globalParms.regKey     ⍝ Registry key
- rc←##.WinReg.DeleteSubKeyTree rk
+ rc←WinReg.DeleteSubKeyTree rk
  →T.GoToTidyUp~rc∊0 2
  testName←↑⎕SI
  rk2←rk,'\',testName     ⍝ Registry key
@@ -16,7 +16,7 @@
  ⎕DL 0.3
  ⎕NQ n.∆Form'Configure',(n.∆Form.Posn+50),(n.∆Form.Size+100)
  1 ⎕NQ n.∆Form'Close'
- →T.GoToTidyUp 0≠##.WinReg.DoesValueExist rk2,'\Posn'
+ →T.GoToTidyUp 0≠WinReg.DoesValueExist rk2,'\Posn'
 
  parms.regKey2←testName
  n←globalParms parms #.APLGUI.APLGUI.SelectionTool.Create(⍕¨1+⍳10)
@@ -25,12 +25,12 @@
  ⎕NQ n.∆Form'Configure',(oldPosn+50),(n.∆Form.Size+100)
  ⎕NQ n.∆Form'Close'     ⍝ Make it write to the Registry
  ∆Process n.∆Form
- →T.GoToTidyUp 0=##.WinReg.DoesValueExist rk2,'\Posn'
- menubarHeight←##.WinSys.(GetSystemMetrics SM_CYMENU)
- →T.GoToTidyUp(oldPosn+50-2↑menubarHeight)≡##.WinReg.GetString rk2,'\Posn'
+ →T.GoToTidyUp 0=WinReg.DoesValueExist rk2,'\Posn'
+ menubarHeight←WinSys.(GetSystemMetrics SM_CYMENU)
+ →T.GoToTidyUp(oldPosn+50-2↑menubarHeight)≡WinReg.GetString rk2,'\Posn'
 
  r←T._OK
 
 ∆TidyUp:
  n.∆CloseForm
- ##.WinReg.DeleteSubKeyTree rk
+ WinReg.DeleteSubKeyTree rk

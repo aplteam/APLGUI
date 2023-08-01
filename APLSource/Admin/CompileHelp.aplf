@@ -1,0 +1,15 @@
+ {r}←CompileHelp(pathToAPLcation pathToSource);parms;ref
+ ref←##.APLGUI
+ parms←ref.Laguntza.CreateParms ⍬
+ parms.folderName←'expand'F.NormalizePath pathToSource,'Help'
+ parms.source←pathToAPLcation
+ parms.visible←0
+ parms.helpAbout←'APLGUI Utilities' 'Written by Kai Jaeger'
+ parms.helpCaption←'APLGUI'
+ parms.helpVersion←ref.Version
+ parms.helpVersionDate←##.APLGUI.APLTreeUtils2.FormatDateTime ⎕TS
+ ref.MarkAPL←##.APLGUI.MarkAPL
+ r←1 ##.APLGUI_Help.Selfie parms
+ r.Close
+ ⎕FUNTIE ⎕FNUMS ⍝ The help DCF file
+⍝Done

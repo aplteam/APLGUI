@@ -3,12 +3,12 @@
  globalParms←##.APLGUI.APLGuiGlobalParms.CreateDefaults
  globalParms.regKey←'MyApp'
  globalParms.caption←'My App'
- globalParms.icon←#.⎕NEW'Icon'(⊂'File'(GetFile'Sample.ico'))
+ globalParms.icon←#.⎕NEW'Icon'(⊂'File'(GetFile'Misc\Sample.ico'))
  parms←##.APLGUI.ProcessTool.CreateParms
  parms.info←'Select items and then press "Process"'
  parms.cancelBtnCaption←0
  list←∪300⍴#.⎕NL-3
  list←list[⍋⊃list]
- n1←globalParms parms ##.APLGUI.ProcessTool.Create list'##.GUI_Demo.∆OnTestHandler_ProcessTool'
+ n1←globalParms parms ##.APLGUI.ProcessTool.Create list((⍕⎕THIS),'.∆OnTestHandler_ProcessTool')
 
  {}##.APLGUI.ProcessTool.ModalWait n1

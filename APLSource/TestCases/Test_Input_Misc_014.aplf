@@ -13,7 +13,7 @@
  defMat⍪←'NoOfCopies' 'No of copies' 1 DT.Numeric 2
 
  globalParms←∆GetGlobalParms
- globalParms.icon←⎕NEW'Icon'(⊂'File' 'Sample.ico')
+ globalParms.icon←⎕NEW'Icon'(⊂'File'(GetFile'Misc\Sample.ico'))
 
  n←#.APLGUI.APLGUI.Input.Create defMat globalParms ⍬
 
@@ -24,7 +24,7 @@
  parms←#.APLGUI.APLGUI.Input.CreateParms
  parms.posn←50 50
  parms.addToCaption←'No. ',⍕∆GetTestCaseNo
- parms.icon←⎕NEW'Icon'(⊂'File'(GetFile'Sample.ico'))
+ parms.icon←⎕NEW'Icon'(⊂'File'(GetFile'Misc\Sample.ico'))
 
  n←#.APLGUI.APLGUI.Input.Create defMat globalParms parms
 

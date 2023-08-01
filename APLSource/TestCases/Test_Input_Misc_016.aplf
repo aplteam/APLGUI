@@ -14,7 +14,7 @@
  defMat⍪←'Currency' '' ''DT.Currency 0 1 1
  defMat⍪←'YesNo' '' ''DT.YesNo 0 1 1
  defMat⍪←'Button' '' ''DT.Button 0 1 1
- defMat⍪←'Image' ''('file:///',GetFile'KaiJaeger.jpg')DT.Image 0 1 1
+ defMat⍪←'Image' ''('file:///',GetFile'Images\KaiJaeger.jpg')DT.Image 0 1 1
  defMat⍪←'DropDown' ''('This' 'That' 'More')DT.DropDown 0 1 1
  defMat⍪←'DropEdit' ''('One' 'Two' 'Three')DT.DropEdit 0 1 1
  defMat⍪←'ListView' ''('Kai' 'Thomas' 'Max')DT.ListView(6 30)1 2

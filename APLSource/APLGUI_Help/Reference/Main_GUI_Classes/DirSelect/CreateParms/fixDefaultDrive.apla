@@ -1,0 +1,6 @@
+(
+ '# fixDefaultDrive'
+ ''
+ 'The drive that becomes pre-selected. Defaults to `C:\\`.'
+ ''
+)

@@ -1,19 +1,15 @@
 :Class StdForm
 ⍝ The principal function `CreateForm` creates just a form and returns
 ⍝ a namespace with references pointing to all the controls created as
-⍝ part of the form: one or two status fields and a progress bar.
-⍝
+⍝ part of the form: one or two status fields and a progress bar.\\
 ⍝ `CreateFormParms` creates a namespace populated with default values
 ⍝ for the possible parameters. You can then set/correct values and
-⍝ then pass the namespace as argument to `CreateForm`.
-⍝
+⍝ then pass the namespace as argument to `CreateForm`.\\
 ⍝ There are two methods for dealing with the progress bar:\\
 ⍝ `IniProgressbar` and `SetProgressbarThumb`\\
-⍝ Tabs can be added by calling `AddTabs`.
-⍝
-⍝ Author: Kai Jaeger ⋄ Copyright: APL Team Ltd
+⍝ Tabs can be added by calling `AddTabs`.\\
+⍝ Author: Kai Jaeger
 
-    :Include ##.APLTreeUtils
     :Include APLGuiUtils
 
     ⎕IO←0 ⋄ ⎕ML←3

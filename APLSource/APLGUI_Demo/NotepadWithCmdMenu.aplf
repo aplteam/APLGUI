@@ -1,7 +1,7 @@
  NotepadWithCmdMenu;txt;parms;n;VTV;res;globalParms;text;changeFlag
 ⍝ Simple NotePad with default parameters
  globalParms←##.APLGUI.APLGuiGlobalParms.CreateDefaults
- globalParms.icon←#.⎕NEW'Icon'(⊂'File'(GetFile'Sample.ico'))
+ globalParms.icon←#.⎕NEW'Icon'(⊂'File'(GetFile'Misc\Sample.ico'))
  globalParms.regKey←∆GetRegPath,'Notepad_Test\'
 
  VTV←''
@@ -19,7 +19,7 @@
  parms.addToCaption←'Copyright notice'
  parms.posn←35 25
  parms.askForSave←1
- parms.cmdMenu←'Special'('First command=F12' '##.GUI_Demo.∆NotepadCmdHandler')('~Second' '##.GUI_Demo.∆NotepadCmdHandler')'-'('One more' '##.GUI_Demo.∆NotepadCmdHandler')
+ parms.cmdMenu←'Special'('First command=F12'((⍕⎕THIS),'.∆NotepadCmdHandler'))('~Second'((⍕⎕THIS),'.∆NotepadCmdHandler'))'-'('One more'((⍕⎕THIS),'.∆NotepadCmdHandler'))
  #.⎕SHADOW¨'OnStart' 'OnClose'
  #.OnStart←{
      n←⍵
@@ -31,7 +31,7 @@
  }
  #.OnClose←{
      n←⍵
-     txt←#.APLTreeUtils.Lowercase n.Edit.Text
+     txt←⎕C n.Edit.Text
      txt←' ',⊃,/txt,¨' '
      0=+/' fuck '⍷txt:0
      _←##.APLGUI.Dialogs.ShowMsg'Sorry, but you disobeyed the rules!'

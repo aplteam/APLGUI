@@ -1,6 +1,6 @@
  ∆TopicProperties←{
-⍝ This function is needed by the APLTreeHelp system.
-⍝ You can edit this function from the APLTreeHelp GUI via the context menu.
+⍝ This function is needed by the Laguntza system.
+⍝ You can edit this function from the Laguntza GUI via the context menu.
 ⍝ *** NOTE:
 ⍝     Make only changes to this function that affect the explicit result.
 ⍝     Any other changes will eventually disappear because these functions are rebuild
@@ -20,7 +20,6 @@
      r⍪←'Dialogs' '' 1 0
      r⍪←'DirSelect' '' 1 0
      r⍪←'FileBox' '' 1 0
-     r⍪←'IE' '' 1 0
      r⍪←'Input' '' 1 0
      r⍪←'Menubar' '' 1 0
      r⍪←'Notepad' '' 1 0
@@ -29,8 +28,5 @@
      r⍪←'Request' '' 1 0
      r⍪←'SelectionTool' '' 1 0
      r⍪←'StdForm' '' 1 0
-     ⍝⍝⍝ <Table>
-     ⍝⍝⍝ r⍪←'Table' '' 1 0
-     ⍝⍝⍝ </Table>
      r
  }

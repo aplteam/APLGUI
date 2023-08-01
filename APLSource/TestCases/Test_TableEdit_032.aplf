@@ -1,4 +1,4 @@
- r←Test_TableEdit_032(stopFlag batchFlag);parms;n;⎕TRAP;table;rowTitles
+ r←Test_TableEdit_032(stopFlag batchFlag);parms;n;⎕TRAP;table;rowTitles;msg
 ⍝ The user is asked whether she sees two scoll bars: a horizontal one and a verical one.
  r←T._Inactive
  :Return
@@ -18,12 +18,12 @@
      parms.confirmQuit←0
      parms.testMode←1
 
-     ⎕←'This test requires two scroll bars to show up. When you are ready to continue press <Enter>'
-     0⍴⍞
+     msg←'This test requires two scroll bars to show up.'
+     CommTools.Pause msg
 
      n←#.APLGUI.APLGUI.Table.Create table #.APLGUI.APLGUI.APLGuiGlobalParms.CreateDefaults parms
 
-     r←~1 ∆PromptForSuccess'Do you see both a horizontal and a vertical scroll bar?'
+     r←~1 CommTools.YesOrNo'Do you see both a horizontal and a vertical scroll bar?'
 
 ∆TidyUp:
      n.∆CloseForm

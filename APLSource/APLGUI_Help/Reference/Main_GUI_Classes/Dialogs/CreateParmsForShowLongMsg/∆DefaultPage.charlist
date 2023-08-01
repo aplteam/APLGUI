@@ -1,4 +1,0 @@
-# CreateParmsForShowLongMsg
-
-Note that `CreateParmsForShowLongMsg` calls →[#.APLGUI.APLGUI_Help.Reference.Main_GUI_Classes.Dialogs.CreateParms]
- and then adds the parameters discussed here.

@@ -13,7 +13,7 @@
  :EndIf
  parms.minSize←100 200
  n←#.APLGUI.APLGUI.StdForm.Create globalParms parms
- n.VersionNo.Text←1⊃#.APLGUI.APLGUI.APLGuiAdmin.Version
+ n.VersionNo.Text←1⊃#.APLGUI.APLGUI.Version
  ⎕DL 1
  →T.FailsIf 200 400≢n.∆Form.Size
  ⎕NQ n.∆Form'Close'

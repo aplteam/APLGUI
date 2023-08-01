@@ -3,7 +3,7 @@
  globalParms←##.APLGUI.APLGuiGlobalParms.CreateDefaults
  globalParms.regKey←'MyApp'
  globalParms.caption←'This is my most favourite application, really!'
- globalParms.icon←#.⎕NEW'Icon'(⊂'File'(GetFile'Sample.ico'))
+ globalParms.icon←#.⎕NEW'Icon'(⊂'File'(GetFile'Misc\Sample.ico'))
  list←∪300⍴#.⎕NL-3
  list←list[⍋⊃list]
  n1←globalParms ##.APLGUI.ProcessTool.Create list'##.##.##.APLGUI.APLGUI_Demo.∆OnTestHandler_ProcessTool'

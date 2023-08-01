@@ -16,8 +16,8 @@
      msg←⍵
      key←2⊃msg
      1≠⍴,key:1
-     ~key∊⎕A,##.APLTreeUtils.Lowercase ⎕A:0      ⍝ Suppress everything that is not a letter
-     (2⊃msg)←##.APLTreeUtils.Uppercase key       ⍝ Translate to Uppercase
+     ~key∊⎕A,⎕C ⎕A:0      ⍝ Suppress everything that is not a letter
+     (2⊃msg)←1 ⎕C key       ⍝ Translate to Uppercase
      ⎕THIS.flag←1
      msg
  }

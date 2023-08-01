@@ -1,0 +1,12 @@
+(
+ '# Create a parameter space with CreateParms'
+ ''
+ 'Syntax:'
+ ''
+ '~~~'
+ 'r←CreateParms'
+ '~~~'
+ ''
+ 'Use this function for creating a parameter space which will be accepted by the `Create` method.'
+ ''
+)

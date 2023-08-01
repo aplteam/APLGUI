@@ -14,9 +14,9 @@
  parms.allowCreate←1
  parms.allowRemove←1
 
- startDir←##.FilesAndDirs.GetTempFilename''
+ startDir←FilesAndDirs.GetTempFilename''
  1 ⎕NDELETE startDir
- 'Create!'##.FilesAndDirs.CheckPath startDir  ⍝ Create a directory that does not contain a sub dir.
+ 'Create!'FilesAndDirs.CheckPath startDir  ⍝ Create a directory that does not contain a sub dir.
  n←myGuiParms parms #.APLGUI.APLGUI.DirSelect.Create startDir
  ⎕DL 0.1
  1 ⎕NQ n.Btn_01'Select'
@@ -24,5 +24,5 @@
  r←T._OK
 
 ∆TidyUp:
- ##.FilesAndDirs.RmDir startDir
+ FilesAndDirs.RmDir startDir
  :Trap 6 ⋄ n.∆CloseForm ⋄ :EndTrap

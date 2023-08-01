@@ -1,6 +1,7 @@
  BusyWithAbortButton;parms;n;i;msg
  #.⎕SHADOW'TEMP'
  #.TEMP←#.⎕NS''
+ #.TEMP.⎕IO←0 ⋄ #.TEMP.⎕ML←3
 
  parms←##.APLGUI.Busy.CreateParms
  parms.addToCaption←'This is "',(↑⎕XSI),'"'

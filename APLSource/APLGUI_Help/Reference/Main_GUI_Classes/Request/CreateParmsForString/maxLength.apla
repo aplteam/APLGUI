@@ -1,0 +1,6 @@
+(
+ '# maxLength'
+ ''
+ 'How many characters may be entered (empty=unlimited).'
+ ''
+)

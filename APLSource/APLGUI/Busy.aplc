@@ -9,7 +9,6 @@
 ⍝ thread, and it will also `⎕DQ` the Form in this thread. This is a must
 ⍝ because otherwise the callback associated with the "Abort" button would not run.
 
-    :Include ##.APLTreeUtils
     :Include APLGuiUtils
 
     ∇ n←{x}Create msg;defaults;globalParms;parms
@@ -37,7 +36,7 @@
       n.∆parms←n.∆parms.∆MergeParms parms
       n.∆parms.parmType←'Busy'
       n.⎕FX' {r}←∆CloseForm' 'r←⍬' ' :Trap 6 ⋄ 2 ⎕NQ ∆Form''Close'' ⋄ ∆Form.∆closed←1 ⋄ :EndTrap' '⎕TKILL ∆TID'
-      msg←,Nest msg
+      msg←,⊆msg
       n←CreateMsg n msg
       n←CreateProgressbar n
       n←CreateAutoTimer n
@@ -95,7 +94,6 @@
       :Access Public Shared
       r←⍬
       :Trap 0 ⋄ n.∆Form.Close ⋄ :EndTrap
-      .
     ∇
 
     ∇ OnSelectOnTopStatus msg;n
@@ -256,4 +254,3 @@
       }
 
 :EndClass
-

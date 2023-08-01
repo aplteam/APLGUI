@@ -1,0 +1,9 @@
+(
+ '# visible'
+ ''
+ 'Boolean that defaults to 0. This is a necessary measure because with very complex forms you might otherwise experience a flickering effect.'
+ ''
+ 'The function `DQ` will set `visible` automatically to 1.'
+ ''
+ 'You want to set this to 1 if and only if you need to trace through `Input`''s code for some reason.'
+)

@@ -1,3 +1,0 @@
- r←∆Menubar
-⍝ Returns those main classes "Menubar" really needs.
- r←,⊂'KeyCodes'

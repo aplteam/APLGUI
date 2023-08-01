@@ -1,0 +1,5 @@
+(
+ '# default'
+ ''
+ 'Which items shall be preselected from the start. Must be Boolean.'
+)

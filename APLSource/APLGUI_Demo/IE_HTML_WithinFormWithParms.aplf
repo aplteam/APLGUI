@@ -3,6 +3,7 @@
 
  #.⎕SHADOW'Temp'
  'Temp'#.⎕NS''
+ #.TEMP.⎕IO←0 ⋄ #.TEMP.⎕ML←3
 
  parms←##.APLGUI.StdForm.CreateParms
  parms.addToCaption←'IE test'

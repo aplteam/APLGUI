@@ -1,0 +1,6 @@
+(
+ '# helpKey'
+ ''
+ 'The shortcut that triggers the help callback. Defaults to F1.'
+ ''
+)

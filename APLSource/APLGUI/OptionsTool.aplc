@@ -3,10 +3,9 @@
 ⍝ By default it's a list of radio buttons but it may by a list of check boxes
 ⍝ as well. The list is supposed to be small: scrolling is not offered.\\
 ⍝ For large lists (or tables) use `SelectionTool` instead.\\
-⍝ Author: Kai Jaeger ⋄ Copyright: APL Team Ltd
+⍝ Author: Kai Jaeger
 
 
-    :Include ##.APLTreeUtils
     :Include APLGuiUtils
 
     ⎕IO←0 ⋄ ⎕ml←3
@@ -32,7 +31,7 @@
       x←{(0<⎕NC ⍵):⍎⍵ ⋄ ⍬}'x'
       (globalParms parms)←CreateParms GetParms x
       parms←CheckParmsForProgressbarAndStatusbar parms
-      'Invalid: style'⎕SIGNAL APLGuiError/⍨~(⊂Lowercase parms.style)∊##.Enums.OptionsStyles.(radio check)
+      'Invalid: style'⎕SIGNAL APLGuiError/⍨~(⊂⎕C parms.style)∊##.Enums.OptionsStyles.(radio check)
       'Invalid: "default"; must be Boolean'⎕SIGNAL 11/⍨(¯1≢parms.default)∧~∧/(parms.default)∊0 1
       parms2←CopyNamespace parms
       parms2.(fontAPL fontInput fontLabel fontStandard)←parms.(fontAPL fontInput fontLabel fontStandard)
@@ -144,7 +143,7 @@
     ⍝ `0=+/boolean` holds true in case `okFlag` is 0.
       :Access Public Shared
       okFlag←0 ⋄ boolean←n.Options.State×0
-      ind←¯1↑0,Where n.Options.State
+      ind←¯1↑0,⍸n.Options.State
       {}⎕NQ(ind⊃n.Options)'GotFocus' ⋄ ⎕DQ n.∆Form
       :If 0=n.∆Form.∆closed
           :If n.∆buttonPressed.Default
@@ -192,7 +191,7 @@
       :If 1<≡info
           n.Info←AddLabels n info
       :ElseIf '⋄'∊info
-          info←'⋄'Split info
+          info←'⋄'RefToAPLTreeUtils.Split info
           n.Info←AddLabels n info
       :Else
           ∆←''

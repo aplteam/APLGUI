@@ -6,7 +6,7 @@
  oldPixelSettings←2035⌶'RealPixel'
  myGuiParms←#.APLGUI.APLGUI.APLGuiGlobalParms.CreateDefaults
  myGuiParms.regKey←'MyApp\Kai1'
- myGuiParms.icon←⎕NEW'Icon'(⊂'File'(GetFile'Sample.ico'))
+ myGuiParms.icon←⎕NEW'Icon'(⊂'File'(GetFile'Misc\Sample.ico'))
  parms←#.APLGUI.APLGUI.Dialogs.CreateParmsForYesOrNo
  msg←'Are you really really sure about this?' '' 'We have to be certain here!' 'A mistake can be fatal!' 'We don''t want this, or do we?' '' 'Therefore, think thrice!'
  parms.question←msg

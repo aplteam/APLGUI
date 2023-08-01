@@ -1,0 +1,7 @@
+(
+ '# regKey2'
+ ''
+ 'If this is non-empty, it it used to save "Posn" & "Size" for the Form. Set to `¯1` if `regKey2`'
+ 'should become `addToCaption`. `''''` means: don''t save (default).'
+ ''
+)

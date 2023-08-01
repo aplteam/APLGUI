@@ -5,5 +5,5 @@
  data,←{(name nc)←⍵ ⋄ (nc∊9.1 9.4 9.1):{0::'n/a'⎕SRC⍎name}⍵ ⋄ 0⊃⍴⎕CR name}¨1↓¨↓data
  data,←⎕SIZE¨data[;1]
  data,←3⊃¨⎕AT¨data[;1]
- data,←{11::'n/a' ⋄ ##.APLTreeUtils.FormatDateTime 6↑1⊃⎕AT ⍵}¨data[;1]
+ data,←{11::'n/a' ⋄ APLTreeUtils2.FormatDateTime 6↑1⊃⎕AT ⍵}¨data[;1]
  colTitles←'No' 'APL object name' 'Name class' 'No of lines' 'Size/bytes' 'Author' 'Timestamp'

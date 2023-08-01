@@ -1,0 +1,8 @@
+(
+ '# onFileSaveAs'
+ ''
+ 'Callback fns called when "Save as..." is issued from the menu.'
+ ''
+ 'For how to qualify callbacks so that they will be found see →[*.Callback_functions].'
+ ''
+)

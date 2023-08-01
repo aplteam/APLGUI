@@ -7,9 +7,8 @@
 ⍝ * Offer more than just the two default buttons with `DisplayButtons`.
 ⍝ * Display messages with `ShowMsg` or `ShowLongMsg`.
 ⍝
-⍝ Author: Kai Jaeger ⋄ Copyright: APL Team Ltd
+⍝ Author: Kai Jaeger
 
-    :Include ##.APLTreeUtils
     :Include APLGuiUtils
 
     ⎕IO←0 ⋄ ⎕ML←3
@@ -19,6 +18,11 @@
     ∇ r←ListHelpers
       :Access Public Shared
       r←'DisplayButtons' 'NoOrYes' 'OkOrCancel' 'ShowLongMsg' 'ShowMsg' 'YesNoCancel' 'YesOrNo'
+    ∇
+
+    ∇ r←Version
+      :Access public shared
+      r←'Dialogs' '0.1.0' '2023-07-14'
     ∇
 
     ∇ boolean←{x}YesOrNo question;n;_;globalParms;parms;⎕TRAP
@@ -497,7 +501,7 @@
 
     ∇ n←CreateEditForMsg n;parms;globalParms;question;∆;needed
       (parms globalParms)←n.(∆parms ∆globalParms)
-      question←,Nest parms.question
+      question←,⊆parms.question
       ∆←''
       ∆,←⊂'Posn'n.(∆Vgap ∆Hgap)
       :If 0∊⍴n.∆buttons    ⍝ No buttons?!
@@ -530,7 +534,7 @@
     ∇ n←CreateQuestion n;parms;globalParms;∆;startPosn;para;question;i;height
       (parms globalParms)←n.(∆parms ∆globalParms)
       ∆←''
-      question←,Nest parms.question
+      question←,⊆parms.question
       i←0
       n.Question←⍬      ⍝ Keeps a vector with refs to all labels.
       startPosn←(##.Enums.DialogStyles.None≡parms.style)⊃{(##.Enums.Globals.InitialVgapMinSize 65⌈⍵)⍵}n.(∆initialVgap ∆Hgap)
@@ -688,7 +692,7 @@
     ∇
 
       GetDefaultParmsForType←{
-          name←'CreateParmsFor',1⊃'.'SplitPath ⍵
+          name←'CreateParmsFor',1⊃'.'RefToAPLTreeUtils.SplitPath ⍵
           3=⎕NC name:⍎name
           'CreateParmsForGeneral'≡name:CreateParms
           6 ⎕SIGNAL⍨'Missing: ',name
@@ -723,4 +727,3 @@
     ∇
 
 :EndClass
-

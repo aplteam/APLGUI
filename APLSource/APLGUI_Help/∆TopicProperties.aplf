@@ -1,15 +1,14 @@
  ∆TopicProperties←{
-⍝ This function is needed by the APLTreeHelp system.
-⍝ You can edit this function from the APLTreeHelp GUI via
-⍝ the context menu.
+⍝ This function is needed by the Laguntza system.
+⍝ You can edit this function from the Laguntza GUI via the context menu.
 ⍝ *** NOTE:
 ⍝     Make only changes to this function that affect the explicit result.
-⍝     Any other changes will eventually disappear because these functions are rebuilt
-⍝     under program control from their explicit results under certain circumstances.
-⍝        This also the reason why you should use the `active` flag to make a topic
-⍝     disappear temporarily because although just putting a `⍝` symbol in tront of its
-⍝     line seems to have the same effect in the long run that's not true because the
-⍝     the commented line is very likely to disappear one day.
+⍝     Any other changes will eventually disappear because these functions are rebuild
+⍝     under program control from their explicit result under certain circumstances.
+⍝        This is also the reason why you should use the `active` flag to hide a topic
+⍝     temporarily because although just putting a `⍝` symbol in front of its line
+⍝     seems to have the same effect, in the long run that's not true because the
+⍝     commented line will disappear in the event of a rebuild.
 ⍝ ----------------------------------
 ⍝ r gets a table with these columns:
 ⍝ [;0] namespace or function name.
@@ -20,8 +19,6 @@
      r⍪←'About' '' 1 0
      r⍪←'Introduction' '' 1 0
      r⍪←'See_it_in_action' 'See it in action' 1 0
-     r⍪←'Requirements' '' 1 0
-     r⍪←'Roadmap' 'Road map' 1 0
      r⍪←'Design_principles' '' 1 0
      r⍪←'Reference' '' 1 0
      r⍪←'How_Tos' 'How-tos' 1 0

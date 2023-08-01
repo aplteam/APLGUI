@@ -1,7 +1,7 @@
  NotepadInSubForm;txt;parms;n;VTV;res;globalParms;text;changeFlag;FF;menu;parmsForm;parmsPad;parmsIE
 ⍝ Simple NotePad with default parameters
  globalParms←##.APLGUI.APLGuiGlobalParms.CreateDefaults
- globalParms.icon←#.⎕NEW'Icon'(⊂'File'(GetFile'Sample.ico'))
+ globalParms.icon←#.⎕NEW'Icon'(⊂'File'(GetFile'Misc\Sample.ico'))
  globalParms.regKey←∆GetRegPath,'Notepad_Test\'
 
  VTV←''
@@ -34,13 +34,13 @@
  parmsIE←##.APLGUI.IE.CreateParms
  parmsIE.onNavigate←'#.TEMP.OnNavigate'
  n.IE←parmsIE ##.APLGUI.IE.CreateIE n.SF_View
- ##.APLGUI.IE.ShowHtmlFile n.IE.IEobject(#.FilesAndDirs.PWD,'\Files\HTML\A\index.html')
+ ##.APLGUI.IE.ShowHtmlFile n.IE.IEobject(##.CiderConfig.HOME,'\Files\HTML\A\index.html')
  n.∆changeFlag←0
  n.∆result←VTV
  n.∆originalText←n.Edit.Text
  n←##.APLGUI.Notepad.InitialFindVars n
  n←##.APLGUI.Notepad.InitialUndoRedoStack n n.Edit.Text
 
- res←⎕DQ'.'
+ res←⎕DQ '.'
 
 ⍝Done

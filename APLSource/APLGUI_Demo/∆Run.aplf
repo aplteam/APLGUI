@@ -40,9 +40,11 @@ _Ask:
      :ElseIf answer∊'Ll'
          ⎕←⍪¨(↓'Group name',[0.5-~⎕IO]'=')(↓'No. of tests',[0.5-~⎕IO]'='),¨groups(list∘{+/⍵∘≡¨(⍴⍵)↑¨⍺}¨groups)
          i-←1
+         →_Ask
      :Else
          :If answer∊'eE'
              ⎕ED this
+             →_Ask
          :ElseIf answer∊'Qq'
              →∆Done
          :Else

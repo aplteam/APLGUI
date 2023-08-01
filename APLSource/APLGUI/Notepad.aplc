@@ -12,9 +12,8 @@
 ⍝ By setting the parameter `aplMode` to 1 you can force `Edit`
 ⍝ to use the "APL385 Unicode" font.
 ⍝
-⍝ Author: Kai Jaeger ⋄ Copyright: APL Team Ltd
+⍝ Author: Kai Jaeger
 
-    :Include ##.APLTreeUtils
     :Include APLGuiUtils
 
     ⎕IO←0 ⋄ ⎕ML←3
@@ -270,8 +269,8 @@
       (line col)←n.∆Ind⊃n.∆Hits
       selText←(1+line),¨(1(1+≢n.∆LastSearchString))+col
       tx←(-/⌽1⊃¨selText)↑(¯1+0 1⊃selText)⌽(¯1+↑↑selText)⊃n.Edit.Text
-      tx←Lowercase⍣(~n.∆MatchCase)⊣tx
-      searchedFor←Lowercase⍣n.∆MatchCase⊣n.∆LastSearchString
+      tx←⎕C⍣(~n.∆MatchCase)⊣tx
+      searchedFor←⎕C⍣n.∆MatchCase⊣n.∆LastSearchString
       :If tx≡searchedFor
           n.Edit.SelText←selText
           n.StatusField1.Text←'Text "',n.∆LastSearchString,'" found ',(⍕{+/0<≢¨⍵}n.∆Hits),' times. -',(⍕1+n.∆Ind),'- is highlighted.'
@@ -441,7 +440,7 @@
       :Access Public Shared
       r←⍬
       :If 0≠≢n.∆filename←OpenFileDialogBox n
-          n.Edit.Text←ReadUtf8File n.∆filename
+          n.Edit.Text←↑⎕NGET n.∆filename
           n.∆originalText←n.Edit.Text
           n.menubar.open.Active←0
           n.menubar.save.Active←1
@@ -466,7 +465,7 @@
       :Access Public Shared
       n←GetRefTo_n 0⊃msg
       :If n.∆originalText≢newText←n.Edit.Text
-          WriteUtf8File n.∆filename newText
+          (⊂,newText)⎕NPUT n.∆filename 1
           n.∆originalText←n.Edit.Text
       :EndIf
     ∇
@@ -581,9 +580,9 @@
                   r,←⊂' Separator : {sep',(⍕i),'}'
               :Else
                   :If 3≠⎕NC 1⊃this
-                      6 ⎕SIGNAL⍨'Cannot see callback for user-defined menu item ',⍕i
+                      6 ⎕SIGNAL⍨'Cannot see callback for user-defined menu item ',(⍕i),': ',1⊃this
                   :Else
-                      r,←⊂(' ',dlb'~'~⍨↑this),'  : OnUserDefinedMenuItem {cmd_',(⍕¯2↑'00',⍕i),'}'
+                      r,←⊂(' ',RefToAPLTreeUtils.DLB'~'~⍨↑this),'  : OnUserDefinedMenuItem {cmd_',(⍕¯2↑'00',⍕i),'}'
                   :EndIf
               :EndIf
           :EndFor
@@ -713,9 +712,9 @@
 
     ∇ {r}←LoadFileIntoEdit(n filename);buffer
       r←⍬
-      :If 1=≡buffer←ReadUtf8File filename
+      :If 1=≡buffer←↑⎕NGET filename
       :AndIf (⎕UCS 13)∊buffer
-          buffer←(⎕UCS 13)Split buffer
+          buffer←(⎕UCS 13)RefToAPLTreeUtils.Split buffer
       :EndIf
       n.∆originalText←n.Edit.Text←buffer
       :If 0<n.menubar.⎕NC'open'
@@ -754,7 +753,7 @@
                   :EndIf
                   :If 0<n.⎕NC'∆filename'
                   :AndIf 0≠≢n.∆filename
-                      WriteUtf8File n.∆filename n.Edit.Text
+                      (⊂,n.Edit.Text)⎕NPUT n.∆filename 1
                   :EndIf
                   n.∆result←n.Edit.Text
                   n.∆changeFlag←1
@@ -800,7 +799,7 @@
       res←n.∆globalParms parms #.GUI.Input.Run defMat
       :If 0≠≢res
           n.(∆LastSearchString ∆MatchCase ∆MatchWord ∆StartOptions)←res[;1]
-          n.∆LastSearchString←Lowercase⍣(~n.∆MatchCase)⊣n.∆LastSearchString
+          n.∆LastSearchString←⎕C⍣(~n.∆MatchCase)⊣n.∆LastSearchString
           :If n.∆StartOptions≡0 1  ⍝ From cursor position?
               buff←(¯1+↑↑n.Edit.SelText)↓n.Edit.Text
               (0⊃buff)←(¯1+0 1⊃n.Edit.SelText)↓0⊃buff
@@ -814,8 +813,8 @@
                   n.∆Hits←⊃,/{(↑⍵),¨1↓⍵}¨{b←≢¨⍵ ⋄ (0<b)/(⍳≢b),¨⍵}where
               :EndIf
           :Else
-              txt←Lowercase⍣(~n.∆MatchCase)⊣buff
-              :If 0=≢∊where←Where¨n.∆LastSearchString∘⍷¨txt
+              txt←⎕C⍣(~n.∆MatchCase)⊣buff
+              :If 0=≢∊where←⍸¨n.∆LastSearchString∘⍷¨txt
                   n.∆Hits←⍬
               :Else
                   n.∆Hits←⊃,/{(↑⍵),¨1↓⍵}¨{b←≢¨⍵ ⋄ (0<b)/(⍳≢b),¨⍵}where
@@ -901,4 +900,3 @@
     :endSection
 
 :EndClass
-

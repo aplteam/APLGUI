@@ -1,0 +1,6 @@
+(
+ '# defaultButton'
+ ''
+ 'Which button is "pressed" when the user presses <enter>; 1 is Cancel.'
+ ''
+)

@@ -1,0 +1,11 @@
+(
+ '# Version'
+ ''
+ 'This niladic function returns a three-item vector:'
+ ''
+ '1. Name'
+ ''
+ '1. Version number'
+ ''
+ '1. Date of that version'
+)

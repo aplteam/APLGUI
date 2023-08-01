@@ -1,0 +1,9 @@
+(
+ '# vGap'
+ ''
+ 'Vertical gap between controls. If this is a fraction of 1 then it defines the % of the hight (sic!)'
+ 'of `fontStandard`, otherwise it is interpreted as number of pixels.'
+ ''
+ 'See also →[#.APLGUI.APLGUI_Help.Design_principles.Parameter_spaces.Global_parameters.initialVgap].'
+ ''
+)

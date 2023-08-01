@@ -1,7 +1,7 @@
  NotepadAplMode;txt;parms;n;VTV;res;globalParms;text;changeFlag
 ⍝ Simple NotePad with default parameters
  globalParms←##.APLGUI.APLGuiGlobalParms.CreateDefaults
- globalParms.icon←#.⎕NEW'Icon'(⊂'File'(GetFile'Sample.ico'))
+ globalParms.icon←#.⎕NEW'Icon'(⊂'File'(GetFile'Misc\Sample.ico'))
  globalParms.regKey←∆GetRegPath,'Notepad_Test'
 
  VTV←''

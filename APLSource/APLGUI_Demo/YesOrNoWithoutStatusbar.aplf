@@ -2,7 +2,7 @@
 ⍝ Presents a "Yes" and a "No" button together with a message and without status bar.
  myGuiParms←##.APLGUI.APLGuiGlobalParms.CreateDefaults
  myGuiParms.regKey←'MyApp\Kai1'
- myGuiParms.icon←⎕NEW'Icon'(⊂'File'(GetFile'Sample.ico'))
+ myGuiParms.icon←⎕NEW'Icon'(⊂'File'(GetFile'Misc\Sample.ico'))
  parms←##.APLGUI.Dialogs.CreateParmsForYesOrNo
  parms.(hasProgressbar hasStatusbar)←2⍴0
  ⎕←parms myGuiParms ##.APLGUI.Dialogs.YesOrNo'Are you really sure about this?'

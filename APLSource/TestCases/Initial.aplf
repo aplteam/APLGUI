@@ -1,7 +1,7 @@
  {r}←Initial;∆;msg
  r←1
  ⎕IO←0 ⋄ ⎕ML←3
- ##.FilesAndDirs.PolishCurrentDir
+ FilesAndDirs.Cd ##.CiderConfig.HOME
  ∆←⊂'Form'
  ∆,←⊂'Coord' 'Pixel'
  ∆,←⊂'Caption' 'Parent Form - don''t close!'

@@ -18,7 +18,7 @@
 ⍝ All in all the class lacks many of the features of the `SelectDir` class and
 ⍝ therefore also the flexibility of that class. For that reason it might well
 ⍝ be replaced by a `SelectFile` class one day.\\
-⍝ Author: Kai Jaeger ⋄ APL Team Ltd.
+⍝ Author: Kai Jaeger
 
     :Include APLGuiUtils
 

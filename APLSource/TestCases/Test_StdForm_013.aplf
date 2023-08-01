@@ -4,7 +4,7 @@
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
 
  parms←#.APLGUI.APLGUI.StdForm.CreateParms
- parms.icon←⎕NEW'Icon'(⊂'File'(GetFile'Sample.ico'))
+ parms.icon←⎕NEW'Icon'(⊂'File'(GetFile'Misc\Sample.ico'))
  parms.size←200 400
  parms.posn←60 60
  parms.minSize←100 200

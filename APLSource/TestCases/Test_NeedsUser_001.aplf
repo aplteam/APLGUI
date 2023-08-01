@@ -8,13 +8,13 @@
  :Else
      r←T._Failed
      ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
-     msg←⊂(⎕PW-1)⍴'-'
+     msg←''
      msg,←⊂'Test of the context menu'
      msg,←⊂'When the context menu appears press `n` - that is the hot key for "Do it now!"'
      msg,←⊂'Note that the context menu will appear at the current position of the mouse'
      msg,←⊂'Don''t change the selection!'
-     ⎕←⍪msg
-     0/⍞,0/⎕←'  Press <enter> when ready'
+     CommTools.Pause msg
+
      parms←#.APLGUI.APLGUI.ProcessTool.CreateParms
      parms.posn←30 40
      list←('one' 'two' 'three' 'four' 'five' 'six' 'seven' 'eight' 'nine'),[0.5]1+⍳9

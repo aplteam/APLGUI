@@ -3,7 +3,7 @@
  globalParms←##.APLGUI.APLGuiGlobalParms.CreateDefaults
  globalParms.regKey←'MyApp'
  globalParms.caption←'My App'
- globalParms.icon←#.⎕NEW'Icon'(⊂'File'(GetFile'Sample.ico'))
+ globalParms.icon←#.⎕NEW'Icon'(⊂'File'(GetFile'Misc\Sample.ico'))
  list←∪300⍴#.⎕NL-3
  list←list[⍋⊃list]
  parms←##.APLGUI.ProcessTool.CreateParms

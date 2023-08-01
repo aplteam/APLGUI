@@ -15,6 +15,6 @@
  ⎕NQ n.Btn_01'Select'
  ∆Process n.∆Form
  n.∆CloseForm
- →T.PassesIf(,5)≡##.APLTreeUtils.Where n.∆result
+ →T.PassesIf(,5)≡⍸n.∆result
 
  r←T._OK

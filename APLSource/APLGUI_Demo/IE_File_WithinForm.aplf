@@ -6,7 +6,7 @@
  ref←##.APLGUI.StdForm.Create parms
  n←##.APLGUI.IE.CreateIE ref.∆Form
 
- ##.APLGUI.IE.ShowHtmlFile n.IEobject(#.FilesAndDirs.PWD,'\Files\HTML\A\index.html')
+ ##.APLGUI.IE.ShowHtmlFile n.IEobject(##.CiderConfig.HOME,'\Files\HTML\A\index.html')
 ⍝⎕←##.APLGUI.IE.GetBody n.IEobject
 ⍝⎕←##.APLGUI.IE.GetHTML n.IEobject
  ⎕DQ ref.∆Form

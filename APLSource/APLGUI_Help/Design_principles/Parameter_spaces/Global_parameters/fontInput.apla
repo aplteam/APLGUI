@@ -1,0 +1,7 @@
+(
+ '# fontInput'
+ ''
+ 'The font used for input fields, tables and lists by all Forms created with `APLGUI` tools. See'
+ '→[*.Fonts] for details.'
+ ''
+)

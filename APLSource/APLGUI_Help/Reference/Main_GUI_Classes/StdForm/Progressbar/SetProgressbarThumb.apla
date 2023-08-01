@@ -1,0 +1,12 @@
+(
+ '# SetProgressbarThumb'
+ ''
+ 'Syntax:'
+ ''
+ '~~~'
+ '{r} ← SetProgressbarThumb (n val)'
+ '~~~'
+ ''
+ 'Useful to manipulate the progress bar thumb.'
+ ''
+)

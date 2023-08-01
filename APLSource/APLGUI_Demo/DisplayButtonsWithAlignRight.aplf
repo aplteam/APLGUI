@@ -2,7 +2,7 @@
 ⍝ Presents four buttons together with a message. This one aligns the buttons to the right.
  globalGuiParms←##.APLGUI.APLGuiGlobalParms.CreateDefaults
  globalGuiParms.regKey←'MyApp\Kai1'
- globalGuiParms.icon←⎕NEW'Icon'(⊂'File'(GetFile'Sample.ico'))
+ globalGuiParms.icon←⎕NEW'Icon'(⊂'File'(GetFile'Misc\Sample.ico'))
  buttons←'PDF' 'XML' 'JSON' 'Cancel'
  parms←##.APLGUI.Dialogs.CreateParmsForDisplayButtons
  parms.cancelButton←¯1+⍴,buttons

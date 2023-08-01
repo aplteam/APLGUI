@@ -1,4 +1,4 @@
- r←Test_TableEdit_035(stopFlag batchFlag);parms;n;⎕TRAP;table;rowTitles
+ r←Test_TableEdit_035(stopFlag batchFlag);parms;n;⎕TRAP;table;rowTitles;msg
 ⍝ Test "lock" of columns. The first two columns should not participate in horizontal scolling.
  r←T._Inactive
  :Return
@@ -20,12 +20,12 @@
      parms.testMode←1
      parms.lock←2
 
-     ⎕←'In this test you shall scroll horizontally. The first two columns should stay put. When you are ready to continue press <Enter>'
-     0⍴⍞
+     msg←'In this test you shall scroll horizontally. The first two columns should stay put. When you are ready to continue press <Enter>'
+     CommTools.Pause msg
 
      n←#.APLGUI.APLGUI.Table.Create table #.APLGUI.APLGUI.APLGuiGlobalParms.CreateDefaults parms
 
-     r←~1 ∆PromptForSuccess'Are the first two columns excluded from horizontal scrolling?'
+     r←~1 CommTools.YesOrNo'Are the first two columns excluded from horizontal scrolling?'
 
 ∆TidyUp:
      n.∆CloseForm

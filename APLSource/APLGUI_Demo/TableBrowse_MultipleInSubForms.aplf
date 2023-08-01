@@ -4,7 +4,7 @@
  . ⍝ The "Table" class is under construction and not ready yet
  globalParms←##.APLGUI.APLGuiGlobalParms.CreateDefaults
  globalParms.caption←'Multiple Grids'
- globalParms.icon←⎕NEW'Icon'(⊂'File'(GetFile'Sample.ico'))
+ globalParms.icon←⎕NEW'Icon'(⊂'File'(GetFile'Misc\Sample.ico'))
  parms←##.APLGUI.StdForm.CreateParms
  parms.caption←'Three'
  parms.osn←35 55

@@ -1,0 +1,6 @@
+(
+ '# timeout'
+ ''
+ 'Number of seconds until the autoPress button is "pressed".'
+ ''
+)

@@ -20,14 +20,14 @@
  n←parms #.APLGUI.APLGUI.Notepad.Create VTV #.APLGUI.APLGUI.Notepad.CreateParms
  n.Edit ∆KeyPress'Kai Jaeger'
  ∆Process n.∆Form
- n.∆filename←##.FilesAndDirs.GetTempFilename''
+ n.∆filename←FilesAndDirs.GetTempFilename''
  ⎕NQ n.menubar.save'Select'
  ∆Process n.∆Form
  ⎕NQ n.menubar.quit'Select'
  ∆Process n.∆Form
 
- buffer←##.APLTreeUtils.ReadUtf8File n.∆filename
- →T.GoToTidyUp'Kai Jaeger'{⍺≢(⍴⍺)↑⍵}↑buffer
+ buffer←↑⎕NGET n.∆filename
+ →T.GoToTidyUp'Kai Jaeger'{⍺≢(⍴⍺)↑⍵}buffer
  r←T._OK
 
 ∆TidyUp:
