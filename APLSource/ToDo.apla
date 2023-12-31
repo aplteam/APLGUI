@@ -1,0 +1,5 @@
+(
+ 'Started a new version by integrating new FilesAndDir which allowed DirSelect to become much faster.'
+ ''
+ 'Tested incl. all test cases but not published.'
+)

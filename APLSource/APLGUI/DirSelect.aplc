@@ -154,7 +154,7 @@
           ∆
       }
 
-    ∇ {r}←OnExpandTree msg;n;in;path;d;_;depth;items;saveCursorObj;hasSubDirs
+    ∇ {r}←OnExpandTree msg;n;in;path;d;_;depth;items;saveCursorObj;isNotEmpty
       r←1
       n←GetRefTo_n↑msg
       saveCursorObj←n.∆Form.CursorObj
@@ -173,9 +173,8 @@
           {}2 ⎕NQ n.Tree'Expanding'in
       :EndIf
       :If 0<≢items
-      :AndIf 0<≢hasSubDirs←0<≢¨RefToFilesAndDirs.ListDirs¨items
-      :AndIf 1<+/hasSubDirs
-          {2 ⎕NQ n.Tree'AddChildren'⍵(⊂'dummy')0}¨in+1+⌽⍸hasSubDirs
+      :AndIf 0<+/isNotEmpty←~RefToFilesAndDirs.IsDirEmpty¨items
+          {2 ⎕NQ n.Tree'AddChildren'⍵(⊂'dummy')0}¨in+1+⌽⍸isNotEmpty
       :EndIf
       n.∆Form.CursorObj←saveCursorObj
     ∇
@@ -222,7 +221,7 @@
           ∆,←⊂'Active'(~n.∆parms.fixDefaultDrive)
           ∆,←⊂'Attach'(4⍴'Top' 'Left')
           n.Drives←n.∆Form.⎕NEW'Combo'∆
-          n.Drives.Size[1]←40+⌈/1⊃∘n.Drives.GetTextSize¨n.Drives.Items   
+          n.Drives.Size[1]←40+⌈/1⊃∘n.Drives.GetTextSize¨n.Drives.Items
           _←n.Drives.⎕DF'[Combo]:Drives'
           n.Drives.onSelect←'OnSelectDrive'
           0=≢startDir:Make_C_DefaultDrive n
@@ -289,7 +288,7 @@
           ⍬
       }
 
-    ∇ {r}←PopulateTree n;paths;path;i;bool;items;in;itemsLC;noOf;firstFlag;depth;hasSubDirs
+    ∇ {r}←PopulateTree n;paths;path;i;bool;items;in;itemsLC;noOf;firstFlag;depth;isNotEmpty
       r←⍬
       :If n.∆parms.fixDefaultDir
           paths←,⊂n.∆startDrive,n.∆startDir
@@ -311,8 +310,8 @@
               2 ⎕NQ n.Tree'Expanding'in
           :EndIf
           :If 0<≢items
-              hasSubDirs←0<≢¨RefToFilesAndDirs.ListDirs¨items
-              {2 ⎕NQ n.Tree'AddChildren'⍵(⊂'dummy')0}¨in+1+⌽⍸hasSubDirs
+              isNotEmpty←~RefToFilesAndDirs.IsDirEmpty¨items
+              {2 ⎕NQ n.Tree'AddChildren'⍵(⊂'dummy')0}¨in+1+⌽⍸isNotEmpty
           :EndIf
           firstFlag←0
           depth+←1
