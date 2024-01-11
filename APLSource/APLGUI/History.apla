@@ -1,6 +1,7 @@
 (
- '* 0.32.0 from 2023-12-31'
+ '* 0.32.0 from 2024-01-11'
  '  * `DirSelect` is now much faster when a directory contains plenty of stuff'
+ '  * Packages updated'
  '* 0.31.0 from 2023-07-18'
  '  * Is now a Tatin package'
 )
