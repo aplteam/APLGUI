@@ -12,9 +12,7 @@
  f1∨←2≠'.'+.=v
  f1∨←~∧/⎕D∊⍨v~'.'
 
- :If f1
-     ⎕←'Result of the "Version" function is invalid.'
- :EndIf
+ 'Result of the "Version" function is invalid'Assert~f1
 
  →T.FailsIf f1
 

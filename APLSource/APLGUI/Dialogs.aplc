@@ -361,7 +361,7 @@
       r.defaultButton←0
       r.focusButton←0
       r.parmType←'Dialogs.ShowLongMsg'
-      r.size←⌊0.25×RefToWinSys.(GetSystemMetrics¨SM_CYFULLSCREEN SM_CXFULLSCREEN)
+      r.size←⌊0.25×##.WinSys.(GetSystemMetrics¨SM_CYFULLSCREEN SM_CXFULLSCREEN)
       r.sizeable←1
       r.timeout←HasAutoPress r
     ∇
@@ -692,7 +692,7 @@
     ∇
 
       GetDefaultParmsForType←{
-          name←'CreateParmsFor',1⊃'.'RefToAPLTreeUtils.SplitPath ⍵
+          name←'CreateParmsFor',1⊃'.'##.APLTreeUtils2.SplitPath ⍵
           3=⎕NC name:⍎name
           'CreateParmsForGeneral'≡name:CreateParms
           6 ⎕SIGNAL⍨'Missing: ',name

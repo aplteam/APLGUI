@@ -65,7 +65,7 @@
         ⍝ Adjusts the size and -if needed- the Posn of the form.
       r←⍬
       needed←95 CalcNeededSize n
-      corr←##.APLGuiUtils.RefToWinSys.(+/GetSystemMetrics¨SM_CYMENU SM_CYCAPTION) ⍝ Menu height + caption height
+      corr←##.WinSys.(+/GetSystemMetrics¨SM_CYMENU SM_CYCAPTION) ⍝ Menu height + caption height
       needed[0]+←corr
       posn←n.∆Form.Posn
       :If 0≠≢↑n.∆parms.posn[0]
@@ -173,13 +173,13 @@
       :EndIf
       width⌈←n.∆Hgap+1⊃↑+/↑¯1↑n.∆buttons.(Posn Size)      ⍝ Take right-most button into account
       width⌈←n.Info.Size[1]+2×n.∆Hgap                     ⍝ Take the "Info" field into account
-      corr←##.APLGuiUtils.RefToWinSys.(GetSystemMetrics SM_CYCAPTION)
-      corr+←##.APLGuiUtils.RefToWinSys.(GetSystemMetrics SM_CYMENU)
+      corr←##.WinSys.(GetSystemMetrics SM_CYCAPTION)
+      corr+←##.WinSys.(GetSystemMetrics SM_CYMENU)
       height+←corr
       height+←n.Btn_00.Size[0]
       width+←30×n.List.CheckBoxes
-      fntObj←⎕NEW'Font'((⊂¨'PName' 'Weight' 'Size'),¨⊂∘{(' '=1↑0⍴⍵):⍵~⎕UCS 0 ⋄ |⍵}¨##.APLGuiUtils.RefToWinSys.GetFormCaptionFontInfo[13 4 0])
-      btns←##.APLGuiUtils.RefToWinSys.(GetSystemMetrics SM_CXICON)×1+n.∆Form.(SysMenu+MaxButton+MinButton)
+      fntObj←⎕NEW'Font'((⊂¨'PName' 'Weight' 'Size'),¨⊂∘{(' '=1↑0⍴⍵):⍵~⎕UCS 0 ⋄ |⍵}¨##.WinSys.GetFormCaptionFontInfo[13 4 0])
+      btns←##.WinSys.(GetSystemMetrics SM_CXICON)×1+n.∆Form.(SysMenu+MaxButton+MinButton)
       width⌈←btns+1⊃n.∆Form.GetTextSize n.∆Form.Caption fntObj
       width⌈←##.APLGuiUtils.CalcSizeOfFormCaption n
       available←##.APLGuiHelpers.MonitorEstate
@@ -188,7 +188,7 @@
       :EndIf
       :If width>available[1]
           width←available[1]            ⍝ But not more than the size of the screen
-          height+←2+##.APLGuiUtils.RefToWinSys.(GetSystemMetrics SM_CXVSCROLL)
+          height+←2+##.WinSys.(GetSystemMetrics SM_CXVSCROLL)
       :EndIf
       size←height,width
       :If 0<⎕NC'maxPercentage'

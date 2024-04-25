@@ -10,6 +10,6 @@
  parms.autoPress←0
  parms.timeout←0.1
 
- ⎕←globalParms parms #.APLGUI.APLGUI.Dialogs.ShowMsg'This is a short message.'
+ {}globalParms parms #.APLGUI.APLGUI.Dialogs.ShowMsg'This is a short message.'
 
  r←T._OK

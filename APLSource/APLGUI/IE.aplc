@@ -101,7 +101,7 @@
       :AndIf n.IEobject.∆parms.redirectHttpToDefaultBrowser
           was←n.IEobject.LocationURL
           self.Stop
-          RefToAPLTreeUtils.GoToWebPage url
+          ##.APLTreeUtils2.GoToWebPage url
           r←0
       :Else
           :If 0≠≢n.IEobject.∆parms.onBeforeNavigate
@@ -157,7 +157,7 @@
     ⍝      ref.browser.Document.write⊂1↓↑,/(⎕UCS 13),¨html    ⍝
     ⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝
       :If 0=ref.⎕NC'∆Filename'
-          ref.∆Filename←'html'RefToFilesAndDirs.GetTempFilename2''
+          ref.∆Filename←'html'##.FilesAndDirs.GetTempFilename2''
       :EndIf
       (⊂,html)⎕NPUT ref.∆Filename 1
       ref.Navigate⊂'file:///',ref.∆Filename

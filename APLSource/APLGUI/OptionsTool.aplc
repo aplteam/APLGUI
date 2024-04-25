@@ -345,11 +345,11 @@
       needed←n.(∆initialVgap ∆Hgap)++⌿⊃ctrl.(Posn Size)
       needed[1]⌈←({1=≡⍵:1⊃⍵ ⋄ ⌈/1⊃¨⍵}n.Info.Size)+2×n.∆Hgap ⍝ Take the "Info" field into account
       needed[1]⌈←n.∆Hgap+1⊃↑↑¯1↑+/¨n.∆buttons.(Posn Size)   ⍝ Take right-most button into account
-      corr←(n.∆Vgap×0≠≢n.∆parms.info)+RefToWinSys.(GetSystemMetrics SM_CYCAPTION)      ⍝ Menubar ...
-      corr+←RefToWinSys.(GetSystemMetrics SM_CYMENU)        ⍝ ... gymnastics.
+      corr←(n.∆Vgap×0≠≢n.∆parms.info)+##.WinSys.(GetSystemMetrics SM_CYCAPTION)      ⍝ Menubar ...
+      corr+←##.WinSys.(GetSystemMetrics SM_CYMENU)          ⍝ ... gymnastics.
                                                             ⍝ Let's check the Window caption:
-      fntObj←⎕NEW'Font'((⊂¨'PName' 'Weight' 'Size'),¨⊂∘{(' '=1↑0⍴⍵):⍵~⎕UCS 0 ⋄ |⍵}¨RefToWinSys.GetFormCaptionFontInfo[13 4 0])
-      btns←RefToWinSys.(GetSystemMetrics SM_CXICON)×1+n.∆Form.(SysMenu+MaxButton+MinButton)
+      fntObj←⎕NEW'Font'((⊂¨'PName' 'Weight' 'Size'),¨⊂∘{(' '=1↑0⍴⍵):⍵~⎕UCS 0 ⋄ |⍵}¨##.WinSys.GetFormCaptionFontInfo[13 4 0])
+      btns←##.WinSys.(GetSystemMetrics SM_CXICON)×1+n.∆Form.(SysMenu+MaxButton+MinButton)
       needed[1]⌈←btns+1⊃n.∆Form.GetTextSize n.∆Form.Caption fntObj
       needed[0]+←corr+(n.∆buttons[0]).Size[0]
       needed⌊←##.APLGuiHelpers.ScreenEstate-(corr+2×n.∆Vgap),0   ⍝ But not more than the size of the screen-20

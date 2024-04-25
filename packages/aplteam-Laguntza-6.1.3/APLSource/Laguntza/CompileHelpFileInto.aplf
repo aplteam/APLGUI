@@ -1,0 +1,23 @@
+ {∆Ref}←source CompileHelpFileInto folder;A;ps;icon
+⍝ Compiles the help file into `folder` which, if empty, defaults to Help\.
+⍝ `source` is the namespace hosting the help system in question.
+ A←APLTreeUtils2
+ :If 0=≢folder
+     folder←'help\'
+ :EndIf
+ folder←⎕C folder
+ folder←FilesAndDirs.AddTrailingSep folder
+ ps←CreateParms ⍬
+ ps.source←source
+ ps.folderName←folder
+ ∆Ref←CompileHelpFile ps
+ icon←Icons.CreateIcon #
+
+ ⍝ ----------- Bug <02144>: this causes a DOMAIN ERROR  ⍝TODO⍝
+ ⍝icon.File←folder,'\help.ICO'
+ ⍝icon.FileWrite
+ ⍝
+ ⍝ ----------- Workaround:
+ (folder,'help.ICO')⎕NCOPY⍠('IfExists' 'Replace')⊣icon.File
+
+⍝Done

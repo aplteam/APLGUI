@@ -55,8 +55,8 @@
 
       CheckPosition←{
           rf←⍵
-          corr←RefToWinSys.(GetSystemMetrics SM_CYCAPTION)
-          corr+←RefToWinSys.(GetSystemMetrics SM_CYMENU)
+          corr←##.WinSys.(GetSystemMetrics SM_CYCAPTION)
+          corr+←##.WinSys.(GetSystemMetrics SM_CYMENU)
           rf.Posn[0]⌈←corr+20
           (2=+/b←(corr++⌿⊃n.∆Form.(Size Posn))<(↑↑¯1↑⎕CLASS ⎕THIS).##.APLGuiHelpers.ScreenEstate):⍬
           posn←b[0]⊃(corr+⌈0.5×(↑↑¯1↑⎕CLASS ⎕THIS).##.APLGuiHelpers.ScreenEstate[0]-rf.Size[0]+corr)(rf.Posn[0])
@@ -263,22 +263,6 @@
       :EndIf
     ∇
 
-      GetRefTo←{
-      ⍝ Once the package manager has arrived this needs a rewrite  ⍝TODO⍝
-          name←⍵
-          9.1 9.4∊⍨#.⎕NC⊂name:#.⍎name
-          9.1 9.4∊⍨##.⎕NC⊂name:##.⍎name
-          ref←(+/∧\∨/¨'._dependencies.'∘⍷¨⎕NSI)⊃⎕RSI
-          9.1 9.4∊⍨ref.⎕NC⊂name:ref.##⍎name
-          9.1 9.4∊⍨ref.##.⎕NC⊂name:ref.##⍎name
-          9.1 9.4∊⍨ref.##.##.⎕NC⊂name:ref.##.##⍎name
-          9.1 9.4∊⍨ref.##.##.##.⎕NC⊂name:ref.##.##.##⍎name
-          9.1 9.4∊⍨(↑⎕RSI).⎕NC⊂name:parent.⍎name
-          9=(↑↑⎕CLASS ⎕THIS).##.⎕NC name:(↑↑⎕CLASS ⎕THIS).##.⍎name
-          APLTreeUtils2
-          6 ⎕SIGNAL⍨'Cannot find ',name,'?!'
-      }
-
       GetRefTo_n←{
      ⍝ Takes a ref (typically the first element of a callback) and walks up
      ⍝ the hirarchy until it finds a control that contains a namespace "n".
@@ -405,26 +389,6 @@
       :EndIf
     ∇
 
-    ∇ r←RefToAPLTreeUtils;⎕TRAP
-      ⎕TRAP←0 'N'
-      r←GetRefTo'APLTreeUtils2'
-    ∇
-
-    ∇ r←RefToFilesAndDirs;⎕TRAP
-      ⎕TRAP←0 'N'
-      r←GetRefTo'FilesAndDirs'
-    ∇
-
-    ∇ r←RefToWinRegSimple;⎕TRAP
-      ⎕TRAP←0 'N'
-      r←GetRefTo'WinRegSimple'
-    ∇
-
-    ∇ r←RefToWinSys;⎕TRAP
-      ⎕TRAP←0 'N'
-      r←GetRefTo'WinSys'
-    ∇
-
     ∇ r←n CheckCallback callback
     ⍝ Returns one of:
     ⍝ * Empty vector
@@ -437,7 +401,7 @@
       :ElseIf 2=≡callback
           r←callback
       :ElseIf '.'∊callback
-          r←{(⍎↑⍵)(1⊃⍵)}¯1 0↓¨'.'(GetRefTo 'APLTreeUtils2').SplitPath callback
+          r←{(⍎↑⍵)(1⊃⍵)}¯1 0↓¨'.'##.APLTreeUtils2.SplitPath callback
       :Else
           r←({↑⍵↓⍨+/∧\⍵=↑⍵}⎕RSI)callback
       :EndIf
@@ -618,7 +582,7 @@
       ⍝ Typically used to correct size/posn of Forms that do have a menubar.
           n←⍵
           0=≢'Menubar'⎕WN n.∆Form:0
-          RefToWinSys.(GetSystemMetrics SM_CYMENU)
+          ##.WinSys.(GetSystemMetrics SM_CYMENU)
       }
 
       CheckUserCallback_←{

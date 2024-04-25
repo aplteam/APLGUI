@@ -298,7 +298,7 @@
       :If 0≠≢n.∆parms.regKey2
       :AndIf ¯1≢n.∆parms.regKey2
       :AndIf n.∆globalParms{(0=⍺.⎕NC ⍵):0 ⋄ 0≠≢⍺.⍎⍵}'regKey'
-          read←{11::'' ⋄ RefToWinRegSimple.Read ⍵}
+          read←{11::'' ⋄ ##.WinRegSimple.Read ⍵}
       :AndIf 0=+/0∊¨⍴¨v←{read(GetRegPath globalParms.regKey parms.regKey2),'\',⍵}¨'Posn' 'Size'
           v←{↑(//)⎕VFI ⍵}¨v
       :AndIf ~¯1∊×1⊃v

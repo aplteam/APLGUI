@@ -133,7 +133,7 @@
               :EndIf
           :Until 0=ind⊃n.Tree.Depth
       :EndIf
-      path←RefToFilesAndDirs.NormalizePath path
+      path←##.FilesAndDirs.NormalizePath path
     ∇
 
 ⍝⍝⍝⍝ Private stuff
@@ -163,17 +163,17 @@
       n.Tree.SelItems[]←0
       n.Tree.SelItems[in]←1
       path←n GetPathFromTreeItems n.Tree.SelItems
-      items←RefToFilesAndDirs.ListDirs path,'\*'            ⍝ List of sub dirs
+      items←##.FilesAndDirs.ListDirs path,'\*'            ⍝ List of sub dirs
       :If 0=≢items
           {}DeleteChildren n.Tree in                        ⍝ There are no sub dirs, so let's delete "dummy"
       :Else
           items←Sort items
           {}DeleteChildren n.Tree in
-          {}2 ⎕NQ n.Tree'AddChildren'in('\'RefToAPLTreeUtils.Last¨items)0
+          {}2 ⎕NQ n.Tree'AddChildren'in('\'##.APLTreeUtils2.Last¨items)0
           {}2 ⎕NQ n.Tree'Expanding'in
       :EndIf
       :If 0<≢items
-      :AndIf 0<+/isNotEmpty←~RefToFilesAndDirs.IsDirEmpty¨items
+      :AndIf 0<+/isNotEmpty←~##.FilesAndDirs.IsDirEmpty¨items
           {2 ⎕NQ n.Tree'AddChildren'⍵(⊂'dummy')0}¨in+1+⌽⍸isNotEmpty
       :EndIf
       n.∆Form.CursorObj←saveCursorObj
@@ -250,7 +250,7 @@
           drive←{'//'≡2⍴⍵:⍵↑⍨⍵⍳' ' ⋄ (↑⍵),':\'}drive
           n.∆startDir≡drive:0
           n.∆startDir←drive
-          items←RefToFilesAndDirs.ListDirs n.∆startDir
+          items←##.FilesAndDirs.ListDirs n.∆startDir
           _←PopulateTree_ n.Tree n.∆startDir items
           1
       }
@@ -293,24 +293,24 @@
       :If n.∆parms.fixDefaultDir
           paths←,⊂n.∆startDrive,n.∆startDir
       :Else
-          paths←(⊂n.∆startDrive),{0=≢⍵:⍵ ⋄ '\'RefToAPLTreeUtils.Split ⍵}n.∆startDir
+          paths←(⊂n.∆startDrive),{0=≢⍵:⍵ ⋄ '\'##.APLTreeUtils2.Split ⍵}n.∆startDir
       :EndIf
       depth←in←0
       2 ⎕NQ n.Tree'AddChildren' 0(1↑paths)0
       firstFlag←1
       :For i :In ⍳≢paths
           path←↑{⍺,(('\'≠¯1↑⍺)/'\'),⍵}/(i+1)↑paths
-          items←RefToFilesAndDirs.ListDirs path,'\'
+          items←##.FilesAndDirs.ListDirs path,'\'
           :If ~firstFlag
               in←⍸(n.Tree.Depth=depth)∧(⎕C n.Tree.Items)≡¨⎕C paths[i]
               2 ⎕NQ n.Tree'DeleteChildren'in
           :EndIf
           :If 0<≢items
-              2 ⎕NQ n.Tree'AddChildren'in('\'RefToAPLTreeUtils.Last¨items)((≢items)⍴0)
+              2 ⎕NQ n.Tree'AddChildren'in('\'##.APLTreeUtils2.Last¨items)((≢items)⍴0)
               2 ⎕NQ n.Tree'Expanding'in
           :EndIf
           :If 0<≢items
-              isNotEmpty←~RefToFilesAndDirs.IsDirEmpty¨items
+              isNotEmpty←~##.FilesAndDirs.IsDirEmpty¨items
               {2 ⎕NQ n.Tree'AddChildren'⍵(⊂'dummy')0}¨in+1+⌽⍸isNotEmpty
           :EndIf
           firstFlag←0
@@ -323,8 +323,8 @@
 
       PopulateTree_←{
           (Tree path items)←⍵
-          bool←{0≠≢⍵ RefToFilesAndDirs.ListDirs ⍵}¨items
-          items←⊂¨'\'RefToAPLTreeUtils.Last¨items
+          bool←{0≠≢⍵ ##.FilesAndDirs.ListDirs ⍵}¨items
+          items←⊂¨'\'##.APLTreeUtils2.Last¨items
           (bool/items)←(bool/items),¨⊂⊂'dummy'
           Tree.Items←(⊂path),↑,/items
           (bool/bool)←⊂0 1
@@ -434,12 +434,12 @@
           path←n GetPathFromTreeItems n.Tree.SelItems
           parms←##.Dialogs.CreateParmsForYesOrNo
           parms.centerIn←n.∆Form
-          ¯1=ef←0=≢↑RefToFilesAndDirs.Dir path,'\':⍬  ⍝ Empty flag; ¯1=does not exist
+          ¯1=ef←0=≢↑##.FilesAndDirs.Dir path,'\':⍬  ⍝ Empty flag; ¯1=does not exist
           msg←'The directory:'path
           msg,←⊂'is ',((~ef)/'NOT '),' empty.'
           msg,←⊂'Are you sure that you want to remove it?'
           0=n.∆globalParms parms ##.Dialogs.YesOrNo msg:⍬
-          (rc en more)←RefToFilesAndDirs.RmDir path
+          (rc en more)←##.FilesAndDirs.RmDir path
           rc≠0:⍬⊣##.Dialogs.ShowMsg('Removing directory <',path,'> failed; rc=',⍕rc)more
           ind←n.Tree.SelItems⍳1
           _←2 ⎕NQ n.Tree'DeleteItems'ind

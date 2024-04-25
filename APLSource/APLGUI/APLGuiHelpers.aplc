@@ -23,7 +23,7 @@
           form2.Coord←sc                        ⍝ Set Coord back to what it was
           np←pp
           np+←⌈0.5×ps-form1.Size                ⍝ Center it.
-          buf←40 10+2↑##.APLGuiUtils.RefToWinSys.(GetSystemMetrics SM_CYMENU)   ⍝ buf; used to force the Dlg away from the brim.
+          buf←40 10+2↑##.WinSys.(GetSystemMetrics SM_CYMENU)   ⍝ buf; used to force the Dlg away from the brim.
           max←0⌈⌊ScreenEstate-form1.Size+buf    ⍝ Calc max value.
           np←buf⌈np⌊max                         ⍝ Calc result.
           form1.Posn←np
@@ -37,8 +37,8 @@
       r←⍬
       rk←##.APLGuiUtils.GetWinRegKeyForForm n.(∆globalParms ∆parms)
       :If 0≠≢rk
-          ##.APLGuiUtils.RefToWinRegSimple.Write(rk,'\Posn')(⍕n.∆Form.Posn)
-          ##.APLGuiUtils.RefToWinRegSimple.Write(rk,'\Size')(⍕n.∆Form.Size-(##.APLGuiUtils.GetMenubarHeight n),0)
+          ##.WinRegSimple.Write(rk,'\Posn')(⍕n.∆Form.Posn)
+          ##.WinRegSimple.Write(rk,'\Size')(⍕n.∆Form.Size-(##.APLGuiUtils.GetMenubarHeight n),0)
       :EndIf
     ∇
 
@@ -113,7 +113,7 @@
 
     ∇ r←ScreenEstate;ss;mi
       :Access Public Shared
-      ss←##.APLGuiUtils.RefToWinSys.(GetSystemMetrics¨SM_CYFULLSCREEN SM_CXFULLSCREEN)  ⍝ Real height & width of main screen
+      ss←##.WinSys.(GetSystemMetrics¨SM_CYFULLSCREEN SM_CXFULLSCREEN)  ⍝ Real height & width of main screen
       mi←MonitorInfo                      ⍝ Physical size of all screens
       r←(ss[0]⌊mi[2]),(ss[1]⌈mi[3])       ⍝ Best of both, ss and mi
     ∇
@@ -132,7 +132,7 @@
     ⍝ | R[3+4] | Size of the  virtual desktop.
     ⍝ | R[5]   | Number of monitors.
     ⍝ | R[6]   | Flag; is true if all monitors have the same display format.
-      r←##.APLGuiUtils.RefToWinSys.(GetSystemMetrics¨SM_YVIRTUALSCREEN SM_XVIRTUALSCREEN SM_CYVIRTUALSCREEN SM_CXVIRTUALSCREEN SM_CMONITORS SM_SAMEDISPLAYFORMAT)
+      r←##.WinSys.(GetSystemMetrics¨SM_YVIRTUALSCREEN SM_XVIRTUALSCREEN SM_CYVIRTUALSCREEN SM_CXVIRTUALSCREEN SM_CMONITORS SM_SAMEDISPLAYFORMAT)
     ∇
 
 :EndClass

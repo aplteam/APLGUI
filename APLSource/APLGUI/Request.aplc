@@ -410,7 +410,7 @@
           rf←⍎'n.',name,'←n.∆Form.⎕NEW''Button'' ∆'
           rf.⎕DF'[Button]:',name
           :If 0=i  ⍝ ⍝ OK button?!
-              rf.onSelect←'OnOkay_',1⊃'.'RefToAPLTreeUtils.SplitPath n.∆parms.parmType
+              rf.onSelect←'OnOkay_',1⊃'.'##.APLTreeUtils2.SplitPath n.∆parms.parmType
           :EndIf
           rf.Posn[0]←n.∆Form.Size[0]-n.∆Vgap+rf.Size[0]+{(0=⍵.⎕NC'Statusbar'):0 ⋄ ⍵.Statusbar.Size[0]}n
           rf.Posn[1]←n.∆Hgap+{⍵:0 ⋄ 1⊃+⌿⊃(↑⌽n.∆buttons).(Posn Size)}0=i

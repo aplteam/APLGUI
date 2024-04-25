@@ -32,7 +32,7 @@
       :Implements Constructor
       :Access Public Instance
       _allKeys←CreateNames
-      A←RefToAPLTreeUtils
+      A←(↑↑⎕CLASS ⎕THIS).##.APLTreeUtils2
     ∇
 
     ∇ r←GetKeyCodeFor keystroke;possibleModifiers;mod;modifier

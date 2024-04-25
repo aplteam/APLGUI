@@ -51,7 +51,7 @@
     ⍝ Reformat a menu definition properly.
       ⎕TRAP←(APLGuiError'E'('⎕DMX.EM ⎕SIGNAL ',⍕APLGuiError))(0 'N')
       bool←0<≢¨{⍵~' ',⎕TC,⎕UCS 9}¨def
-      bool∧←'⍝'≠↑¨RefToAPLTreeUtils.DLB def
+      bool∧←'⍝'≠↑¨##.APLTreeUtils2.DLB def
       def2←bool/def
       KeyCodesInstance←⎕NEW ##.KeyCodes
       def2←Interpret def2
@@ -149,11 +149,11 @@
       r←((≢def),9)⍴''
       :For i :In ⍳⍴def
           this←i⊃def
-          type←{('-'=1↑⍵):'Separator' ⋄ ('['=↑⍵)⊃'MenuItem' 'Menu'}RefToAPLTreeUtils.DLB this
+          type←{('-'=1↑⍵):'Separator' ⋄ ('['=↑⍵)⊃'MenuItem' 'Menu'}##.APLTreeUtils2.DLB this
           level←+/∧\' '=this
-          this←RefToAPLTreeUtils.DLB this
+          this←##.APLTreeUtils2.DLB this
           (caption this)←{w←⌊/⍵⍳':{' ⋄ ('[]'~⍨w↑⍵)(w↓⍵)}this
-          caption←RefToAPLTreeUtils.DTB caption
+          caption←##.APLTreeUtils2.DTB caption
           (caption keyCode)←HandleKeyCode caption
           :If '='∊caption
               caption[caption⍳'=']←↑⎕UCS 9
@@ -184,8 +184,8 @@
                   :EndIf
               :EndIf
           :EndIf
-          active←~'~'=↑RefToAPLTreeUtils.DLB caption
-          checked←'#'=↑RefToAPLTreeUtils.DLB caption
+          active←~'~'=↑##.APLTreeUtils2.DLB caption
+          checked←'#'=↑##.APLTreeUtils2.DLB caption
           caption←((↑caption)∊'#~')↓caption
           r[i;]←type level name caption active checked callback keyCode hint
       :EndFor
@@ -219,7 +219,7 @@
       ⍝ Get rid of comments and blanks lines
           definition←⍵
           definition←{(0 1∊⍨≡⍵):⊂,⍵ ⋄ ⍵}definition
-          def2←RefToAPLTreeUtils.DLB definition
+          def2←##.APLTreeUtils2.DLB definition
           bool←';'≠↑¨def2
           (definition def2)←bool∘/¨definition def2
           bool←'⍎'=↑¨def2
@@ -237,7 +237,7 @@
           (~':'∊⍵):''⍵
           s←{⍵↓⍨1+⍵⍳':'}⍵
           (h r)←{⍵{(⍵↑⍺)(⍵↓⍺)}⍵⍳'{'}s
-          h←FindHandler RefToAPLTreeUtils.DMB h
+          h←FindHandler ##.APLTreeUtils2.DMB h
           h r
       }
 
@@ -245,8 +245,8 @@
       ⍝ Returns the name part and the remains of ⍵ as a two-item vector.
           s←⍵↑⍨⍵⍳'⍝'
           (~'{'∊s):''⍵
-          s←RefToAPLTreeUtils.DMB{1↓⍵↑⍨⍵⍳'}'}s
-          s(RefToAPLTreeUtils.DMB{(~';'∊⍵):1↓⍵ ⋄ ⍵↓⍨1+⍵⍳';'}{⍵↓⍨⍵⍳'}'}⍵)
+          s←##.APLTreeUtils2.DMB{1↓⍵↑⍨⍵⍳'}'}s
+          s(##.APLTreeUtils2.DMB{(~';'∊⍵):1↓⍵ ⋄ ⍵↓⍨1+⍵⍳';'}{⍵↓⍨⍵⍳'}'}⍵)
       }
 
       HandleKeyCode←{
@@ -254,11 +254,11 @@
           (~'='∊⍵):⍵ ⍬
           sc←1↓⍵↓⍨⍵⍳'='
           code←KeyNo sc
-          RefToAPLTreeUtils.IsDevelopment∧0=≢code:'Invalid key shortcut'⎕SIGNAL APLGuiError
+          ##.APLTreeUtils2.IsDevelopment∧0=≢code:'Invalid key shortcut'⎕SIGNAL APLGuiError
           ⍵(KeyNo sc)
       }
 
-    GetCaption←{RefToAPLTreeUtils.DTB ⍵↑⍨⍵⍳'{'}
+    GetCaption←{##.APLTreeUtils2.DTB ⍵↑⍨⍵⍳'{'}
 
       Between←{
       ⍝ (0 0 1 1 1 0 0)←'ab(c)de' Between '()'
