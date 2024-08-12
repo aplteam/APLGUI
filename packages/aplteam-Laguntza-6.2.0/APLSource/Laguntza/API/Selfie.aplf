@@ -1,0 +1,1 @@
+Selfie←{⍺←⊢ ⋄ shy←⍺ ##.Selfie ⍵ ⋄ 1:shy}

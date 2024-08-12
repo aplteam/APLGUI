@@ -1,5 +1,5 @@
  r←Test_DirSelect_001(stopFlag batchFlag);n;⎕TRAP;result
-⍝ Exercise the "DirSelect" method with defaults parameters only.
+⍝ Exercise the "DirSelect" method with default parameters only.
  r←T._Failed
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
 

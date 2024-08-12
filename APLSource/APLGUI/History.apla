@@ -1,4 +1,6 @@
 (
+ '* 0.33.0 from 2024-08-09'
+ '  * Packages updated'
  '* 0.32.0 from 2024-01-11'
  '  * `DirSelect` is now much faster when a directory contains plenty of stuff'
  '  * Packages updated'

@@ -1,5 +1,6 @@
  r←Test_ProcessTool_016(stopFlag batchFlag);⎕TRAP;rf;data;parms;globalParms;n;code
 ⍝ Exercise "ProcessTool" with non-existing callback. In test mode a stub will be created automatically.
+⍝ The stub will write two lines to the session.
  r←T._Failed
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
 

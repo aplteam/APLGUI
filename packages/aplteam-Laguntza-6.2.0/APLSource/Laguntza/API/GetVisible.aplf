@@ -1,0 +1,1 @@
+GetVisible←{⍺←⊢ ⋄ 1:shy←⍺ ##.GetVisible ⍵}

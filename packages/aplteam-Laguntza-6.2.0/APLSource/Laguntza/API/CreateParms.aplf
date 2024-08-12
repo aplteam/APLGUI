@@ -1,0 +1,1 @@
+CreateParms←{⍺←⊢ ⋄ 1:shy←⍺ ##.CreateParms ⍵}

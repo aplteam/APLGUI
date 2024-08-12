@@ -4,8 +4,8 @@
  :If flag
      M←⎕SE.MakeHelpers ⋄ A←##.APLGUI.APLTreeUtils2 ⋄ F←##.APLGUI.FilesAndDirs
      targetPath←'expand'F.NormalizePath ##.CiderConfig.HOME,'\Dist\'
-     M.RecreateFolder targetPath
-     M.IncreaseBuildIDInFunction(⍕##),'.APLGUI.Version'
+     {}M.RecreateFolder targetPath
+     {}M.IncreaseBuildIDInFunction(⍕##),'.APLGUI.Version'
      tempFolder←(F.GetTempSubDir'APLGUI'),'\'
      (##.CiderConfig.HOME,'\apl-package.json')M.CopyTo tempFolder
      (##.CiderConfig.HOME,'\packages\apl-dependencies.txt')M.CopyTo tempFolder
