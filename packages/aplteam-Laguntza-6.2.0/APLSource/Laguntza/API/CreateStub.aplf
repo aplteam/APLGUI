@@ -1,1 +1,0 @@
-CreateStub←{⍺←⊢ ⋄ shy←⍺ ##.CreateStub ⍵ ⋄ 1:shy}

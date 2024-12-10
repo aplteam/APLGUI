@@ -1,3 +1,3 @@
  r←Version
 ⍝ See also: `History`
- r←'APLGUI' '0.33.0+133' '2024-08-12'
+ r←'APLGUI' '0.34.0+142' '2024-12-09'

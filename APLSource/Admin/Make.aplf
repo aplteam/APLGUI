@@ -1,10 +1,15 @@
- Make flag;targetPathToSource;⎕IO;⎕ML;M;A;F;targetPath;tempFolder;zipFilename;rc;msg
-⍝ Version 2.0.0 ⋄ 2023-07-14
+ Make flag;targetPathToSource;⎕IO;⎕ML;M;A;F;targetPath;tempFolder;zipFilename;rc;msg;cfg;version;parms;zipObj
+⍝ Version 2.1.0 ⋄ 2024-12-01
  ⎕IO←1 ⋄ ⎕ML←1
  :If flag
+     :If 0=⎕SE.⎕NC'MakeHelpers' ⋄ {}⎕SE.Tatin.LoadPackages'[tatin]MakeHelpers'⎕SE ⋄ :EndIf
      M←⎕SE.MakeHelpers ⋄ A←##.APLGUI.APLTreeUtils2 ⋄ F←##.APLGUI.FilesAndDirs
      targetPath←'expand'F.NormalizePath ##.CiderConfig.HOME,'\Dist\'
      {}M.RecreateFolder targetPath
+     cfg←⎕SE.Tatin.ReadPackageConfigFile ##.CiderConfig.HOME
+     M.##.CommTools.Pause'In the next step, update the version number',('+'∊2⊃##.APLGUI.Version)/' but leave the build number alone'
+     ⎕ED'##.APLGUI.Version'
+     version←M.CompileVersionNumberPattern cfg
      {}M.IncreaseBuildIDInFunction(⍕##),'.APLGUI.Version'
      tempFolder←(F.GetTempSubDir'APLGUI'),'\'
      (##.CiderConfig.HOME,'\apl-package.json')M.CopyTo tempFolder
@@ -13,8 +18,17 @@
      (##.CiderConfig.HOME,'\APLSource\APLGUI')M.CopyTo tempFolder,'APLSource/'
      (##.CiderConfig.HOME,'\APLSource\APLGUI_Help')M.CopyTo tempFolder,'APLSource/'
      {}CompileHelp ##.APLGUI_Help tempFolder
-     zipFilename←M.CreateZipFile'aplteam-APLGUI'tempFolder ##.APLGUI.Version
-     F.DeleteFile targetPath,↑,/1↓⎕NPARTS zipFilename
+     parms←⎕SE.Tatin.CreateBuildParms ##.CiderConfig.HOME
+     parms.projectPath←tempFolder
+     parms.version←version
+     zipFilename←⎕SE.Tatin.BuildPackage parms
+     :If 0=⎕SE.⎕NC'ZipArchive'
+         'Could not load ZipArchive?!'Assert ⎕SE.Tatin.LoadPackages'[tatin]ZipArchive'⎕SE
+     :EndIf
+     zipObj←⎕NEW ⎕SE.ZipArchive(,⊂zipFilename)
+     tempFolder zipObj.Add 'Help'
+     ⎕EX'zipObj'
+     ⎕DL 1
      targetPath ⎕NMOVE zipFilename
      (rc msg)←F.RmDirByForce tempFolder
      msg Assert rc=0
