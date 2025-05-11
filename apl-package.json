@@ -19,5 +19,5 @@
   source: "APLSource/APLGUI",
   tags: "gui-tools,gui",
   userCommandScript: "",
-  version: "0.34.0+4",
+  version: "0.35.0+40",
 }

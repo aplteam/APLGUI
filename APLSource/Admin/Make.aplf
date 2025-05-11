@@ -1,16 +1,42 @@
- Make flag;targetPathToSource;⎕IO;⎕ML;M;A;F;targetPath;tempFolder;zipFilename;rc;msg;cfg;version;parms;zipObj
-⍝ Version 2.1.0 ⋄ 2024-12-01
+ Make flag;targetPathToSource;⎕IO;⎕ML;M;A;F;targetPath;tempFolder;zipFilename;rc;msg;cfg;parms;zipObj;noOf;answer;q;path;C
+⍝ Version 2.2.0 ⋄ 2025-05-11
  ⎕IO←1 ⋄ ⎕ML←1
  :If flag
-     :If 0=⎕SE.⎕NC'MakeHelpers' ⋄ {}⎕SE.Tatin.LoadPackages'[tatin]MakeHelpers'⎕SE ⋄ :EndIf
-     M←⎕SE.MakeHelpers ⋄ A←##.APLGUI.APLTreeUtils2 ⋄ F←##.APLGUI.FilesAndDirs
-     targetPath←'expand'F.NormalizePath ##.CiderConfig.HOME,'\Dist\'
+     :If 0=⎕NC'refToMakeHelpers'
+         :If 9=⎕SE.⎕NC'MakeHelpers'
+             flag←¯1
+             :Repeat
+                 answer←⍞,0/⍞←q←'Do you want to use "MakeHelpers" ',⎕SE.MakeHelpers.Version,' in ⎕SE (n=re-load) (Y/n)?'
+                 answer←(≢q)↓answer
+                 :If 0=≢answer
+                 :OrIf 'Yy'∊⍨¯1↑answer
+                     flag←1
+                 :ElseIf 'Nn'∊⍨¯1↑answer
+                     flag←0
+                 :EndIf
+             :Until flag∊0 1
+             :If flag
+                 M←⎕SE.MakeHelpers
+             :Else
+                 noOf←⎕SE.Tatin.LoadPackages'MakeHelpers'⎕SE
+                 'Could not load the package "MakeHelpers"'⎕SIGNAL 6/⍨0=noOf
+                 M←⎕SE.MakeHelpers
+             :EndIf
+         :Else
+             noOf←⎕SE.Tatin.LoadPackages'MakeHelpers'⎕SE
+             'Could not load the package "MakeHelpers"'⎕SIGNAL 6/⍨0=noOf
+             M←⎕SE.MakeHelpers
+         :EndIf
+     :Else
+         M←refToMakeHelpers
+     :EndIf
+     ⎕←'Using "MakeHelpers" version ',⎕SE.MakeHelpers.Version
+     A←##.APLGUI.APLTreeUtils2 ⋄ F←##.APLGUI.FilesAndDirs ⋄ C←##.CiderConfig
+     targetPath←'expand'F.NormalizePath C.HOME,'/',C.CIDER.distributionFolder
+     :If ⎕NULL≡cfg←M.EditPackageConfigFile ##.TatinVars
+         ⎕←'Cancelled by user' ⋄ →0
+     :EndIf
      {}M.RecreateFolder targetPath
-     cfg←⎕SE.Tatin.ReadPackageConfigFile ##.CiderConfig.HOME
-     M.##.CommTools.Pause'In the next step, update the version number',('+'∊2⊃##.APLGUI.Version)/' but leave the build number alone'
-     ⎕ED'##.APLGUI.Version'
-     version←M.CompileVersionNumberPattern cfg
-     {}M.IncreaseBuildIDInFunction(⍕##),'.APLGUI.Version'
      tempFolder←(F.GetTempSubDir'APLGUI'),'\'
      (##.CiderConfig.HOME,'\apl-package.json')M.CopyTo tempFolder
      (##.CiderConfig.HOME,'\packages\apl-dependencies.txt')M.CopyTo tempFolder
@@ -20,17 +46,17 @@
      {}CompileHelp ##.APLGUI_Help tempFolder
      parms←⎕SE.Tatin.CreateBuildParms ##.CiderConfig.HOME
      parms.projectPath←tempFolder
-     parms.version←version
+     parms.version←cfg.version
      zipFilename←⎕SE.Tatin.BuildPackage parms
      :If 0=⎕SE.⎕NC'ZipArchive'
          'Could not load ZipArchive?!'Assert ⎕SE.Tatin.LoadPackages'[tatin]ZipArchive'⎕SE
      :EndIf
      zipObj←⎕NEW ⎕SE.ZipArchive(,⊂zipFilename)
-     tempFolder zipObj.Add 'Help'
+     tempFolder zipObj.Add'Help'
      ⎕EX'zipObj'
      ⎕DL 1
      targetPath ⎕NMOVE zipFilename
      (rc msg)←F.RmDirByForce tempFolder
      msg Assert rc=0
-     ⎕←'*** Successfully created: ',zipFilename
+     ⎕←'*** Successfully created: ',targetPath,'\',⊃,/1↓⎕NPARTS zipFilename
  :EndIf

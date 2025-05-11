@@ -6,7 +6,7 @@
  rf←#.APLGUI.APLGUI
 
 ⍝ First we check whether "Version" returns a valid result:
- v←1⊃rf.Version
+ v←rf.Version
  v←{⍵↑⍨¯1+⌊/⍵⍳'+-'}v      ⍝ Remove build ID
  f1←~5≤⍴v
  f1∨←2≠'.'+.=v
