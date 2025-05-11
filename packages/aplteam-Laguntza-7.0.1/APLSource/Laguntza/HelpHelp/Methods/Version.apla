@@ -1,0 +1,8 @@
+(
+ '[DATA]:index=''Version ⋄ Laguntza version'''
+ ''
+ '# (name version date)←Version'
+ ''
+ 'Returns version information regarding Laguntza. The information stems from the package config file.'
+ ''
+)

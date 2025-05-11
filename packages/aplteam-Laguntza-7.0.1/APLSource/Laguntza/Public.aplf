@@ -1,0 +1,4 @@
+ r←Public
+ r←'New' 'CreateStub' 'Selfie' 'CloseHelp' 'CompileHelpFile' 'CreateParms' 'FindTopic' 'GetNoClose'
+ r,←'Inject∆TopicProperties' 'ListHelpForms' 'Reset'
+ r,←'SetNoClose' 'GetVisible' 'SetVisible' 'ShowTopic' 'Version' 'History'

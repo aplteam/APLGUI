@@ -1,0 +1,10 @@
+ r←About ∆Ref;msg;parms;txt;flag;caption
+ ⍝ Called from the menu (About..."); Tells current version
+ parms←⎕FREAD ∆Ref.f.tieNo ∆Ref.f.∆parms
+ txt←{(0 1∊⍨|≡⍵):,⊂,⍵ ⋄ ⍵}∆Ref.p.helpAbout
+ flag←0≠≢∆Ref.p.helpVersion
+ txt,←flag/''('Version ',∆Ref.p.helpVersion)
+ txt,←''('Location: ',∆Ref.p.folderName)
+ caption←∆Ref.p.helpCaption
+ caption Show txt
+⍝Done
