@@ -11,6 +11,7 @@
  parms.posn←72 2073
 
  startDir←'C:\Users\All Users\TEMP'
+ 'Create!'FilesAndDirs.CheckPath startDir
  n←myGuiParms parms #.APLGUI.APLGUI.DirSelect.Create startDir
  ⎕DL 0.1
  →T.GoToTidyUp≢/⎕C startDir({⍵↓⍨-'\'=¯1↑⍵}(n #.APLGUI.APLGUI.DirSelect.GetPathFromTreeItems n.Tree.SelItems))

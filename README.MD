@@ -5,7 +5,7 @@
 
 ## Install / use
 
-`APLGUI` is since version 0.31.0 a Tatin package. For investiagting, simply execute:
+`APLGUI` is since version 0.31.0 a Tatin package. To investigate simply execute:
 
 ```
 ]LoadPackages [tatin]APLGUI

@@ -1,6 +1,7 @@
 {
   api: "",
   assets: "Assets",
+  checkLICENSEfile: 1,
   description: "Collection of GUI utilities",
   documentation: "",
   files: "",
@@ -19,5 +20,5 @@
   source: "APLSource/APLGUI",
   tags: "gui-tools,gui",
   userCommandScript: "",
-  version: "0.36.0+40",
+  version: "0.36.1+40",
 }

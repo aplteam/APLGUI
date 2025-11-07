@@ -43,6 +43,7 @@
      (##.CiderConfig.HOME,'\Assets')M.CopyTo tempFolder
      (##.CiderConfig.HOME,'\APLSource\APLGUI')M.CopyTo tempFolder,'APLSource/'
      (##.CiderConfig.HOME,'\APLSource\APLGUI_Help')M.CopyTo tempFolder,'APLSource/'
+     (##.CiderConfig.HOME,'\LICENSE')M.CopyTo tempFolder
      {}CompileHelp ##.APLGUI_Help tempFolder
      parms←⎕SE.Tatin.CreateBuildParms ##.CiderConfig.HOME
      parms.projectPath←tempFolder

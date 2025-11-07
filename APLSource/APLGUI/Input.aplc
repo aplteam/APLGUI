@@ -16,10 +16,12 @@
 
     ∇ r←Version
       :Access Public Shared
-      r←(⍕⎕THIS)'1.3.0' '2018-11-14'
+      r←(⍕⎕THIS)'1.3.1' '2025-11-07'
     ∇
 
-    ∇ History
+    ∇ History 
+     ⍝ * 1.3.1
+     ⍝   * `OnSelectURL` caused a VALUE ERROR 
      ⍝ * 1.3.0
      ⍝   * Data type "URL" removed.
      ⍝   * Instead every item in a label that matches this regular expression:\\
@@ -325,7 +327,7 @@
       :Access Public Shared
       list←GetAllUserDefinedCallbacks n
       :If 0=≢list
-          ##.Dialogs.ShowMsg 'No callbacks assigned'
+          ##.Dialogs.ShowMsg'No callbacks assigned'
       :Else
           active←0<≢¨list
           parms←##.ProcessTool.CreateParms
@@ -627,7 +629,7 @@
     ∇ OnSelectURL msg;ref
       ref←↑msg
       :Trap 11
-          GoToWebPage ref.Caption
+          ##.APLTreeUtils2.GoToWebPage ref.Caption
       :EndTrap
     ∇
 

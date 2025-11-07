@@ -1,4 +1,6 @@
 (
+ '* 0.36.1 from 2025-11-07'
+ '  * `Input`''s `OnSelectURL` caused a VALUE ERROR '
  '* 0.36.0 from 2025-08-24'
  '  * Packages updated'
  '* 0.35.0 from 2025-05-12'
