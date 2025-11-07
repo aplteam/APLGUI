@@ -1,6 +1,7 @@
 {
   api: "WinReg",
   assets: "",
+  checkLICENSEfile: 1,
   date: 20250328.123644,
   description: "Tools for dealing with the Windows Registry",
   documentation: "",

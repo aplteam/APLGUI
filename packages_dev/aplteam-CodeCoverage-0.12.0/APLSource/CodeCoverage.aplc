@@ -66,7 +66,10 @@
     ∇
 
     ∇ History
-      :Access Public Shared
+      :Access Public Shared   
+    ⍝ * 0.12.0 from 2025-09-12
+    ⍝   * LICENSE file updated
+    ⍝   * Packages updated
     ⍝ * 0.11.1 from 2025-06-04
     ⍝   * When a reference to a namespace or class was passed as argument to `⎕NEW`, `CoderCoverage` reported zero code coverage.
     ⍝ * 0.11.0 from 2025-06-03
