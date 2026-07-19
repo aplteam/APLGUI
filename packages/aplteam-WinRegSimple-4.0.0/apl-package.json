@@ -1,6 +1,7 @@
 {
   api: "",
   assets: "",
+  checkLICENSEfile: 1,
   date: 20250328.130105,
   description: "Limited set of tools for dealing with the Windows Registry",
   documentation: "",

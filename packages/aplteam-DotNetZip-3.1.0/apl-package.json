@@ -1,6 +1,7 @@
 {
   api: "DotNetZip",
   assets: "",
+  checkLICENSEfile: 1,
   date: 20250506.141031,
   description: "Zipping and unzipping with.NET Core on all major platforms",
   documentation: "",

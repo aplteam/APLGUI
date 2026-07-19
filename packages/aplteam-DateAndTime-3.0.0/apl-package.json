@@ -1,6 +1,7 @@
 {
   api: "API",
   assets: "",
+  checkLICENSEfile: 1,
   date: 20250407.065937,
   description: "Utilities related to Date and Time, including doing math",
   documentation: "",

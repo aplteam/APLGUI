@@ -1,6 +1,7 @@
 {
   api: "API",
   assets: "",
+  checkLICENSEfile: 1,
   date: 20250506.083443,
   description: "Windows-only OS calls and system infos",
   documentation: "",
