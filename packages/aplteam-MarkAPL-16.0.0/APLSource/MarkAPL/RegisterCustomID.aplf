@@ -1,0 +1,8 @@
+ {r}←ns RegisterCustomID(txt sa bookmarkName)
+⍝ A header with a custom ID ("{#xyz}") remembers the bookmark name its caption would get otherwise,
+⍝ so that short bookmark links ("[Caption](#)") can be redirected to the custom ID later on.
+ r←⍬
+ :If 0≠≢bookmarkName
+ :AndIf 0≠≢GetIdFromSpecialAttributes sa
+     ns.customIDs⍪←(LowercaseID ns.parms.bookmarkMayStartWithDigit CompileBookMarkName txt'')bookmarkName
+ :EndIf

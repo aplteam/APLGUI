@@ -1,0 +1,12 @@
+ bool←txt KeepOneDoubleMarkerPerRun bool;starts;ends;opener
+⍝ `bool` is the result of something like `'**'⍷txt`, which finds overlapping hits in a run of
+⍝ three or more markers: `'**'⍷'***'` is `1 1 0`. Keeps a single hit per run: the first one when
+⍝ the run opens (a non-white-space character follows it), otherwise the last one.
+⍝ That way "***x***" ends up as "<strong>*x*</strong>", and the remaining single markers are
+⍝ processed as <em> later on.
+⍝ `txt` must be padded with at least two blanks at both ends.
+ starts←⍸bool∧~0,¯1↓bool
+ ends←⍸bool∧~1↓bool,0
+ opener←~txt[ends+2]∊AllWhiteSpaceChars
+ bool←(≢bool)⍴0
+ bool[(opener×starts)+(~opener)×ends]←1

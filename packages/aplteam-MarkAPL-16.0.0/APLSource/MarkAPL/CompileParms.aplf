@@ -1,0 +1,14 @@
+ parms←CompileParms parms
+ :If 0=≢parms
+     parms←CreateParms
+ :Else
+     parms←⎕NS parms                    ⍝ Work on a copy: the caller's namespace must stay untouched
+ :EndIf
+ :If ⎕NULL≡parms.cssURL
+     parms.cssURL←'file://',F.NormalizePath({0=≢⍵:'.',⍵ ⋄ ⍵}parms.homeFolder),'/Files/'
+ :EndIf
+ parms.cssURL←F.AddTrailingSep parms.cssURL
+ parms.cssURL←{'/'@(⍸⍵='\')⊣⍵}parms.cssURL
+ parms.(inputFilename outputFilename)←1 CorrectSlash¨parms.(inputFilename outputFilename)
+ parms.(cssURL screenCSS printCSS)←0 CorrectSlash¨parms.(cssURL screenCSS printCSS)
+⍝Done

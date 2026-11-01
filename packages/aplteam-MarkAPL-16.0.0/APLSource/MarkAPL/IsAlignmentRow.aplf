@@ -1,0 +1,6 @@
+ IsAlignmentRow←{
+⍝ Returns 1 when ⍵ (a table row) consists of nothing but "|", ":", blanks and at least one "-".
+⍝ A row of empty cells is not an alignment row: it is an ordinary row, as written by the author.
+     r←'|: '~⍨⍵
+     (0<≢r)∧∧/'-'=r
+ }

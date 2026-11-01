@@ -1,0 +1,6 @@
+ IsFooterSeparator←{
+⍝ Returns 1 when ⍵ (the cells of a table row) holds nothing but "=" -- at least one of them.
+⍝ A row of empty cells is not a footer separator: it is an ordinary row, as written by the author.
+     c←⊃,/⍵
+     (0<≢c)∧∧/'='=c
+ }

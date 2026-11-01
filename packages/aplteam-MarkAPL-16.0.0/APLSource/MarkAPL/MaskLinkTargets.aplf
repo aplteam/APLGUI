@@ -1,0 +1,10 @@
+ MaskLinkTargets←{
+⍝ Returns a Boolean with a 1 for every character of a link target "(…)" that follows a "]".
+⍝ Used to keep inline markup like `==` out of URLs before `ProcessLinks` has converted the links.
+     txt←⍵
+     r←(≢txt)⍴0
+     0=+/']('⍷txt:r
+     ind←⊃,/{(⊃⍵)+⍳1↓⍵}¨'\]\([^)]*\)'⎕S(0 1)⊣txt
+     r[ind]←1
+     r
+ }

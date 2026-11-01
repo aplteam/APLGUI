@@ -1,0 +1,47 @@
+ (html isHtmlBlock)←ns ProcessFunctionCalls html;mask;ind;call;result;flag;isEmpty;txt;open;close;before;after;k
+⍝ Executes all embedded function calls (⍎⍎name⍎⍎) in `html`, each exactly once, and puts their results in place.
+⍝ Code is blanked rather than removed, so positions refer to `html` itself, and the calls are processed from
+⍝ the last to the first: replacing one does not shift the positions of those that are still to come.
+ isHtmlBlock←0
+ txt←html
+ mask←GetMaskForCodeTags html
+ (mask/txt)←' '                                             ⍝ No calls inside code
+ ind←'(?<!⍎)⍎⍎(?!⍎)'⎕S 0⊣txt                                 ⍝ 0-origin offsets of all "⍎⍎"
+ :If 0≠≢ind←(2×⌊0.5×≢ind)↑ind                                ⍝ An unpaired last one is ignored
+     ind←((≢ind)÷2)2⍴ind
+     :For k :In ⌽⍳≢ind
+         (open close)←ind[k;]                                ⍝ Offsets of the opening and the closing "⍎⍎"
+         before←open↑html
+         after←(close+2)↓html
+         call←A.DLB A.DTB(open+2)↓close↑html
+         result←ns ExecExternalFns call
+         :If 0≠≢result
+             isEmpty←0=≢¨result~¨' '
+             result←(0⌈¯1++/∧\isEmpty)↓(-0⌈¯1++/∧\⌽isEmpty)↓result ⍝ Allow max 1 leading/trailing blank line
+             flag←⊃ns.parms.syntaxSugar
+             isHtmlBlock∨←CheckForHtmlBlock(⊆result)(0=≢¨' '~¨⍨⊆result)ns.topOfDocument
+             :If 1=≡result
+                 :If flag∧~isHtmlBlock
+                     result←⊃ns ProcessInlineMarkUp result
+                 :EndIf
+             :Else
+                 'Embeded function returned invalid result'⎕SIGNAL 11/⍨(,1)≢∪≡¨,¨result
+                 :If flag∧~isHtmlBlock
+                     result←,⊆result
+                     result←,⊃¨ns ProcessInlineMarkUp¨A.DMB result
+                 :EndIf
+             :EndIf
+             'Called function returned an HTML block but does not stand on its own'⎕SIGNAL 11/⍨isHtmlBlock∧0≠≢before,after
+             :If (1<≡result)∧0=≢before,after                 ⍝ Several lines, and the call stands on its own
+                 html←result
+             :Else
+                 :If 1<≡result                               ⍝ Several lines amid other text
+                     result←⊃{⍺,' ',⍵}/result
+                 :EndIf
+                 html←before,result,after
+             :EndIf
+         :Else
+             html←before,after                               ⍝ An empty result removes the call and nothing else
+         :EndIf
+     :EndFor
+ :EndIf

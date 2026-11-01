@@ -1,0 +1,7 @@
+ parms←parent InheritParms parms
+⍝ `parent` are the parameters of the document being processed, `parms` those of a nested conversion
+⍝ (blockquote, table inside a list, collapsible, aside, sub-TOC).
+⍝ Copies the settings that affect how Markdown is rendered, so a nested conversion renders the same way.
+⍝ This matters for `lowercaseID` in particular: every call to `Init` redefines `LowercaseID`.
+⍝ Structural settings like `toc` or `numberHeaders` are deliberately not inherited.
+ parms.(syntaxSugar markdownStrict lang lowercaseID bookmarkMayStartWithDigit debug)←parent.(syntaxSugar markdownStrict lang lowercaseID bookmarkMayStartWithDigit debug)

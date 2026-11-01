@@ -1,0 +1,11 @@
+ r←fence FenceLines md;ind
+⍝ Returns a Boolean with a 1 for every line in `md` that is a valid code-block fence made of `fence`
+⍝ (either "~" or "`"): up to six leading blanks, at least three fence characters, and no fence
+⍝ character in any info string that follows.
+⍝ A single ⎕S over all lines finds the candidates; only those are checked further. This replaces calling
+⍝ a function with a ⎕S and a ⎕R for every single line, which was the most expensive part of `Init`.
+ r←(≢md)⍴0
+ :If 0<≢md
+ :AndIf 0<≢ind←∪1+('^ {0,6}',fence,'{3}')⎕S 2⍠('Mode' 'L')⊣,¨md
+     r[ind]←fence{~⍺∊⍵↓⍨+/∧\⍺=⍵}¨{⍵↓⍨+/∧\' '=⍵}¨md[ind]
+ :EndIf

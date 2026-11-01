@@ -1,0 +1,5 @@
+ UnescapeDoubleQuotes←{
+⍝ What `SmartQuotes` does when syntax sugar is switched off: pairs of double quotes stay what they are,
+⍝ but an escaped double quote loses its escape character.
+     '"\1"' ProcessDoubleQuotes ⍵
+ }

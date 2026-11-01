@@ -1,0 +1,11 @@
+ r←ConvertEscapedAmpersand md;b;m
+⍝ Converts `\&` into `&amp;` -- but not inside code, where `\&` must survive verbatim.
+ r←md
+ :If ∨/b←'\&'⍷md
+ :AndIf ∨/b∧←~GetMaskForCode md
+     r←,¨md
+     r[⍸b]←⊂'&amp;'
+     r[1+⍸b]←⊂''
+     r←⊃,/r
+ :EndIf
+⍝Done

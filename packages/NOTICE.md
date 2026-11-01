@@ -24,7 +24,7 @@ out of or in connection with the software or the use or other dealings in the
 software.
 ```
 
-## aplteam-CommTools-2.0.2
+## aplteam-CommTools-3.2.0
 
 ```
 MIT License                                                                      
@@ -130,7 +130,7 @@ furnished to do so, subject to the following conditions:
                                                                                  
 ```
 
-## aplteam-Laguntza-7.1.0
+## aplteam-Laguntza-7.2.0
 
 ```
 MIT License                                                                      
@@ -157,7 +157,7 @@ furnished to do so, subject to the following conditions:
                                                                                  
 ```
 
-## aplteam-MarkAPL-15.0.0
+## aplteam-MarkAPL-16.0.0
 
 ```
 MIT License                                                                      

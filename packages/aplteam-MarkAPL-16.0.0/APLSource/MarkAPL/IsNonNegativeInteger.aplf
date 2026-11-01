@@ -1,0 +1,7 @@
+ r←IsNonNegativeInteger y
+⍝ Returns 1 for a simple numeric scalar that is a non-negative integer, otherwise 0.
+ r←0
+ :If 0=≡y
+ :AndIf 0=⊃0⍴y
+     r←(0≤y)∧y=⌊y
+ :EndIf

@@ -1,0 +1,19 @@
+ html_←SmartTypography html;cb;bbt;ignore;lt;tags
+⍝ Does all the smart stuff except double + single quote handling; see `SmartQuotes` for that.
+⍝ This function does not check ns.syntaxSugar: that's up to the caller.
+ cb←'(^ {0,3}[~`]{3,}).*\1'                                                         ⍝ Code blocks (anything between `~~~` and three back ticks.
+ bbt←'`[^`].*?`'                                                                    ⍝ Between back-ticks (= code)
+ lt←'\]\([^)]*\)'                                                                    ⍝ Link targets: URLs must not be touched
+ tags←'<[a-zA-Z][^>]*>'                                                              ⍝ Tags, including the href of automatic links
+ ignore←'<!--[^-]+-->'cb bbt lt tags
+⍝ One ⎕R per group of patterns sharing the same options. The order of the patterns matters: "---" must
+⍝ come before "--", and "&lt;==&gt;" before "&lt;==".
+⍝ Each ⎕R is skipped when the text holds nothing it could replace, which is the common case.
+ html_←html
+ :If (1<≡html)∨∨/∨/¨'--' '...' '<<' '>>'⍷¨⊂html
+     html_←(ignore,'---' '--' '\.\.\.' '<<' '>>')⎕R(,¨((≢ignore)⍴'&'),'—–…«»')⍠('Mode' 'D')('DotAll' 1)⊣html_   ⍝ em dash, en dash, ellipses, chevrons
+ :EndIf
+ :If (1<≡html_)∨('('∊html_)∨∨/'=='⍷html_
+     html_←(ignore,'\B\(c\)\B' '\B\(tm\)\B' '\B\(C\)\B' '\B\(TM\)\B' '\B\&lt;==&gt;\B' '\B\&lt;==\B' '\B\==&gt;\B')⎕R(,¨((≢ignore)⍴'&'),'©™©™↔←→')⊣html_   ⍝ Copyright, trademark, arrows
+ :EndIf
+⍝Done

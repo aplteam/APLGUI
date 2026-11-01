@@ -1,0 +1,6 @@
+ ns←parms ProcessLeanPubExtensions ns
+⍝ Replaces `A> ` and alikes against a <div> that is used to give it an outlook similar to what LeanPub is doing.
+⍝ Any embedded parameter `leanpubExtensions` has already been established by `ProcessEmbeddedParms` at this stage.
+ :If parms.leanpubExtensions
+     ns←parms ProcessLeanPubExtensions_ ns
+ :EndIf

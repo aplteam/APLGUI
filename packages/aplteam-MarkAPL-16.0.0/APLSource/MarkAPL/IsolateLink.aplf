@@ -1,0 +1,11 @@
+ IsolateLink←{
+     txt←⍵
+     mask←⍺
+     0=+/b←']('⍷mask\mask/txt:⍬
+     link←⌽(b⍳1)↑txt
+     mask2←⌽(≢link)↑mask
+     link2←mask2\mask2/link
+     r←(≢link)-1++/∧\~(+\link2='[')=+\link2=']'
+     r≥0:r
+     (mask∧(⍳≢mask)≠b⍳1)∇ txt                 ⍝ No matching "[": not a link, so look for the next one
+ }

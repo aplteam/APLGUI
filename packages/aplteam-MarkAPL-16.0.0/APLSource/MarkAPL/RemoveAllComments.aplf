@@ -1,0 +1,17 @@
+ RemoveAllComments←{
+⍝ Removes all lines that start with a lamp (`⍝`) -- except inside code blocks and <pre> blocks.
+⍝ Code blocks are detected by `WhereAreCodeBlocks`, the same way as everywhere else, so a fence
+⍝ with an info string (like `~~~ apl`) is recognized as well.
+     ns←⍵
+     md←ns.markdown
+     isCode←WhereAreCodeBlocks md
+     preStart←(≢md)⍴0
+     preStart[1+'<pre\b'⎕S 2⊢md]←1
+     preEnd←(≢md)⍴0
+     preEnd[1+'</pre>'⎕S 2⊢md]←1
+     isPre←Between(~isCode)∧preStart≠preEnd     ⍝ A line holding both opens and closes a block
+     keep←isCode∨isPre∨'⍝'≠⊃¨md
+     ns.markdown←keep/md
+     ns.lineNumbers←keep/ns.lineNumbers
+     ns
+ }

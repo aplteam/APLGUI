@@ -1,0 +1,14 @@
+ bool←WhereAreCodeBlocks md;b1;b2;fences;first
+ b1←'~'FenceLines md
+ b2←'`'FenceLines md
+ :If 0=+/b1+b2                     ⍝ No code blocks at all: done!
+     bool←(≢md)⍴0
+ :Else
+     :If >/b1 b2⍳¨1
+         (b2 b1)←b1 b2
+     :EndIf
+     b1←Between b1
+     (b1/b2)←0
+     b2←Between b2
+     bool←b1∨b2
+ :EndIf

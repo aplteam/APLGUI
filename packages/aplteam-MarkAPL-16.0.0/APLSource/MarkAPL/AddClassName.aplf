@@ -1,0 +1,7 @@
+ AddClassName←{
+⍝ Adds the class name ⍺ to the special attributes ⍵, which MAY contain user-defined class names already.
+⍝ There must be only one "class" attribute: browsers ignore all but the first one.
+     sa←⍵
+     0=+/'class="'⍷sa:sa,' class="',⍺,'"'
+     'class="'⎕R('&',⍺,' ')⊣sa
+ }

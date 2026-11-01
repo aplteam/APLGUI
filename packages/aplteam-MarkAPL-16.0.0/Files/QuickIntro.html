@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en" style="scroll-behavior:smooth" >
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MarkAPL Quick Intro</title>
+<style media="screen">
+html{line-height:1.15;-webkit-text-size-adjust:100%;}body{margin:0;}main{display:block;}h1{font-size:2em;margin:0.67em 0;}hr{box-sizing:content-box;height:0;overflow:visible;}pre{font-family:monospace, monospace;font-size:1em;}a{background-color:transparent;}abbr[title]{border-bottom:none;text-decoration:underline;text-decoration:underline dotted;}b,strong{font-weight:bolder;}code,kbd,samp{font-family:monospace, monospace;font-size:1em;}small{font-size:80%;}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline;}sub{bottom:-0.25em;}sup{top:-0.5em;}img{border-style:none;}button,input,optgroup,select,textarea{font-family:inherit;font-size:100%;line-height:1.15;margin:0;}button,input{overflow:visible;}button,select{text-transform:none;}button,[type="button"],[type="reset"],[type="submit"]{-webkit-appearance:button;}button::-moz-focus-inner,[type="button"]::-moz-focus-inner,[type="reset"]::-moz-focus-inner,[type="submit"]::-moz-focus-inner{border-style:none;padding:0;}button:-moz-focusring,[type="button"]:-moz-focusring,[type="reset"]:-moz-focusring,[type="submit"]:-moz-focusring{outline:1px dotted ButtonText;}fieldset{padding:0.35em 0.75em 0.625em;}legend{box-sizing:border-box;color:inherit;display:table;max-width:100%;padding:0;white-space:normal;}progress{vertical-align:baseline;}textarea{overflow:auto;}[type="checkbox"],[type="radio"]{box-sizing:border-box;padding:0;}[type="number"]::-webkit-inner-spin-button,[type="number"]::-webkit-outer-spin-button{height:auto;}[type="search"]{-webkit-appearance:textfield;outline-offset:-2px;}[type="search"]::-webkit-search-decoration{-webkit-appearance:none;}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit;}details{display:block;}summary{display:list-item;}template{display:none;}[hidden]{display:none;}body{margin:0;font-family:Georgia, "Palatino Linotype", "Book Antiqua", Palatino, Garamond, "Times New Roman", serif;background-color:#f8f4ea;background-image:linear-gradient(#f8f4ea, #f5f0e2);background-attachment:fixed;font-size:19px;line-height:1.55;max-width:900px;padding:1.5em 1.2em 3em 1.2em;color:#2e2a24;margin-left:auto;margin-right:auto;overflow-wrap:break-word;}h1,h2,h3,h4,h5,h6{color:#402a20;font-weight:700;padding-left:0;font-family:"Palatino Linotype", Palatino, "Book Antiqua", Georgia, "Times New Roman", serif;line-height:1.25;}h1,h2,h3,h4,p{margin-bottom:0.88em;}h1{font-size:2.1em;font-weight:700;text-align:center;margin:0.4em 0 0.9em 0;padding-bottom:0.35em;border-bottom:3px double #b08d57;}h1 > code,h2 > code,h3 > code,h4 > code,h5 > code,h6 > code{font-size:0.9em;background-color:inherit;font-variant:normal;}h2{font-size:1.5em;margin:1.1em 0 0.5em 0;padding-bottom:0.15em;border-bottom:1px solid #cdbb95;}h3{margin:0;margin-top:0.9em;font-size:1.28em;}nav h3{font-size:1.2em;margin:0 0 0.75em 0;}h4{font-size:1.1em;margin:0;margin-top:0.85em;}h5{font-size:1em;margin:0;margin-top:0.65em;padding:0;}h6{font-size:0.95em;color:#6a5a48;margin:0;margin-top:0.6em;padding:0;}a{color:#8b2635;text-decoration:underline;text-decoration-color:#c99aa0;text-underline-offset:2px;margin:0;padding:0;vertical-align:baseline;}a:hover{color:#a83544;text-decoration-color:#a83544;}a:visited{color:#5c4a6b;}a.autoheader_anchor{text-decoration:none;}img{margin-top:0.55em;margin-bottom:0.27em;max-width:100%;}ul{list-style-type:disc;}dd{padding-top:0.25em;}p.first_dd{padding-top:0.25em;}li > ul,li > ol{padding-bottom:0;}li{line-height:1.45;margin-left:1.38em;margin-bottom:0.3em;}ul > li{margin-left:1.5em;}ol > li{margin-left:1.5em;}li ul{margin-left:0.55em;}li ul{margin-left:0.27em;}li p{padding:1px 0 0 0;margin:0.55em 0 0.27em 0;line-height:1.45;}ul, ol{line-height:1.45;padding:0;margin:0.5em;}ul ul,ul ol,ol ol,ol ul{margin-top:0.25em;}p{line-height:1.55;padding:0.2em 0 0 0;margin:0;}pre{position:relative;overflow:auto;padding:0.25em 0.5em;margin:0.9em 0 0.9em 0 !important;background-color:#f2ead8;color:#3a352c;border:1px solid #d8caa8;border-left:4px solid #b08d57;box-shadow:inset 0 0 0.5em rgba(176, 141, 87, 0.12);display:block;line-height:1.25;font-family:APLFont, monospace;font-weight:normal;}pre > code{line-height:1.25;border:0;padding:0;margin:0;background-color:inherit;color:inherit;font-weight:inherit;white-space:pre-wrap;}td code{padding:0;}a code{padding:0;font-size:1em;}nav code{background-color:inherit;font-weight:400;color:inherit;}mark{background-color:yellow;color:black;}code{font-family:APLFont, monospace;font-weight:400;color:#8a2b1b;background-color:#efe7d3;line-height:1.1;font-size:88%;white-space:nowrap;margin:0;padding:0.12em 0.4em;border:1px solid #e0d4b6;border-radius:2px;}tbody tr:nth-child(even){background-color:#f3ecdb;}th{background-color:#e7dcbf;color:#402a20;}th, td{padding:0.28em 0.7em;vertical-align:top;}table td + td{border-left:1px solid #cdbb95;}table th + th{border-left:1px solid #cdbb95;}table{border-color:#b08d57;margin:1em 0;border-collapse:collapse;font-family:APLFont;font-size:0.9em;line-height:1.35;border:1px solid #b08d57;}thead{border-bottom:2px solid #b08d57;}li > table{margin:0.55em 0 0.55em 0;}tr{margin:1.11em;}th{font-weight:bold;}tfoot td{font-weight:bold;border-top:2px solid #b08d57;}blockquote{border-left:3px solid #b08d57;padding:0.1em 1em;margin:1em 0.25em 1em 0.5em;color:#4a4235;font-style:italic;}blockquote p{padding:0 0.25em;}blockquote code{font-style:normal;}blockquote ul li{padding-left:0;}blockquote ol li{padding-left:0;}li > blockquote{margin-left:0;}nav{background-color:#f2ead8;border:1px solid #cdbb95;padding:0.7em 1em;margin:0.5em 0.3em 2em 0.3em;margin-right:0;box-shadow:0.25em 0.25em 0.4em rgba(120, 100, 70, 0.25);overflow:hidden;}nav#main_nav{width:auto;}nav ul{list-style-type:None;margin:0 1em 0.11em 0;padding:0;}nav a{text-decoration:none;}nav a:hover{text-decoration:underline;}nav a:visited{color:#5c4a6b;}nav ul li{margin:0 0 0.16em 0;}nav li p{margin:0;padding:0;line-height:1;}nav li{line-height:1.5;padding:0;margin-top:0;margin-bottom:0;margin-left:2em;}nav p{font-weight:bold;font-size:1em;padding-top:0;margin-bottom:0.5em;}dl{margin-top:0.1em;margin-bottom:0.1em;}dt{margin-top:0.75em;margin-bottom:0.1em;font-weight:700;}.toc-container{height:auto;margin:0;padding:0;}nav h2{font-size:1.4em;margin:0.27em 1em 0.27em 1em;border-bottom:none;}div.toc-container ul{margin-right:1em;padding-left:1em;}[type="checkbox"]{position:absolute;left:-9999px;}label{display:block;width:100%;height:1.1em;cursor:pointer;top:0;padding-left:1em;}div#footnotes_div{margin-top:2em;padding-top:0.5em;font-size:0.92em;}div#footnotes_div p{line-height:1.2;padding-bottom:0;padding-top:0;}div#footnotes_div ol{padding-top:0;}@font-face{font-family:"APLFont";src:local("APL385 Unicode"), url("https://misc.aplteam.com/apl385.ttf") format("truetype");}.no_screen{display:none;}.hide{display:none;}.red{color:#8b2635;}.center{text-align:center;margin-left:auto;margin-right:auto;}.left{text-align:left;margin-right:0;}.right{text-align:right;margin-left:0;}.print_only{display:none;}div.leanpub{padding:0.83em 0.55em 1.11em 0;margin:0.55em 0 0 0.27em;overflow:auto;display:grid;grid-template-columns:auto 1fr;grid-gap:10px;align-items:center;}div.leanpub_A{border:1px solid #cdbb95;background-color:#f2ead8;padding:0.55em;margin:1.11em 0 0.83em 0;}div.leanpub h3,div.leanpub_A h3{font-size:1.2em;padding:0;margin:0;}div.leanpub h4,div.leanpub_A h4{font-size:1.1em;padding:0.27em 0 0 0;margin:0;}div.leanpub h5,div.leanpub h5{font-size:1.0em;padding:0.27em 0 0 0;margin:0;}div.leanpub_A h5,div.leanpub_A h5{font-size:1.0em;padding:0.27em 0 0 0;margin:0;}div.leanpub img{padding:0;margin:0 1.11em 0.27em 0;}div.leanpub_A > p:first-child{padding-top:0;margin-top:0;}div.leanpub img{float:left;padding:0;margin:0.55em 1.11em 0 0;clear:both;}div.leanpub tbody *{background-color:transparent;}div.leanpub p{padding:0.17em 0 0 0;margin:0;}span.leanpub_code{color:#8b2635;}div.leanpub p{display:block;padding:0.44em 0 0 0;}div.leanpub > div{margin-left:2.27em;}pre[class*="language-"]{position:relative;margin:5px 0;padding:1.75em 0 1.75em 1em;}details summary{cursor:pointer;}details summary > *{display:inline;}div.accordion{border:1px solid #cdbb95;padding:0;margin:0.5em 0;background-color:#f2ead8;}div.accordion > div{border:1px solid #cdbb95;padding:0.5em;margin:0 0;}div.accordion > div p,div.accordion > div ul,div.accordion > div ol,div.accordion > div img,div.accordion > div table{margin-block-end:0.1em;}div.collapsible{border:1px solid #cdbb95;padding:0.5em;margin:0.5em 0;background-color:#f2ead8;}div.collapsible p,div.collapsible ul,div.collapsible ol,div.collapsible img,div.collapsible table{margin-block-end:0.1em;}ul.checkboxes{list-style:none;margin-left:0;padding-left:0;}li{text-indent:0;padding-left:0;}ul.checkboxes > li::before{content:"☐";margin-right:0.5em;}ul.checkboxes > li.checked::before{content:"☒";margin-right:0.5em;}ul.checkboxes > li{margin-left:0;padding-left:1em;}pre > button{position:absolute;top:8px;right:10px;padding:0;line-height:0;color:#a2896a;background-color:transparent;border:none;cursor:pointer;opacity:0.6;transition:opacity 150ms, color 150ms;}pre button:hover{cursor:pointer;background-color:transparent;color:#8b2635;opacity:1;}#main_nav{position:relative;overflow:visible;}#main_nav h2{font-size:1.4em;margin:0;padding:0.5em;border-bottom:1px solid #b08d57;}#toc-toggle{position:absolute;top:1.5em;right:1em;}#toc-list{margin:1em 1em 0.25em 0;}#toc-list.floating{position:absolute;left:12.5%;width:75%;top:100%;z-index:100;max-height:80vh;overflow:auto;margin:0;padding:0.5em 1em;box-sizing:border-box;background-color:#f2ead8;border:1px solid #cdbb95;box-shadow:0.25em 0.25em 0.6em rgba(120, 100, 70, 0.35);}@media (max-width:600px){table{display:block;overflow-x:auto;max-width:100%;}pre{overflow-x:auto;}}
+</style>
+<style media="print">
+@page{margin:25mm 20mm 25mm 20mm;}body{font-family:Georgia, "Palatino Linotype", "Book Antiqua", Palatino, Garamond, "Times New Roman", serif;font-size:9pt;line-height:1.2;}h1{font-size:170%;}h2{font-size:110%;}h3{font-size:110%;}h4{font-size:105%;}h5{font-size:100%;}h6{font-size:95%;}h1{margin:0 0 20pt 0;}h2{margin:15pt 0 3pt 0;}h3{margin:10pt 0 0pt 0;}h4{margin:10pt 0 0pt 0;}h5{margin:9pt 0 0pt 0;}h6{margin:9pt 0 0pt 0;}h1,h2,h3,h4,h5,h6{color:black;font-family:"Palatino Linotype", Palatino, "Book Antiqua", Georgia, "Times New Roman", serif;page-break-after:avoid;}h1 > code,h2 > code,h3 > code,h4 > code,h5 > code,h6 > code{font-size:100%;}h2{border-bottom:1pt solid Silver;padding-bottom:2pt;}.h_tag{page-break-after:avoid;break-after:avoid;}abbr[title]{border-bottom:0;text-decoration:none;}a{color:black;margin:0;padding:0;vertical-align:baseline;text-decoration:none;font-style:italic;}a.autoheader_anchor{text-decoration:none;font-style:normal;page-break-after:avoid;break-after:avoid;}ul{list-style-type:square;}ul, ol{padding:0;margin:0;margin-top:10pt;}li > ul,li > ol{padding-bottom:0;padding-top:0;}li{line-height:1.3;margin:2pt 5pt 2pt 13pt;}ul > li{margin-left:15pt;}ol > li{margin-left:15pt;}li ul{margin-left:5pt;}li ul,li ol{margin:0 3pt 0 3pt;}li p{padding:1pt 0 0 0;margin:3pt 0 3pt 0;line-height:1.3;}p,ul,ol{line-height:1.3;padding:4pt 0 0 0;margin:0;color:black;}ul,ol{margin-top:0.5em;}pre{padding:3pt;margin:5pt 0;white-space:pre-wrap;background-color:#FAFAFA;border:1pt Silver solid;display:block;font-family:APLFont, monospace;page-break-inside:avoid;}pre code{background-color:#FAFAFA;color:Black;padding:0;margin:0 0 -6pt 0;line-height:1.1;border:0;white-space:pre-wrap;}mark{background-color:transparent;font-weight:bold;font-style:italic;}code{font-family:APLFont, monospace;line-height:1.2;font-size:9pt;color:black;border:1pt solid silver;padding:0 3pt;white-space:nowrap;}tbody th, tfoot tr{background-color:#e6e6e6;}tbody tr:nth-child(even){background-color:#fafafa;}th{background-color:#F0F0F0;}th, td{padding:1pt 5pt;border:1pt solid #cccccc;vertical-align:top;}table td + td{border-left:1pt solid gray;}table th + th{border-left:1pt solid gray;}table code{font-style:normal;padding-left:0;padding-right:0;}table{margin:0.75em 0;font-family:APLFont;font-size:9pt;padding:0;border:1pt solid #b3b3b3;border-collapse:collapse;}li > table{margin:10pt 0 10pt 0;}tr{margin:20pt;}th{font-weight:bold;}tfoot td{font-weight:bold;}blockquote{border-left:2pt solid #595959;padding-left:5pt;margin:8pt 3pt 8pt 8pt;}nav{background-color:#f8f8f8;border:1pt solid Gray;width:auto;padding:5pt 5pt 5pt 0;margin:5pt 0;overflow:hidden;}nav ul{list-style-type:none;margin:5pt 0 2pt 0;padding:0;}nav ul li{margin-top:2pt;margin-bottom:2pt;}nav li p{margin:0;padding:0;line-height:1;margin:0;padding:0;}nav li{line-height:1;padding:0;margin-top:0;margin-bottom:0;margin-left:8pt;}dl{margin-top:0;margin-bottom:10pt;}dt{margin-top:10pt;margin-bottom:0;font-weight:800;page-break-inside:avoid;}dd{margin-top:2pt;}label#hide_toc_label{font-size:65%;}.toc-container{background-color:inherit;}.toc-container h3{margin:0 0 2pt 7pt;}[type="checkbox"]{display:none;}label{display:block;width:100%;height:1.1em;top:0;padding-left:10pt;}a.external_link::before{content:" 🔗\FE0E\0020";}a.bookmark_link::before{content:" ➯ ";}a.mailto_link::before{content:" ✉ "}nav a.bookmark_link{font-style:normal;}nav p{margin-left:10pt;font-weight:bold;font-size:9pt;}nav a{font-style:normal;}nav a.bookmark_link::before{content:"";}div#footnotes_div a::before{content:"";}div#footnotes_div a{font-style:normal;}div#footnotes_div{page-break-inside:avoid;}@font-face{font-family:"APLFont";src:local("APL385 Unicode"), url("https://misc.aplteam.com/apl385.ttf") format("truetype");}.no_print{display:none;}.hide{display:none;}.red{color:red;}.center{text-align:center;margin:0 auto;}.left{text-align:left;margin-right:0;}.right{text-align:right;margin-left:0;}.avoid_page_break{page-break-inside:avoid;}.page_break_before{page-break-before:always;}div.leanpub{margin:10pt 0 10pt 8pt;page-break-inside:avoid;display:grid;grid-template-columns:auto 1fr;grid-gap:10px;align-items:center;}div.leanpub_A{border:1pt solid black;background-color:#f9f9f9;padding:5pt;margin:10pt 0 10pt 0;page-break-inside:avoid;}div.leanpub h3,div.leanpub_A h3{font-size:1.2em;padding:3pt 0 0 0;margin:0;}div.leanpub h4,div.leanpub_A h4{font-size:1.1em;padding:3pt 0 0 0;margin:0;}div.leanpub h5,div.leanpub h5{font-size:1.0em;padding:3pt 0 0 0;margin:0;}div.leanpub_A h5,div.leanpub_A h5{font-size:1.0em;padding:3pt 0 0 0;margin:0;}div.leanpub img{padding:0;margin:0 10pt 2pt 0;}div.leanpub_A > p:first-child{padding-top:0;margin-top:0;}div.leanpub > div > h1:first-child{padding-top:5pt;}div.leanpub img{float:left;padding:0;margin:5pt 10pt 0 0;clear:both;}div.leanpub p{padding:3pt 0 0 0;margin:0;}span.leanpub_code{font-weight:bold;}div.leanpub p{display:block;padding:8pt 0 0 0;}div.leanpub > div{margin-left:35pt;}sup{font-size:0.75em;line-height:0;position:relative;vertical-align:baseline;top:-0.4em;}pre[class*="language-"]{position:relative;margin:5pt 0;padding:1.75rem 0 1.75rem 1rem;}pre[class*="language-"] button{position:absolute;top:5pt;right:5pt;}div.accordion{padding:0;margin:0.5em 0;}div.accordion > div{border:1pt solid silver;padding:0.5em;margin:0 0;}div.accordion > div p,div.accordion > div ul,div.accordion > div ol,div.accordion > div img,div.accordion > div table{margin-block-end:0.1em;}summary{display:block;}summary::before{content:"\25BE ";}div.collapsible{border:1pt solid silver;padding:0.5em;margin:0.5em 0;}div.collapsible p,div.collapsible ul,div.collapsible ol,div.collapsible img,div.collapsible table{margin-block-end:0.1em;}ul.checkboxes{list-style:none;margin-left:-2rem;padding-left:1rem;}li{padding-left:0.25rem;text-indent:0;}ul.checkboxes > li::before{content:"☐ ";}ul.checkboxes > li.checked::before{content:"☒ ";}pre > button{display:none;}#toc-toggle{display:none;}#toc-list{display:block !important;}#toc-list,#toc-list li,#toc-list a{font-size:9pt;font-weight:normal;}#toc-list ul{margin-left:12pt;}#main_nav h2{margin:0;padding:0.5em 1em;border-bottom:1pt solid silver;}
+</style>
+
+</head>
+<body>
+<div class="h_tag">
+<a href="#quick-introduction-to-markapl" id="quick-introduction-to-markapl" class="autoheader_anchor">
+<h1 data-id="Quick-introduction-to-MarkAPL">Quick introduction to <code>MarkAPL</code></h1>
+</a>
+</div>
+<nav id="main_nav" class="toc">
+<h2 id="toc-heading">Table of contents</h2>
+<button id="toc-toggle" aria-controls="toc-list" aria-expanded="true">Hide</button>
+
+<div class="toc-container">
+<ul id="toc-list" class="print">
+<li class="toc-entry toc-h2"><a href="#quick-start">1. Quick start</a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#making-markapl-available">1.1. Making <code>MarkAPL</code> available</a></li>
+<li class="toc-entry toc-h3"><a href="#converting-markdown-into-html">1.2. Converting Markdown into HTML</a></li>
+<li class="toc-entry toc-h3"><a href="#creating-a-fully-fledged-html-page-with-a-parameter-space">1.3. Creating a fully fledged HTML page with a parameter space</a></li>
+<li class="toc-entry toc-h3"><a href="#create-a-fully-fledged-html-page-with-embedded-parameters">1.4. Create a fully fledged HTML page with embedded parameters</a></li>
+</ul></li>
+<li class="toc-entry toc-h2"><a href="#documentation">2. Documentation</a></li>
+<li class="toc-entry toc-h2"><a href="#misc">3. Misc</a>
+</ul>
+</div>
+</nav>
+<p>By now you are likely aware that <code>MarkAPL</code> converts Markdown to HTML5.</p>
+<p>All you need is the <a href="https://tatin.dev" class="external_link" title="Link to the principal Tatin registry">Tatin package</a> <code>MarkAPL</code>.</p>
+<div class="leanpub">
+<svg version="1.0" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Information" width="20px" height="20px" viewBox="0 0 21 20" preserveAspectRatio="xMidYMid meet"><title>Information</title><g transform="translate(0,20) scale(0.1,-0.1)" fill="#000000" stroke="none"><path d="M0 100 l0 -100 105 0 105 0 0 100 0 100 -105 0 -105 0 0 -100z m190 0 l0 -80 -85 0 -85 0 0 80 0 80 85 0 85 0 0 -80z"/><path d="M90 140 c0 -5 7 -10 15 -10 8 0 15 5 15 10 0 6 -7 10 -15 10 -8 0 -15 -4 -15 -10z"/> <path d="M90 80 c0 -20 5 -30 15 -30 10 0 15 10 15 30 0 20 -5 30 -15 30 -10 0 -15 -10 -15 -30z"/></g></svg>
+<div>
+<p>Tatin comes with Dyalog 19.0, 20.0 and 21.0 but needs to be activated with the <code>]activate</code> user command. In 18.2 it must be installed.</p>
+</div>
+</div>
+
+<div class="h_tag">
+<a href="#quick-start" id="quick-start" class="autoheader_anchor">
+<h2 data-id="Quick-start">1. Quick start</h2>
+</a>
+</div>
+<div class="h_tag">
+<a href="#making-markapl-available" id="making-markapl-available" class="autoheader_anchor">
+<h3 data-id="Making-MarkAPL-available">1.1. Making <code>MarkAPL</code> available</h3>
+</a>
+</div>
+<p>In order to give <code>MarkAPL</code> a try</p>
+<pre tabindex="0"><code>]Tatin.LoadPackages [tatin]markapl
+MyMarkdown←'# MarkAPL' 'All about **_MarkAPL_**'</code></pre>
+<div class="leanpub">
+<svg version="1.0" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Information" width="20px" height="20px" viewBox="0 0 21 20" preserveAspectRatio="xMidYMid meet"><title>Information</title><g transform="translate(0,20) scale(0.1,-0.1)" fill="#000000" stroke="none"><path d="M0 100 l0 -100 105 0 105 0 0 100 0 100 -105 0 -105 0 0 -100z m190 0 l0 -80 -85 0 -85 0 0 80 0 80 85 0 85 0 0 -80z"/><path d="M90 140 c0 -5 7 -10 15 -10 8 0 15 5 15 10 0 6 -7 10 -15 10 -8 0 -15 -4 -15 -10z"/> <path d="M90 80 c0 -20 5 -30 15 -30 10 0 15 10 15 30 0 20 -5 30 -15 30 -10 0 -15 -10 -15 -30z"/></g></svg>
+<div>
+<p>In order to use <code>MarkAPL</code> permanently you must install it into a particular folder, for example:</p>
+<pre tabindex="0"><code>]Tatin.InstallPackages [tatin]markapl /MyProjects/ThisProject/packages</code></pre>
+</div>
+</div>
+
+<p>There are two possible scenarios:</p>
+<div class="h_tag">
+<a href="#converting-markdown-into-html" id="converting-markdown-into-html" class="autoheader_anchor">
+<h3 data-id="Converting-Markdown-into-HTML">1.2. Converting Markdown into HTML</h3>
+</a>
+</div>
+<p>To convert Markdown into HTML, call the <code>Markdown2HTML</code> method:</p>
+<pre tabindex="0"><code>      (html ns)←MarkAPL.Markdown2HTML MyMarkdown
+      ⍪html
+ &lt;div class="h_tag"&gt;
+ &lt;a href="#markapl" id="markapl" class="autoheader_anchor"&gt;
+ &lt;h1 data-id="MarkAPL"&gt;MarkAPL&lt;/h1&gt;
+ &lt;/a&gt;
+ &lt;/div&gt;
+ &lt;p&gt;All about &lt;strong&gt;&lt;em&gt;MarkAPL&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;</code></pre>
+<p>Note that <code>Markdown2HTML</code> returns HTML and a namespace <code>ns</code>. The namespace contains, among other stuff, a variable <code>report</code> that might carry warnings and error reports. Ideally <code>report</code> is empty.</p>
+<p>This way of calling <code>Markdown2HTML</code> relies entirely on defaults. If you are not happy with those you must specify parameters in one of two ways:</p>
+<ul>
+<li>Create a parameter space (usually by calling <code>MarkAPL.CreateParms</code>), modify the parameters, and pass the namespace as the left argument to <code>Markdown2HTML</code>. The next topic explains this process.</li>
+<li>Embed the specific parameters you need into your Markdown. The subsequent topic elaborates on this approach.</li>
+</ul>
+<div class="h_tag">
+<a href="#creating-a-fully-fledged-html-page-with-a-parameter-space" id="creating-a-fully-fledged-html-page-with-a-parameter-space" class="autoheader_anchor">
+<h3 data-id="Creating-a-fully-fledged-HTML-page-with-a-parameter-space">1.3. Creating a fully fledged HTML page with a parameter space</h3>
+</a>
+</div>
+<p>To instruct <code>MarkAPL</code> to generate a complete HTML page, you can either specify <code>outputFilename</code> or set the <code>createFullHtmlPage</code> flag to 1:</p>
+<pre tabindex="0"><code>      parms←MarkAPL.CreateParms
+      parms.createFullHtmlPage←1
+      (html ns)←parms MarkAPL.Markdown2HTML MyMarkdown
+      ⍪4↑html
+ &lt;!DOCTYPE html&gt;
+ &lt;html lang="en" style="scroll-behavior:smooth" &gt;
+ &lt;head&gt;
+ &lt;meta http-equiv="X-UA-Compatible" content="IE=edge"&gt;</code></pre>
+<p>Setting <code>outputFilename</code> has the additional benefit of writing the HTML to that file.</p>
+<p>Note that <code>parms</code> is a namespace that stores default values. You can list them by calling <code>parms.∆List</code>.</p>
+<div class="h_tag">
+<a href="#create-a-fully-fledged-html-page-with-embedded-parameters" id="create-a-fully-fledged-html-page-with-embedded-parameters" class="autoheader_anchor">
+<h3 data-id="Create-a-fully-fledged-HTML-page-with-embedded-parameters">1.4. Create a fully fledged HTML page with embedded parameters</h3>
+</a>
+</div>
+<p>To make <code>MarkAPL</code> generate a complete HTML page, you can <em>embed</em> <code>outputFilename</code> or <code>createFullHtmlPage</code> into the Markdown:</p>
+<pre tabindex="0"><code>      (html ns)←MarkAPL.Markdown2HTML (⊂'[parm]:createFullHtmlPage=1'),MyMarkdown
+      ⍪4↑html
+ &lt;!DOCTYPE html&gt;
+ &lt;html lang="en" style="scroll-behavior:smooth" &gt;
+ &lt;head&gt;
+ &lt;meta http-equiv="X-UA-Compatible" content="IE=edge"&gt;</code></pre>
+<div class="h_tag">
+<a href="#documentation" id="documentation" class="autoheader_anchor">
+<h2 data-id="Documentation">2. Documentation</h2>
+</a>
+</div>
+<ul>
+<li>For the cheat sheet call <code>MarkAPL.Help 0</code></li>
+<li>For comprehensive documentation, call <code>MarkAPL.Reference 0</code></li>
+</ul>
+<div class="h_tag">
+<a href="#misc" id="misc" class="autoheader_anchor">
+<h2 data-id="Misc">3. Misc</h2>
+</a>
+</div>
+<p>Please send comments, suggestions and bug reports to <a href="mailto:kai@aplteam.com" class="mailto_link">kai@aplteam.com</a></p>
+<p>Kai Jaeger ⋄ 2016-02-17</p>
+<p>Last update: 2026-10-31</p>
+
+<script>
+
+// Adds a "Copy" button to every code block & established the event handler
+const copyButtonLabel = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" aria-hidden="true" style="vertical-align:text-bottom"><path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 0 1 0 1.5h-1.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 9.25 16h-7.5A1.75 1.75 0 0 1 0 14.25Z"></path><path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0 1 14.25 11h-7.5A1.75 1.75 0 0 1 5 9.25Zm1.75-.25a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z"></path></svg>` ;
+
+let blocks = document.querySelectorAll("pre");
+
+blocks.forEach((block) => {
+  if (navigator.clipboard) {
+    let button = document.createElement("button");
+
+    button.innerHTML = copyButtonLabel;
+    button.title = "Copies the code block to the clipboard.";
+    block.appendChild(button);
+     
+    button.addEventListener("click", async () => {
+      await copyCode(block, button);
+    });
+  }  
+});  
+
+async function copyCode(block, button) {
+  let code = block.querySelector("code");
+  let text = code.innerText;
+
+  await navigator.clipboard.writeText(text);
+
+  button.innerHTML = `✓`;
+
+  setTimeout(() => {
+    button.innerHTML = copyButtonLabel;
+  }, 700);
+}
+
+
+// Show/Hide the TOC. It starts in normal flow (open); once toggled it becomes
+// an out-of-flow overlay (`.floating`) so further toggles do not re-composite
+// the whole page (which made the mouse erratic on large documents). Driven by
+// an inline style, so it also works when the stylesheet did not load.
+(function () {
+  var button = document.querySelector("#toc-toggle");
+  var content = document.querySelector("#toc-list");
+  if (!button || !content) { return; }
+  var open = !content.classList.contains("hide");
+  content.classList.remove("hide");
+  function setLabel(state) {
+    button.innerText = state ? "Hide" : "Show";
+    button.setAttribute("aria-expanded", state);
+  }
+  function setOpen(state) {
+    content.classList.add("floating");   // out-of-flow overlay: cheap to toggle
+    content.style.display = state ? "block" : "none";
+    setLabel(state);
+  }
+  if (open) { setLabel(true); } else { setOpen(false); }   // leave it in flow on load
+  button.addEventListener("click", function () {
+    setOpen(content.style.display === "none");
+  });
+  content.addEventListener("click", function (evt) {
+    if (evt.target.closest("a")) { setOpen(false); }   // close after picking an entry
+  });
+})();
+
+</script>
+
+</body>
+</html>

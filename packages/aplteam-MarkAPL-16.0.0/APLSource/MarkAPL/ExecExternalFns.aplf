@@ -1,0 +1,42 @@
+ result←ns ExecExternalFns y;fns;__arg;nc;qdmx;valence;call
+⍝ Executes an embedded function call exactly once. `ns` is always passed as the right argument; anything
+⍝ following the function name in the call is passed as the left argument. A dyadic tradfn called without
+⍝ such an argument gets ⍬ as left argument.
+ result←''
+ (fns __arg)←{∨/' '''∊⍵:(¯1+⌊/⍵⍳' '''){(⍺↑⍵)(A.DLB ⍺↓⍵)}⍵ ⋄ ⍵ ⍬}y
+ nc←⎕NC⊂fns
+ :If 3≠⌊|nc
+     ns.report,←⊂'Unknown external function: <',fns,'>'
+ :Else
+     :If (1=×nc)∧0=2⊃1 ⎕AT fns
+         ns.report,←⊂'External function <',fns,'> is niladic but must not!'  ⍝ We cannot perform this check on class methods!
+     :Else
+         valence←¯2                                         ⍝ Ambivalent: dfns and class methods
+         :If 3.1=nc                                         ⍝ Only a tradfn has a fixed valence (⎕AT reports 2 for a dfn)
+             valence←2⊃1 ⎕AT fns
+         :EndIf
+         :If 0<≢__arg                                       ⍝ An argument was given: it goes to the left
+         :OrIf 2=valence                                    ⍝ A dyadic tradfn without an argument gets ⍬
+             call←'result←__arg ',fns,' ns'
+         :Else
+             call←'result←',fns,' ns'
+         :EndIf
+         :Trap 0                                            ⍝ Whatever happens in the function must be reported, not crash MarkAPL
+             ⍎call                                          ⍝ Exactly once: never "try again" after a failure
+             :If ¯1=×≡result
+                 ns.report,←⊂'External function <',fns,'> is niladic but must not!'  ⍝ Only this can explain a negative result
+                 result←''
+             :EndIf
+         :Else
+             qdmx←⎕DMX
+             :If 6=qdmx.EN
+             :AndIf 0=≢__arg
+             :AndIf {'⍺'∊⍵/⍨{~⍵∨≠\⍵}⍵=''''}2⊃qdmx.DM           ⍝ A VALUE ERROR on ⍺: the function needs an argument
+                 ns.report,←⊂'External function <',fns,'> requires a left argument'
+             :Else
+                 ns.report,←⊂'External function <',fns,'> did crash'
+             :EndIf
+             result←''
+         :EndTrap
+     :EndIf
+ :EndIf

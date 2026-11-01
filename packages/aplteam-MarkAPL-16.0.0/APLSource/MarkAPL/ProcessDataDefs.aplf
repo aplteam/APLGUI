@@ -1,0 +1,37 @@
+ r←ProcessDataDefs ns;def;value;id;b;v;ind
+ r←0
+ :If '['=⊃⊃ns.leadingChars
+     :If 0≠≢⍸'[data]:'≡⎕C 7↑⊃ns.leadingChars      ⍝ Find identifiers
+         def←⊃ns.markdown
+         :If '='∊def
+             (id value)←¯1 0↓¨7 0↓¨{i←⍵⍳'=' ⋄ (i↑⍵)(i↓⍵)}def
+             id←A.DLB A.DTB id
+         :AndIf ((⊃id)∊⎕A,(⎕C ⎕A),'_')∧∧/id∊⎕A,(⎕C ⎕A),⎕D,'_'   ⍝ Starts with an ASCII letter or an underscore; an empty name fails here as well
+             value←A.DLB A.DTB value
+             :If ''''∊value
+                 :If ''''''≡2⍴¯1⌽value
+                     value←¯1↓1↓value
+                 :Else
+                     value←''
+                     ns.report,←⊂'Data value definition for line ',(⍕ns.parms.lineNumberOffset+⊃ns.lineNumbers),' is invalid'
+                 :EndIf
+             :Else
+                 (b v)←⎕VFI value
+                 :If ∧/b
+                     value←{1=≢⍵:⍬⍴⍵ ⋄ ⍵}v
+                 :EndIf
+             :EndIf
+             ind←(⊃¨ns.data)⍳⊂id
+             :If ind≤≢ns.data
+                 ns.data[ind]←⊂id value                       ⍝ The last one wins
+                 ns.report,←⊂'Warning: data definition on line ',(⍕ns.parms.lineNumberOffset+⊃ns.lineNumbers),': "',id,'" is already defined; the last one wins'
+             :Else
+                 ns.data,←⊂id value
+             :EndIf
+         :Else
+             ns.report,←⊂'Data definition on line ',(⍕ns.parms.lineNumberOffset+⊃ns.lineNumbers),' is invalid'
+         :EndIf
+         ns←Drop ns
+         r←1
+     :EndIf
+ :EndIf

@@ -1,0 +1,16 @@
+ ProcessAutomaticLinks←{
+ ⍝ Transforms <https:mydomain.com> into a link
+ ⍝ (It was a very bad idea to use this syntax! [](url) is so obvious!)
+ ⍝ Note that this function escapes any of `_`, `__`, `*`, `**`, `~~`.
+     txt←⍵
+     ~∧/'<>'∊txt:txt
+     mask←~GetMaskForCode txt
+     bool←'<'=mask\mask/txt                     ⍝ "<" outside code only
+     0=+/bool:txt
+     head←(¯1+bool⍳1)↑txt                       ⍝ Everything up to the first "<" that is not code
+     txt←(≢head)↓txt
+     bool←(≢head)↓bool
+     txt2←(1+bool)⊆txt
+     txt3←ProcessAutomaticLinks_¨txt2
+     head,⊃,/txt3
+ }

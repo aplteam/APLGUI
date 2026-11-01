@@ -1,0 +1,28 @@
+ ns←HandleAbbreviations ns;html;abbr;comment;match2;match1;tag1;tag2;b;ignore;comment_;abbr_
+ :If 0≠≢ns.abbreviations
+     html←ns.html
+     :For abbr comment :In ↓ns.abbreviations
+         comment←2 EscapeSpecialChars comment
+         :If ns.parms.syntaxSugar
+             comment←ns.parms SmartStuff comment
+             comment_←'&'⎕R'\\&'⊣comment         ⍝ & is a reserved character (Dyalog, not PCRE!)
+         :Else
+             comment_←{b←'&'=w←⍵ ⋄ (b/w)←⊂'\&' ⋄ ⊃,/w}comment       ⍝ Escape "&"
+         :EndIf
+         abbr←{0=+/b←'&'=w←⍵:w ⋄ (b/w)←⊂'&amp;' ⋄ ⊃,/w}abbr            ⍝ That's how it appears in the HTML
+         b←abbr∊'\&'                                                     ⍝ Both are special in a ⎕R replacement
+         abbr_←(1+b)/abbr
+         abbr_[¯1+(+\1+b)[⍸b]]←'\'
+         tag1←'<abbr title="',comment_,'">\&ldquo;',abbr_,'\&rdquo;</abbr>'   ⍝ &ldquo;=left double quote and &rdquo;=right double quote
+         tag2←'<abbr title="',comment_,'">',abbr_,'</abbr>'
+         match2←MakeLiteralForRegex abbr
+         match1←'"',match2,'"'
+         match2←'(?<!\w)',match2,'(?!\w)'                                ⍝ \b fails next to non-word chars like in "C++"
+         ignore←'<img.*>' '<a .*>.*</a>' '<code>.*</code>' '<code .*>.*</code>'
+         ignore,←⊂'<abbr .*>[^<]*</abbr>'       ⍝ Abbreviations themselves should be left alone
+         ignore,←⊂'<dt>.*</dt>'                 ⍝ The keyword of a definition should not become an <abbr> tag.
+         ignore,←⊂'<dt .*>.*</dt>'              ⍝ Same in case of special attributes
+         html←(ignore,match1 match2)⎕R((,¨(≢ignore)⍴'&'),tag1 tag2)⍠('Mode' 'D')('DotAll' 1)('Greedy' 0)⊣html
+     :EndFor
+     ns.html←html
+ :EndIf

@@ -1,0 +1,10 @@
+ FindFenceEnd←{
+ ⍝ The end of a fence must have at last three ⍺ characters and may have leading and trailing blanks as well
+ ⍝ but nothing else, in particular no special attributes.
+ ⍝ ⍵ is a vector of Markdown vectors.
+     pattern←⍺
+     ⍝ ⎕S converts all of its argument, even with ML 1, so look at the next 100 lines first: most code blocks are shorter.
+     0≠≢noOf←1+(pattern,'\s{0,}$')⎕S 2⍠('Mode' 'L')('ML' 1)⊣(100⌊≢⍵)↑⍵:1+⊃noOf
+     0≠≢noOf←1+(pattern,'\s{0,}$')⎕S 2⍠('Mode' 'L')('ML' 1)⊣⍵:1+⊃noOf   ⍝ ML 1: stop at the first match
+     1+≢⍵            ⍝ To the end of the document!
+ }

@@ -1,0 +1,8 @@
+ r←StripBlockquoteMarker line;b
+⍝ Removes up to three leading blanks plus "> " from `line`, a line of a blockquote.
+⍝ A lazy continuation line (one without ">") is returned unchanged.
+ r←line
+ b←3⌊+/∧\' '=line
+ :If '> '≡2↑b↓line
+     r←(b+2)↓line
+ :EndIf

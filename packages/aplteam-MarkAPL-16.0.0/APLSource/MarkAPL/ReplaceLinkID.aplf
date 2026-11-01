@@ -1,0 +1,13 @@
+ {r}←ns ReplaceLinkID(linkText id searchFor);ind;url;title;sa;new
+ r←⍬
+ ind←(⊃¨ns.linkRefs)⍳⊂id
+ :If ind≤≢ns.linkRefs
+     (url title sa)←1↓ind⊃ns.linkRefs
+     :If 0=≢linkText                         ⍝ No link text: take the title, or the URL if there is no title either
+         linkText←(1+0=≢title)⊃title url
+     :EndIf
+     new←'<a href="',url,'" class="external_link"',((0≠≢title)/' title="',title,'"'),sa,'>',linkText,'</a>'
+     ns.html←'<code>.*?</code>'(MakeLiteralForRegex searchFor)⎕R'\0'new⍠('Mode' 'D')('DotAll' 1)⊣ns.html
+ :ElseIf ns.parms.checkLinks                ⍝ 0 in nested runs (blockquotes…): they don't know the definitions
+     ns.report,←⊂'Link reference not found: ',searchFor   ⍝ The text stays as it is
+ :EndIf

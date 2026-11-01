@@ -1,0 +1,9 @@
+ SmartQuotes←{
+⍝ Exchange pairs of double quotes ←→ “„ but in DE, AT and CH ←→ „“.
+⍝ See also SmartTypography for similar stuff.
+⍝ This function does not check ns.syntaxSugar: that's up to the caller.
+     ⍺←'en'                             ⍝ Default language is English.
+     lang←⍺
+     quotes←(1+(⊂lang)∊'de' 'at' 'ch')⊃'“\1”' '„\1“'
+     quotes ProcessDoubleQuotes ⍵
+ }

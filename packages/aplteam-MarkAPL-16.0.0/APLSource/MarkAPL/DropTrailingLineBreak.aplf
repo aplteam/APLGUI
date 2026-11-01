@@ -1,0 +1,7 @@
+ r←DropTrailingLineBreak txt
+⍝ Drops a line break -- a trailing "\" or the CR it got converted into -- from the end of `txt`:
+⍝ at the very end of a paragraph or a list item there is nothing left to break onto a new line.
+ r←txt
+ :If (¯1↑r)∊'\',⎕UCS 13
+     r←¯1↓r
+ :EndIf

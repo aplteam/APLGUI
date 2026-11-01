@@ -1,0 +1,25 @@
+ r←ProcessSubTOC ns;row;level;specialAttrs;subToc;depth
+ r←0
+ :If 0<≢subToc←GetRegExPatternForSubToc ⎕S{⍵.Match}⍠('Greedy' 0)('IC' 1)⊣⊃ns.markdown
+     :If 0<≢((≢⊃subToc)↓⊃ns.markdown)~' '      ⍝ Anything but blanks after the directive?
+         ns.report,←⊂'Line ',(⍕ns.parms.lineNumberOffset+⊃ns.lineNumbers),': text after a SubTOC directive is invalid; the line is treated as a paragraph'
+         :Return                                   ⍝ r is 0: the line falls through to the paragraph
+     :EndIf
+     :If (,0)≢,ns.parms.toc
+     :AndIf ns.parms.subTocs
+         subToc←⊃subToc
+         :If 0<≢ns.headers
+             row←≢ns.headers                       ⍝ The header the SubTOC belongs to: identified by its row, not by its caption
+             level←ns.headers[row;1]
+             specialAttrs←GetSpecialAttributes(∧/'{}'∊subToc)/{⍵↑⍨⍵⍳'}'}{⍵↓⍨¯1+⍵⍳'{'}subToc
+             depth←0
+             :If '-'∊subToc
+                 depth←⊃(//)⎕VFI{⊃⍵↓⍨⍵⍳'-'}subToc
+             :EndIf
+             ns.subToc,←⊂level row depth specialAttrs
+             ns.html,←⎕C 1↑ns.markdown
+         :EndIf
+     :EndIf
+     ns←Drop ns
+     r←1
+ :EndIf

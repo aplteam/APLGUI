@@ -1,0 +1,11 @@
+ c←ns NeutraliseLinksInHeader c;patterns;buff
+⍝ A header must not contain a link: with an auto-anchor around the header this results in an `<a>` nested in
+⍝ an `<a>`, which is invalid HTML, and the same goes for its entry in the table of contents.\\
+⍝ Any link is therefore reported, and turned into text by replacing a character by its HTML entity.
+⍝ This survives compiling the caption more than once, which happens for the table of contents.
+ patterns←'`+[^`]+`+' '!\[[^\]]*\]\(' '\]\(' '\]\[' '(?<!\\)<[^<>]*>'
+ buff←patterns ⎕R NeutraliseLinkInHeader⊣c
+ :If buff≢c
+     ns.report,←⊂'Line ',(⍕ns.parms.lineNumberOffset+⊃ns.lineNumbers),': a header must not contain a link; it is shown as text'
+     c←buff
+ :EndIf

@@ -1,0 +1,40 @@
+ r←ns CreateTOC def;level;caption;id;no;bf;nf;stack;ff
+⍝ def:
+⍝ [;1] level
+⍝ [;2] caption
+⍝ [;3] running no
+⍝ [;4] id
+ r←⊂'<nav id="main_nav" class="toc">'
+ r,←⊂'<h2 id="toc-heading">',ns.parms.tocCaption,'</h2>'
+ :If ns.parms.javaScript
+     r,←⊂'<button id="toc-toggle" aria-controls="toc-list" aria-expanded="true">',ns.parms.tocHideCaption,'</button>'
+ :EndIf
+ r,←⊂''
+ r,←⊂'<div class="toc-container">'
+ r,←⊂'<ul id="toc-list"',(ns.parms.javaScript/' class="print"'),'>'
+ bf←(,0)≢,ns.parms.bookmarkLink        ⍝ Bookmark flag
+ nf←(,0)≢,ns.parms.numberHeaders       ⍝ Numbered flag
+ stack←,⌊/def[;1]                      ⍝ Levels of all open lists; #toc-list holds the shallowest level
+ ff←1                                  ⍝ "First" flag
+ :For (level caption no id) :In ↓def
+     :If ~ff
+         :If level>⊃⌽stack                 ⍝ Deeper: one nested list, no matter how many levels are skipped
+             r,←⊂'<ul>'
+             stack,←level
+         :Else
+             ((≢r)⊃r),←'</li>'
+             :While 1<≢stack                         ⍝ Close lists until the entry fits under its parent
+             :AndIf level≤stack[¯1+≢stack]
+                 r,←⊂'</ul></li>'
+                 stack←¯1↓stack
+             :EndWhile
+         :EndIf
+     :EndIf
+     caption←⊃ns ProcessInlineMarkUp caption
+     r,←⊂'<li class="toc-entry toc-h',(⍕level),'"><a href="#',(LowercaseID id),'">',caption,'</a>'
+     ff←0
+ :EndFor
+ r,←(¯1+≢stack)⍴⊂'</li></ul></li>'
+ r,←⊂'</ul>'
+ r,←⊂'</div>'
+ r,←⊂'</nav>'

@@ -1,0 +1,13 @@
+ ns←RedirectToCustomIDs ns;bool;from;to
+⍝ Short bookmark links ("[Caption](#)") are compiled from their link text. When the header with that
+⍝ caption carries a custom ID ("{#xyz}") they must point to that ID instead.
+⍝ A name that is the bookmark of another header is left alone; with duplicate captions the first one wins.
+ :If 0≠≢ns.customIDs
+     bool←~ns.customIDs[;1]∊ns.headers[;2]
+     bool∧←≠ns.customIDs[;1]
+ :AndIf ∨/bool
+     (from to)←↓⍉bool⌿ns.customIDs
+     from←{'href="#',(MakeLiteralForRegex ⍵),'"'}¨from
+     to←{'href="#',⍵,'"'}¨to
+     ns.html←((⊂'<code>.*?</code>'),from)⎕R((⊂'\0'),to)⍠('Mode' 'D')('DotAll' 1)⊣ns.html
+ :EndIf

@@ -1,0 +1,19 @@
+ ProcessDoubleQuotes←{
+⍝ Replaces pairs of double quotes by ⍺ (a ⎕R transformation string) and removes the escape character from `\"`.
+⍝ A `\"` with a preceding (opening) `"` closes that pair: its `\` is not an escape character.
+⍝ Code, links, images with special attributes and HTML tags are left alone.
+     quotes←⍺
+     html←⍵
+     (2>≡html)∧~'"'∊html:html           ⍝ Without any double quote there is nothing to do (and that's the common case)
+     bbt←'`[^`].*?`'                    ⍝ Between back-ticks (= code)
+     cdq←'"".+?""'                      ⍝ Catch what is enclosed between two pairs (that is four of them!) of double quotes
+     cim←'!\[[^\)].*?\){.*?}'           ⍝ Catch image with special attributes
+     cl1←'\[\]\([^)]*.?\)'              ⍝ Catch simple link
+     cl2←'\[[^]]*.?\]\([^)]*.?\)'       ⍝ Catch simple link
+     ced←'\\"'                          ⍝ Catch escaped double quote
+     ctag←'<[^>]*?>'                    ⍝ Catch opening HTML tag
+     cpb←'&amp;pointybracket_open([^&]*.?)&amp;pointybracket_close' ⍝ Catch pointy brackets
+     me←'\0'
+     pair←'"(.*?)"'
+     cpb cl1 cl2 cim bbt cdq ctag ced pair ⎕R((7⍴⊂me),'"'quotes)⍠('Mode' 'D')('DotAll' 1)⊣html
+ }
